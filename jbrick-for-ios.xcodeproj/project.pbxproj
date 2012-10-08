@@ -1,0 +1,451 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3F1B8991160108410007A0B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1B8990160108410007A0B9 /* UIKit.framework */; };
+		3F1B8993160108410007A0B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1B8992160108410007A0B9 /* Foundation.framework */; };
+		3F1B8995160108410007A0B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1B8994160108410007A0B9 /* CoreGraphics.framework */; };
+		3F1B899B160108410007A0B9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F1B8999160108410007A0B9 /* InfoPlist.strings */; };
+		3F1B899D160108410007A0B9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B899C160108410007A0B9 /* main.m */; };
+		3F1B89A1160108410007A0B9 /* jbrickAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B89A0160108410007A0B9 /* jbrickAppDelegate.m */; };
+		3F1B89A4160108410007A0B9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F1B89A2160108410007A0B9 /* MainStoryboard.storyboard */; };
+		3F1B89A7160108410007A0B9 /* jbrickMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B89A6160108410007A0B9 /* jbrickMasterViewController.m */; };
+		3F490BA1160A3BC400B2BA38 /* puzzle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F490BA0160A3BC400B2BA38 /* puzzle.png */; };
+		3F490BA4160A3D3200B2BA38 /* ProgramPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F490BA3160A3D3200B2BA38 /* ProgramPane.m */; };
+		3F5FA4071615F1F60097B661 /* VariableAssignmentDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FA4061615F1F60097B661 /* VariableAssignmentDelegate.m */; };
+		3F5FA40B1615F6530097B661 /* ValueCodeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FA40A1615F6530097B661 /* ValueCodeBlock.m */; };
+		3FB5322C161098D800A907F7 /* MethodTabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB5322B161098D800A907F7 /* MethodTabelCell.m */; };
+		3FC42542161629D600DE4EBE /* snap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3FC4253F161629D600DE4EBE /* snap.wav */; };
+		3FC42543161629D600DE4EBE /* trash.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3FC42540161629D600DE4EBE /* trash.wav */; };
+		3FC42544161629D600DE4EBE /* velcro.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3FC42541161629D600DE4EBE /* velcro.wav */; };
+		3FC77331161482E50025A048 /* VariableCodeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC77330161482E50025A048 /* VariableCodeBlock.m */; };
+		3FC7733416148C9C0025A048 /* MethodCallCodeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC7733316148C9C0025A048 /* MethodCallCodeBlock.m */; };
+		3FC773371614A19F0025A048 /* PrimativeTypeUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC773361614A19F0025A048 /* PrimativeTypeUtility.m */; };
+		3FC7733A1614B34A0025A048 /* MethodDeclorationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC773391614B34A0025A048 /* MethodDeclorationBlock.m */; };
+		3FCB8F701608DF7A00F45EB7 /* UIBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCB8F6F1608DF7A00F45EB7 /* UIBlock.m */; };
+		3FCB8F711608E39700F45EB7 /* jbrickDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B89A9160108410007A0B9 /* jbrickDetailViewController.m */; };
+		3FCEA6AF1610B2B600C74638 /* PropertyPanelUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCEA6AE1610B2B600C74638 /* PropertyPanelUIView.m */; };
+		3FFD2A75160A118B00E8403C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFD2A74160A118B00E8403C /* AudioToolbox.framework */; };
+		3FFDD4BF1619E4F70065D30B /* UITextFieldStrongDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDD4BE1619E4F70065D30B /* UITextFieldStrongDelegate.m */; };
+		3FFDD4C7161B3CBB0065D30B /* IntInputStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDD4C6161B3CBB0065D30B /* IntInputStrategy.m */; };
+		3FFDD4CA161B3E610065D30B /* StringInputStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDD4C9161B3E610065D30B /* StringInputStrategy.m */; };
+		3FFDD4CE161B6D200065D30B /* UISliderStrongReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDD4CD161B6D200065D30B /* UISliderStrongReference.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3F1B898C160108410007A0B9 /* jbrick-for-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "jbrick-for-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F1B8990160108410007A0B9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3F1B8992160108410007A0B9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3F1B8994160108410007A0B9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3F1B8998160108410007A0B9 /* jbrick-for-ios-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jbrick-for-ios-Info.plist"; sourceTree = "<group>"; };
+		3F1B899A160108410007A0B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3F1B899C160108410007A0B9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3F1B899E160108410007A0B9 /* jbrick-for-ios-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jbrick-for-ios-Prefix.pch"; sourceTree = "<group>"; };
+		3F1B899F160108410007A0B9 /* jbrickAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jbrickAppDelegate.h; sourceTree = "<group>"; };
+		3F1B89A0160108410007A0B9 /* jbrickAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jbrickAppDelegate.m; sourceTree = "<group>"; };
+		3F1B89A3160108410007A0B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		3F1B89A5160108410007A0B9 /* jbrickMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jbrickMasterViewController.h; sourceTree = "<group>"; };
+		3F1B89A6160108410007A0B9 /* jbrickMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jbrickMasterViewController.m; sourceTree = "<group>"; };
+		3F1B89A8160108410007A0B9 /* jbrickDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jbrickDetailViewController.h; sourceTree = "<group>"; };
+		3F1B89A9160108410007A0B9 /* jbrickDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jbrickDetailViewController.m; sourceTree = "<group>"; };
+		3F2CA3FE1611D854006260D1 /* PrimativeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrimativeTypes.h; sourceTree = "<group>"; };
+		3F490BA0160A3BC400B2BA38 /* puzzle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = puzzle.png; sourceTree = "<group>"; };
+		3F490BA2160A3D3200B2BA38 /* ProgramPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramPane.h; sourceTree = "<group>"; };
+		3F490BA3160A3D3200B2BA38 /* ProgramPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramPane.m; sourceTree = "<group>"; };
+		3F5FA4051615F1F60097B661 /* VariableAssignmentDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariableAssignmentDelegate.h; sourceTree = "<group>"; };
+		3F5FA4061615F1F60097B661 /* VariableAssignmentDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariableAssignmentDelegate.m; sourceTree = "<group>"; };
+		3F5FA4091615F6530097B661 /* ValueCodeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueCodeBlock.h; sourceTree = "<group>"; };
+		3F5FA40A1615F6530097B661 /* ValueCodeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValueCodeBlock.m; sourceTree = "<group>"; };
+		3FB5322A161098D800A907F7 /* MethodTabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodTabelCell.h; sourceTree = "<group>"; };
+		3FB5322B161098D800A907F7 /* MethodTabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodTabelCell.m; sourceTree = "<group>"; };
+		3FC4253F161629D600DE4EBE /* snap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = snap.wav; sourceTree = "<group>"; };
+		3FC42540161629D600DE4EBE /* trash.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = trash.wav; sourceTree = "<group>"; };
+		3FC42541161629D600DE4EBE /* velcro.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = velcro.wav; sourceTree = "<group>"; };
+		3FC77320161331420025A048 /* CodeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeBlock.h; sourceTree = "<group>"; };
+		3FC7732F161482E50025A048 /* VariableCodeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariableCodeBlock.h; sourceTree = "<group>"; };
+		3FC77330161482E50025A048 /* VariableCodeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariableCodeBlock.m; sourceTree = "<group>"; };
+		3FC7733216148C9C0025A048 /* MethodCallCodeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodCallCodeBlock.h; sourceTree = "<group>"; };
+		3FC7733316148C9C0025A048 /* MethodCallCodeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodCallCodeBlock.m; sourceTree = "<group>"; };
+		3FC773351614A19F0025A048 /* PrimativeTypeUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrimativeTypeUtility.h; sourceTree = "<group>"; };
+		3FC773361614A19F0025A048 /* PrimativeTypeUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrimativeTypeUtility.m; sourceTree = "<group>"; };
+		3FC773381614B34A0025A048 /* MethodDeclorationBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodDeclorationBlock.h; sourceTree = "<group>"; };
+		3FC773391614B34A0025A048 /* MethodDeclorationBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodDeclorationBlock.m; sourceTree = "<group>"; };
+		3FCB8F6E1608DF7A00F45EB7 /* UIBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBlock.h; sourceTree = "<group>"; };
+		3FCB8F6F1608DF7A00F45EB7 /* UIBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBlock.m; sourceTree = "<group>"; };
+		3FCEA6AD1610B2B600C74638 /* PropertyPanelUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyPanelUIView.h; sourceTree = "<group>"; };
+		3FCEA6AE1610B2B600C74638 /* PropertyPanelUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyPanelUIView.m; sourceTree = "<group>"; };
+		3FD00E33161C82C500AD98DB /* ViewableCodeBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewableCodeBlock.h; sourceTree = "<group>"; };
+		3FFD2A74160A118B00E8403C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		3FFDD4BD1619E4F70065D30B /* UITextFieldStrongDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextFieldStrongDelegate.h; sourceTree = "<group>"; };
+		3FFDD4BE1619E4F70065D30B /* UITextFieldStrongDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextFieldStrongDelegate.m; sourceTree = "<group>"; };
+		3FFDD4C1161B3BD40065D30B /* ValueInputStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueInputStrategy.h; sourceTree = "<group>"; };
+		3FFDD4C5161B3CBB0065D30B /* IntInputStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntInputStrategy.h; sourceTree = "<group>"; };
+		3FFDD4C6161B3CBB0065D30B /* IntInputStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntInputStrategy.m; sourceTree = "<group>"; };
+		3FFDD4C8161B3E610065D30B /* StringInputStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringInputStrategy.h; sourceTree = "<group>"; };
+		3FFDD4C9161B3E610065D30B /* StringInputStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringInputStrategy.m; sourceTree = "<group>"; };
+		3FFDD4CC161B6D200065D30B /* UISliderStrongReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISliderStrongReference.h; sourceTree = "<group>"; };
+		3FFDD4CD161B6D200065D30B /* UISliderStrongReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISliderStrongReference.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3F1B8989160108410007A0B9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FFD2A75160A118B00E8403C /* AudioToolbox.framework in Frameworks */,
+				3F1B8991160108410007A0B9 /* UIKit.framework in Frameworks */,
+				3F1B8993160108410007A0B9 /* Foundation.framework in Frameworks */,
+				3F1B8995160108410007A0B9 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3F1B8981160108410007A0B9 = {
+			isa = PBXGroup;
+			children = (
+				3F1B8996160108410007A0B9 /* jbrick-for-ios */,
+				3F1B898F160108410007A0B9 /* Frameworks */,
+				3F1B898D160108410007A0B9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3F1B898D160108410007A0B9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3F1B898C160108410007A0B9 /* jbrick-for-ios.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3F1B898F160108410007A0B9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3FFD2A74160A118B00E8403C /* AudioToolbox.framework */,
+				3F1B8990160108410007A0B9 /* UIKit.framework */,
+				3F1B8992160108410007A0B9 /* Foundation.framework */,
+				3F1B8994160108410007A0B9 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3F1B8996160108410007A0B9 /* jbrick-for-ios */ = {
+			isa = PBXGroup;
+			children = (
+				3F490BB0160B634100B2BA38 /* CodeBlocks */,
+				3FCB8F631608A72500F45EB7 /* Resources */,
+				3F1B899F160108410007A0B9 /* jbrickAppDelegate.h */,
+				3F1B89A0160108410007A0B9 /* jbrickAppDelegate.m */,
+				3F1B89A2160108410007A0B9 /* MainStoryboard.storyboard */,
+				3F1B89A5160108410007A0B9 /* jbrickMasterViewController.h */,
+				3F1B89A6160108410007A0B9 /* jbrickMasterViewController.m */,
+				3F1B89A8160108410007A0B9 /* jbrickDetailViewController.h */,
+				3F1B89A9160108410007A0B9 /* jbrickDetailViewController.m */,
+				3F1B8997160108410007A0B9 /* Supporting Files */,
+				3FCB8F6E1608DF7A00F45EB7 /* UIBlock.h */,
+				3FCB8F6F1608DF7A00F45EB7 /* UIBlock.m */,
+				3F490BA2160A3D3200B2BA38 /* ProgramPane.h */,
+				3F490BA3160A3D3200B2BA38 /* ProgramPane.m */,
+				3FB5322A161098D800A907F7 /* MethodTabelCell.h */,
+				3FB5322B161098D800A907F7 /* MethodTabelCell.m */,
+				3FCEA6AD1610B2B600C74638 /* PropertyPanelUIView.h */,
+				3FCEA6AE1610B2B600C74638 /* PropertyPanelUIView.m */,
+			);
+			path = "jbrick-for-ios";
+			sourceTree = "<group>";
+		};
+		3F1B8997160108410007A0B9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3F1B8998160108410007A0B9 /* jbrick-for-ios-Info.plist */,
+				3F1B8999160108410007A0B9 /* InfoPlist.strings */,
+				3F1B899C160108410007A0B9 /* main.m */,
+				3F1B899E160108410007A0B9 /* jbrick-for-ios-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3F490BB0160B634100B2BA38 /* CodeBlocks */ = {
+			isa = PBXGroup;
+			children = (
+				3FFDD4CB161B6CE30065D30B /* Views */,
+				3F2CA3FE1611D854006260D1 /* PrimativeTypes.h */,
+				3FC773351614A19F0025A048 /* PrimativeTypeUtility.h */,
+				3FC773361614A19F0025A048 /* PrimativeTypeUtility.m */,
+				3FC77320161331420025A048 /* CodeBlock.h */,
+				3FC7732F161482E50025A048 /* VariableCodeBlock.h */,
+				3FC77330161482E50025A048 /* VariableCodeBlock.m */,
+				3FC7733216148C9C0025A048 /* MethodCallCodeBlock.h */,
+				3FC7733316148C9C0025A048 /* MethodCallCodeBlock.m */,
+				3FC773381614B34A0025A048 /* MethodDeclorationBlock.h */,
+				3FC773391614B34A0025A048 /* MethodDeclorationBlock.m */,
+				3F5FA4051615F1F60097B661 /* VariableAssignmentDelegate.h */,
+				3F5FA4061615F1F60097B661 /* VariableAssignmentDelegate.m */,
+				3F5FA4091615F6530097B661 /* ValueCodeBlock.h */,
+				3F5FA40A1615F6530097B661 /* ValueCodeBlock.m */,
+				3FD00E33161C82C500AD98DB /* ViewableCodeBlock.h */,
+				3FFDD4C4161B3C690065D30B /* InputVerificationStrategies */,
+			);
+			name = CodeBlocks;
+			sourceTree = "<group>";
+		};
+		3FC4253E161629D600DE4EBE /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				3FC4253F161629D600DE4EBE /* snap.wav */,
+				3FC42540161629D600DE4EBE /* trash.wav */,
+				3FC42541161629D600DE4EBE /* velcro.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		3FCB8F631608A72500F45EB7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3FC4253E161629D600DE4EBE /* Sounds */,
+				3FCB8F641608A72500F45EB7 /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3FCB8F641608A72500F45EB7 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				3F490BA0160A3BC400B2BA38 /* puzzle.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		3FFDD4C4161B3C690065D30B /* InputVerificationStrategies */ = {
+			isa = PBXGroup;
+			children = (
+				3FFDD4C1161B3BD40065D30B /* ValueInputStrategy.h */,
+				3FFDD4C5161B3CBB0065D30B /* IntInputStrategy.h */,
+				3FFDD4C6161B3CBB0065D30B /* IntInputStrategy.m */,
+				3FFDD4C8161B3E610065D30B /* StringInputStrategy.h */,
+				3FFDD4C9161B3E610065D30B /* StringInputStrategy.m */,
+			);
+			name = InputVerificationStrategies;
+			sourceTree = "<group>";
+		};
+		3FFDD4CB161B6CE30065D30B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3FFDD4BD1619E4F70065D30B /* UITextFieldStrongDelegate.h */,
+				3FFDD4BE1619E4F70065D30B /* UITextFieldStrongDelegate.m */,
+				3FFDD4CC161B6D200065D30B /* UISliderStrongReference.h */,
+				3FFDD4CD161B6D200065D30B /* UISliderStrongReference.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3F1B898B160108410007A0B9 /* jbrick-for-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F1B89AD160108410007A0B9 /* Build configuration list for PBXNativeTarget "jbrick-for-ios" */;
+			buildPhases = (
+				3F1B8988160108410007A0B9 /* Sources */,
+				3F1B8989160108410007A0B9 /* Frameworks */,
+				3F1B898A160108410007A0B9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "jbrick-for-ios";
+			productName = "jbrick-for-ios";
+			productReference = 3F1B898C160108410007A0B9 /* jbrick-for-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3F1B8983160108410007A0B9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = jbrick;
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 3F1B8986160108410007A0B9 /* Build configuration list for PBXProject "jbrick-for-ios" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3F1B8981160108410007A0B9;
+			productRefGroup = 3F1B898D160108410007A0B9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3F1B898B160108410007A0B9 /* jbrick-for-ios */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3F1B898A160108410007A0B9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F1B899B160108410007A0B9 /* InfoPlist.strings in Resources */,
+				3F1B89A4160108410007A0B9 /* MainStoryboard.storyboard in Resources */,
+				3F490BA1160A3BC400B2BA38 /* puzzle.png in Resources */,
+				3FC42542161629D600DE4EBE /* snap.wav in Resources */,
+				3FC42543161629D600DE4EBE /* trash.wav in Resources */,
+				3FC42544161629D600DE4EBE /* velcro.wav in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3F1B8988160108410007A0B9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F1B899D160108410007A0B9 /* main.m in Sources */,
+				3F1B89A1160108410007A0B9 /* jbrickAppDelegate.m in Sources */,
+				3F1B89A7160108410007A0B9 /* jbrickMasterViewController.m in Sources */,
+				3FCB8F701608DF7A00F45EB7 /* UIBlock.m in Sources */,
+				3FCB8F711608E39700F45EB7 /* jbrickDetailViewController.m in Sources */,
+				3F490BA4160A3D3200B2BA38 /* ProgramPane.m in Sources */,
+				3FB5322C161098D800A907F7 /* MethodTabelCell.m in Sources */,
+				3FCEA6AF1610B2B600C74638 /* PropertyPanelUIView.m in Sources */,
+				3FC77331161482E50025A048 /* VariableCodeBlock.m in Sources */,
+				3FC7733416148C9C0025A048 /* MethodCallCodeBlock.m in Sources */,
+				3FC773371614A19F0025A048 /* PrimativeTypeUtility.m in Sources */,
+				3FC7733A1614B34A0025A048 /* MethodDeclorationBlock.m in Sources */,
+				3F5FA4071615F1F60097B661 /* VariableAssignmentDelegate.m in Sources */,
+				3F5FA40B1615F6530097B661 /* ValueCodeBlock.m in Sources */,
+				3FFDD4BF1619E4F70065D30B /* UITextFieldStrongDelegate.m in Sources */,
+				3FFDD4C7161B3CBB0065D30B /* IntInputStrategy.m in Sources */,
+				3FFDD4CA161B3E610065D30B /* StringInputStrategy.m in Sources */,
+				3FFDD4CE161B6D200065D30B /* UISliderStrongReference.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3F1B8999160108410007A0B9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F1B899A160108410007A0B9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3F1B89A2160108410007A0B9 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F1B89A3160108410007A0B9 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3F1B89AB160108410007A0B9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		3F1B89AC160108410007A0B9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3F1B89AE160108410007A0B9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "jbrick-for-ios/jbrick-for-ios-Prefix.pch";
+				INFOPLIST_FILE = "jbrick-for-ios/jbrick-for-ios-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3F1B89AF160108410007A0B9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "jbrick-for-ios/jbrick-for-ios-Prefix.pch";
+				INFOPLIST_FILE = "jbrick-for-ios/jbrick-for-ios-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3F1B8986160108410007A0B9 /* Build configuration list for PBXProject "jbrick-for-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F1B89AB160108410007A0B9 /* Debug */,
+				3F1B89AC160108410007A0B9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F1B89AD160108410007A0B9 /* Build configuration list for PBXNativeTarget "jbrick-for-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F1B89AE160108410007A0B9 /* Debug */,
+				3F1B89AF160108410007A0B9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3F1B8983160108410007A0B9 /* Project object */;
+}
