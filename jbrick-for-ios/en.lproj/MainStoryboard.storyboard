@@ -36,7 +36,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Property Panel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="4jL-dr-er6">
-                                        <rect key="frame" x="0.0" y="0.0" width="203" height="36"/>
+                                        <rect key="frame" x="0.0" y="2" width="203" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" red="0.44313728809356689" green="0.47058826684951782" blue="0.50196081399917603" alpha="1" colorSpace="deviceRGB"/>
@@ -170,6 +170,35 @@
     <resources>
         <image name="puzzle.png" width="233" height="238"/>
     </resources>
+    <classes>
+        <class className="MethodTabelCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MethodTabelCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="customLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="ProgramPane" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProgramPane.h"/>
+        </class>
+        <class className="PropertyPanelUIView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PropertyPanelUIView.h"/>
+        </class>
+        <class className="jbrickDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/jbrickDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="Upload:"/>
+                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="filename" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="programPane" candidateClass="ProgramPane"/>
+                <relationship kind="outlet" name="propertyPane" candidateClass="PropertyPanelUIView"/>
+                <relationship kind="outlet" name="src" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="jbrickMasterViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/jbrickMasterViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
