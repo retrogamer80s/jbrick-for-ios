@@ -7,6 +7,7 @@
 //
 
 #import "jbrickAppDelegate.h"
+#import "MGSplitViewController.h"
 
 @implementation jbrickAppDelegate
 
@@ -15,11 +16,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-    splitViewController.presentsWithGesture = NO;
-    UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-    splitViewController.delegate = (id)navigationController.topViewController;
-    
+    //UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+    //splitViewController.presentsWithGesture = NO;
+    //UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+    //splitViewController.delegate = (id)navigationController.topViewController;
     return YES;
 }
 							

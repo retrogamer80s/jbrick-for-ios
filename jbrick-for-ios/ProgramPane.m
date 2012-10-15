@@ -32,11 +32,14 @@
 {
     [self setDelegate:self];
     
-    zoomableView = [[UIView alloc] initWithFrame:self.frame];
+    CGRect contentRect = self.frame;
+    contentRect.origin.x += 5;
+    contentRect.origin.y += 5;
+    contentRect.size.width -= 5;
+    contentRect.size.height -= 5;
+    zoomableView = [[UIView alloc] initWithFrame:contentRect];
     zoomableView.clipsToBounds = NO;
     [super addSubview:zoomableView];
-    
-    
 }
 
 - (void)addSubview:(UIView *)view
@@ -88,7 +91,7 @@
         }];
     }
     CGSize canvasSize = (CGSizeMake(furthestRight.floatValue - furthestLeft.floatValue, furthestDown.floatValue - furthestUp.floatValue));
-    [zoomableView setFrame:CGRectMake(0, 0,canvasSize.width, canvasSize.height)];
+    [zoomableView setFrame:CGRectMake(5, 5,canvasSize.width-5, canvasSize.height-5)];
     [UIView animateWithDuration:0.5 animations:^{
         [self setContentSize:canvasSize];
     }];
@@ -99,14 +102,5 @@
     //Return zoomableView to enable zooming... but it's buggy right now
     return nil;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

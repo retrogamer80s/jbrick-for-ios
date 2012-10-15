@@ -18,5 +18,5 @@
 + (NSString *) getDefaultValueWithNum:(NSNumber *)primative;
 + (NSString *) primativeToString:(Primative)primative;
 + (NSString *) primativeToName:(Primative)primative;
-+ (UIView *) constructDefaultView:(Primative)primative variableArray:(NSArray *)variables index:(NSInteger)index;
++ (UIView *) constructDefaultView:(Primative)primative;
 @end

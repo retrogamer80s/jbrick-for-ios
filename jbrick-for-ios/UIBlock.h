@@ -24,6 +24,8 @@
     id<ViewableCodeBlock> codeBlock;
     NSMutableArray *attachedBlocks;
     UIBlock *parentBlock;
+    UIBlock *previousBlock;
+    UIBlock *previousIndexBlock;
     NSInteger defaultHeight;
     
     bool continueScrolling;

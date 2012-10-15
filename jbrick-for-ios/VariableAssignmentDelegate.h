@@ -15,11 +15,12 @@
 
 @interface VariableAssignmentDelegate : NSObject <UITextFieldDelegate>
 {
-    NSMutableArray *variableArray;
-    NSInteger variableIndex;
     Primative type;
     id<ValueInputStrategy> inputStrategy;
 }
--(id) init:(NSMutableArray *)variables index:(NSInteger)index returnType:(Primative)type;
+
+@property (nonatomic, retain) id<CodeBlock> value;
+
+-(id) init:(Primative)type;
 - (void)sliderChanged:(UISlider *)slider;
 @end

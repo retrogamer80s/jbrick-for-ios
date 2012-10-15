@@ -11,6 +11,8 @@
 #import "MethodCallCodeBlock.h"
 #import "MethodDeclorationBlock.h"
 #import "ValueCodeBlock.h"
+#import "UIBlock.h"
+#import "KGNoise.h"
 
 @interface jbrickDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -30,6 +32,7 @@
 @synthesize propertyPane = _propertyPane;
 @synthesize programPane = _programPane;
 @synthesize masterPopoverController = _masterPopoverController;
+@synthesize splitViewController = _splitViewController;
 
 #pragma mark - Managing the detail item
 float firstX;
@@ -61,6 +64,7 @@ float firstY;
     if (self.detailItem) {
         self.detailDescriptionLabel.text = [self.detailItem description];
     }
+    
 }
 
 - (void)viewDidLoad
@@ -69,22 +73,27 @@ float firstY;
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
     
-    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRightReceived:)];
-    [swipeGesture setDelegate:self];
-    [swipeGesture setNumberOfTouchesRequired:2];
-    [swipeGesture setDirection:UISwipeGestureRecognizerDirectionRight];
-    [self.splitViewController.view addGestureRecognizer:swipeGesture]; 
-    
-    swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeftReceived:)];
-    [swipeGesture setDelegate:self];
-    [swipeGesture setNumberOfTouchesRequired:2];
-    [swipeGesture setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [self.splitViewController.view addGestureRecognizer:swipeGesture]; 
-    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOutsideBlock:)];
     [tapGesture setDelegate:self];
     [tapGesture setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapGesture];
+    
+    UISwipeGestureRecognizer *sg = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRightReceived:)];
+    sg.numberOfTouchesRequired = 2;
+    sg.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:sg];
+    
+    sg = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeftReceived:)];
+    sg.numberOfTouchesRequired = 2;
+    sg.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:sg];
+    
+    MethodDeclorationBlock *main = [MethodDeclorationBlock getMainBlock];
+    main.BlockColor = [UIColor purpleColor].CGColor;
+    UIBlock *mainBlock = [[UIBlock alloc] init:self codeBlock:main];
+    [self.programPane addSubview:mainBlock];
+    
+    self.view.frame = CGRectMake(400, 400, 400, 400);
     
 }
 
@@ -118,7 +127,7 @@ float firstY;
 - (void)placeBlock:(UIView *)block
 {
     [block removeFromSuperview];
-    block.center = [self.programPane convertPoint:block.center fromView:self.splitViewController.view];
+    block.center = [self.programPane convertPoint:block.center fromView:_splitViewController.view];
     [self.programPane addSubview:block];
     
 }

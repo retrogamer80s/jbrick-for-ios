@@ -15,7 +15,7 @@
 @property bool Deleted;
 - (NSString *) generateCode;
 - (bool) addCodeBlock:(id<CodeBlock>)codeBlock;
-- (bool) addCodeBlock:(id<CodeBlock>)codeBlock afterBlock:(id<CodeBlock>)indexBlock;
+- (bool) addCodeBlock:(id<CodeBlock>)codeBlock indexBlock:(id<CodeBlock>)indexBlock afterIndexBlock:(bool)afterIndexBlock;
 - (void) removeCodeBlock:(id<CodeBlock>)codeBlock;
 - (void) removeFromParent;
 @end

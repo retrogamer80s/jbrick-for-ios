@@ -7,6 +7,7 @@
 //
 
 #import "MethodCallCodeBlock.h"
+#import "ValueCodeBlock.h"
 
 @implementation MethodCallCodeBlock
 @synthesize ReturnType;
@@ -24,7 +25,7 @@ int DEFAULT_MARGIN = 10;
     parameterTypes = parameters;
     parameterValues = [NSMutableArray arrayWithCapacity:[parameters count]];
     for(int i=0; i<[parameterTypes count]; i++)
-        [parameterValues addObject:[NSNull null]];
+        [parameterValues addObject:[[ValueCodeBlock alloc] init:[[parameters objectAtIndex:i] integerValue]]];
     
     return self;
 }
@@ -58,7 +59,7 @@ int DEFAULT_MARGIN = 10;
     // Construct a view to hold all subviews, it's frame will change with each view added
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     for (int i=0; i<parameterTypes.count; i++) {
-        UIView *subView = [PrimativeTypeUtility constructDefaultView:[[parameterTypes objectAtIndex:i] integerValue] variableArray:parameterValues index:i];
+        UIView *subView = [PrimativeTypeUtility constructDefaultView:[[parameterTypes objectAtIndex:i] integerValue]];
         subView.frame = CGRectMake(0, view.frame.size.height + 10, 0, subView.frame.size.height);
         view.frame = CGRectMake(0, 0, 0, view.frame.size.height + subView.frame.size.height + DEFAULT_MARGIN*2);
         [view addSubview:subView];
@@ -84,7 +85,7 @@ int DEFAULT_MARGIN = 10;
     return false; // Cannot add blocks to a call block
 }
 
--(bool)addCodeBlock:(id<CodeBlock>)codeBlock afterBlock:(id<CodeBlock>)indexBlock
+-(bool)addCodeBlock:(id<CodeBlock>)codeBlock indexBlock:(id<CodeBlock>)indexBlock afterIndexBlock:(bool)afterIndexBlock
 {
     return false; // Cannot add blocks to a call block
 }
@@ -97,6 +98,11 @@ int DEFAULT_MARGIN = 10;
 -(void)removeCodeBlock:(id<CodeBlock>)codeBlock
 {
     // Method call blocks don't have children and thus can't remove them
+}
+
+-(NSArray *) getPropertyVariables
+{
+    return parameterValues;
 }
 
 -(NSArray *)getParameterValues

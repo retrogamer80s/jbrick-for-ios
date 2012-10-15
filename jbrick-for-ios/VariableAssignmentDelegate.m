@@ -10,11 +10,11 @@
 
 @implementation VariableAssignmentDelegate
 
--(id) init:(NSMutableArray *)variables index:(NSInteger)index returnType:(Primative)typeParam
+@synthesize value;
+
+-(id) init:(Primative)typeParam
 {
     self = [super init];
-    variableArray = variables;
-    variableIndex = index;
     type = typeParam;
     
     [self initInputStrategy];
@@ -29,7 +29,7 @@
     if([inputStrategy VerifyInput:concatString])
     {
         id<CodeBlock> codeBlock = [inputStrategy GetCodeBlock:concatString];
-        [variableArray replaceObjectAtIndex:variableIndex withObject:codeBlock];
+        value = codeBlock;
         
         return YES;
     }
@@ -40,7 +40,7 @@
 - (void)sliderChanged:(UISlider *)slider {
     
     id<CodeBlock> codeBlock = [inputStrategy GetCodeBlock:[NSString stringWithFormat:@"%d", (int)roundf(slider.value)]];
-    [variableArray replaceObjectAtIndex:variableIndex withObject:codeBlock];
+    value = codeBlock;
 }
 
 - (void)initInputStrategy{

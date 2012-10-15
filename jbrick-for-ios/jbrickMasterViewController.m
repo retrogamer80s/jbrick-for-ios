@@ -8,8 +8,10 @@
 
 #import "jbrickMasterViewController.h"
 #import "jbrickDetailViewController.h"
+#import "MGSplitViewController.h"
 #import "MethodCallCodeBlock.h"
 #import "MethodDeclorationBlock.h"
+#import "KGNoise.h"
 
 @interface jbrickMasterViewController () {
     NSMutableArray *_objects;
@@ -19,6 +21,8 @@
 @implementation jbrickMasterViewController
 
 @synthesize detailViewController = _detailViewController;
+@synthesize splitViewController = _splitViewController;
+
 bool inDrag = NO;
 UIBlock *draggedView = nil;
 NSIndexPath *selectedIndex = nil;
@@ -34,30 +38,31 @@ NSMutableDictionary *methodBlocks;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
-    self.detailViewController = (jbrickDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    self.detailViewController = (jbrickDetailViewController *)[[_splitViewController.viewControllers lastObject] topViewController];
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
     [self.tableView addGestureRecognizer:longPress];    
     
     methodBlocks = [[NSMutableDictionary alloc] init];
     
-    MethodDeclorationBlock *main = [MethodDeclorationBlock getMainBlock];
+    MethodDeclorationBlock *ifBlock = [[MethodDeclorationBlock alloc] init:@"If" parameterVariables:[[NSArray alloc]init] returnType:VOID];
     MethodCallCodeBlock *onFWD = [[MethodCallCodeBlock alloc] init:@"OnFwd" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:MOTOR],[NSNumber numberWithInt:MOTOR_POWER],[NSNumber numberWithInt:INTEGER], nil] returnType:VOID];
     MethodCallCodeBlock *wait = [[MethodCallCodeBlock alloc] init:@"Wait" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:INTEGER], nil] returnType:VOID];
     MethodCallCodeBlock *stopMotor = [[MethodCallCodeBlock alloc] init:@"Off" parameterTypes:[NSArray arrayWithObject:[NSNumber numberWithInt:MOTOR]] returnType:VOID];
 
-    main.BlockColor = [UIColor purpleColor].CGColor;
+    ifBlock.BlockColor = [UIColor yellowColor].CGColor;
     onFWD.BlockColor = [UIColor greenColor].CGColor;
     wait.BlockColor = [UIColor blueColor].CGColor;
     stopMotor.BlockColor = [UIColor redColor].CGColor;
     
     NSArray *motorMethods = [NSArray arrayWithObjects:onFWD, stopMotor, nil];
-    NSArray *logicMethods = [NSArray arrayWithObjects:wait, main, nil];
+    NSArray *logicMethods = [NSArray arrayWithObjects:wait, ifBlock, nil];
     NSMutableArray *customMethods = [NSMutableArray arrayWithObjects:nil];
     
     [methodBlocks setObject:motorMethods forKey:@"Motor Blocks"];
@@ -66,7 +71,7 @@ NSMutableDictionary *methodBlocks;
      
     selectedIndex = [NSIndexPath indexPathForRow:-1 inSection:-1];
     
-    UIBlock *mainBlock = [[UIBlock alloc] init:self.detailViewController codeBlock:main];
+    UIBlock *mainBlock = [[UIBlock alloc] init:self.detailViewController codeBlock:ifBlock];
     [self.detailViewController.programPane addSubview:mainBlock];
 }
 
@@ -90,8 +95,9 @@ NSMutableDictionary *methodBlocks;
 
 - (IBAction)longPress:(UIGestureRecognizer *)sender
 {
+    
     if (sender.state == UIGestureRecognizerStateBegan)
-    {        
+    {
         // figure out which item in the table was selected
         NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:[sender locationInView:self.tableView]];
         if (!indexPath)
@@ -105,14 +111,12 @@ NSMutableDictionary *methodBlocks;
         id<ViewableCodeBlock> codeBlock = [[[methodBlocks allValues] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         [self.detailViewController.propertyPane closePanel:nil];
         
-        // create item to be dragged, in this example, just a simple UILabel      
-        UIView *splitView = self.splitViewController.view;
+        // create item to be dragged, in this example, just a simple UILabel
+        UIView *splitView = _splitViewController.view;
         CGPoint point = [sender locationInView:splitView];
-
+        
         draggedView = [[UIBlock alloc] init:self.detailViewController codeBlock:[codeBlock getPrototype]];
         draggedView.center = CGPointMake(point.x+(draggedView.frame.size.width/2)-20, point.y +(draggedView.frame.size.height/2)-20);
-
-        [draggedView setBackgroundColor:[UIColor clearColor]];
 
         // now add the item to the view
         [splitView addSubview:draggedView];
@@ -121,10 +125,10 @@ NSMutableDictionary *methodBlocks;
     {
         // we dragged it, so let's update the coordinates of the dragged view
         
-        UIView *splitView = self.splitViewController.view;
+        UIView *splitView = _splitViewController.view;
         CGPoint point = [sender locationInView:splitView];
         
-        CGPoint blockLoc = [self.detailViewController.programPane convertPoint:draggedView.frame.origin fromView:self.splitViewController.view];
+        CGPoint blockLoc = [self.detailViewController.programPane convertPoint:draggedView.frame.origin fromView:_splitViewController.view];
         CGSize contSize = self.detailViewController.programPane.contentSize;
         
         [draggedView panToPoint:point scrollToRect:CGRectMake(blockLoc.x > contSize.width ? 0 : blockLoc.x, blockLoc.y, 100, 100)];
@@ -133,7 +137,6 @@ NSMutableDictionary *methodBlocks;
     {
         [self.detailViewController placeBlock:draggedView];
         [draggedView snapToGrid];
-        [self.detailViewController.propertyPane openPanel:nil];
     }
 }
 

@@ -93,17 +93,17 @@
     }
 }
 
-+ (UIView *) constructDefaultView:(Primative)primative variableArray:(NSMutableArray *)variables index:(NSInteger)index
++ (UIView *) constructDefaultView:(Primative)primative
 {
-    VariableAssignmentDelegate *delegate = [[VariableAssignmentDelegate alloc] init:variables index:index returnType:primative];
+    VariableAssignmentDelegate *delegate = [[VariableAssignmentDelegate alloc] init:primative];
     ValueCodeBlock *value = nil;
-    if([[variables objectAtIndex:index] isKindOfClass:[ValueCodeBlock class]])
-        value = [variables objectAtIndex:index];
+    //if([[variables objectAtIndex:index] isKindOfClass:[ValueCodeBlock class]])
+        //value = [variables objectAtIndex:index];
     
     switch (primative) {
         case MOTOR_POWER:
         {
-            UISlider *slider = [[UISliderStrongReference alloc] initWithFrame:CGRectMake(0, 0, 0, 40)];
+            UISlider *slider = [[UISliderStrongReference alloc] initWithFrame:CGRectMake(0, 0, 280, 40)];
             [slider addTarget:delegate action:@selector(sliderChanged:) forControlEvents:UIControlEventTouchUpInside];
             if(value)
                 [slider setValue:[value.Value floatValue] animated:YES];

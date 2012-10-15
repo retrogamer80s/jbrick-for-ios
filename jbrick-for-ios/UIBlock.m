@@ -51,6 +51,7 @@ static NSMutableArray *placedBlocks;
 {
     CGRect frame = CGRectMake(0, 0, 250, 250);
     self = [self initWithFrame:frame];
+    self.backgroundColor = [UIColor clearColor];
     controller = controllerParam;
     programPane = controller.programPane;
     codeBlock = codeBlockParam;
@@ -101,6 +102,9 @@ static NSMutableArray *placedBlocks;
         AudioServicesPlaySystemSound(velcroSound);
         
         if(parentBlock){
+            previousBlock = parentBlock;
+            previousIndexBlock = [parentBlock getIndexBlock:self];
+            
             [codeBlock removeFromParent];
             [parentBlock->attachedBlocks removeObject:self];
             [UIView animateWithDuration:.5 animations:^{
@@ -163,22 +167,26 @@ static NSMutableArray *placedBlocks;
         // Animated Snap to place
         [UIView animateWithDuration:0.5 animations:^{
             //Determine what side to attach to
-            float deltaX = self.center.x - overlappedBlock.center.x;
-            float deltaY = self.center.y - overlappedBlock.center.y;
-            if(deltaX < 0){
-                //Attach Left
-                if(overlappedBlock->parentBlock)
-                    [overlappedBlock->parentBlock attachBlockToSide:self indexBlock:overlappedBlock];
-            } else if (deltaX >= 0){
-                //Attach Right
-                [overlappedBlock attachBlockToSide:self indexBlock:nil];
-                //self.center = CGPointMake(overlappedBlock.center.x + 40, overlappedBlock.center.y);
+            float deltaX = self.frame.origin.x - overlappedBlock.frame.origin.x;
+            float deltaY = self.frame.origin.y - overlappedBlock.frame.origin.y;
+
+            if(overlappedBlock->parentBlock){
+                if(deltaX > 50){
+                    [overlappedBlock attachBlockToSide:self indexBlock:nil afterIndexBlock:false];
+                } else {
+                    if(deltaY <= 0)
+                        [overlappedBlock->parentBlock attachBlockToSide:self indexBlock:overlappedBlock afterIndexBlock:false];
+                    else
+                        [overlappedBlock->parentBlock attachBlockToSide:self indexBlock:overlappedBlock afterIndexBlock:true];
+                }
+            } else {
+                [overlappedBlock attachBlockToSide:self indexBlock:nil afterIndexBlock:false];
             }
         }];
     }
     [programPane fitToContent];
     [programPane scrollRectToVisible:self.frame animated:YES];
-    [controller.propertyPane setPanelContents:[codeBlock getPropertyView]];
+    [controller.propertyPane setPropertyContent:[codeBlock getPropertyVariables]];
     selectedCodeBlock = codeBlock;
 }
 
@@ -200,7 +208,7 @@ static NSMutableArray *placedBlocks;
     return children;
 }
 
--(void)attachBlockToSide:(UIBlock *)attachBlock indexBlock:(UIBlock *)indexBlock
+-(void)attachBlockToSide:(UIBlock *)attachBlock indexBlock:(UIBlock *)indexBlock afterIndexBlock:(bool)afterIndexBlock
 {
     bool attached = false;
     attachBlock->parentBlock = self;
@@ -212,17 +220,33 @@ static NSMutableArray *placedBlocks;
         }
     } else {
         NSInteger index = [attachedBlocks indexOfObject:indexBlock];
-        if(index != NSNotFound)
-            if([codeBlock addCodeBlock:attachBlock->codeBlock afterBlock:indexBlock->codeBlock]){
-                [attachedBlocks insertObject:attachBlock atIndex:index+1];
+        if(index != NSNotFound){
+            if([codeBlock addCodeBlock:attachBlock->codeBlock indexBlock:indexBlock->codeBlock afterIndexBlock:afterIndexBlock]){
+                if(afterIndexBlock)
+                    [attachedBlocks insertObject:attachBlock atIndex:index+1];
+                else
+                    [attachedBlocks insertObject:attachBlock atIndex:index];
                 attached = true;
             }
+        }
     }
     if(attached)
         [self positionBlockGroup];
     else{
-        // Bounce back to original position or perhaps delete
+        if(attachBlock->previousBlock)
+            [attachBlock->previousBlock attachBlockToSide:attachBlock indexBlock:attachBlock->previousIndexBlock afterIndexBlock:false];
+        else
+            [attachBlock delete];
     }
+}
+
+-(UIBlock *)getIndexBlock:(UIBlock *)indexBlock
+{
+    NSInteger index = [attachedBlocks indexOfObject:indexBlock];
+    if(index == NSNotFound || index == attachedBlocks.count -1)
+        return nil;
+    else
+        return [attachedBlocks objectAtIndex:index+1];
 }
 
 -(void) positionBlockGroup
@@ -345,7 +369,8 @@ static NSMutableArray *placedBlocks;
 {
     if(codeBlock != selectedCodeBlock || ![controller.propertyPane isOpen])
     {
-        [controller.propertyPane setPanelContents:[codeBlock getPropertyView]];
+        [controller.propertyPane setPropertyContent:[codeBlock getPropertyVariables]];
+        [controller.propertyPane openPanel:nil];
         selectedCodeBlock = codeBlock;
     }
 }

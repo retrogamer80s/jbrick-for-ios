@@ -34,7 +34,7 @@
     return false;
 }
 
--(bool)addCodeBlock:(id<CodeBlock>)codeBlock afterBlock:(id<CodeBlock>)indexBlock
+-(bool)addCodeBlock:(id<CodeBlock>)codeBlock indexBlock:(id<CodeBlock>)indexBlock afterIndexBlock:(bool)afterIndexBlock
 {
     return false;
 }

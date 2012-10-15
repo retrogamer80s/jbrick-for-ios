@@ -14,4 +14,5 @@
 -(UIView *) getPropertyView;
 -(NSString *) getDisplayName;
 -(id<ViewableCodeBlock>) getPrototype;
+-(NSArray *) getPropertyVariables;
 @end

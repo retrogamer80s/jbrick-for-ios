@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ProgramPane.h"
-#import "PropertyPanelUIView.h"
+#import "MGSplitViewController.h"
+#import "PropertyViewController.h"
 
 @interface jbrickDetailViewController : UIViewController <UISplitViewControllerDelegate, UIGestureRecognizerDelegate>
 
@@ -16,8 +17,9 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
-@property (weak, nonatomic) IBOutlet PropertyPanelUIView *propertyPane;
+@property (weak, nonatomic) IBOutlet PropertyViewController *propertyPane;
 @property (weak, nonatomic) IBOutlet ProgramPane *programPane;
+@property (strong, nonatomic) MGSplitViewController *splitViewController;
 
 -(void) placeBlock:(UIView *)block;
 

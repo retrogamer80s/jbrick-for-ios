@@ -62,14 +62,17 @@ static MethodDeclorationBlock *mainBlock;
     return true;
 }
 
--(bool)addCodeBlock:(id<CodeBlock>)codeBlock afterBlock:(id<CodeBlock>)indexBlock
+-(bool)addCodeBlock:(id<CodeBlock>)codeBlock indexBlock:(id<CodeBlock>)indexBlock afterIndexBlock:(bool)afterIndexBlock
 {
     NSInteger insertIndex = [innerCodeBlocks indexOfObject:indexBlock];
     if(insertIndex == NSNotFound)
         return false;
     
     codeBlock.Parent = self;
-    [innerCodeBlocks insertObject:codeBlock atIndex:insertIndex+1];
+    if(afterIndexBlock)
+        [innerCodeBlocks insertObject:codeBlock atIndex:insertIndex+1];
+    else
+        [innerCodeBlocks insertObject:codeBlock atIndex:insertIndex];
     return true;
 }
 
@@ -98,6 +101,11 @@ static MethodDeclorationBlock *mainBlock;
 -(void)removeCodeBlock:(id<CodeBlock>)codeBlock
 {
     [innerCodeBlocks removeObject:codeBlock];
+}
+
+-(NSArray *) getPropertyVariables
+{
+    return parameterVariables;
 }
 
 

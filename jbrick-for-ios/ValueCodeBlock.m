@@ -7,6 +7,7 @@
 //
 
 #import "ValueCodeBlock.h"
+#import "PrimativeTypeUtility.h"
 
 @implementation ValueCodeBlock
 @synthesize ReturnType;
@@ -29,10 +30,14 @@
 
 -(NSString *) generateCode
 {
-    if(ReturnType == STRING)
-        return [NSString stringWithFormat:@"\"%@\"", Value];
+    if(Value){
+        if(ReturnType == STRING)
+            return [NSString stringWithFormat:@"\"%@\"", Value];
     
-    return Value;
+        return Value;
+    } else {
+        return [PrimativeTypeUtility getDefaultValue:ReturnType];
+    }
 }
 
 -(bool)addCodeBlock:(id<CodeBlock>)codeBlock
@@ -40,7 +45,7 @@
     return false;
 }
 
--(bool)addCodeBlock:(id<CodeBlock>)codeBlock afterBlock:(id<CodeBlock>)indexBlock
+-(bool)addCodeBlock:(id<CodeBlock>)codeBlock indexBlock:(id<CodeBlock>)indexBlock afterIndexBlock:(bool)afterIndexBlock
 {
     return false;
 }
