@@ -56,6 +56,11 @@ static NSMutableArray *placedBlocks;
     codeBlock = codeBlockParam;
     attachedBlocks = [[NSMutableArray alloc]init];
     defaultHeight = frame.size.height;
+    
+    UIImageView *Icon = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Wait_icon.png"]];
+    Icon.frame = CGRectMake(15, 15, 50, 60);
+    [self addSubview:Icon];
+    
     return self;
 }
 
