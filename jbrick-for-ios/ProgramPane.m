@@ -39,6 +39,7 @@
     contentRect.size.height -= 5;
     zoomableView = [[UIView alloc] initWithFrame:contentRect];
     zoomableView.clipsToBounds = NO;
+    
     [super addSubview:zoomableView];
 }
 

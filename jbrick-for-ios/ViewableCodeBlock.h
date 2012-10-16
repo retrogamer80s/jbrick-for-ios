@@ -11,6 +11,7 @@
 
 @protocol ViewableCodeBlock <CodeBlock>
 @property CGColorRef BlockColor;
+@property UIImage *Icon;
 -(UIView *) getPropertyView;
 -(NSString *) getDisplayName;
 -(id<ViewableCodeBlock>) getPrototype;

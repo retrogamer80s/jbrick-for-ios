@@ -14,6 +14,7 @@
 @synthesize Parent;
 @synthesize Deleted;
 @synthesize BlockColor;
+@synthesize Icon;
 
 int DEFAULT_MARGIN = 10;
 
@@ -77,6 +78,7 @@ int DEFAULT_MARGIN = 10;
 -(id<ViewableCodeBlock>)getPrototype{
     MethodCallCodeBlock *block = [[MethodCallCodeBlock alloc] init:name parameterTypes:parameterTypes returnType:ReturnType];
     block.BlockColor = BlockColor;
+    block.Icon = Icon;
     return block;
 }
 
@@ -99,6 +101,23 @@ int DEFAULT_MARGIN = 10;
 {
     // Method call blocks don't have children and thus can't remove them
 }
+
+- (NSArray *) getAvailableParameters:(Primative)type
+{
+    NSMutableArray *params = [NSMutableArray array];
+    [Parent addAvailableParameters:type parameterList:params beforeIndex:self];
+    return params;
+}
+- (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(id<CodeBlock>)index
+{
+    // This method should only be called from child blocks, and this type of block has no children
+}
+- (bool) canBeParameter:(Primative)type
+{
+    return NO; // Currently we are not supporting using non-variable blocks as parameters of other blocks
+}
+
+//******** Private Methods ********
 
 -(NSArray *) getPropertyVariables
 {

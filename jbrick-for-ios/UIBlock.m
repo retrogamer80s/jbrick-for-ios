@@ -12,9 +12,9 @@
 @synthesize controller;
 @synthesize programPane;
 
-id<ViewableCodeBlock> selectedCodeBlock;
+UIBlock *selectedCodeBlock;
 
-static NSMutableArray *placedBlocks; 
+static NSMutableArray *placedBlocks;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -58,9 +58,12 @@ static NSMutableArray *placedBlocks;
     attachedBlocks = [[NSMutableArray alloc]init];
     defaultHeight = frame.size.height;
     
-    UIImageView *Icon = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Wait_icon.png"]];
-    Icon.frame = CGRectMake(15, 15, 50, 60);
-    [self addSubview:Icon];
+    if(codeBlock.Icon){
+        UIImageView *Icon = [[UIImageView alloc]initWithImage:codeBlock.Icon];
+        CGFloat aspectRatio = codeBlock.Icon.size.height / codeBlock.Icon.size.width;
+        Icon.frame = CGRectMake(15, 15, 50, 50 * aspectRatio);
+        [self addSubview:Icon];
+    }
     
     return self;
 }
@@ -69,7 +72,11 @@ static NSMutableArray *placedBlocks;
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
+    if(self != selectedCodeBlock)
+        CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
+    else
+        CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    
     CGContextSetLineWidth(context, 4.0);
     CGContextBeginPath(context);
     CGContextSetFillColorWithColor(context, codeBlock.BlockColor);
@@ -187,7 +194,12 @@ static NSMutableArray *placedBlocks;
     [programPane fitToContent];
     [programPane scrollRectToVisible:self.frame animated:YES];
     [controller.propertyPane setPropertyContent:[codeBlock getPropertyVariables]];
-    selectedCodeBlock = codeBlock;
+    
+    // Redraw the selection of the current block
+    UIBlock *previousSelected = selectedCodeBlock;
+    selectedCodeBlock = self;
+    [previousSelected setNeedsDisplay];
+    [self setNeedsDisplay];
 }
 
 -(NSArray *)getUnattachedBlocks{
@@ -367,11 +379,18 @@ static NSMutableArray *placedBlocks;
 
 - (void)blockTapped:(UITapGestureRecognizer *)gestureRecognizer
 {
-    if(codeBlock != selectedCodeBlock || ![controller.propertyPane isOpen])
+    if(self != selectedCodeBlock || ![controller.propertyPane isOpen])
     {
         [controller.propertyPane setPropertyContent:[codeBlock getPropertyVariables]];
         [controller.propertyPane openPanel:nil];
-        selectedCodeBlock = codeBlock;
+    }
+    if(self != selectedCodeBlock)
+    {
+        // Redraw the selection of the current block
+        UIBlock *previousSelected = selectedCodeBlock;
+        selectedCodeBlock = self;
+        [previousSelected setNeedsDisplay];
+        [self setNeedsDisplay];
     }
 }
 

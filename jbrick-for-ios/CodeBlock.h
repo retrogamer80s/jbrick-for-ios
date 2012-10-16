@@ -18,4 +18,7 @@
 - (bool) addCodeBlock:(id<CodeBlock>)codeBlock indexBlock:(id<CodeBlock>)indexBlock afterIndexBlock:(bool)afterIndexBlock;
 - (void) removeCodeBlock:(id<CodeBlock>)codeBlock;
 - (void) removeFromParent;
+- (NSArray *) getAvailableParameters:(Primative)type;
+- (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(id<CodeBlock>)index;
+- (bool) canBeParameter:(Primative)type;
 @end

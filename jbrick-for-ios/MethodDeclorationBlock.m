@@ -13,6 +13,7 @@
 @synthesize Parent;
 @synthesize Deleted;
 @synthesize BlockColor;
+@synthesize Icon;
 
 static MethodDeclorationBlock *mainBlock;
 
@@ -90,6 +91,7 @@ static MethodDeclorationBlock *mainBlock;
 {
     MethodDeclorationBlock *prototype = [[MethodDeclorationBlock alloc] init:name parameterVariables:parameterVariables returnType:ReturnType];
     prototype.BlockColor = BlockColor;
+    prototype.Icon = Icon;
     return prototype;    
 }
 

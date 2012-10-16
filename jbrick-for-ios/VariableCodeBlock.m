@@ -9,6 +9,9 @@
 #import "VariableCodeBlock.h"
 
 @implementation VariableCodeBlock
+
+static NSInteger variableCount = 0;
+
 @synthesize ReturnType;
 @synthesize Parent;
 @synthesize Deleted;
@@ -18,6 +21,7 @@
     self = [super init];
     name = nameParam;
     self.ReturnType = primitive;
+    variableCount++;
     return self;
 }
 
@@ -47,6 +51,21 @@
 -(void)removeCodeBlock:(id<CodeBlock>)codeBlock
 {
     // Variable blocks don't have children and thus can't remove them
+}
+
+- (NSArray *) getAvailableParameters:(Primative)type
+{
+    NSMutableArray *params = [NSMutableArray array];
+    [Parent addAvailableParameters:type parameterList:params beforeIndex:self];
+    return params;
+}
+- (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(id<CodeBlock>)index
+{
+    // This method should only be called from child blocks, and this type of block has no children
+}
+- (bool) canBeParameter:(Primative)type
+{
+    return ReturnType == type;
 }
 
 @end

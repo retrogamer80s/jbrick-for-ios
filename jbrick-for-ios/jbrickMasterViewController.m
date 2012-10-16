@@ -61,6 +61,11 @@ NSMutableDictionary *methodBlocks;
     wait.BlockColor = [UIColor blueColor].CGColor;
     stopMotor.BlockColor = [UIColor redColor].CGColor;
     
+    ifBlock.Icon = [UIImage imageNamed:@"Loop_icon.png"];
+    onFWD.Icon = [UIImage imageNamed:@"Variable.png"];
+    wait.Icon = [UIImage imageNamed:@"Wait_icon.png"];
+    stopMotor.Icon = [UIImage imageNamed:@"Variable.png"];
+    
     NSArray *motorMethods = [NSArray arrayWithObjects:onFWD, stopMotor, nil];
     NSArray *logicMethods = [NSArray arrayWithObjects:wait, ifBlock, nil];
     NSMutableArray *customMethods = [NSMutableArray arrayWithObjects:nil];
