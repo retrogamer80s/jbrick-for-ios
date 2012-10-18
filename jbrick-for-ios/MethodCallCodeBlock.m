@@ -112,9 +112,10 @@ int DEFAULT_MARGIN = 10;
 {
     // This method should only be called from child blocks, and this type of block has no children
 }
-- (bool) canBeParameter:(Primative)type
+
+- (id<CodeBlock>) getParameterReferenceBlock:(Primative)type
 {
-    return NO; // Currently we are not supporting using non-variable blocks as parameters of other blocks
+    return nil; // Currently we are not supporting using non-variable blocks as parameters of other blocks
 }
 
 //******** Private Methods ********

@@ -276,6 +276,9 @@
         </class>
         <class className="jbrickMasterViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/jbrickMasterViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="longPress:" candidateClass="UIGestureRecognizer"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

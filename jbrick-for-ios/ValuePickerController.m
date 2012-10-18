@@ -11,17 +11,13 @@
 @implementation ValuePickerController
 
 @synthesize delegate;
-@synthesize type;
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    return self;
-}
+@synthesize parentCodeBlock;
+@synthesize valueCodeBlock;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    availableCodeBlocks = [parentCodeBlock getAvailableParameters:valueCodeBlock.ReturnType];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -47,7 +43,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 3;
+    return [availableCodeBlocks count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -55,11 +51,12 @@
     
     if(indexPath.row == 0){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EmptyCell" forIndexPath:indexPath];
-        [cell addSubview:[PrimativeTypeUtility constructDefaultView:type]];
+        [cell addSubview:[PrimativeTypeUtility constructDefaultView:valueCodeBlock.ReturnType]];
         return cell;
     } else {
+        id<CodeBlock> codeBlock = [availableCodeBlocks objectAtIndex:indexPath.row-1];
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-        cell.textLabel.text = @"Value";
+        cell.textLabel.text = [codeBlock generateCode];
     
         return cell;
     }

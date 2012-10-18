@@ -11,6 +11,7 @@
 #import "MGSplitViewController.h"
 #import "MethodCallCodeBlock.h"
 #import "MethodDeclorationBlock.h"
+#import "VariableDeclorationBlock.h"
 #import "KGNoise.h"
 
 @interface jbrickMasterViewController () {
@@ -55,19 +56,22 @@ NSMutableDictionary *methodBlocks;
     MethodCallCodeBlock *onFWD = [[MethodCallCodeBlock alloc] init:@"OnFwd" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:MOTOR],[NSNumber numberWithInt:MOTOR_POWER],[NSNumber numberWithInt:INTEGER], nil] returnType:VOID];
     MethodCallCodeBlock *wait = [[MethodCallCodeBlock alloc] init:@"Wait" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:INTEGER], nil] returnType:VOID];
     MethodCallCodeBlock *stopMotor = [[MethodCallCodeBlock alloc] init:@"Off" parameterTypes:[NSArray arrayWithObject:[NSNumber numberWithInt:MOTOR]] returnType:VOID];
+    VariableDeclorationBlock *variable = [[VariableDeclorationBlock alloc] init:@"MOTOR_POWER" type:MOTOR_POWER];
 
     ifBlock.BlockColor = [UIColor yellowColor].CGColor;
     onFWD.BlockColor = [UIColor greenColor].CGColor;
     wait.BlockColor = [UIColor blueColor].CGColor;
     stopMotor.BlockColor = [UIColor redColor].CGColor;
+    variable.BlockColor = [UIColor orangeColor].CGColor;
     
     ifBlock.Icon = [UIImage imageNamed:@"Loop_icon.png"];
     onFWD.Icon = [UIImage imageNamed:@"Variable.png"];
     wait.Icon = [UIImage imageNamed:@"Wait_icon.png"];
     stopMotor.Icon = [UIImage imageNamed:@"Variable.png"];
+    variable.Icon = [UIImage imageNamed:@"Variable.png"];
     
     NSArray *motorMethods = [NSArray arrayWithObjects:onFWD, stopMotor, nil];
-    NSArray *logicMethods = [NSArray arrayWithObjects:wait, ifBlock, nil];
+    NSArray *logicMethods = [NSArray arrayWithObjects:wait, ifBlock, variable, nil];
     NSMutableArray *customMethods = [NSMutableArray arrayWithObjects:nil];
     
     [methodBlocks setObject:motorMethods forKey:@"Motor Blocks"];

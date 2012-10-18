@@ -110,6 +110,31 @@ static MethodDeclorationBlock *mainBlock;
     return parameterVariables;
 }
 
+- (NSArray *) getAvailableParameters:(Primative)type
+{
+    NSMutableArray *params = [NSMutableArray array];
+    [Parent addAvailableParameters:type parameterList:params beforeIndex:self];
+    return params;
+}
+- (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(id<CodeBlock>)index
+{
+    for(id<CodeBlock> codeBlock in innerCodeBlocks)
+    {
+        if(codeBlock == index)
+            break;
+        id<CodeBlock> paramRef = [codeBlock getParameterReferenceBlock:type];
+        if(paramRef)
+            [paramList addObject:codeBlock];
+    }
+    
+    if(Parent)
+        [Parent addAvailableParameters:type parameterList:paramList beforeIndex:self];
+}
+
+- (id<CodeBlock>) getParameterReferenceBlock:(Primative)type
+{
+    return nil; // Currently we are not supporting using non-variable blocks as parameters of other blocks
+}
 
 -(NSArray *)getParameterDeclorations
 {

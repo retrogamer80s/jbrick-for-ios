@@ -9,17 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "MGSplitViewController.h"
 #import "ValuePickerController.h"
+#import "ViewableCodeBlock.h"
 
 @interface PropertyViewController : UITableViewController
 {
     NSArray *variables;
     ValuePickerController *valuePicker;
     UIPopoverController *popoverController;
+    id<CodeBlock> codeBlock;
 }
 @property MGSplitViewController *splitViewController;
 @property (readonly) BOOL isOpen;
 
--(void)setPropertyContent:(NSArray *) variables;
+-(void)setPropertyContent:(id<ViewableCodeBlock>) codeBlock;
 -(void)closePanel:(void (^)(BOOL finished))completion;
 -(void)openPanel:(void (^)(BOOL finished))completion;
 @end

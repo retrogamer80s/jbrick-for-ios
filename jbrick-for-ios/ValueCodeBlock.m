@@ -60,4 +60,20 @@
     // Method call blocks don't have children and thus can't remove them
 }
 
+- (NSArray *) getAvailableParameters:(Primative)type
+{
+    NSMutableArray *params = [NSMutableArray array];
+    [Parent addAvailableParameters:type parameterList:params beforeIndex:self];
+    return params;
+}
+- (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(id<CodeBlock>)index
+{
+    // This method should only be called from child blocks, and this type of block has no children
+}
+
+- (id<CodeBlock>) getParameterReferenceBlock:(Primative)type
+{
+    return nil; // Currently we are not supporting using non-variable blocks as parameters of other blocks
+}
+
 @end

@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "CodeBlock.h"
 #import "PrimativeTypeUtility.h"
+#import "VariableDeclorationBlock.h"
 
 @interface VariableCodeBlock : NSObject <CodeBlock>
 {
-    NSString *name;
+    VariableDeclorationBlock *variable;
     Primative returnType;
 }
--(id) init:(NSString *)name type:(Primative)primitive;
+-(id) init:(VariableDeclorationBlock *)name type:(Primative)primitive;
 @end

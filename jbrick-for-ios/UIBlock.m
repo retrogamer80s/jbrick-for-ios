@@ -193,7 +193,7 @@ static NSMutableArray *placedBlocks;
     }
     [programPane fitToContent];
     [programPane scrollRectToVisible:self.frame animated:YES];
-    [controller.propertyPane setPropertyContent:[codeBlock getPropertyVariables]];
+    [controller.propertyPane setPropertyContent:codeBlock];
     
     // Redraw the selection of the current block
     UIBlock *previousSelected = selectedCodeBlock;
@@ -381,7 +381,7 @@ static NSMutableArray *placedBlocks;
 {
     if(self != selectedCodeBlock || ![controller.propertyPane isOpen])
     {
-        [controller.propertyPane setPropertyContent:[codeBlock getPropertyVariables]];
+        [controller.propertyPane setPropertyContent:codeBlock];
         [controller.propertyPane openPanel:nil];
     }
     if(self != selectedCodeBlock)

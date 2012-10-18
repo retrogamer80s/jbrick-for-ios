@@ -20,5 +20,5 @@
 - (void) removeFromParent;
 - (NSArray *) getAvailableParameters:(Primative)type;
 - (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(id<CodeBlock>)index;
-- (bool) canBeParameter:(Primative)type;
+- (id<CodeBlock>) getParameterReferenceBlock:(Primative)type;
 @end

@@ -17,8 +17,12 @@
 
 
 @interface ValuePickerController : UITableViewController
+{
+    NSArray *availableCodeBlocks;
+}
 
 @property (nonatomic, assign) id<ValuePickerDelegate> delegate;
-@property (nonatomic, assign) Primative type;
+@property (nonatomic, assign) id<CodeBlock> parentCodeBlock;
+@property (nonatomic, assign) id<CodeBlock> valueCodeBlock;
 
 @end

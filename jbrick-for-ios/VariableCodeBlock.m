@@ -16,10 +16,10 @@ static NSInteger variableCount = 0;
 @synthesize Parent;
 @synthesize Deleted;
 
--(id) init:(NSString *)nameParam type:(Primative)primitive
+-(id) init:(VariableDeclorationBlock *)variableParam type:(Primative)primitive
 {
     self = [super init];
-    name = nameParam;
+    variable = variableParam;
     self.ReturnType = primitive;
     variableCount++;
     return self;
@@ -27,8 +27,8 @@ static NSInteger variableCount = 0;
 
 - (NSString *) generateCode
 {
-    if(!Deleted)
-        return name;
+    if(!Deleted && variable && !variable.Deleted)
+        return variable.Name;
     else 
         return [PrimativeTypeUtility getDefaultValue:ReturnType];
 }
@@ -63,9 +63,10 @@ static NSInteger variableCount = 0;
 {
     // This method should only be called from child blocks, and this type of block has no children
 }
-- (bool) canBeParameter:(Primative)type
+
+- (id<CodeBlock>) getParameterReferenceBlock:(Primative)type
 {
-    return ReturnType == type;
+    return nil; // Currently we are not supporting using non-variable blocks as parameters of other blocks
 }
 
 @end

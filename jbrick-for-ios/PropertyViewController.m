@@ -56,14 +56,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<CodeBlock> codeBlock = [variables objectAtIndex:indexPath.row];
+    id<CodeBlock> valueCodeBlock = [variables objectAtIndex:indexPath.row];
     
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-    if(codeBlock){
-        cell.textLabel.text = [PrimativeTypeUtility primativeToName:codeBlock.ReturnType];
-        NSString *detail = [codeBlock generateCode];
+    if(valueCodeBlock){
+        cell.textLabel.text = [PrimativeTypeUtility primativeToName:valueCodeBlock.ReturnType];
+        NSString *detail = [valueCodeBlock generateCode];
         cell.detailTextLabel.text = detail;
     }
         
@@ -113,12 +113,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<CodeBlock> codeBlock = [variables objectAtIndex:indexPath.row];
+    id<CodeBlock> valueCodeBlock = [variables objectAtIndex:indexPath.row];
     
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     valuePicker = [sb instantiateViewControllerWithIdentifier:@"ValuePickerController"];
     valuePicker.contentSizeForViewInPopover = self.view.frame.size;
-    valuePicker.type = codeBlock.ReturnType;
+    valuePicker.parentCodeBlock = codeBlock;
+    valuePicker.valueCodeBlock = valueCodeBlock;
                              
     popoverController = [[UIPopoverController alloc] initWithContentViewController:valuePicker];
     
@@ -132,11 +133,12 @@
     return ![_splitViewController isShowingMaster];
 }
 
--(void)setPropertyContent:(NSArray *) variablesParam
+-(void)setPropertyContent:(id<ViewableCodeBlock>) codeBlockParam
 {
+    codeBlock = codeBlockParam;
     for(int i=0; i<[self.tableView numberOfRowsInSection:0]; i++)
         [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0] animated:NO];
-    variables = variablesParam;
+    variables = [codeBlockParam getPropertyVariables];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     
 }
