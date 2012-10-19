@@ -106,6 +106,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if(delegate)
+        [delegate didSelectValue:[availableCodeBlocks objectAtIndex:indexPath.row-1] previousCodeBlock:valueCodeBlock];
 }
 
 @end

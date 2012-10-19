@@ -8,6 +8,7 @@
 
 #import "MethodCallCodeBlock.h"
 #import "ValueCodeBlock.h"
+#import "ConstantValueBlocks.h"
 
 @implementation MethodCallCodeBlock
 @synthesize ReturnType;
@@ -106,6 +107,7 @@ int DEFAULT_MARGIN = 10;
 {
     NSMutableArray *params = [NSMutableArray array];
     [Parent addAvailableParameters:type parameterList:params beforeIndex:self];
+    [params addObjectsFromArray:[ConstantValueBlocks getValueConstants:type]];
     return params;
 }
 - (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(id<CodeBlock>)index
@@ -138,6 +140,20 @@ int DEFAULT_MARGIN = 10;
             [values addObject:[PrimativeTypeUtility getDefaultValueWithNum:[parameterTypes objectAtIndex:i]]];
     }
     return values;
+}
+- (bool) replaceParameter:(id<CodeBlock>)oldParam newParameter:(id<CodeBlock>)newParam
+{
+    NSInteger index = [parameterValues indexOfObject:oldParam];
+    if(index == NSNotFound)
+        return false;
+    
+    if(oldParam.ReturnType == newParam.ReturnType)
+    {
+        [parameterValues replaceObjectAtIndex:index withObject:newParam];
+        return true;
+    }
+
+    return false;
 }
 
 @end

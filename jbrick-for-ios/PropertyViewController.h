@@ -11,12 +11,12 @@
 #import "ValuePickerController.h"
 #import "ViewableCodeBlock.h"
 
-@interface PropertyViewController : UITableViewController
+@interface PropertyViewController : UITableViewController <ValuePickerDelegate>
 {
     NSArray *variables;
     ValuePickerController *valuePicker;
     UIPopoverController *popoverController;
-    id<CodeBlock> codeBlock;
+    id<ViewableCodeBlock> codeBlock;
 }
 @property MGSplitViewController *splitViewController;
 @property (readonly) BOOL isOpen;

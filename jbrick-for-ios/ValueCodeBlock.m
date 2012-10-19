@@ -8,6 +8,7 @@
 
 #import "ValueCodeBlock.h"
 #import "PrimativeTypeUtility.h"
+#import "ConstantValueBlocks.h"
 
 @implementation ValueCodeBlock
 @synthesize ReturnType;
@@ -64,6 +65,7 @@
 {
     NSMutableArray *params = [NSMutableArray array];
     [Parent addAvailableParameters:type parameterList:params beforeIndex:self];
+    [params addObjectsFromArray:[ConstantValueBlocks getValueConstants:type]];
     return params;
 }
 - (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(id<CodeBlock>)index

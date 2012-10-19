@@ -48,6 +48,7 @@ NSMutableDictionary *methodBlocks;
     self.detailViewController = (jbrickDetailViewController *)[[_splitViewController.viewControllers lastObject] topViewController];
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+    [longPress setMinimumPressDuration:0.15];
     [self.tableView addGestureRecognizer:longPress];    
     
     methodBlocks = [[NSMutableDictionary alloc] init];
@@ -79,9 +80,6 @@ NSMutableDictionary *methodBlocks;
     [methodBlocks setObject:customMethods forKey:@"Custom"];
      
     selectedIndex = [NSIndexPath indexPathForRow:-1 inSection:-1];
-    
-    UIBlock *mainBlock = [[UIBlock alloc] init:self.detailViewController codeBlock:ifBlock];
-    [self.detailViewController.programPane addSubview:mainBlock];
 }
 
 - (void)viewDidUnload

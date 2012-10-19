@@ -10,22 +10,19 @@
 #import "ValueCodeBlock.h"
 
 @implementation ConstantValueBlocks
--(id)init
-{
-    self = [super init];
-    constants = [NSMutableDictionary dictionary];
-    return self;
-}
+static NSMutableDictionary *constants;
 
--(NSArray *) getValueConstants:(Primative)type
++(NSArray *) getValueConstants:(Primative)type
 {
+    if(!constants)
+        constants = [NSMutableDictionary dictionary];
     if([constants objectForKey:[NSNumber numberWithInt:type]])
         return [constants objectForKey:[NSNumber numberWithInt:type]];
     else
         return [self populateConstants:type];
 }
 
--(NSArray *) populateConstants:(Primative)type
++(NSArray *) populateConstants:(Primative)type
 {
     switch (type) {
         case INTEGER:

@@ -72,6 +72,7 @@ float firstY;
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
+
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOutsideBlock:)];
     [tapGesture setDelegate:self];

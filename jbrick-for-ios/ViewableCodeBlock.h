@@ -16,4 +16,5 @@
 -(NSString *) getDisplayName;
 -(id<ViewableCodeBlock>) getPrototype;
 -(NSArray *) getPropertyVariables;
+- (bool) replaceParameter:(id<CodeBlock>)oldParam newParameter:(id<CodeBlock>)newParam;
 @end

@@ -12,7 +12,7 @@
 #import "CodeBlock.h"
 
 @protocol ValuePickerDelegate
-- (void)didSelectValue:(id<CodeBlock>)codeBlock;
+- (void)didSelectValue:(id<CodeBlock>)codeBlock previousCodeBlock:(id<CodeBlock>)prevCodeBlock;
 @end
 
 

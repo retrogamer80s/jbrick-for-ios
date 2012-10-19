@@ -32,6 +32,7 @@ static NSMutableArray *placedBlocks;
         UITapGestureRecognizer *tripleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(blockTripleTapped:)];
         [tapGesture setNumberOfTapsRequired:1];
         [tripleTapGesture setNumberOfTapsRequired:3];
+        lpGesture.minimumPressDuration = .15;
         
         lpGesture.delegate = self;
         tapGesture.delegate = self;
@@ -103,9 +104,8 @@ static NSMutableArray *placedBlocks;
 {   
     CGPoint translation = [gestureRecognizer locationInView:[self superview]];
     if([gestureRecognizer state] == UIGestureRecognizerStateBegan)
-    {       
-        panelWasOpen = [controller.propertyPane isOpen];
-        [controller.propertyPane closePanel:nil];
+    {
+        [self selectBlock];
         AudioServicesPlaySystemSound(velcroSound);
         
         if(parentBlock){
@@ -149,7 +149,7 @@ static NSMutableArray *placedBlocks;
 {
     AudioServicesPlaySystemSound(snapSound);
     
-    CGRect boundsA = [self convertRect:self.bounds toView:nil];
+    CGRect boundsA = self.frame;
     UIBlock *overlappedBlock;
     CGFloat distanceToBlock = 0.0;
 
@@ -158,7 +158,7 @@ static NSMutableArray *placedBlocks;
         if(object != self)
         {
             UIBlock *otherBlock = object;
-            CGRect boundsB = [otherBlock convertRect:otherBlock.bounds toView:nil];
+            CGRect boundsB = otherBlock.frame;
             if( CGRectIntersectsRect(boundsA, boundsB) ){
                 //Check if this one is closer than the previous
                 CGFloat otherBlockDistance = [self DistanceBetweenTwoPoints:self.frame.origin point2:otherBlock.frame.origin];
@@ -190,12 +190,27 @@ static NSMutableArray *placedBlocks;
                 [overlappedBlock attachBlockToSide:self indexBlock:nil afterIndexBlock:false];
             }
         }];
+        [programPane fitToContent];
+        [programPane scrollRectToVisible:self.frame animated:YES];
+        
+        // Redraw the selection of the current block
+        [self selectBlock];
+    } else {
+        
+        if(previousBlock)
+            [UIView animateWithDuration:0.5 animations:^{
+                [previousBlock attachBlockToSide:self indexBlock:previousIndexBlock afterIndexBlock:false];
+            }];
+        else
+            [self delete];
+        
     }
-    [programPane fitToContent];
-    [programPane scrollRectToVisible:self.frame animated:YES];
-    [controller.propertyPane setPropertyContent:codeBlock];
     
-    // Redraw the selection of the current block
+}
+
+-(void) selectBlock
+{
+    [controller.propertyPane setPropertyContent:codeBlock];
     UIBlock *previousSelected = selectedCodeBlock;
     selectedCodeBlock = self;
     [previousSelected setNeedsDisplay];
@@ -341,10 +356,9 @@ static NSMutableArray *placedBlocks;
         [codeBlock removeFromParent];
         [parentBlock->attachedBlocks removeObject:self];
     }
-    
     [UIView transitionWithView:self
-                      duration:.5
-                       options:UIViewAnimationOptionTransitionCurlUp
+                    duration:.5
+                       options:UIViewAnimationOptionTransitionCurlUp | UIViewAnimationOptionAllowAnimatedContent
                     animations:^ {
                         [self animateDelete];
                     }
@@ -379,18 +393,11 @@ static NSMutableArray *placedBlocks;
 
 - (void)blockTapped:(UITapGestureRecognizer *)gestureRecognizer
 {
-    if(self != selectedCodeBlock || ![controller.propertyPane isOpen])
-    {
-        [controller.propertyPane setPropertyContent:codeBlock];
-        [controller.propertyPane openPanel:nil];
-    }
+    [controller.propertyPane openPanel:nil];
+
     if(self != selectedCodeBlock)
     {
-        // Redraw the selection of the current block
-        UIBlock *previousSelected = selectedCodeBlock;
-        selectedCodeBlock = self;
-        [previousSelected setNeedsDisplay];
-        [self setNeedsDisplay];
+        [self selectBlock];
     }
 }
 

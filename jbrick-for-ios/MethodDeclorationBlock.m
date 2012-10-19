@@ -7,6 +7,7 @@
 //
 
 #import "MethodDeclorationBlock.h"
+#import "ConstantValueBlocks.h"
 
 @implementation MethodDeclorationBlock
 @synthesize ReturnType;
@@ -17,7 +18,7 @@
 
 static MethodDeclorationBlock *mainBlock;
 
--(id) init:(NSString *)methodName parameterVariables:(NSArray *)parameters returnType:(Primative)returnType
+-(id) init:(NSString *)methodName parameterVariables:(NSMutableArray *)parameters returnType:(Primative)returnType
 {
     self = [super init];
     name = methodName;
@@ -114,6 +115,7 @@ static MethodDeclorationBlock *mainBlock;
 {
     NSMutableArray *params = [NSMutableArray array];
     [Parent addAvailableParameters:type parameterList:params beforeIndex:self];
+    [params addObjectsFromArray:[ConstantValueBlocks getValueConstants:type]];
     return params;
 }
 - (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(id<CodeBlock>)index
@@ -147,6 +149,21 @@ static MethodDeclorationBlock *mainBlock;
         [declorations addObject:[NSString stringWithFormat:@"%@ %@", primTypeString, variableString]];
     }
     return declorations;
+}
+
+- (bool) replaceParameter:(id<CodeBlock>)oldParam newParameter:(id<CodeBlock>)newParam
+{
+    NSInteger index = [parameterVariables indexOfObject:oldParam];
+    if(index == NSNotFound)
+        return false;
+    
+    if(oldParam.ReturnType == newParam.ReturnType)
+    {
+        [parameterVariables replaceObjectAtIndex:index withObject:newParam];
+        return true;
+    }
+    
+    return false;
 }
 
 @end

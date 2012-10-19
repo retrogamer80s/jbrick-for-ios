@@ -7,6 +7,7 @@
 //
 
 #import "VariableCodeBlock.h"
+#import "ConstantValueBlocks.h"
 
 @implementation VariableCodeBlock
 
@@ -57,6 +58,7 @@ static NSInteger variableCount = 0;
 {
     NSMutableArray *params = [NSMutableArray array];
     [Parent addAvailableParameters:type parameterList:params beforeIndex:self];
+    [params addObjectsFromArray:[ConstantValueBlocks getValueConstants:type]];
     return params;
 }
 - (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(id<CodeBlock>)index

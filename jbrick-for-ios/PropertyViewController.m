@@ -59,7 +59,7 @@
     id<CodeBlock> valueCodeBlock = [variables objectAtIndex:indexPath.row];
     
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     if(valueCodeBlock){
         cell.textLabel.text = [PrimativeTypeUtility primativeToName:valueCodeBlock.ReturnType];
@@ -93,21 +93,6 @@
 }
 */
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -117,8 +102,9 @@
     
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     valuePicker = [sb instantiateViewControllerWithIdentifier:@"ValuePickerController"];
-    valuePicker.contentSizeForViewInPopover = self.view.frame.size;
     valuePicker.parentCodeBlock = codeBlock;
+    valuePicker.delegate = self;
+    valuePicker.contentSizeForViewInPopover = self.view.frame.size;
     valuePicker.valueCodeBlock = valueCodeBlock;
                              
     popoverController = [[UIPopoverController alloc] initWithContentViewController:valuePicker];
@@ -136,8 +122,9 @@
 -(void)setPropertyContent:(id<ViewableCodeBlock>) codeBlockParam
 {
     codeBlock = codeBlockParam;
-    for(int i=0; i<[self.tableView numberOfRowsInSection:0]; i++)
-        [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0] animated:NO];
+    //for(int i=0; i<[self.tableView numberOfRowsInSection:0]; i++)
+        //[self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0] animated:NO];
+    //[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:YES];
     variables = [codeBlockParam getPropertyVariables];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     
@@ -155,6 +142,13 @@
 
 - (IBAction)ClosePressed:(id)sender {
     [self closePanel:nil];
+}
+
+- (void)didSelectValue:(id<CodeBlock>)newCodeBlock previousCodeBlock:(id<CodeBlock>)prevCodeBlock{
+    NSIndexPath *index = [NSIndexPath indexPathForItem:[variables indexOfObject:prevCodeBlock] inSection:0];
+    [codeBlock replaceParameter:prevCodeBlock newParameter:newCodeBlock];
+    [popoverController dismissPopoverAnimated:YES];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:index] withRowAnimation:YES];
 }
 
 

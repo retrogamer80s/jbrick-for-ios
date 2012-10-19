@@ -10,8 +10,5 @@
 #import "PrimativeTypes.h"
 
 @interface ConstantValueBlocks : NSObject
-{
-    NSMutableDictionary *constants;
-}
--(NSArray *) getValueConstants:(Primative)type;
++(NSArray *) getValueConstants:(Primative)type;
 @end

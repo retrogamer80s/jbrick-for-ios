@@ -9,6 +9,7 @@
 #import "VariableDeclorationBlock.h"
 #import "PrimativeTypeUtility.h"
 #import "VariableCodeBlock.h"
+#import "ConstantValueBlocks.h"
 
 @implementation VariableDeclorationBlock
 @synthesize Name;
@@ -82,6 +83,7 @@
 {
     NSMutableArray *params = [NSMutableArray array];
     [Parent addAvailableParameters:type parameterList:params beforeIndex:self];
+    [params addObjectsFromArray:[ConstantValueBlocks getValueConstants:type]];
     return params;
 }
 - (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(id<CodeBlock>)index
@@ -96,6 +98,11 @@
     else
         return nil;
         
+}
+
+- (bool) replaceParameter:(id<CodeBlock>)oldParam newParameter:(id<CodeBlock>)newParam
+{
+    return false; //this method doesn't apply to a variable def since it has no parameters
 }
 
 @end
