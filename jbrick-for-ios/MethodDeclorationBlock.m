@@ -126,7 +126,7 @@ static MethodDeclorationBlock *mainBlock;
             break;
         id<CodeBlock> paramRef = [codeBlock getParameterReferenceBlock:type];
         if(paramRef)
-            [paramList addObject:codeBlock];
+            [paramList addObject:paramRef];
     }
     
     if(Parent)

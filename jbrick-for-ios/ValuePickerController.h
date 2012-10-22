@@ -10,15 +10,17 @@
 #import "CodeBlock.h"
 #import "PrimativeTypeUtility.h"
 #import "CodeBlock.h"
+#import "ValueInputCell.h"
 
 @protocol ValuePickerDelegate
 - (void)didSelectValue:(id<CodeBlock>)codeBlock previousCodeBlock:(id<CodeBlock>)prevCodeBlock;
 @end
 
 
-@interface ValuePickerController : UITableViewController
+@interface ValuePickerController : UITableViewController <ValueInputCellDelegate>
 {
     NSArray *availableCodeBlocks;
+    VariableAssignmentDelegate *varDel;
 }
 
 @property (nonatomic, assign) id<ValuePickerDelegate> delegate;

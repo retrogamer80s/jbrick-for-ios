@@ -36,9 +36,9 @@
 		3FC7733A1614B34A0025A048 /* MethodDeclorationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC773391614B34A0025A048 /* MethodDeclorationBlock.m */; };
 		3FCB8F701608DF7A00F45EB7 /* UIBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCB8F6F1608DF7A00F45EB7 /* UIBlock.m */; };
 		3FCB8F711608E39700F45EB7 /* jbrickDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B89A9160108410007A0B9 /* jbrickDetailViewController.m */; };
-		3FCEA6AF1610B2B600C74638 /* PropertyPanelUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCEA6AE1610B2B600C74638 /* PropertyPanelUIView.m */; };
 		3FD9C268162EE6D800E467BB /* VariableDeclorationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9C267162EE6D800E467BB /* VariableDeclorationBlock.m */; };
 		3FD9C26C162F22A100E467BB /* ConstantValueBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9C26B162F22A000E467BB /* ConstantValueBlocks.m */; };
+		3FDB98FD1631D6F600EA3190 /* ValueInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB98FC1631D6F600EA3190 /* ValueInputCell.m */; };
 		3FFD2A75160A118B00E8403C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFD2A74160A118B00E8403C /* AudioToolbox.framework */; };
 		3FFDD4BF1619E4F70065D30B /* UITextFieldStrongDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDD4BE1619E4F70065D30B /* UITextFieldStrongDelegate.m */; };
 		3FFDD4C7161B3CBB0065D30B /* IntInputStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDD4C6161B3CBB0065D30B /* IntInputStrategy.m */; };
@@ -102,13 +102,13 @@
 		3FC773391614B34A0025A048 /* MethodDeclorationBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodDeclorationBlock.m; sourceTree = "<group>"; };
 		3FCB8F6E1608DF7A00F45EB7 /* UIBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBlock.h; sourceTree = "<group>"; };
 		3FCB8F6F1608DF7A00F45EB7 /* UIBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBlock.m; sourceTree = "<group>"; };
-		3FCEA6AD1610B2B600C74638 /* PropertyPanelUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyPanelUIView.h; sourceTree = "<group>"; };
-		3FCEA6AE1610B2B600C74638 /* PropertyPanelUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyPanelUIView.m; sourceTree = "<group>"; };
 		3FD00E33161C82C500AD98DB /* ViewableCodeBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewableCodeBlock.h; sourceTree = "<group>"; };
 		3FD9C266162EE6D800E467BB /* VariableDeclorationBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariableDeclorationBlock.h; sourceTree = "<group>"; };
 		3FD9C267162EE6D800E467BB /* VariableDeclorationBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariableDeclorationBlock.m; sourceTree = "<group>"; };
 		3FD9C26A162F22A000E467BB /* ConstantValueBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantValueBlocks.h; sourceTree = "<group>"; };
 		3FD9C26B162F22A000E467BB /* ConstantValueBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstantValueBlocks.m; sourceTree = "<group>"; };
+		3FDB98FB1631D6F600EA3190 /* ValueInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueInputCell.h; sourceTree = "<group>"; };
+		3FDB98FC1631D6F600EA3190 /* ValueInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValueInputCell.m; sourceTree = "<group>"; };
 		3FFD2A74160A118B00E8403C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3FFDD4BD1619E4F70065D30B /* UITextFieldStrongDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextFieldStrongDelegate.h; sourceTree = "<group>"; };
 		3FFDD4BE1619E4F70065D30B /* UITextFieldStrongDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextFieldStrongDelegate.m; sourceTree = "<group>"; };
@@ -192,8 +192,8 @@
 				3F490BA3160A3D3200B2BA38 /* ProgramPane.m */,
 				3FB5322A161098D800A907F7 /* MethodTabelCell.h */,
 				3FB5322B161098D800A907F7 /* MethodTabelCell.m */,
-				3FCEA6AD1610B2B600C74638 /* PropertyPanelUIView.h */,
-				3FCEA6AE1610B2B600C74638 /* PropertyPanelUIView.m */,
+				3FDB98FB1631D6F600EA3190 /* ValueInputCell.h */,
+				3FDB98FC1631D6F600EA3190 /* ValueInputCell.m */,
 			);
 			path = "jbrick-for-ios";
 			sourceTree = "<group>";
@@ -391,7 +391,6 @@
 				3FCB8F711608E39700F45EB7 /* jbrickDetailViewController.m in Sources */,
 				3F490BA4160A3D3200B2BA38 /* ProgramPane.m in Sources */,
 				3FB5322C161098D800A907F7 /* MethodTabelCell.m in Sources */,
-				3FCEA6AF1610B2B600C74638 /* PropertyPanelUIView.m in Sources */,
 				3FC77331161482E50025A048 /* VariableCodeBlock.m in Sources */,
 				3FC7733416148C9C0025A048 /* MethodCallCodeBlock.m in Sources */,
 				3FC773371614A19F0025A048 /* PrimativeTypeUtility.m in Sources */,
@@ -410,6 +409,7 @@
 				3F86E730162C9D4E00A7C985 /* ValuePickerController.m in Sources */,
 				3FD9C268162EE6D800E467BB /* VariableDeclorationBlock.m in Sources */,
 				3FD9C26C162F22A100E467BB /* ConstantValueBlocks.m in Sources */,
+				3FDB98FD1631D6F600EA3190 /* ValueInputCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

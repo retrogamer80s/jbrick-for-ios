@@ -18,5 +18,5 @@
 + (NSString *) getDefaultValueWithNum:(NSNumber *)primative;
 + (NSString *) primativeToString:(Primative)primative;
 + (NSString *) primativeToName:(Primative)primative;
-+ (UIView *) constructDefaultView:(Primative)primative;
++ (UIView *) constructDefaultView:(Primative)primative delegate:(VariableAssignmentDelegate *)delegate value:(id<CodeBlock>)value;
 @end

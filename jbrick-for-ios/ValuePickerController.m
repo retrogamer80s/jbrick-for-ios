@@ -7,6 +7,8 @@
 //
 
 #import "ValuePickerController.h"
+#import "ValueInputCell.h"
+#import "VariableAssignmentDelegate.h"
 
 @implementation ValuePickerController
 
@@ -50,8 +52,10 @@
 {
     
     if(indexPath.row == 0){
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EmptyCell" forIndexPath:indexPath];
-        [cell addSubview:[PrimativeTypeUtility constructDefaultView:valueCodeBlock.ReturnType]];
+        ValueInputCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EmptyCell" forIndexPath:indexPath];
+        cell.delegate = self;
+        varDel = [[VariableAssignmentDelegate alloc] init:valueCodeBlock.ReturnType];
+        [cell setContent:[PrimativeTypeUtility constructDefaultView:valueCodeBlock.ReturnType delegate:varDel value:valueCodeBlock]];
         return cell;
     } else {
         id<CodeBlock> codeBlock = [availableCodeBlocks objectAtIndex:indexPath.row-1];
@@ -62,6 +66,13 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == 0)
+        return 137;
+    else
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -105,9 +116,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(indexPath.row == 0)
+        return;
+    
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(delegate)
         [delegate didSelectValue:[availableCodeBlocks objectAtIndex:indexPath.row-1] previousCodeBlock:valueCodeBlock];
+}
+
+- (void)submitClicked
+{
+    if(varDel)
+        if(delegate)
+            [delegate didSelectValue:varDel.value previousCodeBlock:valueCodeBlock];
 }
 
 @end

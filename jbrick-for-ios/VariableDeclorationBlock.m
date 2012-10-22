@@ -38,7 +38,7 @@
 
 -(UIView *) getPropertyView
 {
-    return [PrimativeTypeUtility constructDefaultView:ReturnType];
+    return nil;
 }
 
 -(NSString *)getDisplayName{

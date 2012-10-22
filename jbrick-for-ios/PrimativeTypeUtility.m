@@ -93,20 +93,15 @@
     }
 }
 
-+ (UIView *) constructDefaultView:(Primative)primative
-{
-    VariableAssignmentDelegate *delegate = [[VariableAssignmentDelegate alloc] init:primative];
-    ValueCodeBlock *value = nil;
-    //if([[variables objectAtIndex:index] isKindOfClass:[ValueCodeBlock class]])
-        //value = [variables objectAtIndex:index];
-    
++ (UIView *) constructDefaultView:(Primative)primative delegate:(VariableAssignmentDelegate *)delegate value:(id<CodeBlock>)value
+{   
     switch (primative) {
         case MOTOR_POWER:
         {
             UISlider *slider = [[UISliderStrongReference alloc] initWithFrame:CGRectMake(0, 0, 280, 40)];
             [slider addTarget:delegate action:@selector(sliderChanged:) forControlEvents:UIControlEventTouchUpInside];
-            if(value)
-                [slider setValue:[value.Value floatValue] animated:YES];
+            if(((ValueCodeBlock *)value).Value)
+                [slider setValue:[((ValueCodeBlock *)value).Value floatValue] animated:NO];
             return slider;
         }
             
@@ -115,7 +110,7 @@
             UITextField *view = [[UITextFieldStrongDelegate alloc] initWithFrame:CGRectMake(0, 0, 400, 40) inputDelegate:delegate];
             [view setPlaceholder:[PrimativeTypeUtility primativeToName:primative]];
             if(value)
-                view.text = value.Value;
+                view.text = ((ValueCodeBlock *)value).Value;
             return view;
         }
     }

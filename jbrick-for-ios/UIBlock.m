@@ -386,6 +386,7 @@ static NSMutableArray *placedBlocks;
 {
     [placedBlocks removeObject:self];
     [self removeFromSuperview];
+    codeBlock.Deleted = true;
     for(UIBlock *child in attachedBlocks)
         [child deleteWithAllChildren];
         

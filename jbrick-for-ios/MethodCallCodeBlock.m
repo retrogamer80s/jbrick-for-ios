@@ -61,10 +61,10 @@ int DEFAULT_MARGIN = 10;
     // Construct a view to hold all subviews, it's frame will change with each view added
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     for (int i=0; i<parameterTypes.count; i++) {
-        UIView *subView = [PrimativeTypeUtility constructDefaultView:[[parameterTypes objectAtIndex:i] integerValue]];
-        subView.frame = CGRectMake(0, view.frame.size.height + 10, 0, subView.frame.size.height);
-        view.frame = CGRectMake(0, 0, 0, view.frame.size.height + subView.frame.size.height + DEFAULT_MARGIN*2);
-        [view addSubview:subView];
+        //UIView *subView = [PrimativeTypeUtility constructDefaultView:[[parameterTypes objectAtIndex:i] integerValue]];
+        //subView.frame = CGRectMake(0, view.frame.size.height + 10, 0, subView.frame.size.height);
+        //view.frame = CGRectMake(0, 0, 0, view.frame.size.height + subView.frame.size.height + DEFAULT_MARGIN*2);
+        //[view addSubview:subView];
     }
     return view;
 }
