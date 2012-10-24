@@ -19,6 +19,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    inputCellView = [PrimativeTypeUtility constructDefaultView:valueCodeBlock.ReturnType delegate:varDel value:valueCodeBlock];
+    if(inputCellView)
+        listSizeModifier = 1;
     availableCodeBlocks = [parentCodeBlock getAvailableParameters:valueCodeBlock.ReturnType];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -45,20 +48,20 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [availableCodeBlocks count] + 1;
+    return [availableCodeBlocks count] + listSizeModifier;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if(indexPath.row == 0){
+    if(indexPath.row == 0 && inputCellView){
         ValueInputCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EmptyCell" forIndexPath:indexPath];
         cell.delegate = self;
         varDel = [[VariableAssignmentDelegate alloc] init:valueCodeBlock.ReturnType];
         [cell setContent:[PrimativeTypeUtility constructDefaultView:valueCodeBlock.ReturnType delegate:varDel value:valueCodeBlock]];
         return cell;
     } else {
-        id<CodeBlock> codeBlock = [availableCodeBlocks objectAtIndex:indexPath.row-1];
+        id<CodeBlock> codeBlock = [availableCodeBlocks objectAtIndex:indexPath.row-listSizeModifier];
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
         cell.textLabel.text = [codeBlock generateCode];
     
@@ -68,7 +71,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 0)
+    if(indexPath.row == 0 && inputCellView)
         return 137;
     else
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
@@ -121,7 +124,7 @@
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(delegate)
-        [delegate didSelectValue:[availableCodeBlocks objectAtIndex:indexPath.row-1] previousCodeBlock:valueCodeBlock];
+        [delegate didSelectValue:[availableCodeBlocks objectAtIndex:indexPath.row-listSizeModifier] previousCodeBlock:valueCodeBlock];
 }
 
 - (void)submitClicked

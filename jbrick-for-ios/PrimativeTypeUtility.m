@@ -104,6 +104,10 @@
                 [slider setValue:[((ValueCodeBlock *)value).Value floatValue] animated:NO];
             return slider;
         }
+        case MOTOR:
+        {
+            return nil;
+        }
             
         default:
         {

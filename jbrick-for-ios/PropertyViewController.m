@@ -109,7 +109,14 @@
                              
     popoverController = [[UIPopoverController alloc] initWithContentViewController:valuePicker];
     
-    [popoverController presentPopoverFromRect:[self tableView:self.tableView cellForRowAtIndexPath:indexPath].frame inView:self.tableView permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+    NSInteger width = self.tableView.frame.size.width;
+    NSInteger yPos = 0;
+    for(int i=0; i < indexPath.row; i++)
+        yPos += [self tableView:tableView heightForRowAtIndexPath:[NSIndexPath indexPathForItem:i inSection:indexPath.section]];
+    NSInteger height = [self tableView:tableView heightForRowAtIndexPath:indexPath];
+    CGRect cellFrame = CGRectMake(0, yPos, width, height);
+    
+    [popoverController presentPopoverFromRect:cellFrame inView:self.tableView permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
@@ -125,7 +132,10 @@
     //for(int i=0; i<[self.tableView numberOfRowsInSection:0]; i++)
         //[self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0] animated:NO];
     //[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:YES];
-    variables = [codeBlockParam getPropertyVariables];
+    if(codeBlock)
+        variables = [codeBlockParam getPropertyVariables];
+    else
+        variables = [NSArray array];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     
 }
@@ -145,10 +155,13 @@
 }
 
 - (void)didSelectValue:(id<CodeBlock>)newCodeBlock previousCodeBlock:(id<CodeBlock>)prevCodeBlock{
-    NSIndexPath *index = [NSIndexPath indexPathForItem:[variables indexOfObject:prevCodeBlock] inSection:0];
-    [codeBlock replaceParameter:prevCodeBlock newParameter:newCodeBlock];
+    if(newCodeBlock){
+        NSIndexPath *index = [NSIndexPath indexPathForItem:[variables indexOfObject:prevCodeBlock] inSection:0];
+        [codeBlock replaceParameter:prevCodeBlock newParameter:newCodeBlock];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:index] withRowAnimation:YES];
+    }
     [popoverController dismissPopoverAnimated:YES];
-    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:index] withRowAnimation:YES];
+    
 }
 
 

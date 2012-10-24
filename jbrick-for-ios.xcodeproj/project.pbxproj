@@ -39,6 +39,11 @@
 		3FD9C268162EE6D800E467BB /* VariableDeclorationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9C267162EE6D800E467BB /* VariableDeclorationBlock.m */; };
 		3FD9C26C162F22A100E467BB /* ConstantValueBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9C26B162F22A000E467BB /* ConstantValueBlocks.m */; };
 		3FDB98FD1631D6F600EA3190 /* ValueInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB98FC1631D6F600EA3190 /* ValueInputCell.m */; };
+		3FE1DDA5163593900049555C /* backward_wheel_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE1DDA0163593900049555C /* backward_wheel_icon.png */; };
+		3FE1DDA6163593900049555C /* Equals_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE1DDA1163593900049555C /* Equals_icon.png */; };
+		3FE1DDA7163593900049555C /* forward_wheel_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE1DDA2163593900049555C /* forward_wheel_icon.png */; };
+		3FE1DDA8163593900049555C /* Gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE1DDA3163593900049555C /* Gear.png */; };
+		3FE1DDA9163593900049555C /* wheel_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE1DDA4163593900049555C /* wheel_icon.png */; };
 		3FFD2A75160A118B00E8403C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFD2A74160A118B00E8403C /* AudioToolbox.framework */; };
 		3FFDD4BF1619E4F70065D30B /* UITextFieldStrongDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDD4BE1619E4F70065D30B /* UITextFieldStrongDelegate.m */; };
 		3FFDD4C7161B3CBB0065D30B /* IntInputStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDD4C6161B3CBB0065D30B /* IntInputStrategy.m */; };
@@ -109,6 +114,11 @@
 		3FD9C26B162F22A000E467BB /* ConstantValueBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstantValueBlocks.m; sourceTree = "<group>"; };
 		3FDB98FB1631D6F600EA3190 /* ValueInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueInputCell.h; sourceTree = "<group>"; };
 		3FDB98FC1631D6F600EA3190 /* ValueInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValueInputCell.m; sourceTree = "<group>"; };
+		3FE1DDA0163593900049555C /* backward_wheel_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward_wheel_icon.png; sourceTree = "<group>"; };
+		3FE1DDA1163593900049555C /* Equals_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Equals_icon.png; sourceTree = "<group>"; };
+		3FE1DDA2163593900049555C /* forward_wheel_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward_wheel_icon.png; sourceTree = "<group>"; };
+		3FE1DDA3163593900049555C /* Gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gear.png; sourceTree = "<group>"; };
+		3FE1DDA4163593900049555C /* wheel_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wheel_icon.png; sourceTree = "<group>"; };
 		3FFD2A74160A118B00E8403C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3FFDD4BD1619E4F70065D30B /* UITextFieldStrongDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextFieldStrongDelegate.h; sourceTree = "<group>"; };
 		3FFDD4BE1619E4F70065D30B /* UITextFieldStrongDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextFieldStrongDelegate.m; sourceTree = "<group>"; };
@@ -170,30 +180,30 @@
 		3F1B8996160108410007A0B9 /* jbrick-for-ios */ = {
 			isa = PBXGroup;
 			children = (
-				3F86E708162C9D4E00A7C985 /* KGNoise */,
-				3F86E70F162C9D4E00A7C985 /* MGSplitView */,
-				3F86E71C162C9D4E00A7C985 /* PropertyViewController.h */,
-				3F86E71D162C9D4E00A7C985 /* PropertyViewController.m */,
-				3F86E721162C9D4E00A7C985 /* ValuePickerController.h */,
-				3F86E722162C9D4E00A7C985 /* ValuePickerController.m */,
 				3F490BB0160B634100B2BA38 /* CodeBlocks */,
-				3FCB8F631608A72500F45EB7 /* Resources */,
 				3F1B899F160108410007A0B9 /* jbrickAppDelegate.h */,
 				3F1B89A0160108410007A0B9 /* jbrickAppDelegate.m */,
-				3F1B89A2160108410007A0B9 /* MainStoryboard.storyboard */,
-				3F1B89A5160108410007A0B9 /* jbrickMasterViewController.h */,
-				3F1B89A6160108410007A0B9 /* jbrickMasterViewController.m */,
 				3F1B89A8160108410007A0B9 /* jbrickDetailViewController.h */,
 				3F1B89A9160108410007A0B9 /* jbrickDetailViewController.m */,
+				3F1B89A5160108410007A0B9 /* jbrickMasterViewController.h */,
+				3F1B89A6160108410007A0B9 /* jbrickMasterViewController.m */,
+				3F86E708162C9D4E00A7C985 /* KGNoise */,
+				3F1B89A2160108410007A0B9 /* MainStoryboard.storyboard */,
+				3FB5322A161098D800A907F7 /* MethodTabelCell.h */,
+				3FB5322B161098D800A907F7 /* MethodTabelCell.m */,
+				3F86E70F162C9D4E00A7C985 /* MGSplitView */,
+				3F490BA2160A3D3200B2BA38 /* ProgramPane.h */,
+				3F490BA3160A3D3200B2BA38 /* ProgramPane.m */,
+				3F86E71C162C9D4E00A7C985 /* PropertyViewController.h */,
+				3F86E71D162C9D4E00A7C985 /* PropertyViewController.m */,
+				3FCB8F631608A72500F45EB7 /* Resources */,
 				3F1B8997160108410007A0B9 /* Supporting Files */,
 				3FCB8F6E1608DF7A00F45EB7 /* UIBlock.h */,
 				3FCB8F6F1608DF7A00F45EB7 /* UIBlock.m */,
-				3F490BA2160A3D3200B2BA38 /* ProgramPane.h */,
-				3F490BA3160A3D3200B2BA38 /* ProgramPane.m */,
-				3FB5322A161098D800A907F7 /* MethodTabelCell.h */,
-				3FB5322B161098D800A907F7 /* MethodTabelCell.m */,
 				3FDB98FB1631D6F600EA3190 /* ValueInputCell.h */,
 				3FDB98FC1631D6F600EA3190 /* ValueInputCell.m */,
+				3F86E721162C9D4E00A7C985 /* ValuePickerController.h */,
+				3F86E722162C9D4E00A7C985 /* ValuePickerController.m */,
 			);
 			path = "jbrick-for-ios";
 			sourceTree = "<group>";
@@ -212,27 +222,27 @@
 		3F490BB0160B634100B2BA38 /* CodeBlocks */ = {
 			isa = PBXGroup;
 			children = (
-				3FFDD4C4161B3C690065D30B /* InputVerificationStrategies */,
-				3FFDD4CB161B6CE30065D30B /* Views */,
-				3FD9C266162EE6D800E467BB /* VariableDeclorationBlock.h */,
-				3FD9C267162EE6D800E467BB /* VariableDeclorationBlock.m */,
-				3F2CA3FE1611D854006260D1 /* PrimativeTypes.h */,
-				3FC773351614A19F0025A048 /* PrimativeTypeUtility.h */,
-				3FC773361614A19F0025A048 /* PrimativeTypeUtility.m */,
 				3FC77320161331420025A048 /* CodeBlock.h */,
-				3FC7732F161482E50025A048 /* VariableCodeBlock.h */,
-				3FC77330161482E50025A048 /* VariableCodeBlock.m */,
+				3FD9C26A162F22A000E467BB /* ConstantValueBlocks.h */,
+				3FD9C26B162F22A000E467BB /* ConstantValueBlocks.m */,
+				3FFDD4C4161B3C690065D30B /* InputVerificationStrategies */,
 				3FC7733216148C9C0025A048 /* MethodCallCodeBlock.h */,
 				3FC7733316148C9C0025A048 /* MethodCallCodeBlock.m */,
 				3FC773381614B34A0025A048 /* MethodDeclorationBlock.h */,
 				3FC773391614B34A0025A048 /* MethodDeclorationBlock.m */,
-				3F5FA4051615F1F60097B661 /* VariableAssignmentDelegate.h */,
-				3F5FA4061615F1F60097B661 /* VariableAssignmentDelegate.m */,
+				3F2CA3FE1611D854006260D1 /* PrimativeTypes.h */,
+				3FC773351614A19F0025A048 /* PrimativeTypeUtility.h */,
+				3FC773361614A19F0025A048 /* PrimativeTypeUtility.m */,
 				3F5FA4091615F6530097B661 /* ValueCodeBlock.h */,
 				3F5FA40A1615F6530097B661 /* ValueCodeBlock.m */,
+				3F5FA4051615F1F60097B661 /* VariableAssignmentDelegate.h */,
+				3F5FA4061615F1F60097B661 /* VariableAssignmentDelegate.m */,
+				3FC7732F161482E50025A048 /* VariableCodeBlock.h */,
+				3FC77330161482E50025A048 /* VariableCodeBlock.m */,
+				3FD9C266162EE6D800E467BB /* VariableDeclorationBlock.h */,
+				3FD9C267162EE6D800E467BB /* VariableDeclorationBlock.m */,
 				3FD00E33161C82C500AD98DB /* ViewableCodeBlock.h */,
-				3FD9C26A162F22A000E467BB /* ConstantValueBlocks.h */,
-				3FD9C26B162F22A000E467BB /* ConstantValueBlocks.m */,
+				3FFDD4CB161B6CE30065D30B /* Views */,
 			);
 			name = CodeBlocks;
 			sourceTree = "<group>";
@@ -282,6 +292,11 @@
 		3FCB8F641608A72500F45EB7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3FE1DDA0163593900049555C /* backward_wheel_icon.png */,
+				3FE1DDA1163593900049555C /* Equals_icon.png */,
+				3FE1DDA2163593900049555C /* forward_wheel_icon.png */,
+				3FE1DDA3163593900049555C /* Gear.png */,
+				3FE1DDA4163593900049555C /* wheel_icon.png */,
 				94E8F997162C8F9100C9886B /* Loop_icon.png */,
 				94E8F998162C8F9100C9886B /* Variable.png */,
 				94E8F999162C8F9100C9886B /* Wait_icon.png */,
@@ -374,6 +389,11 @@
 				94E8F99B162C8F9100C9886B /* Variable.png in Resources */,
 				94E8F99C162C8F9100C9886B /* Wait_icon.png in Resources */,
 				3F86E724162C9D4E00A7C985 /* license.txt in Resources */,
+				3FE1DDA5163593900049555C /* backward_wheel_icon.png in Resources */,
+				3FE1DDA6163593900049555C /* Equals_icon.png in Resources */,
+				3FE1DDA7163593900049555C /* forward_wheel_icon.png in Resources */,
+				3FE1DDA8163593900049555C /* Gear.png in Resources */,
+				3FE1DDA9163593900049555C /* wheel_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

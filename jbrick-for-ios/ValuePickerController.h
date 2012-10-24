@@ -21,6 +21,8 @@
 {
     NSArray *availableCodeBlocks;
     VariableAssignmentDelegate *varDel;
+    NSInteger listSizeModifier;
+    UIView *inputCellView;
 }
 
 @property (nonatomic, assign) id<ValuePickerDelegate> delegate;

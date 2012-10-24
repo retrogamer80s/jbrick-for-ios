@@ -53,7 +53,7 @@ NSMutableDictionary *methodBlocks;
     
     methodBlocks = [[NSMutableDictionary alloc] init];
     
-    MethodDeclorationBlock *ifBlock = [[MethodDeclorationBlock alloc] init:@"If" parameterVariables:[[NSArray alloc]init] returnType:VOID];
+    MethodDeclorationBlock *ifBlock = [[MethodDeclorationBlock alloc] init:@"If" parameterVariables:[[NSMutableArray alloc]init] returnType:VOID];
     MethodCallCodeBlock *onFWD = [[MethodCallCodeBlock alloc] init:@"OnFwd" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:MOTOR],[NSNumber numberWithInt:MOTOR_POWER],[NSNumber numberWithInt:INTEGER], nil] returnType:VOID];
     MethodCallCodeBlock *wait = [[MethodCallCodeBlock alloc] init:@"Wait" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:INTEGER], nil] returnType:VOID];
     MethodCallCodeBlock *stopMotor = [[MethodCallCodeBlock alloc] init:@"Off" parameterTypes:[NSArray arrayWithObject:[NSNumber numberWithInt:MOTOR]] returnType:VOID];
@@ -66,9 +66,9 @@ NSMutableDictionary *methodBlocks;
     variable.BlockColor = [UIColor orangeColor].CGColor;
     
     ifBlock.Icon = [UIImage imageNamed:@"Loop_icon.png"];
-    onFWD.Icon = [UIImage imageNamed:@"Variable.png"];
+    onFWD.Icon = [UIImage imageNamed:@"forward_wheel_icon.png"];
     wait.Icon = [UIImage imageNamed:@"Wait_icon.png"];
-    stopMotor.Icon = [UIImage imageNamed:@"Variable.png"];
+    stopMotor.Icon = [UIImage imageNamed:@"wheel_icon.png"];
     variable.Icon = [UIImage imageNamed:@"Variable.png"];
     
     NSArray *motorMethods = [NSArray arrayWithObjects:onFWD, stopMotor, nil];

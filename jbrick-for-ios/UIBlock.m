@@ -351,6 +351,7 @@ static NSMutableArray *placedBlocks;
 {
     [controller.propertyPane closePanel:nil];
     AudioServicesPlaySystemSound(trashSound);
+    [controller.propertyPane setPropertyContent:nil];
     
     if(parentBlock){
         [codeBlock removeFromParent];
