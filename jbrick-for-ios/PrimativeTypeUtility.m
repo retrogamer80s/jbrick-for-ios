@@ -57,7 +57,7 @@
             return @"int";
         case VOID:
             return @"void";
-        case -1:
+        case MAIN:
             // Custom case used only for the main block
             return @"task";
         default:
@@ -88,35 +88,53 @@
             return @"LCD Line";
         case VOID:
             return @"Void";
+        case PARAMETER_NAME:
+            return @"Name";
+        case PARAMETER_RETURN:
+            return @"Type";
+        case ANY_VARIABLE:
+            return @"Variable";
         default:
             return nil;
     }
 }
 
 + (UIView *) constructDefaultView:(Primative)primative delegate:(VariableAssignmentDelegate *)delegate value:(id<CodeBlock>)value
-{   
+{
+    ValueCodeBlock *valBlock;
+    if([value isKindOfClass:[ValueCodeBlock class]])
+        valBlock = value;
+    
     switch (primative) {
         case MOTOR_POWER:
         {
             UISlider *slider = [[UISliderStrongReference alloc] initWithFrame:CGRectMake(0, 0, 280, 40)];
             [slider addTarget:delegate action:@selector(sliderChanged:) forControlEvents:UIControlEventTouchUpInside];
-            if(((ValueCodeBlock *)value).Value)
-                [slider setValue:[((ValueCodeBlock *)value).Value floatValue] animated:NO];
+            if(valBlock && valBlock.Value)
+                [slider setValue:[valBlock.Value floatValue] animated:NO];
             return slider;
         }
         case MOTOR:
         {
             return nil;
         }
-            
+        case PARAMETER_RETURN:
+        {
+            return nil;
+        }
         default:
         {
             UITextField *view = [[UITextFieldStrongDelegate alloc] initWithFrame:CGRectMake(0, 0, 400, 40) inputDelegate:delegate];
             [view setPlaceholder:[PrimativeTypeUtility primativeToName:primative]];
-            if(value)
-                view.text = ((ValueCodeBlock *)value).Value;
+            if(valBlock)
+                view.text = valBlock.Value;
             return view;
         }
     }
+}
+
++ (Boolean) primativeIsUserSelectable:(Primative)type
+{
+    return type < NON_USER_SELECTABLE;
 }
 @end

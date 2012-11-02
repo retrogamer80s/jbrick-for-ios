@@ -38,11 +38,13 @@
 }
 - (IBAction)ValueSelected:(id)sender {
     if(delegate)
-        [delegate submitClicked];
+        [delegate submitClicked:indexPath];
 }
 
-- (void)setContent:(UIView *)content
+- (void)setContent:(UIView *)content indexPath:(NSIndexPath *)index
 {
+    indexPath = index;
+    
     for(UIView *view in Subview.subviews)
         [view removeFromSuperview];
     content.frame = CGRectMake(0, 0, 260, content.frame.size.height);

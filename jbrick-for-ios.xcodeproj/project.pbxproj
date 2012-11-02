@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F1254E816406582005A1B0E /* VariableAssignmentBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1254E716406581005A1B0E /* VariableAssignmentBlock.m */; };
 		3F1B8991160108410007A0B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1B8990160108410007A0B9 /* UIKit.framework */; };
 		3F1B8993160108410007A0B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1B8992160108410007A0B9 /* Foundation.framework */; };
 		3F1B8995160108410007A0B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1B8994160108410007A0B9 /* CoreGraphics.framework */; };
@@ -18,7 +19,7 @@
 		3F490BA1160A3BC400B2BA38 /* puzzle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F490BA0160A3BC400B2BA38 /* puzzle.png */; };
 		3F490BA4160A3D3200B2BA38 /* ProgramPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F490BA3160A3D3200B2BA38 /* ProgramPane.m */; };
 		3F5FA4071615F1F60097B661 /* VariableAssignmentDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FA4061615F1F60097B661 /* VariableAssignmentDelegate.m */; };
-		3F5FA40B1615F6530097B661 /* ValueCodeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FA40A1615F6530097B661 /* ValueCodeBlock.m */; };
+		3F6E422D1642CE2F00E69AF2 /* ValueCodeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6E422C1642CE2F00E69AF2 /* ValueCodeBlock.m */; };
 		3F86E723162C9D4E00A7C985 /* KGNoise.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F86E70A162C9D4E00A7C985 /* KGNoise.m */; };
 		3F86E724162C9D4E00A7C985 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3F86E70B162C9D4E00A7C985 /* license.txt */; };
 		3F86E727162C9D4E00A7C985 /* MGSplitCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F86E711162C9D4E00A7C985 /* MGSplitCornersView.m */; };
@@ -55,6 +56,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F1254E616406581005A1B0E /* VariableAssignmentBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariableAssignmentBlock.h; sourceTree = "<group>"; };
+		3F1254E716406581005A1B0E /* VariableAssignmentBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariableAssignmentBlock.m; sourceTree = "<group>"; };
 		3F1B898C160108410007A0B9 /* jbrick-for-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "jbrick-for-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F1B8990160108410007A0B9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3F1B8992160108410007A0B9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -77,7 +80,7 @@
 		3F5FA4051615F1F60097B661 /* VariableAssignmentDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariableAssignmentDelegate.h; sourceTree = "<group>"; };
 		3F5FA4061615F1F60097B661 /* VariableAssignmentDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariableAssignmentDelegate.m; sourceTree = "<group>"; };
 		3F5FA4091615F6530097B661 /* ValueCodeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueCodeBlock.h; sourceTree = "<group>"; };
-		3F5FA40A1615F6530097B661 /* ValueCodeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValueCodeBlock.m; sourceTree = "<group>"; };
+		3F6E422C1642CE2F00E69AF2 /* ValueCodeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValueCodeBlock.m; sourceTree = "<group>"; };
 		3F86E709162C9D4E00A7C985 /* KGNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGNoise.h; sourceTree = "<group>"; };
 		3F86E70A162C9D4E00A7C985 /* KGNoise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGNoise.m; sourceTree = "<group>"; };
 		3F86E70B162C9D4E00A7C985 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
@@ -108,6 +111,7 @@
 		3FCB8F6E1608DF7A00F45EB7 /* UIBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBlock.h; sourceTree = "<group>"; };
 		3FCB8F6F1608DF7A00F45EB7 /* UIBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBlock.m; sourceTree = "<group>"; };
 		3FD00E33161C82C500AD98DB /* ViewableCodeBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewableCodeBlock.h; sourceTree = "<group>"; };
+		3FD6B0BD164155EC00B4A0CC /* CodeBlockVisitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeBlockVisitor.h; sourceTree = "<group>"; };
 		3FD9C266162EE6D800E467BB /* VariableDeclorationBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariableDeclorationBlock.h; sourceTree = "<group>"; };
 		3FD9C267162EE6D800E467BB /* VariableDeclorationBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariableDeclorationBlock.m; sourceTree = "<group>"; };
 		3FD9C26A162F22A000E467BB /* ConstantValueBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantValueBlocks.h; sourceTree = "<group>"; };
@@ -234,7 +238,7 @@
 				3FC773351614A19F0025A048 /* PrimativeTypeUtility.h */,
 				3FC773361614A19F0025A048 /* PrimativeTypeUtility.m */,
 				3F5FA4091615F6530097B661 /* ValueCodeBlock.h */,
-				3F5FA40A1615F6530097B661 /* ValueCodeBlock.m */,
+				3F6E422C1642CE2F00E69AF2 /* ValueCodeBlock.m */,
 				3F5FA4051615F1F60097B661 /* VariableAssignmentDelegate.h */,
 				3F5FA4061615F1F60097B661 /* VariableAssignmentDelegate.m */,
 				3FC7732F161482E50025A048 /* VariableCodeBlock.h */,
@@ -243,6 +247,9 @@
 				3FD9C267162EE6D800E467BB /* VariableDeclorationBlock.m */,
 				3FD00E33161C82C500AD98DB /* ViewableCodeBlock.h */,
 				3FFDD4CB161B6CE30065D30B /* Views */,
+				3F1254E616406581005A1B0E /* VariableAssignmentBlock.h */,
+				3F1254E716406581005A1B0E /* VariableAssignmentBlock.m */,
+				3FD6B0BD164155EC00B4A0CC /* CodeBlockVisitor.h */,
 			);
 			name = CodeBlocks;
 			sourceTree = "<group>";
@@ -416,7 +423,6 @@
 				3FC773371614A19F0025A048 /* PrimativeTypeUtility.m in Sources */,
 				3FC7733A1614B34A0025A048 /* MethodDeclorationBlock.m in Sources */,
 				3F5FA4071615F1F60097B661 /* VariableAssignmentDelegate.m in Sources */,
-				3F5FA40B1615F6530097B661 /* ValueCodeBlock.m in Sources */,
 				3FFDD4BF1619E4F70065D30B /* UITextFieldStrongDelegate.m in Sources */,
 				3FFDD4C7161B3CBB0065D30B /* IntInputStrategy.m in Sources */,
 				3FFDD4CA161B3E610065D30B /* StringInputStrategy.m in Sources */,
@@ -430,6 +436,8 @@
 				3FD9C268162EE6D800E467BB /* VariableDeclorationBlock.m in Sources */,
 				3FD9C26C162F22A100E467BB /* ConstantValueBlocks.m in Sources */,
 				3FDB98FD1631D6F600EA3190 /* ValueInputCell.m in Sources */,
+				3F1254E816406582005A1B0E /* VariableAssignmentBlock.m in Sources */,
+				3F6E422D1642CE2F00E69AF2 /* ValueCodeBlock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

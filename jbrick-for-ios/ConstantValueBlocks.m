@@ -8,6 +8,7 @@
 
 #import "ConstantValueBlocks.h"
 #import "ValueCodeBlock.h"
+#import "PrimativeTypeUtility.h"
 
 @implementation ConstantValueBlocks
 static NSMutableDictionary *constants;
@@ -63,6 +64,20 @@ static NSMutableDictionary *constants;
             break;
         case VOID:
             [constants setObject:[NSArray array] forKey:[NSNumber numberWithInt:type]];
+            break;
+        case PARAMETER_RETURN:
+            [constants setObject:[NSArray arrayWithObjects:
+                                  [[ValueCodeBlock alloc] init:INTEGER value:[PrimativeTypeUtility primativeToName:INTEGER]],
+                                  [[ValueCodeBlock alloc] init:BOOLEAN value:[PrimativeTypeUtility primativeToName:BOOLEAN]],
+                                  [[ValueCodeBlock alloc] init:STRING value:[PrimativeTypeUtility primativeToName:STRING]],
+                                  [[ValueCodeBlock alloc] init:FLOAT value:[PrimativeTypeUtility primativeToName:FLOAT]],
+                                  [[ValueCodeBlock alloc] init:LONG value:[PrimativeTypeUtility primativeToName:LONG]],
+                                  [[ValueCodeBlock alloc] init:MOTOR value:[PrimativeTypeUtility primativeToName:MOTOR]],
+                                  [[ValueCodeBlock alloc] init:MOTOR_POWER value:[PrimativeTypeUtility primativeToName:MOTOR_POWER]],
+                                  [[ValueCodeBlock alloc] init:TONE value:[PrimativeTypeUtility primativeToName:TONE]],
+                                  [[ValueCodeBlock alloc] init:LCD_LINE value:[PrimativeTypeUtility primativeToName:LCD_LINE]],
+                                  nil]
+                          forKey:[NSNumber numberWithInt:type]];
             break;
     }
     return [constants objectForKey:[NSNumber numberWithInt:type]];

@@ -31,7 +31,7 @@ static MethodDeclorationBlock *mainBlock;
 +(id) getMainBlock
 {
     if(!mainBlock){
-        mainBlock = [[MethodDeclorationBlock alloc] init:@"main" parameterVariables:[NSArray array] returnType:-1];
+        mainBlock = [[MethodDeclorationBlock alloc] init:@"main" parameterVariables:[NSArray array] returnType:MAIN];
     }
     return mainBlock;
 }
@@ -160,10 +160,17 @@ static MethodDeclorationBlock *mainBlock;
     if(oldParam.ReturnType == newParam.ReturnType)
     {
         [parameterVariables replaceObjectAtIndex:index withObject:newParam];
+        [((VariableCodeBlock *)oldParam) removeParent:self]; // If it's not a variableCodeBlock this call will do nothing
+        newParam.Parent = self;
         return true;
     }
     
     return false;
+}
+
+-(void)acceptVisitor:(id<CodeBlockVisitor>)visitor
+{
+    [visitor visitMethodDeclorationBlock:self];
 }
 
 @end

@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "PrimativeTypes.h"
+#import "CodeBlockVisitor.h"
 
-@protocol CodeBlock
+@protocol CodeBlock <NSObject>
 @property Primative ReturnType;
 @property id<CodeBlock> Parent;
 @property bool Deleted;
@@ -21,4 +22,5 @@
 - (NSArray *) getAvailableParameters:(Primative)type;
 - (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(id<CodeBlock>)index;
 - (id<CodeBlock>) getParameterReferenceBlock:(Primative)type;
+- (void) acceptVisitor:(id<CodeBlockVisitor>)visitor;
 @end

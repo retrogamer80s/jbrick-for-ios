@@ -150,10 +150,18 @@ int DEFAULT_MARGIN = 10;
     if(oldParam.ReturnType == newParam.ReturnType)
     {
         [parameterValues replaceObjectAtIndex:index withObject:newParam];
+        if([oldParam isKindOfClass:[VariableCodeBlock class]])
+            [((VariableCodeBlock *)oldParam) removeParent:self];
+        newParam.Parent = self;
         return true;
     }
 
     return false;
+}
+
+-(void)acceptVisitor:(id<CodeBlockVisitor>)visitor
+{
+    [visitor visitMethodCallCodeBlock:self];
 }
 
 @end

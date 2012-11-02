@@ -15,6 +15,10 @@
 {
     VariableDeclorationBlock *variable;
     Primative returnType;
+    NSMutableArray *parents;
+    Boolean deleted;
 }
+@property (readonly) NSInteger ReferenceCount;
 -(id) init:(VariableDeclorationBlock *)name type:(Primative)primitive;
+-(void) removeParent:(id<CodeBlock>)parent;
 @end

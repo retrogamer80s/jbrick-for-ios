@@ -8,8 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "ViewableCodeBlock.h"
+#import "ValueCodeBlock.h"
 
 @interface VariableDeclorationBlock : NSObject <ViewableCodeBlock>
-@property NSString *Name;
+{
+    ValueCodeBlock *name;
+    ValueCodeBlock *type;
+    id<CodeBlock> varReference;
+}
+@property (readonly) NSString *Name;
 -(id) init:(NSString *)variableName type:(Primative)returnType;
 @end

@@ -10,11 +10,7 @@
 #import "ConstantValueBlocks.h"
 
 @implementation VariableCodeBlock
-
-static NSInteger variableCount = 0;
-
 @synthesize ReturnType;
-@synthesize Parent;
 @synthesize Deleted;
 
 -(id) init:(VariableDeclorationBlock *)variableParam type:(Primative)primitive
@@ -22,13 +18,41 @@ static NSInteger variableCount = 0;
     self = [super init];
     variable = variableParam;
     self.ReturnType = primitive;
-    variableCount++;
+    parents = [NSMutableArray array];
     return self;
+}
+
+-(id<CodeBlock>)Parent{
+    if(parents.count > 0)
+        return [parents objectAtIndex:0];
+    else
+        return nil;
+}
+-(void)setParent:(id<CodeBlock>)Parent
+{
+    [parents addObject:Parent];
+}
+-(void) removeParent:(id<CodeBlock>)parent
+{
+    [parents removeObject:parent];
+}
+
+-(bool)Deleted {
+    return deleted || variable.Deleted;
+}
+
+-(NSInteger)ReferenceCount {
+    
+    for(id<CodeBlock> parent in [parents copy])
+        if(parent.Deleted)
+            [parents removeObject:parent];
+    
+    return parents.count;
 }
 
 - (NSString *) generateCode
 {
-    if(!Deleted && variable && !variable.Deleted)
+    if(!Deleted && variable && !variable.Deleted && variable.ReturnType == ReturnType)
         return variable.Name;
     else 
         return [PrimativeTypeUtility getDefaultValue:ReturnType];
@@ -46,7 +70,7 @@ static NSInteger variableCount = 0;
 
 -(void)removeFromParent
 {
-    [Parent removeCodeBlock:self];
+    [self.Parent removeCodeBlock:self];
 }
 
 -(void)removeCodeBlock:(id<CodeBlock>)codeBlock
@@ -57,7 +81,7 @@ static NSInteger variableCount = 0;
 - (NSArray *) getAvailableParameters:(Primative)type
 {
     NSMutableArray *params = [NSMutableArray array];
-    [Parent addAvailableParameters:type parameterList:params beforeIndex:self];
+    [self.Parent addAvailableParameters:type parameterList:params beforeIndex:self];
     [params addObjectsFromArray:[ConstantValueBlocks getValueConstants:type]];
     return params;
 }
@@ -69,6 +93,11 @@ static NSInteger variableCount = 0;
 - (id<CodeBlock>) getParameterReferenceBlock:(Primative)type
 {
     return nil; // Currently we are not supporting using non-variable blocks as parameters of other blocks
+}
+
+-(void)acceptVisitor:(id<CodeBlockVisitor>)visitor
+{
+    [visitor visitVariableCodeBlock:self];
 }
 
 @end

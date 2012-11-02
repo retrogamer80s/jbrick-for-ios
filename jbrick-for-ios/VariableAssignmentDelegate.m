@@ -12,10 +12,11 @@
 
 @synthesize value;
 
--(id) init:(Primative)typeParam
+-(id) init:(id<CodeBlock>)codeBlock
 {
     self = [super init];
-    type = typeParam;
+    value = codeBlock;
+    type = codeBlock.ReturnType;
     
     [self initInputStrategy];
     

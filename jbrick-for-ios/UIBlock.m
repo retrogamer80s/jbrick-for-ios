@@ -101,37 +101,39 @@ static NSMutableArray *placedBlocks;
 }
 
 - (void)panGesture:(UILongPressGestureRecognizer *)gestureRecognizer
-{   
-    CGPoint translation = [gestureRecognizer locationInView:[self superview]];
-    if([gestureRecognizer state] == UIGestureRecognizerStateBegan)
-    {
-        [self selectBlock];
-        AudioServicesPlaySystemSound(velcroSound);
-        
-        if(parentBlock){
-            previousBlock = parentBlock;
-            previousIndexBlock = [parentBlock getIndexBlock:self];
+{
+    if(parentBlock || previousBlock){
+        CGPoint translation = [gestureRecognizer locationInView:[self superview]];
+        if([gestureRecognizer state] == UIGestureRecognizerStateBegan)
+        {
+            [self selectBlock];
+            AudioServicesPlaySystemSound(velcroSound);
             
-            [codeBlock removeFromParent];
-            [parentBlock->attachedBlocks removeObject:self];
-            [UIView animateWithDuration:.5 animations:^{
-                [parentBlock positionBlockGroup];
-            }];
-            
+            if(parentBlock){
+                previousBlock = parentBlock;
+                previousIndexBlock = [parentBlock getIndexBlock:self];
+                
+                [codeBlock removeFromParent];
+                [parentBlock->attachedBlocks removeObject:self];
+                [UIView animateWithDuration:.5 animations:^{
+                    [parentBlock positionBlockGroup];
+                }];
+                
+            }
+            parentBlock = nil;
         }
-        parentBlock = nil;
-    }
         
-    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan || [gestureRecognizer state] == UIGestureRecognizerStateChanged) {
-        CGRect scrollRect = CGRectMake(translation.x > programPane.contentSize.width ? 0 :translation.x, translation.y, 100, 100);
-        [self panToPoint:translation scrollToRect:scrollRect];
-    }
-
-    if (gestureRecognizer.state == UIGestureRecognizerStateEnded)
-    {
-        [self snapToGrid];
-        if(panelWasOpen)
-            [controller.propertyPane openPanel:nil];
+        if ([gestureRecognizer state] == UIGestureRecognizerStateBegan || [gestureRecognizer state] == UIGestureRecognizerStateChanged) {
+            CGRect scrollRect = CGRectMake(translation.x > programPane.contentSize.width ? 0 :translation.x, translation.y, 100, 100);
+            [self panToPoint:translation scrollToRect:scrollRect];
+        }
+        
+        if (gestureRecognizer.state == UIGestureRecognizerStateEnded)
+        {
+            [self snapToGrid];
+            if(panelWasOpen)
+                [controller.propertyPane openPanel:nil];
+        }
     }
 }
 
@@ -405,7 +407,8 @@ static NSMutableArray *placedBlocks;
 
 - (void)blockTripleTapped:(UITapGestureRecognizer *)gestureRecognizer
 {
-    [self delete];
+    if(parentBlock)
+        [self delete];
 }
 
 - (CGFloat) DistanceBetweenTwoPoints:(CGPoint)point1 point2:(CGPoint)point2;

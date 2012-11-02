@@ -22,6 +22,7 @@
     self = [super initWithStyle:style];
     if (self) {
         variables = [NSArray array];
+        varDelegates = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -56,18 +57,45 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<CodeBlock> valueCodeBlock = [variables objectAtIndex:indexPath.row];
+    id<CodeBlock> valueCodeBlock = [[codeBlock getPropertyVariables] objectAtIndex:indexPath.row];
     
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(valueCodeBlock.ReturnType != PARAMETER_NAME){
+        static NSString *CellIdentifier = @"Cell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
-    if(valueCodeBlock){
-        cell.textLabel.text = [PrimativeTypeUtility primativeToName:valueCodeBlock.ReturnType];
-        NSString *detail = [valueCodeBlock generateCode];
-        cell.detailTextLabel.text = detail;
+        if(valueCodeBlock){
+            cell.textLabel.text = [PrimativeTypeUtility primativeToName:valueCodeBlock.ReturnType];
+            NSString *detail = [valueCodeBlock generateCode];
+            cell.detailTextLabel.text = detail;
+        }
+        return cell;
+    } else {
+        ValueInputCell *cell = [tableView dequeueReusableCellWithIdentifier:@"valueCell"];
+        cell.delegate = self;
+        VariableAssignmentDelegate *varDel = [self getVarDelegate:valueCodeBlock index:indexPath];
+        [cell setContent:[PrimativeTypeUtility constructDefaultView:valueCodeBlock.ReturnType delegate:varDel value:valueCodeBlock] indexPath:indexPath];
+
+        return cell;
     }
-        
-    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    id<CodeBlock> valueCodeBlock = [[codeBlock getPropertyVariables] objectAtIndex:indexPath.row];
+    if(valueCodeBlock.ReturnType == PARAMETER_NAME)
+        return 137;
+    else
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+}
+
+- (VariableAssignmentDelegate *)getVarDelegate:(id<CodeBlock>)valueCodeBlock index:(NSIndexPath *)index
+{
+    if(![varDelegates objectForKey:index]){
+        VariableAssignmentDelegate *varDel = [[VariableAssignmentDelegate alloc] init:valueCodeBlock];
+        [varDelegates setObject:varDel forKey:index];
+    }
+    
+    return [varDelegates objectForKey:index];
 }
 
 /*
@@ -98,27 +126,29 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<CodeBlock> valueCodeBlock = [variables objectAtIndex:indexPath.row];
+    id<CodeBlock> valueCodeBlock = [[codeBlock getPropertyVariables]  objectAtIndex:indexPath.row];
     
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    valuePicker = [sb instantiateViewControllerWithIdentifier:@"ValuePickerController"];
-    valuePicker.parentCodeBlock = codeBlock;
-    valuePicker.delegate = self;
-    valuePicker.contentSizeForViewInPopover = self.view.frame.size;
-    valuePicker.valueCodeBlock = valueCodeBlock;
-                             
-    popoverController = [[UIPopoverController alloc] initWithContentViewController:valuePicker];
-    
-    NSInteger width = self.tableView.frame.size.width;
-    NSInteger yPos = 0;
-    for(int i=0; i < indexPath.row; i++)
-        yPos += [self tableView:tableView heightForRowAtIndexPath:[NSIndexPath indexPathForItem:i inSection:indexPath.section]];
-    NSInteger height = [self tableView:tableView heightForRowAtIndexPath:indexPath];
-    CGRect cellFrame = CGRectMake(0, yPos, width, height);
-    
-    [popoverController presentPopoverFromRect:cellFrame inView:self.tableView permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
-    
-    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if(valueCodeBlock.ReturnType != PARAMETER_NAME){
+        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+        valuePicker = [sb instantiateViewControllerWithIdentifier:@"ValuePickerController"];
+        valuePicker.parentCodeBlock = codeBlock;
+        valuePicker.delegate = self;
+        valuePicker.contentSizeForViewInPopover = self.view.frame.size;
+        valuePicker.valueCodeBlock = valueCodeBlock;
+        
+        popoverController = [[UIPopoverController alloc] initWithContentViewController:valuePicker];
+        
+        NSInteger width = self.tableView.frame.size.width;
+        NSInteger yPos = 0;
+        for(int i=0; i < indexPath.row; i++)
+            yPos += [self tableView:tableView heightForRowAtIndexPath:[NSIndexPath indexPathForItem:i inSection:indexPath.section]];
+        NSInteger height = [self tableView:tableView heightForRowAtIndexPath:indexPath];
+        CGRect cellFrame = CGRectMake(0, yPos, width, height);
+        
+        [popoverController presentPopoverFromRect:cellFrame inView:self.tableView permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+        
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
 }
 
 - (BOOL)isOpen
@@ -136,6 +166,8 @@
         variables = [codeBlockParam getPropertyVariables];
     else
         variables = [NSArray array];
+    varDelegates = [NSMutableDictionary dictionary];
+    
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     
 }
@@ -162,6 +194,18 @@
     }
     [popoverController dismissPopoverAnimated:YES];
     
+}
+
+- (void)submitClicked:(NSIndexPath *)index
+{
+    id<CodeBlock> valueCodeBlock = [[codeBlock getPropertyVariables]  objectAtIndex:index.row];
+    VariableAssignmentDelegate *varDel = [self getVarDelegate:valueCodeBlock index:index];
+    
+    if(varDel.value){
+        [codeBlock replaceParameter:valueCodeBlock newParameter:varDel.value];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:index] withRowAnimation:YES];
+    }
+
 }
 
 

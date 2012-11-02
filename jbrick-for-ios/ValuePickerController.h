@@ -10,9 +10,11 @@
 #import "CodeBlock.h"
 #import "PrimativeTypeUtility.h"
 #import "CodeBlock.h"
+#import "ValueCodeBlock.h"
+#import "VariableCodeBlock.h"
 #import "ValueInputCell.h"
 
-@protocol ValuePickerDelegate
+@protocol ValuePickerDelegate <UIAlertViewDelegate>
 - (void)didSelectValue:(id<CodeBlock>)codeBlock previousCodeBlock:(id<CodeBlock>)prevCodeBlock;
 @end
 
@@ -23,6 +25,7 @@
     VariableAssignmentDelegate *varDel;
     NSInteger listSizeModifier;
     UIView *inputCellView;
+    id<CodeBlock> newParamBlock;
 }
 
 @property (nonatomic, assign) id<ValuePickerDelegate> delegate;

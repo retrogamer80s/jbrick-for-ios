@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef enum PrimativeTypes{
+    // User selectable types
     INTEGER,
     BOOLEAN,
     STRING,
@@ -18,7 +19,17 @@ typedef enum PrimativeTypes{
     MOTOR_POWER,
     TONE,
     LCD_LINE,
-    VOID
+    VOID,
+    
+    // Types below this point are used within the system
+    // if(Primative < SYSTEM_TYPES) will tell if a type is user selectable
+    NON_USER_SELECTABLE,
+    
+    PARAMETER_NAME,
+    PARAMETER_RETURN,
+    PARAMETER_VALUE,
+    MAIN,
+    ANY_VARIABLE
 } Primative;
 
 

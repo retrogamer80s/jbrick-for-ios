@@ -21,6 +21,6 @@
 
 @property (nonatomic, retain) id<CodeBlock> value;
 
--(id) init:(Primative)type;
+-(id) init:(id<CodeBlock>)codeBlock;
 - (void)sliderChanged:(UISlider *)slider;
 @end
