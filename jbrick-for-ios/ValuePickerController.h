@@ -15,7 +15,7 @@
 #import "ValueInputCell.h"
 
 @protocol ValuePickerDelegate <UIAlertViewDelegate>
-- (void)didSelectValue:(id<CodeBlock>)codeBlock previousCodeBlock:(id<CodeBlock>)prevCodeBlock;
+- (void)didSelectValue:(CodeBlock *)codeBlock previousCodeBlock:(CodeBlock *)prevCodeBlock;
 @end
 
 
@@ -25,11 +25,11 @@
     VariableAssignmentDelegate *varDel;
     NSInteger listSizeModifier;
     UIView *inputCellView;
-    id<CodeBlock> newParamBlock;
+    CodeBlock * newParamBlock;
 }
 
 @property (nonatomic, assign) id<ValuePickerDelegate> delegate;
-@property (nonatomic, assign) id<CodeBlock> parentCodeBlock;
-@property (nonatomic, assign) id<CodeBlock> valueCodeBlock;
+@property (nonatomic, assign) CodeBlock * parentCodeBlock;
+@property (nonatomic, assign) CodeBlock * valueCodeBlock;
 
 @end

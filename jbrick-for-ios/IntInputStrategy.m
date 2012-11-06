@@ -30,7 +30,7 @@
     return YES;
 }
 
--(id<CodeBlock>)GetCodeBlock:(id)value
+-(CodeBlock *)GetCodeBlock:(id)value
 {
     return [[ValueCodeBlock alloc] init:type value:value];
 }

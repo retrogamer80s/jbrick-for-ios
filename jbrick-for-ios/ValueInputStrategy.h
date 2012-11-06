@@ -12,5 +12,5 @@
 @protocol ValueInputStrategy
 -(id) initWithPrim:(Primative)primative;
 -(BOOL) VerifyInput:(NSString *)input;
--(id<CodeBlock>) GetCodeBlock:(id)value;
+-(CodeBlock *) GetCodeBlock:(id)value;
 @end

@@ -9,11 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "ViewableCodeBlock.h"
 
-@interface ValueCodeBlock : NSObject <ViewableCodeBlock>
+@interface ValueCodeBlock : ViewableCodeBlock
 {
-    id<CodeBlock> type;
-    id<CodeBlock> valueBlock;
-    Primative returnType;
+    CodeBlock * type;
+    CodeBlock * valueBlock;
 }
 @property (nonatomic, copy) NSString *Value;
 -(id) init:(Primative)type;

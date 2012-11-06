@@ -9,19 +9,14 @@
 #import "VariableAssignmentBlock.h"
 #import "ValueCodeBlock.h"
 #import "ConstantValueBlocks.h"
+#import "VariableCodeBlock.h"
 
 @implementation VariableAssignmentBlock
-@synthesize ReturnType;
-@synthesize Parent;
-@synthesize Deleted;
-@synthesize BlockColor;
-@synthesize Icon;
 
 -(id) init
 {
     self = [super init];
-    ReturnType = VOID;
-    parameters = [NSMutableArray arrayWithObject:[[ValueCodeBlock alloc] init:ANY_VARIABLE]];
+    self.ReturnType = VOID;
     return self;
 }
 
@@ -34,13 +29,15 @@
     return @"";
 }
 
--(bool)addCodeBlock:(id<CodeBlock>)codeBlock
+-(bool)addCodeBlock:(CodeBlock *)codeBlock
 {
     if(variableReference && !variableReference.Deleted && (!innerCodeBlock || innerCodeBlock.Deleted)){
         if([codeBlock isKindOfClass:[ValueCodeBlock class]]){
+            codeBlock.Parent = self;
             codeBlock.ReturnType = variableReference.ReturnType;
         }
         if(codeBlock.ReturnType == variableReference.ReturnType){
+            codeBlock.Parent = self;
             innerCodeBlock = codeBlock;
             return true;
         } else {
@@ -51,14 +48,9 @@
     }
 }
 
--(bool)addCodeBlock:(id<CodeBlock>)codeBlock indexBlock:(id<CodeBlock>)indexBlock afterIndexBlock:(bool)afterIndexBlock
+-(bool)addCodeBlock:(CodeBlock *)codeBlock indexBlock:(CodeBlock *)indexBlock afterIndexBlock:(bool)afterIndexBlock
 {
     return [self addCodeBlock:codeBlock];
-}
-
--(UIView *) getPropertyView
-{
-    return [[UITextView alloc] init];
 }
 
 -(NSString *) getDisplayName
@@ -66,53 +58,51 @@
     return @"Variable Assignment";
 }
 
--(id<ViewableCodeBlock>) getPrototype
+-(ViewableCodeBlock *) getPrototype
 {
     VariableAssignmentBlock *prototype = [[VariableAssignmentBlock alloc] init];
-    prototype.BlockColor = BlockColor;
-    prototype.Icon = Icon;
+    prototype.BlockColor = self.BlockColor;
+    prototype.Icon = self.Icon;
     return prototype;
 }
 
--(void)removeFromParent
-{
-    [Parent removeCodeBlock:self];
-}
-
--(void)removeCodeBlock:(id<CodeBlock>)codeBlock
+-(void)removeCodeBlock:(CodeBlock *)codeBlock
 {
     innerCodeBlock = nil;
 }
 
 -(NSArray *) getPropertyVariables
 {
-    return parameters;
+    if(!variableReference || variableReference.Deleted){
+        parameterVariable = [[ValueCodeBlock alloc] init:ANY_VARIABLE value:@"None"];
+        variableReference = nil;
+    }
+    return [NSArray arrayWithObject:parameterVariable];
 }
 
 - (NSArray *) getAvailableParameters:(Primative)type
 {
     NSMutableArray *params = [NSMutableArray array];
-    [Parent addAvailableParameters:type parameterList:params beforeIndex:self];
+    [self.Parent addAvailableParameters:type parameterList:params beforeIndex:self];
     [params addObjectsFromArray:[ConstantValueBlocks getValueConstants:type]];
     return params;
 }
-- (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(id<CodeBlock>)index
+- (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(CodeBlock *)index
 {
-    if(Parent)
-        [Parent addAvailableParameters:type parameterList:paramList beforeIndex:self];
+    if(self.Parent)
+        [self.Parent addAvailableParameters:type parameterList:paramList beforeIndex:self];
 }
 
-- (id<CodeBlock>) getParameterReferenceBlock:(Primative)type
-{
-    return nil; // Currently we are not supporting using non-variable blocks as parameters of other blocks
-}
-
-- (bool) replaceParameter:(id<CodeBlock>)oldParam newParameter:(id<CodeBlock>)newParam
+- (bool) replaceParameter:(CodeBlock *)oldParam newParameter:(CodeBlock *)newParam
 {
     if (oldParam.ReturnType == ANY_VARIABLE){
         variableReference = newParam;
-        id<CodeBlock> parameter = [[ValueCodeBlock alloc] init:ANY_VARIABLE value:[newParam generateCode]];
-        [parameters replaceObjectAtIndex:0 withObject:parameter];
+        newParam.Parent = self;
+        CodeBlock * parameter = [[ValueCodeBlock alloc] init:ANY_VARIABLE value:[newParam generateCode]];
+        parameterVariable = parameter;
+        
+        if([oldParam isKindOfClass:[VariableCodeBlock class]])
+            [((VariableCodeBlock *)oldParam) removeParent:self];
         return true;
     } else {
         return false;
@@ -123,5 +113,14 @@
 -(void)acceptVisitor:(id<CodeBlockVisitor>)visitor
 {
     [visitor visitVariableDeclorationBlock:self];
+}
+
+- (Boolean)childRequestChangeType:(CodeBlock *)child prevType:(Primative)prevType newType:(Primative)newType
+{
+    if(child == innerCodeBlock)
+        return false;
+    
+    innerCodeBlock.Deleted = true;
+    return [super childRequestChangeType:child prevType:prevType newType:newType];
 }
 @end

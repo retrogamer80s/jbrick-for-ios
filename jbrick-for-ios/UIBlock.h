@@ -13,7 +13,7 @@
 #import "ProgramPane.h"
 #import "ViewableCodeBlock.h"
 
-@interface UIBlock : UIView <UIGestureRecognizerDelegate> 
+@interface UIBlock : UIView <UIGestureRecognizerDelegate, CodeBlockDelegate>
 {
     CGPoint startLocation;
     SystemSoundID snapSound;
@@ -21,7 +21,7 @@
     SystemSoundID velcroSound;
     bool panelWasOpen;
     
-    id<ViewableCodeBlock> codeBlock;
+    ViewableCodeBlock * codeBlock;
     NSMutableArray *attachedBlocks;
     UIBlock *parentBlock;
     UIBlock *previousBlock;
@@ -33,7 +33,7 @@
 @property (nonatomic, retain) jbrickDetailViewController *controller;
 @property (nonatomic, retain) ProgramPane *programPane;
 
-- (id)init:(jbrickDetailViewController *)controller codeBlock:(id<ViewableCodeBlock>)codeBlockParam;
+- (id)init:(jbrickDetailViewController *)controller codeBlock:(ViewableCodeBlock *)codeBlockParam;
 
 - (void)panToPoint:(CGPoint) newCenter scrollToRect:(CGRect)visibleRect;
 - (void)snapToGrid;

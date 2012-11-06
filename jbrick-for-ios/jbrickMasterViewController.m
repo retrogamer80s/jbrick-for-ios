@@ -12,6 +12,7 @@
 #import "MethodCallCodeBlock.h"
 #import "MethodDeclorationBlock.h"
 #import "VariableDeclorationBlock.h"
+#import "VariableAssignmentBlock.h"
 #import "KGNoise.h"
 
 @interface jbrickMasterViewController () {
@@ -53,12 +54,13 @@ NSMutableDictionary *methodBlocks;
     
     methodBlocks = [[NSMutableDictionary alloc] init];
     
-    MethodDeclorationBlock *ifBlock = [[MethodDeclorationBlock alloc] init:@"If" parameterVariables:[[NSMutableArray alloc]init] returnType:VOID];
+    MethodDeclorationBlock *ifBlock = [[MethodDeclorationBlock alloc] init:@"If" parameterVariables:[[NSMutableArray alloc]init] returnType:BOOLEAN];
     MethodCallCodeBlock *onFWD = [[MethodCallCodeBlock alloc] init:@"OnFwd" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:MOTOR],[NSNumber numberWithInt:MOTOR_POWER],[NSNumber numberWithInt:INTEGER], nil] returnType:VOID];
     MethodCallCodeBlock *wait = [[MethodCallCodeBlock alloc] init:@"Wait" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:INTEGER], nil] returnType:VOID];
     MethodCallCodeBlock *stopMotor = [[MethodCallCodeBlock alloc] init:@"Off" parameterTypes:[NSArray arrayWithObject:[NSNumber numberWithInt:MOTOR]] returnType:VOID];
     VariableDeclorationBlock *variable = [[VariableDeclorationBlock alloc] init:@"Variable" type:VOID];
     ValueCodeBlock *value = [[ValueCodeBlock alloc] init:VOID];
+    VariableAssignmentBlock *varAssign = [[VariableAssignmentBlock alloc] init];
 
     ifBlock.BlockColor = [UIColor yellowColor].CGColor;
     onFWD.BlockColor = [UIColor greenColor].CGColor;
@@ -66,6 +68,7 @@ NSMutableDictionary *methodBlocks;
     stopMotor.BlockColor = [UIColor redColor].CGColor;
     variable.BlockColor = [UIColor orangeColor].CGColor;
     value.BlockColor = [UIColor cyanColor].CGColor;
+    varAssign.BlockColor = [UIColor magentaColor].CGColor;
     
     ifBlock.Icon = [UIImage imageNamed:@"Loop_icon.png"];
     onFWD.Icon = [UIImage imageNamed:@"forward_wheel_icon.png"];
@@ -73,9 +76,10 @@ NSMutableDictionary *methodBlocks;
     stopMotor.Icon = [UIImage imageNamed:@"wheel_icon.png"];
     variable.Icon = [UIImage imageNamed:@"Variable.png"];
     value.Icon = [UIImage imageNamed:@"Variable.png"];
+    varAssign.Icon = [UIImage imageNamed:@"Math.png"];
     
     NSArray *motorMethods = [NSArray arrayWithObjects:onFWD, stopMotor, nil];
-    NSArray *logicMethods = [NSArray arrayWithObjects:wait, ifBlock, variable, value, nil];
+    NSArray *logicMethods = [NSArray arrayWithObjects:wait, ifBlock, variable, value, varAssign, nil];
     NSMutableArray *customMethods = [NSMutableArray arrayWithObjects:nil];
     
     [methodBlocks setObject:motorMethods forKey:@"Motor Blocks"];
@@ -118,7 +122,7 @@ NSMutableDictionary *methodBlocks;
         
         inDrag = YES;
         
-        id<ViewableCodeBlock> codeBlock = [[[methodBlocks allValues] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        ViewableCodeBlock * codeBlock = [[[methodBlocks allValues] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         [self.detailViewController.propertyPane closePanel:nil];
         
         // create item to be dragged, in this example, just a simple UILabel
@@ -175,7 +179,7 @@ NSMutableDictionary *methodBlocks;
     else
         cell = [tableView dequeueReusableCellWithIdentifier:@"Cell_Normal"];
     NSArray *methods = [methodBlocks objectForKey:[[methodBlocks allKeys] objectAtIndex:indexPath.section]];
-    id<ViewableCodeBlock> codeBlock = [methods objectAtIndex:indexPath.row];
+    ViewableCodeBlock * codeBlock = [methods objectAtIndex:indexPath.row];
     [cell.customLabel setText:[codeBlock getDisplayName]];
     
     return cell;

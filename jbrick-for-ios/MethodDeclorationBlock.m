@@ -10,19 +10,14 @@
 #import "ConstantValueBlocks.h"
 
 @implementation MethodDeclorationBlock
-@synthesize ReturnType;
-@synthesize Parent;
-@synthesize Deleted;
-@synthesize BlockColor;
-@synthesize Icon;
 
 static MethodDeclorationBlock *mainBlock;
 
--(id) init:(NSString *)methodName parameterVariables:(NSMutableArray *)parameters returnType:(Primative)returnType
+-(id) init:(NSString *)methodName parameterVariables:(NSMutableArray *)parameters returnType:(Primative)returnTypeParam
 {
     self = [super init];
     name = methodName;
-    ReturnType = returnType;
+    self.ReturnType = returnTypeParam;
     parameterVariables = parameters;
     innerCodeBlocks = [[NSMutableArray alloc]init];
     return self;
@@ -39,7 +34,7 @@ static MethodDeclorationBlock *mainBlock;
 -(NSString *)generateCode
 {
     // The end result should look like "void sum(int variable1, int variable2){ return variable1+variable2; }"
-    NSMutableString *generatedCode = [[NSMutableString alloc] initWithString:[PrimativeTypeUtility primativeToString:ReturnType]];
+    NSMutableString *generatedCode = [[NSMutableString alloc] initWithString:[PrimativeTypeUtility primativeToString:self.ReturnType]];
     [generatedCode appendFormat:@" %@(", name];
     NSArray *paramValues = [self getParameterDeclorations];
     for(int i=0; i<[paramValues count]; i++ ){
@@ -49,7 +44,7 @@ static MethodDeclorationBlock *mainBlock;
     }
     [generatedCode appendString:@"){"];
     
-    for(id<CodeBlock> statement in innerCodeBlocks){
+    for(CodeBlock * statement in innerCodeBlocks){
         [generatedCode appendString:[statement generateCode]];
     }
     [generatedCode appendString:@"}"];
@@ -57,14 +52,14 @@ static MethodDeclorationBlock *mainBlock;
     return generatedCode;
 }
 
--(bool)addCodeBlock:(id<CodeBlock>)codeBlock
+-(bool)addCodeBlock:(CodeBlock *)codeBlock
 {
     codeBlock.Parent = self;
     [innerCodeBlocks addObject:codeBlock];
     return true;
 }
 
--(bool)addCodeBlock:(id<CodeBlock>)codeBlock indexBlock:(id<CodeBlock>)indexBlock afterIndexBlock:(bool)afterIndexBlock
+-(bool)addCodeBlock:(CodeBlock *)codeBlock indexBlock:(CodeBlock *)indexBlock afterIndexBlock:(bool)afterIndexBlock
 {
     NSInteger insertIndex = [innerCodeBlocks indexOfObject:indexBlock];
     if(insertIndex == NSNotFound)
@@ -78,30 +73,20 @@ static MethodDeclorationBlock *mainBlock;
     return true;
 }
 
--(UIView *) getPropertyView
-{
-    return [[UITextView alloc] init];
-}
-
 -(NSString *) getDisplayName
 {
     return name;
 }
 
--(id<ViewableCodeBlock>) getPrototype
+-(ViewableCodeBlock *) getPrototype
 {
-    MethodDeclorationBlock *prototype = [[MethodDeclorationBlock alloc] init:name parameterVariables:parameterVariables returnType:ReturnType];
-    prototype.BlockColor = BlockColor;
-    prototype.Icon = Icon;
+    MethodDeclorationBlock *prototype = [[MethodDeclorationBlock alloc] init:name parameterVariables:parameterVariables returnType:self.ReturnType];
+    prototype.BlockColor = self.BlockColor;
+    prototype.Icon = self.Icon;
     return prototype;    
 }
 
--(void)removeFromParent
-{
-    [Parent removeCodeBlock:self];
-}
-
--(void)removeCodeBlock:(id<CodeBlock>)codeBlock
+-(void)removeCodeBlock:(CodeBlock *)codeBlock
 {
     [innerCodeBlocks removeObject:codeBlock];
 }
@@ -111,31 +96,19 @@ static MethodDeclorationBlock *mainBlock;
     return parameterVariables;
 }
 
-- (NSArray *) getAvailableParameters:(Primative)type
+- (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(CodeBlock *)index
 {
-    NSMutableArray *params = [NSMutableArray array];
-    [Parent addAvailableParameters:type parameterList:params beforeIndex:self];
-    [params addObjectsFromArray:[ConstantValueBlocks getValueConstants:type]];
-    return params;
-}
-- (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(id<CodeBlock>)index
-{
-    for(id<CodeBlock> codeBlock in innerCodeBlocks)
+    for(CodeBlock * codeBlock in innerCodeBlocks)
     {
         if(codeBlock == index)
             break;
-        id<CodeBlock> paramRef = [codeBlock getParameterReferenceBlock:type];
+        CodeBlock * paramRef = [codeBlock getParameterReferenceBlock:type];
         if(paramRef)
             [paramList addObject:paramRef];
     }
     
-    if(Parent)
-        [Parent addAvailableParameters:type parameterList:paramList beforeIndex:self];
-}
-
-- (id<CodeBlock>) getParameterReferenceBlock:(Primative)type
-{
-    return nil; // Currently we are not supporting using non-variable blocks as parameters of other blocks
+    if(self.Parent)
+        [self.Parent addAvailableParameters:type parameterList:paramList beforeIndex:self];
 }
 
 -(NSArray *)getParameterDeclorations
@@ -151,7 +124,7 @@ static MethodDeclorationBlock *mainBlock;
     return declorations;
 }
 
-- (bool) replaceParameter:(id<CodeBlock>)oldParam newParameter:(id<CodeBlock>)newParam
+- (bool) replaceParameter:(CodeBlock *)oldParam newParameter:(CodeBlock *)newParam
 {
     NSInteger index = [parameterVariables indexOfObject:oldParam];
     if(index == NSNotFound)

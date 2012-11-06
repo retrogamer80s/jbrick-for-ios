@@ -10,17 +10,37 @@
 #import "PrimativeTypes.h"
 #import "CodeBlockVisitor.h"
 
-@protocol CodeBlock <NSObject>
+@protocol CodeBlockDelegate <NSObject>
+@optional
+- (void) blockWasDeleted:(NSObject *)sender;
+- (void) blockChangedType:(NSObject *)sender;
+@end
+
+typedef void (^onResponseType)(Boolean);
+
+// This class is inteded to be an abstract class... which objective-c doesn't have
+// So don't use this class instead use a derived class of it.
+@interface CodeBlock : NSObject <UIAlertViewDelegate>
+{
+    Boolean deleted;
+    Primative returnType;
+    onResponseType onResponse;
+}
 @property Primative ReturnType;
-@property id<CodeBlock> Parent;
+@property CodeBlock *Parent;
 @property bool Deleted;
+@property id<CodeBlockDelegate> Delegate;
 - (NSString *) generateCode;
-- (bool) addCodeBlock:(id<CodeBlock>)codeBlock;
-- (bool) addCodeBlock:(id<CodeBlock>)codeBlock indexBlock:(id<CodeBlock>)indexBlock afterIndexBlock:(bool)afterIndexBlock;
-- (void) removeCodeBlock:(id<CodeBlock>)codeBlock;
+- (bool) addCodeBlock:(CodeBlock *)codeBlock;
+- (bool) addCodeBlock:(CodeBlock *)codeBlock indexBlock:(CodeBlock *)indexBlock afterIndexBlock:(bool)afterIndexBlock;
+- (void) removeCodeBlock:(CodeBlock *)codeBlock;
 - (void) removeFromParent;
 - (NSArray *) getAvailableParameters:(Primative)type;
-- (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(id<CodeBlock>)index;
-- (id<CodeBlock>) getParameterReferenceBlock:(Primative)type;
+- (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(CodeBlock *)index;
+- (CodeBlock *) getParameterReferenceBlock:(Primative)type;
 - (void) acceptVisitor:(id<CodeBlockVisitor>)visitor;
+- (Boolean) childRequestChangeType:(CodeBlock *)child prevType:(Primative)prevType newType:(Primative)newType;
+- (void) childWasDeleted:(CodeBlock *)child;
+- (void)requestUserResponse:(NSString *)message title:(NSString *)title onResponse:(onResponseType)onRespondedBlock;
+
 @end

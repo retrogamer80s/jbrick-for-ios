@@ -57,7 +57,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<CodeBlock> valueCodeBlock = [[codeBlock getPropertyVariables] objectAtIndex:indexPath.row];
+    CodeBlock * valueCodeBlock = [[codeBlock getPropertyVariables] objectAtIndex:indexPath.row];
     
     if(valueCodeBlock.ReturnType != PARAMETER_NAME){
         static NSString *CellIdentifier = @"Cell";
@@ -81,14 +81,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<CodeBlock> valueCodeBlock = [[codeBlock getPropertyVariables] objectAtIndex:indexPath.row];
+    CodeBlock * valueCodeBlock = [[codeBlock getPropertyVariables] objectAtIndex:indexPath.row];
     if(valueCodeBlock.ReturnType == PARAMETER_NAME)
         return 137;
     else
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
-- (VariableAssignmentDelegate *)getVarDelegate:(id<CodeBlock>)valueCodeBlock index:(NSIndexPath *)index
+- (VariableAssignmentDelegate *)getVarDelegate:(CodeBlock *)valueCodeBlock index:(NSIndexPath *)index
 {
     if(![varDelegates objectForKey:index]){
         VariableAssignmentDelegate *varDel = [[VariableAssignmentDelegate alloc] init:valueCodeBlock];
@@ -126,7 +126,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<CodeBlock> valueCodeBlock = [[codeBlock getPropertyVariables]  objectAtIndex:indexPath.row];
+    CodeBlock * valueCodeBlock = [[codeBlock getPropertyVariables]  objectAtIndex:indexPath.row];
     
     if(valueCodeBlock.ReturnType != PARAMETER_NAME){
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
@@ -156,12 +156,9 @@
     return ![_splitViewController isShowingMaster];
 }
 
--(void)setPropertyContent:(id<ViewableCodeBlock>) codeBlockParam
+-(void)setPropertyContent:(ViewableCodeBlock *) codeBlockParam
 {
     codeBlock = codeBlockParam;
-    //for(int i=0; i<[self.tableView numberOfRowsInSection:0]; i++)
-        //[self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0] animated:NO];
-    //[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:YES];
     if(codeBlock)
         variables = [codeBlockParam getPropertyVariables];
     else
@@ -186,11 +183,10 @@
     [self closePanel:nil];
 }
 
-- (void)didSelectValue:(id<CodeBlock>)newCodeBlock previousCodeBlock:(id<CodeBlock>)prevCodeBlock{
+- (void)didSelectValue:(CodeBlock *)newCodeBlock previousCodeBlock:(CodeBlock *)prevCodeBlock{
     if(newCodeBlock){
-        NSIndexPath *index = [NSIndexPath indexPathForItem:[variables indexOfObject:prevCodeBlock] inSection:0];
         [codeBlock replaceParameter:prevCodeBlock newParameter:newCodeBlock];
-        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:index] withRowAnimation:YES];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
     [popoverController dismissPopoverAnimated:YES];
     
@@ -198,7 +194,7 @@
 
 - (void)submitClicked:(NSIndexPath *)index
 {
-    id<CodeBlock> valueCodeBlock = [[codeBlock getPropertyVariables]  objectAtIndex:index.row];
+    CodeBlock * valueCodeBlock = [[codeBlock getPropertyVariables]  objectAtIndex:index.row];
     VariableAssignmentDelegate *varDel = [self getVarDelegate:valueCodeBlock index:index];
     
     if(varDel.value){

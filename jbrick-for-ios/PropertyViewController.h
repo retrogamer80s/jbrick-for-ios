@@ -16,13 +16,13 @@
     NSArray *variables;
     ValuePickerController *valuePicker;
     UIPopoverController *popoverController;
-    id<ViewableCodeBlock> codeBlock;
+    ViewableCodeBlock * codeBlock;
     NSMutableDictionary *varDelegates;
 }
 @property MGSplitViewController *splitViewController;
 @property (readonly) BOOL isOpen;
 
--(void)setPropertyContent:(id<ViewableCodeBlock>) codeBlock;
+-(void)setPropertyContent:(ViewableCodeBlock *) codeBlock;
 -(void)closePanel:(void (^)(BOOL finished))completion;
 -(void)openPanel:(void (^)(BOOL finished))completion;
 @end

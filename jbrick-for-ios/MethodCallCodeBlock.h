@@ -11,11 +11,11 @@
 #import "VariableCodeBlock.h"
 #import "PrimativeTypeUtility.h"
 
-@interface MethodCallCodeBlock : NSObject <ViewableCodeBlock>{
+@interface MethodCallCodeBlock : ViewableCodeBlock{
     NSString *name;
     NSMutableArray *parameterValues;
     NSArray *parameterTypes;
 }
 -(id) init:(NSString *)methodName parameterTypes:(NSArray *)parameters returnType:(Primative)returnType;
--(void) setVariable:(id<CodeBlock>)variable index:(NSInteger)index;
+-(void) setVariable:(CodeBlock *)variable index:(NSInteger)index;
 @end

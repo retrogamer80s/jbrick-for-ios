@@ -48,7 +48,7 @@ static NSMutableArray *placedBlocks;
     }
     return self;
 }
-- (id)init:(jbrickDetailViewController *)controllerParam codeBlock:(id<ViewableCodeBlock>)codeBlockParam
+- (id)init:(jbrickDetailViewController *)controllerParam codeBlock:(ViewableCodeBlock *)codeBlockParam
 {
     CGRect frame = CGRectMake(0, 0, 250, 250);
     self = [self initWithFrame:frame];
@@ -56,6 +56,7 @@ static NSMutableArray *placedBlocks;
     controller = controllerParam;
     programPane = controller.programPane;
     codeBlock = codeBlockParam;
+    codeBlock.Delegate = self;
     attachedBlocks = [[NSMutableArray alloc]init];
     defaultHeight = frame.size.height;
     
@@ -351,6 +352,11 @@ static NSMutableArray *placedBlocks;
 
 - (void)delete
 {
+    codeBlock.Deleted = true;
+}
+
+-(void)performDeleteAnimation
+{
     [controller.propertyPane closePanel:nil];
     AudioServicesPlaySystemSound(trashSound);
     [controller.propertyPane setPropertyContent:nil];
@@ -360,10 +366,10 @@ static NSMutableArray *placedBlocks;
         [parentBlock->attachedBlocks removeObject:self];
     }
     [UIView transitionWithView:self
-                    duration:.5
+                      duration:.5
                        options:UIViewAnimationOptionTransitionCurlUp | UIViewAnimationOptionAllowAnimatedContent
                     animations:^ {
-                        [self animateDelete];
+                        [self deleteAnimation];
                     }
                     completion:^(BOOL finished) {
                         [self removeFromSuperview];
@@ -377,12 +383,12 @@ static NSMutableArray *placedBlocks;
                     }];
 }
 
--(void)animateDelete
+-(void)deleteAnimation
 {
     self.alpha = 0;
     
     for(UIBlock *child in [attachedBlocks copy])
-        [child animateDelete];
+        [child deleteAnimation];
 }
 
 -(void)deleteWithAllChildren
@@ -416,7 +422,17 @@ static NSMutableArray *placedBlocks;
     CGFloat dx = point2.x - point1.x;
     CGFloat dy = point2.y - point1.y;
     return sqrt(dx*dx + dy*dy );
-};
+}
+
+-(void)blockWasDeleted:(NSObject *)sender
+{
+    [self performDeleteAnimation];
+}
+
+-(void)blockChangedType:(NSObject *)sender
+{
+    [controller.propertyPane setPropertyContent:codeBlock];
+}
 
 
 @end

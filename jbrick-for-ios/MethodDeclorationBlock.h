@@ -11,7 +11,7 @@
 #import "VariableCodeBlock.h"
 #import "PrimativeTypeUtility.h"
 
-@interface MethodDeclorationBlock : NSObject <ViewableCodeBlock>
+@interface MethodDeclorationBlock : ViewableCodeBlock
 {
     NSString *name;
     NSMutableArray *parameterVariables;

@@ -12,19 +12,16 @@
 #import "ConstantValueBlocks.h"
 
 @implementation VariableDeclorationBlock
-@synthesize ReturnType;
-@synthesize Parent;
-@synthesize Deleted;
-@synthesize BlockColor;
-@synthesize Icon;
+@synthesize InternalType;
 
--(id) init:(NSString *)variableName type:(Primative)returnType
+-(id) init:(NSString *)variableName type:(Primative)returnTypeParam
 {
     self = [super init];
     name = [[ValueCodeBlock alloc] init:PARAMETER_NAME value:variableName];
-    type = [[ValueCodeBlock alloc] init:PARAMETER_RETURN value:[PrimativeTypeUtility primativeToName:returnType]];
-    varReference = [[VariableCodeBlock alloc] init:self type:ReturnType];
-    ReturnType = returnType;
+    type = [[ValueCodeBlock alloc] init:PARAMETER_RETURN value:@"None"];
+    InternalType = VOID;
+    varReference = [[VariableCodeBlock alloc] init:self type:InternalType];
+    self.ReturnType = returnTypeParam;
     return self;
 }
 
@@ -33,10 +30,28 @@
     return name.generateCode;
 }
 
+-(void)setDeleted:(bool)Deleted
+{
+    if(!deleted){
+        VariableCodeBlock *varRef = (VariableCodeBlock *)varReference;
+        
+        if(varRef.ReferenceCount > 0)
+        {
+            NSString *message = [NSString stringWithFormat:@"Deleting the block will unlink %d blocks currently using it. Do you wish to continue?", varRef.ReferenceCount];
+            [self requestUserResponse:message title:@"Remove References?" onResponse:^(Boolean positiveResponse) {
+                if(positiveResponse)
+                    [super setDeleted:Deleted];
+            }];
+        }
+        else
+            [super setDeleted:Deleted];
+    }
+}
+
 -(NSString *)generateCode
 {
-    if(!Deleted){
-        return [NSString stringWithFormat:(@"%@ %@;", [PrimativeTypeUtility primativeToString:ReturnType], self.Name)];
+    if(!self.Deleted){
+        return [NSString stringWithFormat:(@"%@ %@;", [PrimativeTypeUtility primativeToString:self.ReturnType], self.Name)];
     } else {
         return nil;
     }
@@ -54,69 +69,46 @@
     return self.Name;
 }
 
--(id<ViewableCodeBlock>)getPrototype{
-    VariableDeclorationBlock *block = [[VariableDeclorationBlock alloc] init:self.Name type:ReturnType];
-    block.BlockColor = BlockColor;
-    block.Icon = Icon;
+-(ViewableCodeBlock *)getPrototype {
+    VariableDeclorationBlock *block = [[VariableDeclorationBlock alloc] init:self.Name type:self.ReturnType];
+    block.BlockColor = self.BlockColor;
+    block.Icon = self.Icon;
     return block;
 }
 
--(bool)addCodeBlock:(id<CodeBlock>)codeBlock
+- (CodeBlock *) getParameterReferenceBlock:(Primative)typeParam
 {
-    return false; // Cannot add blocks to a variable block
-}
-
--(bool)addCodeBlock:(id<CodeBlock>)codeBlock indexBlock:(id<CodeBlock>)indexBlock afterIndexBlock:(bool)afterIndexBlock
-{
-    return false; // Cannot add blocks to a variable block
-}
-
--(void)removeFromParent
-{
-    [Parent removeCodeBlock:self];
-}
-
--(void)removeCodeBlock:(id<CodeBlock>)codeBlock
-{
-    // variable decloration blocks don't have children and thus can't remove them
-}
--(NSArray *) getPropertyVariables
-{
-    return [NSArray arrayWithObjects:name, type, nil];
-}
-
-- (NSArray *) getAvailableParameters:(Primative)typeParam
-{
-    NSMutableArray *params = [NSMutableArray array];
-    [Parent addAvailableParameters:typeParam parameterList:params beforeIndex:self];
-    [params addObjectsFromArray:[ConstantValueBlocks getValueConstants:typeParam]];
-    return params;
-}
-- (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(id<CodeBlock>)index
-{
-    // This method should only be called from child blocks, and this type of block has no children
-}
-
-- (id<CodeBlock>) getParameterReferenceBlock:(Primative)typeParam
-{
-    if(ReturnType == typeParam)
+    if(InternalType == typeParam || (typeParam == ANY_VARIABLE && InternalType != VOID))
         return varReference;
     else
         return nil;
         
 }
 
-- (bool) replaceParameter:(id<CodeBlock>)oldParam newParameter:(id<CodeBlock>)newParam
+-(NSArray *) getPropertyVariables
+{
+    return [NSArray arrayWithObjects:name, type, nil];
+}
+
+- (bool) replaceParameter:(CodeBlock *)oldParam newParameter:(CodeBlock *)newParam
 {
     if (oldParam.ReturnType == PARAMETER_NAME){
         name = (ValueCodeBlock *)newParam;
         return true;
-    } else if(oldParam.ReturnType == PARAMETER_RETURN && newParam.ReturnType != ReturnType){
-        ReturnType = newParam.ReturnType;
-        type = [[ValueCodeBlock alloc] init:PARAMETER_RETURN value:[PrimativeTypeUtility primativeToName:ReturnType]];
-        varReference.Deleted = true;
-        varReference = [[VariableCodeBlock alloc] init:self type:ReturnType];
+    } else if(oldParam.ReturnType == PARAMETER_RETURN && newParam.ReturnType != self.ReturnType){
+        VariableCodeBlock *varRef = (VariableCodeBlock *)varReference;
         
+        if(varRef.ReferenceCount > 0)
+        {
+            NSString *message = [NSString stringWithFormat:@"Changing the block's type will unlink %d blocks currently using it. Do you wish to continue?", varRef.ReferenceCount];
+            [self requestUserResponse:message title:@"Remove References?" onResponse:^(Boolean positiveResponse) {
+                if(positiveResponse){
+                    [self setInnerType:newParam.ReturnType];
+                }
+            }];
+        } else {
+            [self setInnerType:newParam.ReturnType];
+        }
         return true;
     } else {
         return false;
@@ -126,6 +118,18 @@
 -(void)acceptVisitor:(id<CodeBlockVisitor>)visitor
 {
     [visitor visitVariableDeclorationBlock:self];
+}
+
+-(void)setInnerType:(Primative)newType
+{
+    InternalType = newType;
+    type = [[ValueCodeBlock alloc] init:PARAMETER_RETURN value:[PrimativeTypeUtility primativeToName:newType]];
+    varReference.Deleted = true;
+    varReference.ReturnType = newType;
+    varReference = [[VariableCodeBlock alloc] init:self type:newType];
+    if(self.Delegate && [self.Delegate respondsToSelector:@selector(blockChangedType:)])
+        [self.Delegate blockChangedType:self];
+
 }
 
 @end

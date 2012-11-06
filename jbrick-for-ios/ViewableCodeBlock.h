@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "CodeBlock.h"
 
-@protocol ViewableCodeBlock <CodeBlock>
+@interface ViewableCodeBlock : CodeBlock
 @property CGColorRef BlockColor;
 @property UIImage *Icon;
 -(NSString *) getDisplayName;
--(id<ViewableCodeBlock>) getPrototype;
+-(ViewableCodeBlock *) getPrototype;
 -(NSArray *) getPropertyVariables;
-- (bool) replaceParameter:(id<CodeBlock>)oldParam newParameter:(id<CodeBlock>)newParam;
+- (bool) replaceParameter:(CodeBlock *)oldParam newParameter:(CodeBlock *)newParam;
 @end

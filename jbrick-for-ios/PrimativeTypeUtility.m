@@ -99,7 +99,7 @@
     }
 }
 
-+ (UIView *) constructDefaultView:(Primative)primative delegate:(VariableAssignmentDelegate *)delegate value:(id<CodeBlock>)value
++ (UIView *) constructDefaultView:(Primative)primative delegate:(VariableAssignmentDelegate *)delegate value:(CodeBlock *)value
 {
     ValueCodeBlock *valBlock;
     if([value isKindOfClass:[ValueCodeBlock class]])

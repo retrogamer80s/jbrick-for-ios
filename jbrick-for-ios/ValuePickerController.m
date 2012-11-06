@@ -61,7 +61,7 @@
         [cell setContent:[PrimativeTypeUtility constructDefaultView:valueCodeBlock.ReturnType delegate:varDel value:valueCodeBlock] indexPath:indexPath];
         return cell;
     } else {
-        id<CodeBlock> codeBlock = [availableCodeBlocks objectAtIndex:indexPath.row-listSizeModifier];
+        CodeBlock * codeBlock = [availableCodeBlocks objectAtIndex:indexPath.row-listSizeModifier];
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
         cell.textLabel.text = [codeBlock generateCode];
     
@@ -124,44 +124,9 @@
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    id<CodeBlock> newParam = [availableCodeBlocks objectAtIndex:indexPath.row-listSizeModifier];
-    VariableCodeBlock *varRef = [parentCodeBlock getParameterReferenceBlock:parentCodeBlock.ReturnType];
-   
-    if(valueCodeBlock.ReturnType == PARAMETER_RETURN && newParam.ReturnType != parentCodeBlock.ReturnType
-       && varRef && varRef.ReferenceCount > 0){
-        newParamBlock = newParam;
-        NSString *message = [NSString stringWithFormat:@"Changing the block's type will unlink %d blocks currently using it. Do you wish to continue?", varRef.ReferenceCount];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Remove References?"
-                                                            message:message
-                                                           delegate:self
-                                                  cancelButtonTitle:@"YES"
-                                                  otherButtonTitles:@"NO", nil];
-        
-        [alertView show];
-    } else {
-        if(delegate)
-            [delegate didSelectValue:newParam previousCodeBlock:valueCodeBlock];
-    }
-}
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) {
-        case 0:
-            //Yes was Pressed
-            if(newParamBlock) {
-                if(delegate)
-                    [delegate didSelectValue:newParamBlock previousCodeBlock:valueCodeBlock];
-            }
-            newParamBlock = nil;
-            break;
-        case 1:
-            //No was Pressed
-            [self dismissModalViewControllerAnimated:YES];
-            break;
-        default:
-            break;
-    }
+    CodeBlock * newParam = [availableCodeBlocks objectAtIndex:indexPath.row-listSizeModifier];
+    if(delegate)
+        [delegate didSelectValue:newParam previousCodeBlock:valueCodeBlock];
 }
 
 -(void)submitClicked:(NSIndexPath *)index

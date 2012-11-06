@@ -18,6 +18,6 @@
 + (NSString *) getDefaultValueWithNum:(NSNumber *)primative;
 + (NSString *) primativeToString:(Primative)primative;
 + (NSString *) primativeToName:(Primative)primative;
-+ (UIView *) constructDefaultView:(Primative)primative delegate:(VariableAssignmentDelegate *)delegate value:(id<CodeBlock>)value;
++ (UIView *) constructDefaultView:(Primative)primative delegate:(VariableAssignmentDelegate *)delegate value:(CodeBlock *)value;
 + (Boolean) primativeIsUserSelectable:(Primative)type;
 @end

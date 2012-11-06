@@ -12,7 +12,7 @@
 
 @synthesize value;
 
--(id) init:(id<CodeBlock>)codeBlock
+-(id) init:(CodeBlock *)codeBlock
 {
     self = [super init];
     value = codeBlock;
@@ -29,7 +29,7 @@
     
     if([inputStrategy VerifyInput:concatString])
     {
-        id<CodeBlock> codeBlock = [inputStrategy GetCodeBlock:concatString];
+        CodeBlock * codeBlock = [inputStrategy GetCodeBlock:concatString];
         value = codeBlock;
         
         return YES;
@@ -40,7 +40,7 @@
 
 - (void)sliderChanged:(UISlider *)slider {
     
-    id<CodeBlock> codeBlock = [inputStrategy GetCodeBlock:[NSString stringWithFormat:@"%d", (int)roundf(slider.value)]];
+    CodeBlock * codeBlock = [inputStrategy GetCodeBlock:[NSString stringWithFormat:@"%d", (int)roundf(slider.value)]];
     value = codeBlock;
 }
 

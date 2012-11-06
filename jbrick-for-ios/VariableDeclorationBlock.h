@@ -10,12 +10,13 @@
 #import "ViewableCodeBlock.h"
 #import "ValueCodeBlock.h"
 
-@interface VariableDeclorationBlock : NSObject <ViewableCodeBlock>
+@interface VariableDeclorationBlock : ViewableCodeBlock
 {
     ValueCodeBlock *name;
     ValueCodeBlock *type;
-    id<CodeBlock> varReference;
+    CodeBlock * varReference;
 }
 @property (readonly) NSString *Name;
+@property Primative InternalType;
 -(id) init:(NSString *)variableName type:(Primative)returnType;
 @end

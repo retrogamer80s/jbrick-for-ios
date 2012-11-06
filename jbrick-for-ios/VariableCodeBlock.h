@@ -11,14 +11,12 @@
 #import "PrimativeTypeUtility.h"
 #import "VariableDeclorationBlock.h"
 
-@interface VariableCodeBlock : NSObject <CodeBlock>
+@interface VariableCodeBlock : CodeBlock
 {
     VariableDeclorationBlock *variable;
-    Primative returnType;
     NSMutableArray *parents;
-    Boolean deleted;
 }
 @property (readonly) NSInteger ReferenceCount;
 -(id) init:(VariableDeclorationBlock *)name type:(Primative)primitive;
--(void) removeParent:(id<CodeBlock>)parent;
+-(void) removeParent:(CodeBlock *)parent;
 @end

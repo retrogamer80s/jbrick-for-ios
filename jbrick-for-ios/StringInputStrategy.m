@@ -20,7 +20,7 @@
     return YES;
 }
 
--(id<CodeBlock>)GetCodeBlock:(id)value
+-(CodeBlock *)GetCodeBlock:(id)value
 {
     //Add quotes around the entered text. Could possibly escape any quotes within the text as well
     return [[ValueCodeBlock alloc] init:type value:[NSString stringWithFormat:@"%@", value]];

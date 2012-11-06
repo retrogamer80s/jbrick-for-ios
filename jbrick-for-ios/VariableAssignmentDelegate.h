@@ -19,8 +19,8 @@
     id<ValueInputStrategy> inputStrategy;
 }
 
-@property (nonatomic, retain) id<CodeBlock> value;
+@property (nonatomic, retain) CodeBlock * value;
 
--(id) init:(id<CodeBlock>)codeBlock;
+-(id) init:(CodeBlock *)codeBlock;
 - (void)sliderChanged:(UISlider *)slider;
 @end

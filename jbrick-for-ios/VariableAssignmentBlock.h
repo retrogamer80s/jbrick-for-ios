@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "ViewableCodeBlock.h"
 
-@interface VariableAssignmentBlock : NSObject <ViewableCodeBlock>
+@interface VariableAssignmentBlock : ViewableCodeBlock
 {
-    id<CodeBlock> variableReference;
-    id<CodeBlock> innerCodeBlock;
-    NSMutableArray *parameters;
+    CodeBlock * variableReference;
+    CodeBlock * parameterVariable;
+    CodeBlock * innerCodeBlock;
 }
 @end
