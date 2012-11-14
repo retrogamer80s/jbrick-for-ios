@@ -32,7 +32,7 @@
         deleted = Deleted;
         if(Parent)
             [Parent childWasDeleted:self];
-        if(Delegate && [Delegate respondsToSelector:@selector(blockWasDeleted:)])
+        if(Delegate && [Delegate respondsToSelector:@selector(blockWasDeleted:)] && !Parent.Deleted)
             [Delegate blockWasDeleted:self];
     }
 }

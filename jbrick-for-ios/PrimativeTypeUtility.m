@@ -94,6 +94,8 @@
             return @"Type";
         case ANY_VARIABLE:
             return @"Variable";
+        case MATH_OPERATION:
+            return @"Math Operation";
         default:
             return nil;
     }
@@ -115,13 +117,11 @@
             return slider;
         }
         case MOTOR:
-        {
             return nil;
-        }
         case PARAMETER_RETURN:
-        {
             return nil;
-        }
+        case MATH_OPERATION:
+            return nil;
         default:
         {
             UITextField *view = [[UITextFieldStrongDelegate alloc] initWithFrame:CGRectMake(0, 0, 400, 40) inputDelegate:delegate];

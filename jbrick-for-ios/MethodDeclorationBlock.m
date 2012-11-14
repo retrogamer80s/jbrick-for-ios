@@ -20,6 +20,7 @@ static MethodDeclorationBlock *mainBlock;
     self.ReturnType = returnTypeParam;
     parameterVariables = parameters;
     innerCodeBlocks = [[NSMutableArray alloc]init];
+    self.ContainsChildren = YES;
     return self;
 }
 

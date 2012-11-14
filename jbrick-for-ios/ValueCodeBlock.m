@@ -77,7 +77,7 @@
         type = [[ValueCodeBlock alloc] init:PARAMETER_RETURN value:[PrimativeTypeUtility primativeToName:returnType]];
     if(!valueBlock)
         valueBlock = [[ValueCodeBlock alloc] init:returnType];
-    return [NSArray arrayWithObjects:type, valueBlock, nil];
+    return [NSArray arrayWithObjects:valueBlock, nil];
 }
 
 - (bool) replaceParameter:(CodeBlock *)oldParam newParameter:(CodeBlock *)newParam

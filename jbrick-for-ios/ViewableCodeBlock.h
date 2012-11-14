@@ -12,6 +12,7 @@
 @interface ViewableCodeBlock : CodeBlock
 @property CGColorRef BlockColor;
 @property UIImage *Icon;
+@property bool ContainsChildren;
 -(NSString *) getDisplayName;
 -(ViewableCodeBlock *) getPrototype;
 -(NSArray *) getPropertyVariables;

@@ -10,6 +10,8 @@
 
 @implementation ProgramPane
 
+@synthesize TrashCan = trashCan;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -40,7 +42,11 @@
     zoomableView = [[UIView alloc] initWithFrame:contentRect];
     zoomableView.clipsToBounds = NO;
     
+    trashCan = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Trash Can.png"]];
+    trashCan.frame = CGRectMake(self.frame.size.width - 120, self.frame.size.height - 150, 100, 140);
+    
     [super addSubview:zoomableView];
+    [super addSubview:trashCan];
 }
 
 - (void)addSubview:(UIView *)view

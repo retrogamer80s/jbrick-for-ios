@@ -12,7 +12,7 @@
 {
     UIView *zoomableView;
 }
-
+@property UIImageView *TrashCan;
 - (void)fitToContent;
 
 @end

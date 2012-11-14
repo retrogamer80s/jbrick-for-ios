@@ -11,6 +11,7 @@
 @implementation ViewableCodeBlock
 @synthesize BlockColor;
 @synthesize Icon;
+@synthesize ContainsChildren;
 
 -(NSString *) getDisplayName
 {

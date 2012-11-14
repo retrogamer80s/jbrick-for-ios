@@ -79,6 +79,16 @@ static NSMutableDictionary *constants;
                                   nil]
                           forKey:[NSNumber numberWithInt:type]];
             break;
+        case MATH_OPERATION:
+            [constants setObject:[NSArray arrayWithObjects:
+                                  [[ValueCodeBlock alloc] init:type value:@"+"],
+                                  [[ValueCodeBlock alloc] init:type value:@"-"],
+                                  [[ValueCodeBlock alloc] init:type value:@"*"],
+                                  [[ValueCodeBlock alloc] init:type value:@"/"],
+                                  nil]
+                          forKey:[NSNumber numberWithInt:type]];
+            break;
+
     }
     return [constants objectForKey:[NSNumber numberWithInt:type]];
 }

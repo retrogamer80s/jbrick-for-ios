@@ -13,6 +13,7 @@
 #import "MethodDeclorationBlock.h"
 #import "VariableDeclorationBlock.h"
 #import "VariableAssignmentBlock.h"
+#import "VariableMathBlock.h"
 #import "KGNoise.h"
 
 @interface jbrickMasterViewController () {
@@ -61,6 +62,7 @@ NSMutableDictionary *methodBlocks;
     VariableDeclorationBlock *variable = [[VariableDeclorationBlock alloc] init:@"Variable" type:VOID];
     ValueCodeBlock *value = [[ValueCodeBlock alloc] init:VOID];
     VariableAssignmentBlock *varAssign = [[VariableAssignmentBlock alloc] init];
+    VariableMathBlock *varMath = [[VariableMathBlock alloc] init];
 
     ifBlock.BlockColor = [UIColor yellowColor].CGColor;
     onFWD.BlockColor = [UIColor greenColor].CGColor;
@@ -69,17 +71,19 @@ NSMutableDictionary *methodBlocks;
     variable.BlockColor = [UIColor orangeColor].CGColor;
     value.BlockColor = [UIColor cyanColor].CGColor;
     varAssign.BlockColor = [UIColor magentaColor].CGColor;
+    varMath.BlockColor = [UIColor lightGrayColor].CGColor;
     
     ifBlock.Icon = [UIImage imageNamed:@"Loop_icon.png"];
     onFWD.Icon = [UIImage imageNamed:@"forward_wheel_icon.png"];
     wait.Icon = [UIImage imageNamed:@"Wait_icon.png"];
     stopMotor.Icon = [UIImage imageNamed:@"wheel_icon.png"];
     variable.Icon = [UIImage imageNamed:@"Variable.png"];
-    value.Icon = [UIImage imageNamed:@"Variable.png"];
-    varAssign.Icon = [UIImage imageNamed:@"Math.png"];
+    value.Icon = [UIImage imageNamed:@"value.png"];
+    varAssign.Icon = [UIImage imageNamed:@"Equals_icon.png"];
+    varMath.Icon = [UIImage imageNamed:@"Math.png"];
     
     NSArray *motorMethods = [NSArray arrayWithObjects:onFWD, stopMotor, nil];
-    NSArray *logicMethods = [NSArray arrayWithObjects:wait, ifBlock, variable, value, varAssign, nil];
+    NSArray *logicMethods = [NSArray arrayWithObjects:wait, ifBlock, variable, value, varAssign, varMath, nil];
     NSMutableArray *customMethods = [NSMutableArray arrayWithObjects:nil];
     
     [methodBlocks setObject:motorMethods forKey:@"Motor Blocks"];

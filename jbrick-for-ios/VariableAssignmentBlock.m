@@ -17,6 +17,7 @@
 {
     self = [super init];
     self.ReturnType = VOID;
+    self.ContainsChildren = YES;
     return self;
 }
 
@@ -80,13 +81,6 @@
     return [NSArray arrayWithObject:parameterVariable];
 }
 
-- (NSArray *) getAvailableParameters:(Primative)type
-{
-    NSMutableArray *params = [NSMutableArray array];
-    [self.Parent addAvailableParameters:type parameterList:params beforeIndex:self];
-    [params addObjectsFromArray:[ConstantValueBlocks getValueConstants:type]];
-    return params;
-}
 - (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(CodeBlock *)index
 {
     if(self.Parent)

@@ -15,6 +15,11 @@
 UIBlock *selectedCodeBlock;
 
 static NSMutableArray *placedBlocks;
+static int TOP_MARGIN = 60;
+static int BOTTOM_MARGIN = 20;
+static int LEFT_MARGIN = 40;
+static int DEFAULT_MINIMIZED_HEIGHT = 100;
+static int DEFAULT_WIDTH = 250;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -50,15 +55,19 @@ static NSMutableArray *placedBlocks;
 }
 - (id)init:(jbrickDetailViewController *)controllerParam codeBlock:(ViewableCodeBlock *)codeBlockParam
 {
-    CGRect frame = CGRectMake(0, 0, 250, 250);
+    codeBlock = codeBlockParam;
+    codeBlock.Delegate = self;
+    if(codeBlock.ContainsChildren)
+        defaultHeight = DEFAULT_MINIMIZED_HEIGHT + TOP_MARGIN + BOTTOM_MARGIN;
+    else
+        defaultHeight = DEFAULT_MINIMIZED_HEIGHT;
+    CGRect frame = CGRectMake(0, 0, DEFAULT_WIDTH, defaultHeight);
+    
     self = [self initWithFrame:frame];
     self.backgroundColor = [UIColor clearColor];
     controller = controllerParam;
     programPane = controller.programPane;
-    codeBlock = codeBlockParam;
-    codeBlock.Delegate = self;
     attachedBlocks = [[NSMutableArray alloc]init];
-    defaultHeight = frame.size.height;
     
     if(codeBlock.Icon){
         UIImageView *Icon = [[UIImageView alloc]initWithImage:codeBlock.Icon];
@@ -66,6 +75,12 @@ static NSMutableArray *placedBlocks;
         Icon.frame = CGRectMake(15, 15, 50, 50 * aspectRatio);
         [self addSubview:Icon];
     }
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(75, 15, DEFAULT_WIDTH-75, 25)];
+    label.text = [codeBlock getDisplayName];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:30];
+    [self addSubview:label];
     
     return self;
 }
@@ -89,7 +104,6 @@ static NSMutableArray *placedBlocks;
     CGContextAddPath(context, strokeRect.CGPath);
     CGContextClosePath(context);
     
-    //CGContextFillPath(context);
     CGContextStrokePath(context);
 
 }
@@ -155,6 +169,8 @@ static NSMutableArray *placedBlocks;
     CGRect boundsA = self.frame;
     UIBlock *overlappedBlock;
     CGFloat distanceToBlock = 0.0;
+    
+    [self isInDeleteLocation:self.frame];
 
     for(id object in [self getUnattachedBlocks])
     {
@@ -292,8 +308,8 @@ static NSMutableArray *placedBlocks;
         childHeightSum += child.frame.size.height;
     }
     if(childHeightSum == 0)
-        childHeightSum = defaultHeight - 60;
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, childHeightSum+60);
+        childHeightSum = defaultHeight - TOP_MARGIN - BOTTOM_MARGIN;
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, childHeightSum+TOP_MARGIN+BOTTOM_MARGIN);
     [self setNeedsDisplay];
     
     if(parentBlock)
@@ -310,8 +326,8 @@ static NSMutableArray *placedBlocks;
         childHeightSum += child.frame.size.height;
     }
     if(childHeightSum == 0)
-        childHeightSum = defaultHeight - 60;
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, childHeightSum+60);
+        childHeightSum = defaultHeight - TOP_MARGIN - BOTTOM_MARGIN;
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, childHeightSum+TOP_MARGIN+BOTTOM_MARGIN);
     [self setNeedsDisplay];
 }
 
@@ -320,10 +336,10 @@ static NSMutableArray *placedBlocks;
     for(int i=0; i<[attachedBlocks count]; i++){
         UIBlock *child = [attachedBlocks objectAtIndex:i];
         if(i == 0)
-            child.frame = CGRectMake(self.frame.origin.x + 40, self.frame.origin.y + 40, child.frame.size.width, child.frame.size.height);
+            child.frame = CGRectMake(self.frame.origin.x + LEFT_MARGIN, self.frame.origin.y + TOP_MARGIN, child.frame.size.width, child.frame.size.height);
         else{
             UIBlock *prevChild = [attachedBlocks objectAtIndex:i-1];
-            child.frame = CGRectMake(self.frame.origin.x + 40, prevChild.frame.origin.y + prevChild.frame.size.height, child.frame.size.width, child.frame.size.height);
+            child.frame = CGRectMake(self.frame.origin.x + LEFT_MARGIN, prevChild.frame.origin.y + prevChild.frame.size.height, child.frame.size.width, child.frame.size.height);
         }
     }
 
@@ -415,6 +431,13 @@ static NSMutableArray *placedBlocks;
 {
     if(parentBlock)
         [self delete];
+}
+
+- (bool) isInDeleteLocation:(CGRect)frame
+{    
+    if(CGRectIntersectsRect(frame, controller.programPane.TrashCan.frame))
+        NSLog(@"Trashed");
+    return true;
 }
 
 - (CGFloat) DistanceBetweenTwoPoints:(CGPoint)point1 point2:(CGPoint)point2;

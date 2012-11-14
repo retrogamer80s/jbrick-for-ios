@@ -15,4 +15,5 @@
 -(void) visitVariableCodeBlock:(NSObject *)block;
 -(void) visitVariableDeclorationBlock:(NSObject *)block;
 -(void) visitVariableAssignmentBlock:(NSObject *)block;
+-(void) visitVariableMathBlock:(NSObject *)block;
 @end

@@ -29,7 +29,8 @@ typedef enum PrimativeTypes{
     PARAMETER_RETURN,
     PARAMETER_VALUE,
     MAIN,
-    ANY_VARIABLE
+    ANY_VARIABLE,
+    MATH_OPERATION
 } Primative;
 
 
