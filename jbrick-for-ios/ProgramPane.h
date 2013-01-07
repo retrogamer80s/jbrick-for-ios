@@ -13,6 +13,7 @@
     UIView *zoomableView;
 }
 @property UIImageView *TrashCan;
+@property NSMutableArray *PlacedBlocks;
 - (void)fitToContent;
 
 @end

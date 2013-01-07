@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "ViewableCodeBlock.h"
+#import "VariableCodeBlock.h"
 
 @interface VariableAssignmentBlock : ViewableCodeBlock
 {
-    CodeBlock * variableReference;
+    VariableCodeBlock * variableReference;
     CodeBlock * parameterVariable;
     CodeBlock * innerCodeBlock;
 }

@@ -39,8 +39,11 @@
         {
             NSString *message = [NSString stringWithFormat:@"Deleting the block will unlink %d blocks currently using it. Do you wish to continue?", varRef.ReferenceCount];
             [self requestUserResponse:message title:@"Remove References?" onResponse:^(Boolean positiveResponse) {
-                if(positiveResponse)
+                if(positiveResponse) {
                     [super setDeleted:Deleted];
+                    varReference.Deleted = true;
+                    varReference.ReturnType = VOID;
+                }
             }];
         }
         else
@@ -127,8 +130,6 @@
     varReference.Deleted = true;
     varReference.ReturnType = newType;
     varReference = [[VariableCodeBlock alloc] init:self type:newType];
-    if(self.Delegate && [self.Delegate respondsToSelector:@selector(blockChangedType:)])
-        [self.Delegate blockChangedType:self];
 
 }
 

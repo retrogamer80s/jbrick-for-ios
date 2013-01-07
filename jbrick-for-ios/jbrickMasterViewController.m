@@ -55,6 +55,7 @@ NSMutableDictionary *methodBlocks;
     
     methodBlocks = [[NSMutableDictionary alloc] init];
     
+    MethodDeclorationBlock *main = [MethodDeclorationBlock getMainBlock];
     MethodDeclorationBlock *ifBlock = [[MethodDeclorationBlock alloc] init:@"If" parameterVariables:[[NSMutableArray alloc]init] returnType:BOOLEAN];
     MethodCallCodeBlock *onFWD = [[MethodCallCodeBlock alloc] init:@"OnFwd" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:MOTOR],[NSNumber numberWithInt:MOTOR_POWER],[NSNumber numberWithInt:INTEGER], nil] returnType:VOID];
     MethodCallCodeBlock *wait = [[MethodCallCodeBlock alloc] init:@"Wait" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:INTEGER], nil] returnType:VOID];
@@ -64,6 +65,7 @@ NSMutableDictionary *methodBlocks;
     VariableAssignmentBlock *varAssign = [[VariableAssignmentBlock alloc] init];
     VariableMathBlock *varMath = [[VariableMathBlock alloc] init];
 
+    main.BlockColor = [UIColor purpleColor].CGColor;
     ifBlock.BlockColor = [UIColor yellowColor].CGColor;
     onFWD.BlockColor = [UIColor greenColor].CGColor;
     wait.BlockColor = [UIColor blueColor].CGColor;
@@ -73,6 +75,7 @@ NSMutableDictionary *methodBlocks;
     varAssign.BlockColor = [UIColor magentaColor].CGColor;
     varMath.BlockColor = [UIColor lightGrayColor].CGColor;
     
+    main.Icon = [UIImage imageNamed:@"main.png"];
     ifBlock.Icon = [UIImage imageNamed:@"Loop_icon.png"];
     onFWD.Icon = [UIImage imageNamed:@"forward_wheel_icon.png"];
     wait.Icon = [UIImage imageNamed:@"Wait_icon.png"];

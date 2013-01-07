@@ -7,10 +7,11 @@
 //
 
 #import "ViewableCodeBlock.h"
+#import "VariableCodeBlock.h"
 
 @interface VariableMathBlock : ViewableCodeBlock
 {
-    CodeBlock *variableReference;
+    VariableCodeBlock *variableReference;
     CodeBlock *parameterVariable;
     CodeBlock *mathOpBlock;
     NSMutableArray *innerCodeBlocks;

@@ -100,6 +100,8 @@
     if(!variableReference || variableReference.Deleted){
         parameterVariable = [[ValueCodeBlock alloc] init:ANY_VARIABLE value:@"None"];
         variableReference = nil;
+    } else {
+        parameterVariable = [[ValueCodeBlock alloc] init:ANY_VARIABLE value:[variableReference generateCode]];
     }
     return [NSArray arrayWithObjects:parameterVariable, mathOpBlock, nil];
 }
@@ -113,7 +115,8 @@
 - (bool) replaceParameter:(CodeBlock *)oldParam newParameter:(CodeBlock *)newParam
 {
     if (oldParam.ReturnType == ANY_VARIABLE){
-        variableReference = newParam;
+        [variableReference removeParent:self];
+        variableReference = (VariableCodeBlock *)newParam;
         newParam.Parent = self;
         CodeBlock * parameter = [[ValueCodeBlock alloc] init:ANY_VARIABLE value:[newParam generateCode]];
         parameterVariable = parameter;

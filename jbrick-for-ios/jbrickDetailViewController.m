@@ -93,7 +93,10 @@ float firstY;
     UIBlock *mainBlock = [[UIBlock alloc] init:self codeBlock:main];
     [self.programPane addSubview:mainBlock];
     
-    self.view.frame = CGRectMake(400, 400, 400, 400);
+    UIImageView *trashCan = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Trash Can.png"]];
+    trashCan.frame = CGRectMake(615, 580, 100, 140);
+    [self.view addSubview:trashCan];
+    self.programPane.TrashCan = trashCan;
     
 }
 

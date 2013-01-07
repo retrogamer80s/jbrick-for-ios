@@ -14,7 +14,6 @@
 
 UIBlock *selectedCodeBlock;
 
-static NSMutableArray *placedBlocks;
 static int TOP_MARGIN = 60;
 static int BOTTOM_MARGIN = 20;
 static int LEFT_MARGIN = 40;
@@ -27,9 +26,7 @@ static int DEFAULT_WIDTH = 250;
     self = [super initWithFrame:frame];
     
     if (self) {
-        if(placedBlocks == nil)
-            placedBlocks = [[NSMutableArray alloc] init];
-        [placedBlocks addObject:self];
+        [programPane.PlacedBlocks addObject:self];
         
         self.userInteractionEnabled = true;
         UILongPressGestureRecognizer *lpGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
@@ -63,11 +60,12 @@ static int DEFAULT_WIDTH = 250;
         defaultHeight = DEFAULT_MINIMIZED_HEIGHT;
     CGRect frame = CGRectMake(0, 0, DEFAULT_WIDTH, defaultHeight);
     
-    self = [self initWithFrame:frame];
-    self.backgroundColor = [UIColor clearColor];
     controller = controllerParam;
     programPane = controller.programPane;
     attachedBlocks = [[NSMutableArray alloc]init];
+    
+    self = [self initWithFrame:frame];
+    self.backgroundColor = [UIColor clearColor];
     
     if(codeBlock.Icon){
         UIImageView *Icon = [[UIImageView alloc]initWithImage:codeBlock.Icon];
@@ -93,6 +91,8 @@ static int DEFAULT_WIDTH = 250;
         CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     else
         CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+
     
     CGContextSetLineWidth(context, 4.0);
     CGContextBeginPath(context);
@@ -170,7 +170,9 @@ static int DEFAULT_WIDTH = 250;
     UIBlock *overlappedBlock;
     CGFloat distanceToBlock = 0.0;
     
-    [self isInDeleteLocation:self.frame];
+    if([self isInDeleteLocation:self.frame]){
+        return;
+    }
 
     for(id object in [self getUnattachedBlocks])
     {
@@ -221,7 +223,7 @@ static int DEFAULT_WIDTH = 250;
                 [previousBlock attachBlockToSide:self indexBlock:previousIndexBlock afterIndexBlock:false];
             }];
         else
-            [self delete];
+            [self returnToList];
         
     }
     
@@ -237,7 +239,7 @@ static int DEFAULT_WIDTH = 250;
 }
 
 -(NSArray *)getUnattachedBlocks{
-    NSMutableArray *unattachedBlocks = [NSMutableArray arrayWithArray:placedBlocks];
+    NSMutableArray *unattachedBlocks = [NSMutableArray arrayWithArray:programPane.PlacedBlocks];
     [unattachedBlocks removeObjectsInArray:[self getAllChildren:nil]];
     
     return unattachedBlocks;
@@ -366,6 +368,16 @@ static int DEFAULT_WIDTH = 250;
     return parent;
 }
 
+- (void)returnToList
+{
+    [UIView animateWithDuration:.5 animations:^{
+        self.center = CGPointMake(-150, 300);
+    } completion:^(BOOL finished) {
+        
+    }];
+    [self delete];
+}
+
 - (void)delete
 {
     codeBlock.Deleted = true;
@@ -409,7 +421,7 @@ static int DEFAULT_WIDTH = 250;
 
 -(void)deleteWithAllChildren
 {
-    [placedBlocks removeObject:self];
+    [programPane.PlacedBlocks removeObject:self];
     [self removeFromSuperview];
     codeBlock.Deleted = true;
     for(UIBlock *child in attachedBlocks)
@@ -434,10 +446,14 @@ static int DEFAULT_WIDTH = 250;
 }
 
 - (bool) isInDeleteLocation:(CGRect)frame
-{    
-    if(CGRectIntersectsRect(frame, controller.programPane.TrashCan.frame))
-        NSLog(@"Trashed");
-    return true;
+{
+    CGRect hitBox = CGRectMake(frame.origin.x, frame.origin.y, 50, 50);
+    if(CGRectIntersectsRect(hitBox, controller.programPane.TrashCan.frame))
+    {
+        [self delete];
+        return true;
+    }
+    return false;
 }
 
 - (CGFloat) DistanceBetweenTwoPoints:(CGPoint)point1 point2:(CGPoint)point2;

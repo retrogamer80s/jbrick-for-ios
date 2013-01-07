@@ -11,6 +11,7 @@
 @implementation ProgramPane
 
 @synthesize TrashCan = trashCan;
+@synthesize PlacedBlocks;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -34,6 +35,8 @@
 {
     [self setDelegate:self];
     
+    self.PlacedBlocks = [NSMutableArray array];
+    
     CGRect contentRect = self.frame;
     contentRect.origin.x += 5;
     contentRect.origin.y += 5;
@@ -42,11 +45,8 @@
     zoomableView = [[UIView alloc] initWithFrame:contentRect];
     zoomableView.clipsToBounds = NO;
     
-    trashCan = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Trash Can.png"]];
-    trashCan.frame = CGRectMake(self.frame.size.width - 120, self.frame.size.height - 150, 100, 140);
-    
     [super addSubview:zoomableView];
-    [super addSubview:trashCan];
+    //[self.superview addSubview:trashCan];
 }
 
 - (void)addSubview:(UIView *)view
