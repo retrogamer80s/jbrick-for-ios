@@ -448,7 +448,7 @@ static int DEFAULT_WIDTH = 250;
 - (bool) isInDeleteLocation:(CGRect)frame
 {
     CGRect hitBox = CGRectMake(frame.origin.x, frame.origin.y, 50, 50);
-    if(CGRectIntersectsRect(hitBox, controller.programPane.TrashCan.frame))
+    if(CGRectIntersectsRect(hitBox, [controller.programPane convertRect:controller.programPane.TrashCan.frame fromView:controller.view ]))
     {
         [self delete];
         return true;
