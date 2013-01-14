@@ -14,6 +14,7 @@
 @optional
 - (void) blockWasDeleted:(NSObject *)sender;
 - (void) blockChangedType:(NSObject *)sender;
+- (void) blockMoved:(NSObject *)sender oldParent:(NSObject *)oldParent newParent:(NSObject *)newParent;
 @end
 
 typedef void (^onResponseType)(Boolean);
@@ -24,6 +25,7 @@ typedef void (^onResponseType)(Boolean);
 {
     Boolean deleted;
     Primative returnType;
+    CodeBlock *parent;
     onResponseType onResponse;
 }
 @property Primative ReturnType;
@@ -37,6 +39,7 @@ typedef void (^onResponseType)(Boolean);
 - (void) removeFromParent;
 - (NSArray *) getAvailableParameters:(Primative)type;
 - (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(CodeBlock *)index;
+- (bool) parameterIsInScope:(CodeBlock *)parameter beforeIndex:(CodeBlock *)index;
 - (CodeBlock *) getParameterReferenceBlock:(Primative)type;
 - (void) acceptVisitor:(id<CodeBlockVisitor>)visitor;
 - (Boolean) childRequestChangeType:(CodeBlock *)child prevType:(Primative)prevType newType:(Primative)newType;

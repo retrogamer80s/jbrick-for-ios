@@ -11,7 +11,7 @@
 #import "PrimativeTypeUtility.h"
 #import "VariableDeclorationBlock.h"
 
-@interface VariableCodeBlock : CodeBlock
+@interface VariableCodeBlock : CodeBlock <CodeBlockDelegate>
 {
     VariableDeclorationBlock *variable;
     NSMutableArray *parents;

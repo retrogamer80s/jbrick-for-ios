@@ -55,8 +55,8 @@ static MethodDeclorationBlock *mainBlock;
 
 -(bool)addCodeBlock:(CodeBlock *)codeBlock
 {
-    codeBlock.Parent = self;
     [innerCodeBlocks addObject:codeBlock];
+    codeBlock.Parent = self;
     return true;
 }
 
@@ -66,11 +66,11 @@ static MethodDeclorationBlock *mainBlock;
     if(insertIndex == NSNotFound)
         return false;
     
-    codeBlock.Parent = self;
     if(afterIndexBlock)
         [innerCodeBlocks insertObject:codeBlock atIndex:insertIndex+1];
     else
         [innerCodeBlocks insertObject:codeBlock atIndex:insertIndex];
+    codeBlock.Parent = self;
     return true;
 }
 
@@ -95,6 +95,17 @@ static MethodDeclorationBlock *mainBlock;
 -(NSArray *) getPropertyVariables
 {
     return parameterVariables;
+}
+
+-(bool) parameterIsInScope:(CodeBlock *)parameter beforeIndex:(CodeBlock *)index
+{
+    int paramIndex = [innerCodeBlocks indexOfObject:parameter];
+    int indexIndex = [innerCodeBlocks indexOfObject:index];
+    
+    if(paramIndex != NSNotFound && indexIndex != NSNotFound)
+        return paramIndex < indexIndex;
+    else
+        return [super parameterIsInScope:parameter beforeIndex:index];
 }
 
 - (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(CodeBlock *)index

@@ -15,6 +15,7 @@
 {
     self = [super init];
     variable = variableParam;
+    variable.Delegate = self;
     self.ReturnType = primitive;
     parents = [NSMutableArray array];
     return self;
@@ -29,10 +30,12 @@
 -(void)setParent:(CodeBlock *)Parent
 {
     [parents addObject:Parent];
+    Parent.Delegate = self;
 }
 -(void) removeParent:(CodeBlock *)parent
 {
     [parents removeObject:parent];
+    parent.Delegate = NULL;
 }
 
 - (void)setReturnType:(Primative)ReturnType
@@ -66,6 +69,16 @@
 -(void)acceptVisitor:(id<CodeBlockVisitor>)visitor
 {
     [visitor visitVariableCodeBlock:self];
+}
+
+-(void) blockMoved:(NSObject *)sender oldParent:(NSObject *)oldParent newParent:(NSObject *)newParent
+{
+    int outOfScopeCount = 0;
+    for (CodeBlock * reference in parents) {
+        if(! [reference parameterIsInScope:variable beforeIndex:self])
+            outOfScopeCount++;
+    }
+    NSLog([NSString stringWithFormat:@"%d are now out of scope", outOfScopeCount]);
 }
 
 @end

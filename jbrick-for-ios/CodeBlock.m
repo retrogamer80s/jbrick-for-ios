@@ -10,14 +10,20 @@
 #import "ConstantValueBlocks.h"
 
 @implementation CodeBlock
-@synthesize Parent;
 @synthesize Delegate;
+
+- (CodeBlock *)Parent { return parent; }
+- (void)setParent:(CodeBlock *)Parent {
+    if(Delegate && [Delegate respondsToSelector:@selector(blockMoved:oldParent:newParent:)])
+        [Delegate blockMoved:self oldParent:parent newParent:Parent];
+    parent = Parent;
+}
 
 - (Primative)ReturnType { return returnType; }
 - (void)setReturnType:(Primative)ReturnType {
     Boolean canChange = true;
-    if(Parent)
-        canChange = [Parent childRequestChangeType:self prevType:returnType newType:ReturnType];
+    if(parent)
+        canChange = [parent childRequestChangeType:self prevType:returnType newType:ReturnType];
     
     if(canChange)
         returnType = ReturnType;
@@ -30,9 +36,9 @@
 - (void)setDeleted:(bool)Deleted {
     if(deleted != Deleted){
         deleted = Deleted;
-        if(Parent)
-            [Parent childWasDeleted:self];
-        if(Delegate && [Delegate respondsToSelector:@selector(blockWasDeleted:)] && !Parent.Deleted)
+        if(parent)
+            [parent childWasDeleted:self];
+        if(Delegate && [Delegate respondsToSelector:@selector(blockWasDeleted:)] && !parent.Deleted)
             [Delegate blockWasDeleted:self];
     }
 }
@@ -61,17 +67,25 @@
 
 - (void) removeFromParent
 {
-    if(Parent)
-        [Parent removeCodeBlock:self];
+    if(parent)
+        [parent removeCodeBlock:self];
 }
 
 - (NSArray *) getAvailableParameters:(Primative)type
 {
     NSMutableArray *params = [NSMutableArray array];
-    if(Parent)
-        [Parent addAvailableParameters:type parameterList:params beforeIndex:self];
+    if(parent)
+        [parent addAvailableParameters:type parameterList:params beforeIndex:self];
     [params addObjectsFromArray:[ConstantValueBlocks getValueConstants:type]];
     return params;
+}
+
+- (bool) parameterIsInScope:(CodeBlock *)parameter beforeIndex:(CodeBlock *)index
+{
+    if(parent)
+        return [parent parameterIsInScope:parameter beforeIndex:self];
+    else
+        return false;
 }
 
 - (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(CodeBlock *)index
