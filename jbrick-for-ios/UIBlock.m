@@ -7,6 +7,7 @@
 //
 
 #import "UIBlock.h"
+#import "iToast.h"
 
 @implementation UIBlock
 @synthesize controller;
@@ -370,6 +371,9 @@ static int DEFAULT_WIDTH = 250;
 
 - (void)returnToList
 {
+    [[[[iToast makeText:@"Blocks must be placed over other blocks"]
+       setDuration:iToastDurationNormal] setGravity:iToastGravityTop ] show];
+    
     [UIView animateWithDuration:.5 animations:^{
         self.center = CGPointMake(-150, 300);
     } completion:^(BOOL finished) {

@@ -16,6 +16,7 @@
 		3F1B89A1160108410007A0B9 /* jbrickAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B89A0160108410007A0B9 /* jbrickAppDelegate.m */; };
 		3F1B89A4160108410007A0B9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F1B89A2160108410007A0B9 /* MainStoryboard.storyboard */; };
 		3F1B89A7160108410007A0B9 /* jbrickMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B89A6160108410007A0B9 /* jbrickMasterViewController.m */; };
+		3F30AE5C169B30F60002407F /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F30AE5A169B2FD20002407F /* iToast.m */; };
 		3F490BA1160A3BC400B2BA38 /* puzzle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F490BA0160A3BC400B2BA38 /* puzzle.png */; };
 		3F490BA4160A3D3200B2BA38 /* ProgramPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F490BA3160A3D3200B2BA38 /* ProgramPane.m */; };
 		3F4AB4D0164464E5001D7C43 /* bluetooth.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4AB4C9164464E5001D7C43 /* bluetooth.png */; };
@@ -99,6 +100,8 @@
 		3F1B89A8160108410007A0B9 /* jbrickDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jbrickDetailViewController.h; sourceTree = "<group>"; };
 		3F1B89A9160108410007A0B9 /* jbrickDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jbrickDetailViewController.m; sourceTree = "<group>"; };
 		3F2CA3FE1611D854006260D1 /* PrimativeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrimativeTypes.h; sourceTree = "<group>"; };
+		3F30AE59169B2FD20002407F /* iToast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iToast.h; sourceTree = "<group>"; };
+		3F30AE5A169B2FD20002407F /* iToast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iToast.m; sourceTree = "<group>"; };
 		3F490BA0160A3BC400B2BA38 /* puzzle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = puzzle.png; sourceTree = "<group>"; };
 		3F490BA2160A3D3200B2BA38 /* ProgramPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramPane.h; sourceTree = "<group>"; };
 		3F490BA3160A3D3200B2BA38 /* ProgramPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramPane.m; sourceTree = "<group>"; };
@@ -237,6 +240,8 @@
 		3F1B8996160108410007A0B9 /* jbrick-for-ios */ = {
 			isa = PBXGroup;
 			children = (
+				3F30AE59169B2FD20002407F /* iToast.h */,
+				3F30AE5A169B2FD20002407F /* iToast.m */,
 				3F490BB0160B634100B2BA38 /* CodeBlocks */,
 				3F1B899F160108410007A0B9 /* jbrickAppDelegate.h */,
 				3F1B89A0160108410007A0B9 /* jbrickAppDelegate.m */,
@@ -548,6 +553,7 @@
 				3FD7740D16481B5C0005A4B9 /* CodeBlock.m in Sources */,
 				3FD77410164839230005A4B9 /* ViewableCodeBlock.m in Sources */,
 				3FD7741F1649B25D0005A4B9 /* VariableMathBlock.m in Sources */,
+				3F30AE5C169B30F60002407F /* iToast.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
