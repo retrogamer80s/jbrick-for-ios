@@ -10,6 +10,7 @@
 #import "PrimativeTypeUtility.h"
 #import "VariableCodeBlock.h"
 #import "ConstantValueBlocks.h"
+#import "UIPrompt.h"
 
 @implementation VariableDeclorationBlock
 @synthesize InternalType;
@@ -38,7 +39,7 @@
         if(varRef.ReferenceCount > 0)
         {
             NSString *message = [NSString stringWithFormat:@"Deleting the block will unlink %d blocks currently using it. Do you wish to continue?", varRef.ReferenceCount];
-            [self requestUserResponse:message title:@"Remove References?" onResponse:^(Boolean positiveResponse) {
+            [UIPrompt prompt:message title:@"Remove References?" onResponse:^(Boolean positiveResponse) {
                 if(positiveResponse) {
                     [super setDeleted:Deleted];
                     varReference.Deleted = true;
@@ -104,7 +105,7 @@
         if(varRef.ReferenceCount > 0)
         {
             NSString *message = [NSString stringWithFormat:@"Changing the block's type will unlink %d blocks currently using it. Do you wish to continue?", varRef.ReferenceCount];
-            [self requestUserResponse:message title:@"Remove References?" onResponse:^(Boolean positiveResponse) {
+            [UIPrompt prompt:message title:@"Remove References?" onResponse:^(Boolean positiveResponse) {
                 if(positiveResponse){
                     [self setInnerType:newParam.ReturnType];
                 }

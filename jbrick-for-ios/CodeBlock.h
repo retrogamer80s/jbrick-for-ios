@@ -17,8 +17,6 @@
 - (void) blockMoved:(NSObject *)sender oldParent:(NSObject *)oldParent newParent:(NSObject *)newParent;
 @end
 
-typedef void (^onResponseType)(Boolean);
-
 // This class is inteded to be an abstract class... which objective-c doesn't have
 // So don't use this class instead use a derived class of it.
 @interface CodeBlock : NSObject <UIAlertViewDelegate>
@@ -26,7 +24,6 @@ typedef void (^onResponseType)(Boolean);
     Boolean deleted;
     Primative returnType;
     CodeBlock *parent;
-    onResponseType onResponse;
 }
 @property Primative ReturnType;
 @property CodeBlock *Parent;
@@ -44,6 +41,5 @@ typedef void (^onResponseType)(Boolean);
 - (void) acceptVisitor:(id<CodeBlockVisitor>)visitor;
 - (Boolean) childRequestChangeType:(CodeBlock *)child prevType:(Primative)prevType newType:(Primative)newType;
 - (void) childWasDeleted:(CodeBlock *)child;
-- (UIAlertView *)requestUserResponse:(NSString *)message title:(NSString *)title onResponse:(onResponseType)onRespondedBlock;
 
 @end

@@ -10,6 +10,20 @@
 
 @implementation UIPrompt
 
+static UIPrompt *prompt;
+
++ (void) prompt:(NSString *)message title:(NSString *)title onResponse:(onResponseType)onRespondedBlock
+{
+    prompt = [[UIPrompt alloc] init];
+    [prompt prompt:message title:title onResponse:onRespondedBlock];
+}
+
++ (Boolean) promptBlocking:(NSString *)message title:(NSString *)title
+{
+    prompt = [[UIPrompt alloc] init];
+    return [prompt promptBlocking:message title:title];
+}
+
 - (void)prompt:(NSString *)message title:(NSString *)title onResponse:(onResponseType)onRespondedBlock
 {
     onResponse = onRespondedBlock;

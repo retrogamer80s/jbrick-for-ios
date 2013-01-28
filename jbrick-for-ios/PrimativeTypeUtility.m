@@ -105,7 +105,7 @@
 {
     ValueCodeBlock *valBlock;
     if([value isKindOfClass:[ValueCodeBlock class]])
-        valBlock = value;
+        valBlock = (ValueCodeBlock*)value;
     
     switch (primative) {
         case MOTOR_POWER:

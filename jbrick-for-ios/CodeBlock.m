@@ -113,34 +113,4 @@
 {
     // Optionally overwrite this method to be notified when a child block is deleted
 }
-
-- (UIAlertView*)requestUserResponse:(NSString *)message title:(NSString *)title onResponse:(onResponseType)onRespondedBlock
-{
-    onResponse = onRespondedBlock;
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:self
-                                              cancelButtonTitle:@"YES"
-                                              otherButtonTitles:@"NO", nil];
-    
-    [alertView show];
-    return alertView;
-}
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) {
-        case 0:
-            if(onResponse)
-                onResponse(true);
-            break;
-        case 1:
-            if(onResponse)
-                onResponse(false);
-            break;
-        default:
-            break;
-    }
-    onResponse = nil;
-}
 @end

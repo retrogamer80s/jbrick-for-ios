@@ -32,10 +32,10 @@
     [parents addObject:Parent];
     Parent.Delegate = self;
 }
--(void) removeParent:(CodeBlock *)parent
+-(void) removeParent:(CodeBlock *)oldParent
 {
-    [parents removeObject:parent];
-    parent.Delegate = NULL;
+    [parents removeObject:oldParent];
+    oldParent.Delegate = NULL;
 }
 
 - (void)setReturnType:(Primative)ReturnType
@@ -51,9 +51,9 @@
 
 -(NSInteger)ReferenceCount {
     
-    for(CodeBlock * parent in [parents copy])
-        if(parent.Deleted)
-            [parents removeObject:parent];
+    for(CodeBlock * parentBlock in [parents copy])
+        if(parentBlock.Deleted)
+            [parents removeObject:parentBlock];
     
     return parents.count;
 }
@@ -80,7 +80,7 @@
             outOfScopeCount++;
     }
     
-    Boolean response = [[[UIPrompt alloc] init] promptBlocking:@"Parameters out of scope" title:@"Variable out of scope"];
+    Boolean response = [UIPrompt promptBlocking:@"Parameters out of scope" title:@"Variable out of scope"];
     
     NSLog([NSString stringWithFormat:@"%d are now out of scope, %d", outOfScopeCount, response]);
 }

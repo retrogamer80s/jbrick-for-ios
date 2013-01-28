@@ -16,7 +16,8 @@ typedef void (^onResponseType)(Boolean response);
     UIAlertView *innerAlert;
     Boolean result;
 }
-- (void)prompt:(NSString *)message title:(NSString *)title onResponse:(onResponseType)onRespondedBlock;
-- (Boolean)promptBlocking:(NSString *)message title:(NSString *)title;
+
++ (void)prompt:(NSString *)message title:(NSString *)title onResponse:(onResponseType)onRespondedBlock;
++ (Boolean)promptBlocking:(NSString *)message title:(NSString *)title;
 
 @end
