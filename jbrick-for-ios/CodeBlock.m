@@ -14,9 +14,9 @@
 
 - (CodeBlock *)Parent { return parent; }
 - (void)setParent:(CodeBlock *)Parent {
+    parent = Parent;
     if(Delegate && [Delegate respondsToSelector:@selector(blockMoved:oldParent:newParent:)])
         [Delegate blockMoved:self oldParent:parent newParent:Parent];
-    parent = Parent;
 }
 
 - (Primative)ReturnType { return returnType; }
@@ -114,7 +114,7 @@
     // Optionally overwrite this method to be notified when a child block is deleted
 }
 
-- (void)requestUserResponse:(NSString *)message title:(NSString *)title onResponse:(onResponseType)onRespondedBlock
+- (UIAlertView*)requestUserResponse:(NSString *)message title:(NSString *)title onResponse:(onResponseType)onRespondedBlock
 {
     onResponse = onRespondedBlock;
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
@@ -124,6 +124,7 @@
                                               otherButtonTitles:@"NO", nil];
     
     [alertView show];
+    return alertView;
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex

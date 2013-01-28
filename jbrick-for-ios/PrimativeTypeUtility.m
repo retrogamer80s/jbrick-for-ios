@@ -122,6 +122,8 @@
             return nil;
         case MATH_OPERATION:
             return nil;
+        case BOOLEAN:
+            return nil;
         default:
         {
             UITextField *view = [[UITextFieldStrongDelegate alloc] initWithFrame:CGRectMake(0, 0, 400, 40) inputDelegate:delegate];

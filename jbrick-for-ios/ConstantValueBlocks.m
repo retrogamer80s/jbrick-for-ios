@@ -30,7 +30,11 @@ static NSMutableDictionary *constants;
             [constants setObject:[NSArray array] forKey:[NSNumber numberWithInt:type]];
             break;
         case BOOLEAN:
-            [constants setObject:[NSArray array] forKey:[NSNumber numberWithInt:type]];
+            [constants setObject:[NSArray arrayWithObjects:
+                                  [[ValueCodeBlock alloc] init:type value:@"True"],
+                                  [[ValueCodeBlock alloc] init:type value:@"False"],
+                                  nil]
+                          forKey:[NSNumber numberWithInt:type]];
             break;
         case STRING:
             [constants setObject:[NSArray array] forKey:[NSNumber numberWithInt:type]];

@@ -74,11 +74,15 @@
 -(void) blockMoved:(NSObject *)sender oldParent:(NSObject *)oldParent newParent:(NSObject *)newParent
 {
     int outOfScopeCount = 0;
+
     for (CodeBlock * reference in parents) {
         if(! [reference parameterIsInScope:variable beforeIndex:self])
             outOfScopeCount++;
     }
-    NSLog([NSString stringWithFormat:@"%d are now out of scope", outOfScopeCount]);
+    
+    Boolean response = [[[UIPrompt alloc] init] promptBlocking:@"Parameters out of scope" title:@"Variable out of scope"];
+    
+    NSLog([NSString stringWithFormat:@"%d are now out of scope, %d", outOfScopeCount, response]);
 }
 
 @end

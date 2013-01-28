@@ -44,6 +44,6 @@ typedef void (^onResponseType)(Boolean);
 - (void) acceptVisitor:(id<CodeBlockVisitor>)visitor;
 - (Boolean) childRequestChangeType:(CodeBlock *)child prevType:(Primative)prevType newType:(Primative)newType;
 - (void) childWasDeleted:(CodeBlock *)child;
-- (void)requestUserResponse:(NSString *)message title:(NSString *)title onResponse:(onResponseType)onRespondedBlock;
+- (UIAlertView *)requestUserResponse:(NSString *)message title:(NSString *)title onResponse:(onResponseType)onRespondedBlock;
 
 @end

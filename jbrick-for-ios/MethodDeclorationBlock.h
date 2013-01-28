@@ -14,10 +14,11 @@
 @interface MethodDeclorationBlock : ViewableCodeBlock
 {
     NSString *name;
-    NSMutableArray *parameterVariables;
+    NSMutableArray *parameterValues;
+    NSMutableArray *parameterTypes;
     NSMutableArray *innerCodeBlocks;
 }
 
 +(id) getMainBlock;
--(id) init:(NSString *)name parameterVariables:(NSMutableArray *)parameters returnType:(Primative)returnType;
+-(id) init:(NSString *)name parameterTypes:(NSMutableArray *)parameters returnType:(Primative)returnType;
 @end

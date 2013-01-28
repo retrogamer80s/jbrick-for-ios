@@ -13,12 +13,17 @@
 
 static MethodDeclorationBlock *mainBlock;
 
--(id) init:(NSString *)methodName parameterVariables:(NSMutableArray *)parameters returnType:(Primative)returnTypeParam
+-(id) init:(NSString *)methodName parameterTypes:(NSMutableArray *)parameters returnType:(Primative)returnTypeParam
 {
     self = [super init];
     name = methodName;
     self.ReturnType = returnTypeParam;
-    parameterVariables = parameters;
+    
+    parameterTypes = parameters;
+    parameterValues = [NSMutableArray arrayWithCapacity:[parameters count]];
+    for(int i=0; i<[parameterTypes count]; i++)
+        [parameterValues addObject:[[ValueCodeBlock alloc] init:[[parameters objectAtIndex:i] integerValue]]];
+    
     innerCodeBlocks = [[NSMutableArray alloc]init];
     self.ContainsChildren = YES;
     return self;
@@ -27,7 +32,7 @@ static MethodDeclorationBlock *mainBlock;
 +(id) getMainBlock
 {
     if(!mainBlock){
-        mainBlock = [[MethodDeclorationBlock alloc] init:@"main" parameterVariables:[NSArray array] returnType:MAIN];
+        mainBlock = [[MethodDeclorationBlock alloc] init:@"main" parameterTypes:[NSArray array] returnType:MAIN];
     }
     return mainBlock;
 }
@@ -69,8 +74,8 @@ static MethodDeclorationBlock *mainBlock;
     if(afterIndexBlock)
         [innerCodeBlocks insertObject:codeBlock atIndex:insertIndex+1];
     else
-        [innerCodeBlocks insertObject:codeBlock atIndex:insertIndex];
-    codeBlock.Parent = self;
+        [innerCodeBlocks insertObject:codeBlock atIndex:insertIndex];     codeBlock.Parent = self;
+    
     return true;
 }
 
@@ -81,7 +86,7 @@ static MethodDeclorationBlock *mainBlock;
 
 -(ViewableCodeBlock *) getPrototype
 {
-    MethodDeclorationBlock *prototype = [[MethodDeclorationBlock alloc] init:name parameterVariables:parameterVariables returnType:self.ReturnType];
+    MethodDeclorationBlock *prototype = [[MethodDeclorationBlock alloc] init:name parameterTypes:parameterTypes returnType:self.ReturnType];
     prototype.BlockColor = self.BlockColor;
     prototype.Icon = self.Icon;
     return prototype;    
@@ -94,7 +99,7 @@ static MethodDeclorationBlock *mainBlock;
 
 -(NSArray *) getPropertyVariables
 {
-    return parameterVariables;
+    return parameterValues;
 }
 
 -(bool) parameterIsInScope:(CodeBlock *)parameter beforeIndex:(CodeBlock *)index
@@ -125,9 +130,9 @@ static MethodDeclorationBlock *mainBlock;
 
 -(NSArray *)getParameterDeclorations
 {
-    NSMutableArray *declorations = [[NSMutableArray alloc] initWithCapacity:[parameterVariables count]];
-    for (int i = 0; i<[parameterVariables count]; i++) {
-        VariableCodeBlock *variable = [parameterVariables objectAtIndex:i];
+    NSMutableArray *declorations = [[NSMutableArray alloc] initWithCapacity:[parameterValues count]];
+    for (int i = 0; i<[parameterValues count]; i++) {
+        VariableCodeBlock *variable = [parameterValues objectAtIndex:i];
         NSString *primTypeString = [PrimativeTypeUtility primativeToString:variable.ReturnType];
         NSString *variableString = [variable generateCode];
         
@@ -138,14 +143,15 @@ static MethodDeclorationBlock *mainBlock;
 
 - (bool) replaceParameter:(CodeBlock *)oldParam newParameter:(CodeBlock *)newParam
 {
-    NSInteger index = [parameterVariables indexOfObject:oldParam];
+    NSInteger index = [parameterValues indexOfObject:oldParam];
     if(index == NSNotFound)
         return false;
     
     if(oldParam.ReturnType == newParam.ReturnType)
     {
-        [parameterVariables replaceObjectAtIndex:index withObject:newParam];
-        [((VariableCodeBlock *)oldParam) removeParent:self]; // If it's not a variableCodeBlock this call will do nothing
+        [parameterValues replaceObjectAtIndex:index withObject:newParam];
+        if([oldParam isKindOfClass:[VariableCodeBlock class]])
+            [((VariableCodeBlock *)oldParam) removeParent:self];
         newParam.Parent = self;
         return true;
     }

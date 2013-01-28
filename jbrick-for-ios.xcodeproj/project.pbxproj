@@ -71,6 +71,7 @@
 		3FE1DDA7163593900049555C /* forward_wheel_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE1DDA2163593900049555C /* forward_wheel_icon.png */; };
 		3FE1DDA8163593900049555C /* Gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE1DDA3163593900049555C /* Gear.png */; };
 		3FE1DDA9163593900049555C /* wheel_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE1DDA4163593900049555C /* wheel_icon.png */; };
+		3FEF4D7C16B6D2BE00D9CABD /* UIPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEF4D7B16B6D2BE00D9CABD /* UIPrompt.m */; };
 		3FFD2A75160A118B00E8403C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFD2A74160A118B00E8403C /* AudioToolbox.framework */; };
 		3FFDD4BF1619E4F70065D30B /* UITextFieldStrongDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDD4BE1619E4F70065D30B /* UITextFieldStrongDelegate.m */; };
 		3FFDD4C7161B3CBB0065D30B /* IntInputStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDD4C6161B3CBB0065D30B /* IntInputStrategy.m */; };
@@ -177,6 +178,8 @@
 		3FE1DDA2163593900049555C /* forward_wheel_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward_wheel_icon.png; sourceTree = "<group>"; };
 		3FE1DDA3163593900049555C /* Gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gear.png; sourceTree = "<group>"; };
 		3FE1DDA4163593900049555C /* wheel_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wheel_icon.png; sourceTree = "<group>"; };
+		3FEF4D7A16B6D2BE00D9CABD /* UIPrompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPrompt.h; sourceTree = "<group>"; };
+		3FEF4D7B16B6D2BE00D9CABD /* UIPrompt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPrompt.m; sourceTree = "<group>"; };
 		3FFD2A74160A118B00E8403C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3FFDD4BD1619E4F70065D30B /* UITextFieldStrongDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextFieldStrongDelegate.h; sourceTree = "<group>"; };
 		3FFDD4BE1619E4F70065D30B /* UITextFieldStrongDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextFieldStrongDelegate.m; sourceTree = "<group>"; };
@@ -421,6 +424,8 @@
 				3FFDD4BE1619E4F70065D30B /* UITextFieldStrongDelegate.m */,
 				3FFDD4CC161B6D200065D30B /* UISliderStrongReference.h */,
 				3FFDD4CD161B6D200065D30B /* UISliderStrongReference.m */,
+				3FEF4D7A16B6D2BE00D9CABD /* UIPrompt.h */,
+				3FEF4D7B16B6D2BE00D9CABD /* UIPrompt.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -554,6 +559,7 @@
 				3FD77410164839230005A4B9 /* ViewableCodeBlock.m in Sources */,
 				3FD7741F1649B25D0005A4B9 /* VariableMathBlock.m in Sources */,
 				3F30AE5C169B30F60002407F /* iToast.m in Sources */,
+				3FEF4D7C16B6D2BE00D9CABD /* UIPrompt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

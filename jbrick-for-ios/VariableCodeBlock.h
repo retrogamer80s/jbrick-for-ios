@@ -10,11 +10,13 @@
 #import "CodeBlock.h"
 #import "PrimativeTypeUtility.h"
 #import "VariableDeclorationBlock.h"
+#import "UIPrompt.h"
 
 @interface VariableCodeBlock : CodeBlock <CodeBlockDelegate>
 {
     VariableDeclorationBlock *variable;
     NSMutableArray *parents;
+    Boolean promptDone;
 }
 @property (readonly) NSInteger ReferenceCount;
 -(id) init:(VariableDeclorationBlock *)name type:(Primative)primitive;
