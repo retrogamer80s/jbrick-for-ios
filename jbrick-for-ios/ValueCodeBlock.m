@@ -12,6 +12,9 @@
 
 @implementation ValueCodeBlock
 @synthesize Value;
+@synthesize BlockColor;
+@synthesize Icon;
+@synthesize ContainsChildren;
 
 -(id) init:(Primative)typeParam
 {
@@ -64,7 +67,7 @@
     return @"Value";
 }
 
--(ViewableCodeBlock *)getPrototype{
+-(id<ViewableCodeBlock>)getPrototype{
     ValueCodeBlock *block = [[ValueCodeBlock alloc] init:returnType];
     block.BlockColor = self.BlockColor;
     block.Icon = self.Icon;

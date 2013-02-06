@@ -10,8 +10,9 @@
 #import "ViewableCodeBlock.h"
 #import "VariableCodeBlock.h"
 #import "PrimativeTypeUtility.h"
+#import "CompositeCodeBlock.h"
 
-@interface MethodDeclorationBlock : ViewableCodeBlock
+@interface MethodDeclorationBlock : CodeBlock <ViewableCodeBlock>
 {
     NSString *name;
     NSMutableArray *parameterValues;

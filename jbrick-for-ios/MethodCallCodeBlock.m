@@ -11,6 +11,9 @@
 #import "ConstantValueBlocks.h"
 
 @implementation MethodCallCodeBlock
+@synthesize BlockColor;
+@synthesize Icon;
+@synthesize ContainsChildren;
 
 -(id) init:(NSString *)methodName parameterTypes:(NSArray *)parameters returnType:(Primative)returnTypeParam
 {
@@ -56,7 +59,7 @@
     return name;
 }
 
--(ViewableCodeBlock *)getPrototype{
+-(id<ViewableCodeBlock>)getPrototype{
     MethodCallCodeBlock *block = [[MethodCallCodeBlock alloc] init:name parameterTypes:parameterTypes returnType:self.ReturnType];
     block.BlockColor = self.BlockColor;
     block.Icon = self.Icon;

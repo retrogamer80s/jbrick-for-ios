@@ -156,7 +156,7 @@
     return ![_splitViewController isShowingMaster];
 }
 
--(void)setPropertyContent:(ViewableCodeBlock *) codeBlockParam
+-(void)setPropertyContent:(id<ViewableCodeBlock>) codeBlockParam
 {
     codeBlock = codeBlockParam;
     if(codeBlock)

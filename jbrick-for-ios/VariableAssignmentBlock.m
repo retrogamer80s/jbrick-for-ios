@@ -12,6 +12,9 @@
 #import "VariableCodeBlock.h"
 
 @implementation VariableAssignmentBlock
+@synthesize BlockColor;
+@synthesize Icon;
+@synthesize ContainsChildren;
 
 -(id) init
 {
@@ -59,7 +62,7 @@
     return @"Variable Assignment";
 }
 
--(ViewableCodeBlock *) getPrototype
+-(id<ViewableCodeBlock>) getPrototype
 {
     VariableAssignmentBlock *prototype = [[VariableAssignmentBlock alloc] init];
     prototype.BlockColor = self.BlockColor;

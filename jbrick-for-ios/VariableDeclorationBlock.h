@@ -10,7 +10,7 @@
 #import "ViewableCodeBlock.h"
 #import "ValueCodeBlock.h"
 
-@interface VariableDeclorationBlock : ViewableCodeBlock
+@interface VariableDeclorationBlock : CodeBlock <ViewableCodeBlock>
 {
     ValueCodeBlock *name;
     ValueCodeBlock *type;

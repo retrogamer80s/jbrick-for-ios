@@ -11,6 +11,10 @@
 #import "VariableCodeBlock.h"
 
 @implementation VariableMathBlock
+@synthesize BlockColor;
+@synthesize Icon;
+@synthesize ContainsChildren;
+
 -(id) init
 {
     self = [super init];
@@ -82,7 +86,7 @@
     return @"Variable Math";
 }
 
--(ViewableCodeBlock *) getPrototype
+-(id<ViewableCodeBlock>) getPrototype
 {
     VariableMathBlock *prototype = [[VariableMathBlock alloc] init];
     prototype.BlockColor = self.BlockColor;

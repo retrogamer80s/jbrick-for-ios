@@ -14,6 +14,9 @@
 
 @implementation VariableDeclorationBlock
 @synthesize InternalType;
+@synthesize BlockColor;
+@synthesize Icon;
+@synthesize ContainsChildren;
 
 -(id) init:(NSString *)variableName type:(Primative)returnTypeParam
 {
@@ -73,7 +76,7 @@
     return self.Name;
 }
 
--(ViewableCodeBlock *)getPrototype {
+-(id<ViewableCodeBlock>)getPrototype {
     VariableDeclorationBlock *block = [[VariableDeclorationBlock alloc] init:self.Name type:self.ReturnType];
     block.BlockColor = self.BlockColor;
     block.Icon = self.Icon;

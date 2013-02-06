@@ -10,6 +10,9 @@
 #import "ConstantValueBlocks.h"
 
 @implementation MethodDeclorationBlock
+@synthesize BlockColor;
+@synthesize Icon;
+@synthesize ContainsChildren;
 
 static MethodDeclorationBlock *mainBlock;
 
@@ -84,7 +87,7 @@ static MethodDeclorationBlock *mainBlock;
     return name;
 }
 
--(ViewableCodeBlock *) getPrototype
+-(id<ViewableCodeBlock>) getPrototype
 {
     MethodDeclorationBlock *prototype = [[MethodDeclorationBlock alloc] init:name parameterTypes:parameterTypes returnType:self.ReturnType];
     prototype.BlockColor = self.BlockColor;

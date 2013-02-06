@@ -51,7 +51,7 @@ static int DEFAULT_WIDTH = 250;
     }
     return self;
 }
-- (id)init:(jbrickDetailViewController *)controllerParam codeBlock:(ViewableCodeBlock *)codeBlockParam
+- (id)init:(jbrickDetailViewController *)controllerParam codeBlock:(CodeBlock<ViewableCodeBlock> *)codeBlockParam
 {
     codeBlock = codeBlockParam;
     codeBlock.Delegate = self;

@@ -26,6 +26,7 @@
 		3F4AB4D6164464E5001D7C43 /* value.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4AB4CF164464E5001D7C43 /* value.png */; };
 		3F5FA4071615F1F60097B661 /* VariableAssignmentDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FA4061615F1F60097B661 /* VariableAssignmentDelegate.m */; };
 		3F6E422D1642CE2F00E69AF2 /* ValueCodeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6E422C1642CE2F00E69AF2 /* ValueCodeBlock.m */; };
+		3F7857A316C2DB6D00A292FA /* CompositeCodeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7857A216C2DB6D00A292FA /* CompositeCodeBlock.m */; };
 		3F7D925A166D0D3300EA5E46 /* Trash Can.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7D9259166D0D3300EA5E46 /* Trash Can.png */; };
 		3F86E723162C9D4E00A7C985 /* KGNoise.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F86E70A162C9D4E00A7C985 /* KGNoise.m */; };
 		3F86E724162C9D4E00A7C985 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3F86E70B162C9D4E00A7C985 /* license.txt */; };
@@ -58,7 +59,6 @@
 		3FCB8F701608DF7A00F45EB7 /* UIBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCB8F6F1608DF7A00F45EB7 /* UIBlock.m */; };
 		3FCB8F711608E39700F45EB7 /* jbrickDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B89A9160108410007A0B9 /* jbrickDetailViewController.m */; };
 		3FD7740D16481B5C0005A4B9 /* CodeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD7740C16481B5C0005A4B9 /* CodeBlock.m */; };
-		3FD77410164839230005A4B9 /* ViewableCodeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD7740F164839230005A4B9 /* ViewableCodeBlock.m */; };
 		3FD774181649915E0005A4B9 /* if-elseif-else.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD774151649915E0005A4B9 /* if-elseif-else.png */; };
 		3FD774191649915E0005A4B9 /* sound.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD774161649915E0005A4B9 /* sound.png */; };
 		3FD7741A1649915E0005A4B9 /* touch.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD774171649915E0005A4B9 /* touch.png */; };
@@ -115,6 +115,8 @@
 		3F5FA4061615F1F60097B661 /* VariableAssignmentDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariableAssignmentDelegate.m; sourceTree = "<group>"; };
 		3F5FA4091615F6530097B661 /* ValueCodeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueCodeBlock.h; sourceTree = "<group>"; };
 		3F6E422C1642CE2F00E69AF2 /* ValueCodeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValueCodeBlock.m; sourceTree = "<group>"; };
+		3F7857A116C2DB6D00A292FA /* CompositeCodeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositeCodeBlock.h; sourceTree = "<group>"; };
+		3F7857A216C2DB6D00A292FA /* CompositeCodeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompositeCodeBlock.m; sourceTree = "<group>"; };
 		3F7D9259166D0D3300EA5E46 /* Trash Can.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Trash Can.png"; sourceTree = "<group>"; };
 		3F86E709162C9D4E00A7C985 /* KGNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGNoise.h; sourceTree = "<group>"; };
 		3F86E70A162C9D4E00A7C985 /* KGNoise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGNoise.m; sourceTree = "<group>"; };
@@ -161,7 +163,6 @@
 		3FD00E33161C82C500AD98DB /* ViewableCodeBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewableCodeBlock.h; sourceTree = "<group>"; };
 		3FD6B0BD164155EC00B4A0CC /* CodeBlockVisitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeBlockVisitor.h; sourceTree = "<group>"; };
 		3FD7740C16481B5C0005A4B9 /* CodeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeBlock.m; sourceTree = "<group>"; };
-		3FD7740F164839230005A4B9 /* ViewableCodeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewableCodeBlock.m; sourceTree = "<group>"; };
 		3FD774151649915E0005A4B9 /* if-elseif-else.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "if-elseif-else.png"; sourceTree = "<group>"; };
 		3FD774161649915E0005A4B9 /* sound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sound.png; sourceTree = "<group>"; };
 		3FD774171649915E0005A4B9 /* touch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = touch.png; sourceTree = "<group>"; };
@@ -243,9 +244,9 @@
 		3F1B8996160108410007A0B9 /* jbrick-for-ios */ = {
 			isa = PBXGroup;
 			children = (
+				3F490BB0160B634100B2BA38 /* CodeBlocks */,
 				3F30AE59169B2FD20002407F /* iToast.h */,
 				3F30AE5A169B2FD20002407F /* iToast.m */,
-				3F490BB0160B634100B2BA38 /* CodeBlocks */,
 				3F1B899F160108410007A0B9 /* jbrickAppDelegate.h */,
 				3F1B89A0160108410007A0B9 /* jbrickAppDelegate.m */,
 				3F1B89A8160108410007A0B9 /* jbrickDetailViewController.h */,
@@ -269,6 +270,7 @@
 				3FDB98FC1631D6F600EA3190 /* ValueInputCell.m */,
 				3F86E721162C9D4E00A7C985 /* ValuePickerController.h */,
 				3F86E722162C9D4E00A7C985 /* ValuePickerController.m */,
+				3FFDD4CB161B6CE30065D30B /* Views */,
 			);
 			path = "jbrick-for-ios";
 			sourceTree = "<group>";
@@ -313,8 +315,8 @@
 				3FD7741C164994E80005A4B9 /* VariableMathBlock.h */,
 				3FD7741D164994E80005A4B9 /* VariableMathBlock.m */,
 				3FD00E33161C82C500AD98DB /* ViewableCodeBlock.h */,
-				3FD7740F164839230005A4B9 /* ViewableCodeBlock.m */,
-				3FFDD4CB161B6CE30065D30B /* Views */,
+				3F7857A116C2DB6D00A292FA /* CompositeCodeBlock.h */,
+				3F7857A216C2DB6D00A292FA /* CompositeCodeBlock.m */,
 			);
 			name = CodeBlocks;
 			sourceTree = "<group>";
@@ -556,10 +558,10 @@
 				3F1254E816406582005A1B0E /* VariableAssignmentBlock.m in Sources */,
 				3F6E422D1642CE2F00E69AF2 /* ValueCodeBlock.m in Sources */,
 				3FD7740D16481B5C0005A4B9 /* CodeBlock.m in Sources */,
-				3FD77410164839230005A4B9 /* ViewableCodeBlock.m in Sources */,
 				3FD7741F1649B25D0005A4B9 /* VariableMathBlock.m in Sources */,
 				3F30AE5C169B30F60002407F /* iToast.m in Sources */,
 				3FEF4D7C16B6D2BE00D9CABD /* UIPrompt.m in Sources */,
+				3F7857A316C2DB6D00A292FA /* CompositeCodeBlock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -129,7 +129,7 @@ NSMutableDictionary *methodBlocks;
         
         inDrag = YES;
         
-        ViewableCodeBlock * codeBlock = [[[methodBlocks allValues] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        CodeBlock<ViewableCodeBlock> *codeBlock = [[[methodBlocks allValues] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         [self.detailViewController.propertyPane closePanel:nil];
         
         // create item to be dragged, in this example, just a simple UILabel
@@ -186,7 +186,7 @@ NSMutableDictionary *methodBlocks;
     else
         cell = [tableView dequeueReusableCellWithIdentifier:@"Cell_Normal"];
     NSArray *methods = [methodBlocks objectForKey:[[methodBlocks allKeys] objectAtIndex:indexPath.section]];
-    ViewableCodeBlock * codeBlock = [methods objectAtIndex:indexPath.row];
+    CodeBlock<ViewableCodeBlock> *codeBlock = [methods objectAtIndex:indexPath.row];
     [cell.customLabel setText:[codeBlock getDisplayName]];
     
     return cell;

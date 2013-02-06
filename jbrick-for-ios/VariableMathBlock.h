@@ -9,7 +9,7 @@
 #import "ViewableCodeBlock.h"
 #import "VariableCodeBlock.h"
 
-@interface VariableMathBlock : ViewableCodeBlock
+@interface VariableMathBlock : CodeBlock <ViewableCodeBlock>
 {
     VariableCodeBlock *variableReference;
     CodeBlock *parameterVariable;

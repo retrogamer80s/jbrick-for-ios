@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ViewableCodeBlock.h"
 
-@interface ValueCodeBlock : ViewableCodeBlock
+@interface ValueCodeBlock : CodeBlock <ViewableCodeBlock>
 {
     CodeBlock * type;
     CodeBlock * valueBlock;
