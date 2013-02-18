@@ -31,7 +31,7 @@
 -(NSString *)generateCode
 {
     if(!self.Deleted){
-        // The end result should look like "name(variable1, variable2);"
+        // The end result should look like "name(variable1, variable2)"
         NSMutableString *generatedCode = [[NSMutableString alloc] initWithString:name];
         [generatedCode appendString:@"("];
         NSArray *paramValues = [self getParameterValues];
@@ -40,7 +40,7 @@
             if (i < [paramValues count] - 1)
                 [generatedCode appendString:@","];
         }
-        [generatedCode appendString:@");"];
+        [generatedCode appendString:@")"];
         return generatedCode;
     } else {
         return [PrimativeTypeUtility getDefaultValue:self.ReturnType];

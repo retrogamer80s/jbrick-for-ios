@@ -13,6 +13,8 @@
 #import "ValueCodeBlock.h"
 #import "UIBlock.h"
 #import "KGNoise.h"
+#import "AFJSONRequestOperation.h"
+#import "AFHTTPClient.h"
 
 @interface jbrickDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -40,7 +42,40 @@ float firstY;
 
 - (IBAction)Upload:(id)sender {
     MethodDeclorationBlock *main = [MethodDeclorationBlock getMainBlock];
-    NSLog([main generateCode]);
+    NSLog(@"Code:\n%@",[main generateCode]);
+    
+    NSURL *url = [NSURL URLWithString:@"http://129.21.90.33/"];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    httpClient.parameterEncoding = AFJSONParameterEncoding;
+    httpClient.stringEncoding = NSUTF16StringEncoding;
+    
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [main generateCode], @"src",
+                            @"Test", @"filename",
+                            nil];
+    [httpClient postPath:@"rest/Devices/001653081691/compile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"Request Successful, response '%@'", responseStr);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+    }];
+}
+
+- (IBAction)RunProgram:(id)sender {
+    NSURL *url = [NSURL URLWithString:@"http://129.21.90.33/"];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    httpClient.parameterEncoding = AFJSONParameterEncoding;
+    
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"Test", @"program",
+                            nil];
+    [httpClient getPath:@"rest/Devices/001653081691/RunProgram" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"Request Successful, response '%@'", responseStr);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+    }];
+
 }
 
 - (void)setDetailItem:(id)newDetailItem

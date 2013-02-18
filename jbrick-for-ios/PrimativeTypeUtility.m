@@ -21,6 +21,10 @@
             return @"OUT_A";
         case MOTOR_POWER:
             return @"75";
+        case PORT:
+            return @"S1";
+        case SENSOR_TYPE:
+            return @"SENSOR_TYPE_TOUCH";
         case VOID:
             return @"";
         default:
@@ -55,6 +59,10 @@
             return @"int";
         case LCD_LINE:
             return @"int";
+        case PORT:
+            return @"byte";
+        case SENSOR_TYPE:
+            return @"byte";
         case VOID:
             return @"void";
         case MAIN:
@@ -86,6 +94,10 @@
             return @"Tone";
         case LCD_LINE:
             return @"LCD Line";
+        case PORT:
+            return @"Sensor Port";
+        case SENSOR_TYPE:
+            return @"Sensor Type";
         case VOID:
             return @"Void";
         case PARAMETER_NAME:
@@ -96,6 +108,8 @@
             return @"Variable";
         case MATH_OPERATION:
             return @"Math Operation";
+        case LOGIC_OPERATION:
+            return @"Logic Operation";
         default:
             return nil;
     }
@@ -121,6 +135,8 @@
         case PARAMETER_RETURN:
             return nil;
         case MATH_OPERATION:
+            return nil;
+        case LOGIC_OPERATION:
             return nil;
         case BOOLEAN:
             return nil;

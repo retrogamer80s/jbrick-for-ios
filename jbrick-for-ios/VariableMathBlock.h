@@ -8,12 +8,12 @@
 
 #import "ViewableCodeBlock.h"
 #import "VariableCodeBlock.h"
+#import "CompositeCodeBlock.h"
 
-@interface VariableMathBlock : CodeBlock <ViewableCodeBlock>
+@interface VariableMathBlock : CompositeCodeBlock <ViewableCodeBlock>
 {
     VariableCodeBlock *variableReference;
     CodeBlock *parameterVariable;
     CodeBlock *mathOpBlock;
-    NSMutableArray *innerCodeBlocks;
 }
 @end

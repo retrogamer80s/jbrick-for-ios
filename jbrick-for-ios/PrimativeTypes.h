@@ -19,6 +19,8 @@ typedef enum PrimativeTypes{
     MOTOR_POWER,
     TONE,
     LCD_LINE,
+    PORT,
+    SENSOR_TYPE,
     VOID,
     
     // Types below this point are used within the system
@@ -30,7 +32,8 @@ typedef enum PrimativeTypes{
     PARAMETER_VALUE,
     MAIN,
     ANY_VARIABLE,
-    MATH_OPERATION
+    MATH_OPERATION,
+    LOGIC_OPERATION
 } Primative;
 
 

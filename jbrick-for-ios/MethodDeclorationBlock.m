@@ -55,31 +55,11 @@ static MethodDeclorationBlock *mainBlock;
     
     for(CodeBlock * statement in innerCodeBlocks){
         [generatedCode appendString:[statement generateCode]];
+        [generatedCode appendString:@";"];
     }
     [generatedCode appendString:@"}"];
     
     return generatedCode;
-}
-
--(bool)addCodeBlock:(CodeBlock *)codeBlock
-{
-    [innerCodeBlocks addObject:codeBlock];
-    codeBlock.Parent = self;
-    return true;
-}
-
--(bool)addCodeBlock:(CodeBlock *)codeBlock indexBlock:(CodeBlock *)indexBlock afterIndexBlock:(bool)afterIndexBlock
-{
-    NSInteger insertIndex = [innerCodeBlocks indexOfObject:indexBlock];
-    if(insertIndex == NSNotFound)
-        return false;
-    
-    if(afterIndexBlock)
-        [innerCodeBlocks insertObject:codeBlock atIndex:insertIndex+1];
-    else
-        [innerCodeBlocks insertObject:codeBlock atIndex:insertIndex];     codeBlock.Parent = self;
-    
-    return true;
 }
 
 -(NSString *) getDisplayName
@@ -95,40 +75,9 @@ static MethodDeclorationBlock *mainBlock;
     return prototype;    
 }
 
--(void)removeCodeBlock:(CodeBlock *)codeBlock
-{
-    [innerCodeBlocks removeObject:codeBlock];
-}
-
 -(NSArray *) getPropertyVariables
 {
     return parameterValues;
-}
-
--(bool) parameterIsInScope:(CodeBlock *)parameter beforeIndex:(CodeBlock *)index
-{
-    int paramIndex = [innerCodeBlocks indexOfObject:parameter];
-    int indexIndex = [innerCodeBlocks indexOfObject:index];
-    
-    if(paramIndex != NSNotFound && indexIndex != NSNotFound)
-        return paramIndex < indexIndex;
-    else
-        return [super parameterIsInScope:parameter beforeIndex:index];
-}
-
-- (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(CodeBlock *)index
-{
-    for(CodeBlock * codeBlock in innerCodeBlocks)
-    {
-        if(codeBlock == index)
-            break;
-        CodeBlock * paramRef = [codeBlock getParameterReferenceBlock:type];
-        if(paramRef)
-            [paramList addObject:paramRef];
-    }
-    
-    if(self.Parent)
-        [self.Parent addAvailableParameters:type parameterList:paramList beforeIndex:self];
 }
 
 -(NSArray *)getParameterDeclorations

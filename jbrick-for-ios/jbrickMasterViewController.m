@@ -14,6 +14,8 @@
 #import "VariableDeclorationBlock.h"
 #import "VariableAssignmentBlock.h"
 #import "VariableMathBlock.h"
+#import "WhileLoopCodeBlock.h"
+#import "LogicalOperatorCodeBlock.h"
 #import "KGNoise.h"
 
 @interface jbrickMasterViewController () {
@@ -56,10 +58,16 @@ NSMutableDictionary *methodBlocks;
     methodBlocks = [[NSMutableDictionary alloc] init];
     
     MethodDeclorationBlock *main = [MethodDeclorationBlock getMainBlock];
-    MethodDeclorationBlock *ifBlock = [[MethodDeclorationBlock alloc] init:@"If" parameterTypes:[NSMutableArray arrayWithObject:[NSNumber numberWithInt:BOOLEAN]] returnType:BOOLEAN];
+    WhileLoopCodeBlock *ifBlock = [[WhileLoopCodeBlock alloc] init:IF];
+    WhileLoopCodeBlock *whileLoop = [[WhileLoopCodeBlock alloc] init:WHILE];
+    LogicalOperatorCodeBlock *logicOp = [[LogicalOperatorCodeBlock alloc] init];
     MethodCallCodeBlock *onFWD = [[MethodCallCodeBlock alloc] init:@"OnFwd" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:MOTOR],[NSNumber numberWithInt:MOTOR_POWER], nil] returnType:VOID];
+    MethodCallCodeBlock *onRev = [[MethodCallCodeBlock alloc] init:@"OnRev" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:MOTOR],[NSNumber numberWithInt:MOTOR_POWER], nil] returnType:VOID];
+    MethodCallCodeBlock *playTone = [[MethodCallCodeBlock alloc] init:@"PlayTone" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:INTEGER],[NSNumber numberWithInt:INTEGER], nil] returnType:VOID];
     MethodCallCodeBlock *wait = [[MethodCallCodeBlock alloc] init:@"Wait" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:INTEGER], nil] returnType:VOID];
     MethodCallCodeBlock *stopMotor = [[MethodCallCodeBlock alloc] init:@"Off" parameterTypes:[NSArray arrayWithObject:[NSNumber numberWithInt:MOTOR]] returnType:VOID];
+    MethodCallCodeBlock *setSensor = [[MethodCallCodeBlock alloc] init:@"SetSensorType" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:PORT],[NSNumber numberWithInt:SENSOR_TYPE], nil] returnType:VOID];
+    MethodCallCodeBlock *sensorBoolean = [[MethodCallCodeBlock alloc] init:@"SensorBoolean" parameterTypes:[NSArray arrayWithObject:[NSNumber numberWithInt:PORT]] returnType:BOOLEAN];
     VariableDeclorationBlock *variable = [[VariableDeclorationBlock alloc] init:@"Variable" type:VOID];
     ValueCodeBlock *value = [[ValueCodeBlock alloc] init:VOID];
     VariableAssignmentBlock *varAssign = [[VariableAssignmentBlock alloc] init];
@@ -67,9 +75,15 @@ NSMutableDictionary *methodBlocks;
 
     main.BlockColor = [UIColor purpleColor].CGColor;
     ifBlock.BlockColor = [UIColor yellowColor].CGColor;
+    whileLoop.BlockColor = [UIColor yellowColor].CGColor;
+    logicOp.BlockColor = [UIColor yellowColor].CGColor;
     onFWD.BlockColor = [UIColor greenColor].CGColor;
+    onRev.BlockColor = [UIColor greenColor].CGColor;
+    playTone.BlockColor = [UIColor yellowColor].CGColor;
     wait.BlockColor = [UIColor blueColor].CGColor;
     stopMotor.BlockColor = [UIColor redColor].CGColor;
+    setSensor.BlockColor = [UIColor blueColor].CGColor;
+    sensorBoolean.BlockColor = [UIColor blueColor].CGColor;
     variable.BlockColor = [UIColor orangeColor].CGColor;
     value.BlockColor = [UIColor cyanColor].CGColor;
     varAssign.BlockColor = [UIColor magentaColor].CGColor;
@@ -77,21 +91,28 @@ NSMutableDictionary *methodBlocks;
     
     main.Icon = [UIImage imageNamed:@"main.png"];
     ifBlock.Icon = [UIImage imageNamed:@"Loop_icon.png"];
+    whileLoop.Icon = [UIImage imageNamed:@"Loop_icon.png"];
+    logicOp.Icon = [UIImage imageNamed:@"Math.png"];
     onFWD.Icon = [UIImage imageNamed:@"forward_wheel_icon.png"];
+    onRev.Icon = [UIImage imageNamed:@"backward_wheel_icon.png"];
+    playTone.Icon = [UIImage imageNamed:@"speaker.png"];
     wait.Icon = [UIImage imageNamed:@"Wait_icon.png"];
     stopMotor.Icon = [UIImage imageNamed:@"wheel_icon.png"];
+    setSensor.Icon = [UIImage imageNamed:@"Gear.png"];
+    sensorBoolean.Icon = [UIImage imageNamed:@"Gear.png"];
     variable.Icon = [UIImage imageNamed:@"Variable.png"];
     value.Icon = [UIImage imageNamed:@"value.png"];
     varAssign.Icon = [UIImage imageNamed:@"Equals_icon.png"];
     varMath.Icon = [UIImage imageNamed:@"Math.png"];
     
-    NSArray *motorMethods = [NSArray arrayWithObjects:onFWD, stopMotor, nil];
-    NSArray *logicMethods = [NSArray arrayWithObjects:wait, ifBlock, variable, value, varAssign, varMath, nil];
+    NSArray *motorMethods = [NSArray arrayWithObjects:onFWD, onRev, stopMotor, playTone, nil];
+    NSArray *logicMethods = [NSArray arrayWithObjects:wait, variable, value, varAssign, whileLoop, ifBlock, logicOp, nil];
+    NSArray *inputMethods = [NSArray arrayWithObjects:setSensor, sensorBoolean, nil];
     NSMutableArray *customMethods = [NSMutableArray arrayWithObjects:nil];
     
     [methodBlocks setObject:motorMethods forKey:@"Motor Blocks"];
     [methodBlocks setObject:logicMethods forKey:@"Logic Blocks"];
-    [methodBlocks setObject:customMethods forKey:@"Custom"];
+    [methodBlocks setObject:inputMethods forKey:@"Input Blocks"];
      
     selectedIndex = [NSIndexPath indexPathForRow:-1 inSection:-1];
 }

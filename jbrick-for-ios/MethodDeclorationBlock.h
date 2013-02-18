@@ -12,12 +12,11 @@
 #import "PrimativeTypeUtility.h"
 #import "CompositeCodeBlock.h"
 
-@interface MethodDeclorationBlock : CodeBlock <ViewableCodeBlock>
+@interface MethodDeclorationBlock : CompositeCodeBlock<ViewableCodeBlock>
 {
     NSString *name;
     NSMutableArray *parameterValues;
     NSMutableArray *parameterTypes;
-    NSMutableArray *innerCodeBlocks;
 }
 
 +(id) getMainBlock;

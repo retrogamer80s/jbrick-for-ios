@@ -29,6 +29,8 @@
     // The end result should look like "variable_name = value;"
     if(variableReference && innerCodeBlock && !variableReference.Deleted && !innerCodeBlock.Deleted){
         return [NSString stringWithFormat:@"%@ = %@;", [variableReference generateCode], [innerCodeBlock generateCode]];
+    } else if(variableReference && !innerCodeBlock && !variableReference.Deleted){
+        return [NSString stringWithFormat:@"%@ = %@;", [variableReference generateCode], [PrimativeTypeUtility getDefaultValue:variableReference.ReturnType]];
     }
     return @"";
 }

@@ -31,8 +31,9 @@ static NSMutableDictionary *constants;
             break;
         case BOOLEAN:
             [constants setObject:[NSArray arrayWithObjects:
-                                  [[ValueCodeBlock alloc] init:type value:@"True"],
-                                  [[ValueCodeBlock alloc] init:type value:@"False"],
+                                  [[ValueCodeBlock alloc] init:type value:@"true"],
+                                  [[ValueCodeBlock alloc] init:type value:@"false"],
+                                  [[ValueCodeBlock alloc] init:type value:@"SENSOR_2"],
                                   nil]
                           forKey:[NSNumber numberWithInt:type]];
             break;
@@ -66,6 +67,24 @@ static NSMutableDictionary *constants;
         case LCD_LINE:
             [constants setObject:[NSArray array] forKey:[NSNumber numberWithInt:type]];
             break;
+        case PORT:
+            [constants setObject:[NSArray arrayWithObjects:
+                                  [[ValueCodeBlock alloc] init:type value:@"S1"],
+                                  [[ValueCodeBlock alloc] init:type value:@"S2"],
+                                  [[ValueCodeBlock alloc] init:type value:@"S3"],
+                                  [[ValueCodeBlock alloc] init:type value:@"S4"],
+                                  nil]
+                        forKey:[NSNumber numberWithInt:type]];
+             break;
+        case SENSOR_TYPE:
+            [constants setObject:[NSArray arrayWithObjects:
+                                  [[ValueCodeBlock alloc] init:type value:@"SENSOR_TYPE_TOUCH"],
+                                  [[ValueCodeBlock alloc] init:type value:@"SENSOR_TYPE_LIGHT"],
+                                  [[ValueCodeBlock alloc] init:type value:@"SENSOR_TYPE_SOUND_DB"],
+                                  [[ValueCodeBlock alloc] init:type value:@"SENSOR_TYPE_TEMPERATURE"],
+                                  nil]
+                          forKey:[NSNumber numberWithInt:type]];
+            break;
         case VOID:
             [constants setObject:[NSArray array] forKey:[NSNumber numberWithInt:type]];
             break;
@@ -89,6 +108,16 @@ static NSMutableDictionary *constants;
                                   [[ValueCodeBlock alloc] init:type value:@"-"],
                                   [[ValueCodeBlock alloc] init:type value:@"*"],
                                   [[ValueCodeBlock alloc] init:type value:@"/"],
+                                  nil]
+                          forKey:[NSNumber numberWithInt:type]];
+            break;
+            
+        case LOGIC_OPERATION:
+            [constants setObject:[NSArray arrayWithObjects:
+                                  [[ValueCodeBlock alloc] init:type value:@"||"],
+                                  [[ValueCodeBlock alloc] init:type value:@"&&"],
+                                  [[ValueCodeBlock alloc] init:type value:@"=="],
+                                  [[ValueCodeBlock alloc] init:type value:@"!"],
                                   nil]
                           forKey:[NSNumber numberWithInt:type]];
             break;

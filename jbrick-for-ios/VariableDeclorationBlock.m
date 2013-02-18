@@ -58,7 +58,7 @@
 -(NSString *)generateCode
 {
     if(!self.Deleted){
-        return [NSString stringWithFormat:(@"%@ %@;", [PrimativeTypeUtility primativeToString:self.ReturnType], self.Name)];
+        return [NSString stringWithFormat:@"%@ %@;", [PrimativeTypeUtility primativeToString:InternalType], self.Name];
     } else {
         return nil;
     }
