@@ -1,0 +1,14 @@
+c:\users\colton\documents\visual studio 2010\Projects\NXTManager\NXTConsoleUtility\bin\Debug\NXTConsoleUtility.exe
+c:\users\colton\documents\visual studio 2010\Projects\NXTManager\NXTConsoleUtility\bin\Debug\NXTConsoleUtility.pdb
+c:\users\colton\documents\visual studio 2010\Projects\NXTManager\NXTConsoleUtility\bin\Debug\NXTManager.dll
+c:\users\colton\documents\visual studio 2010\Projects\NXTManager\NXTConsoleUtility\bin\Debug\NXTManager.pdb
+c:\users\colton\documents\visual studio 2010\Projects\NXTManager\NXTConsoleUtility\obj\x86\Debug\NXTConsoleUtility.exe
+c:\users\colton\documents\visual studio 2010\Projects\NXTManager\NXTConsoleUtility\obj\x86\Debug\NXTConsoleUtility.pdb
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTConsoleUtility\bin\Debug\WinUsbWrapper.dll
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTConsoleUtility\bin\Debug\WinUsbWrapper.pdb
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTConsoleUtility\bin\Debug\NXTConsoleUtility.exe.config
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTConsoleUtility\bin\Debug\NXCCompilerWebService.dll
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTConsoleUtility\bin\Debug\NXCCompilerWebService.pdb
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTConsoleUtility\bin\Debug\InTheHand.Net.Personal.dll
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTConsoleUtility\bin\Debug\InTheHand.Net.Personal.xml
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTConsoleUtility\obj\x86\Debug\NXTConsoleUtility.csprojResolveAssemblyReference.cache

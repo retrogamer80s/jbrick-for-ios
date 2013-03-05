@@ -1,0 +1,29 @@
+﻿<Window x:Class="NXTManagerGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:NXTManagerGUI="clr-namespace:NXTManagerGUI"
+        Title="MainWindow" Height="420" Width="215">
+    <Window.Resources>
+        <NXTManagerGUI:EnabledImageConverter x:Key="enabledImageConverter"/>
+    </Window.Resources>
+    <DockPanel Margin="10">
+        <ListView Name="RobotList" ItemsSource="{Binding Robots}">
+            <ListView.ItemTemplate>
+                <HierarchicalDataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Play Tone" Command="{Binding PlayToneCommand}"  />
+                            </ContextMenu>
+                        </StackPanel.ContextMenu>
+                        <Image Source="{Binding Connected, Converter={StaticResource enabledImageConverter}}" Height="75" Margin="5"/>
+                        <TextBlock Text="{Binding Name}" FontSize="20" VerticalAlignment="Center" />
+                        <Button Command="{Binding PlayToneCommand}" Width="50" Height="50">
+                            <Image Source="Resources/speaker.png"></Image>
+                        </Button>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </DockPanel>
+</Window>

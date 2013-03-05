@@ -1,0 +1,22 @@
+c:\users\colton\documents\visual studio 2010\Projects\NXCCompilerWebService\NXCCompilerWebService\bin\NXCCompilerWebService.dll
+c:\users\colton\documents\visual studio 2010\Projects\NXCCompilerWebService\NXCCompilerWebService\bin\NXCCompilerWebService.pdb
+c:\users\colton\documents\visual studio 2010\Projects\NXCCompilerWebService\NXCCompilerWebService\obj\Debug\NXCCompilerWebService.dll
+c:\users\colton\documents\visual studio 2010\Projects\NXCCompilerWebService\NXCCompilerWebService\obj\Debug\NXCCompilerWebService.pdb
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXCCompilerWebService\NXCCompilerWebService\bin\NXTManager.dll
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXCCompilerWebService\NXCCompilerWebService\bin\WinUsbWrapper.dll
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXCCompilerWebService\NXCCompilerWebService\bin\InTheHand.Net.Personal.dll
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXCCompilerWebService\NXCCompilerWebService\bin\NXTManager.pdb
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXCCompilerWebService\NXCCompilerWebService\bin\WinUsbWrapper.pdb
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXCCompilerWebService\NXCCompilerWebService\bin\InTheHand.Net.Personal.xml
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXCCompilerWebService\NXCCompilerWebService\obj\Debug\NXCCompilerWebService.csprojResolveAssemblyReference.cache
+C:\Users\colton\My Projects\Jbrick\NXCCompilerWebService\NXCCompilerWebService\bin\NXCCompilerWebService.dll
+C:\Users\colton\My Projects\Jbrick\NXCCompilerWebService\NXCCompilerWebService\bin\NXCCompilerWebService.pdb
+C:\Users\colton\My Projects\Jbrick\NXCCompilerWebService\NXCCompilerWebService\bin\NXTManager.dll
+C:\Users\colton\My Projects\Jbrick\NXCCompilerWebService\NXCCompilerWebService\bin\InTheHand.Net.Personal.dll
+C:\Users\colton\My Projects\Jbrick\NXCCompilerWebService\NXCCompilerWebService\bin\WinUsbWrapper.dll
+C:\Users\colton\My Projects\Jbrick\NXCCompilerWebService\NXCCompilerWebService\bin\NXTManager.pdb
+C:\Users\colton\My Projects\Jbrick\NXCCompilerWebService\NXCCompilerWebService\bin\InTheHand.Net.Personal.xml
+C:\Users\colton\My Projects\Jbrick\NXCCompilerWebService\NXCCompilerWebService\bin\WinUsbWrapper.pdb
+C:\Users\colton\My Projects\Jbrick\NXCCompilerWebService\NXCCompilerWebService\obj\Debug\NXCCompilerWebService.csprojResolveAssemblyReference.cache
+C:\Users\colton\My Projects\Jbrick\NXCCompilerWebService\NXCCompilerWebService\obj\Debug\NXCCompilerWebService.dll
+C:\Users\colton\My Projects\Jbrick\NXCCompilerWebService\NXCCompilerWebService\obj\Debug\NXCCompilerWebService.pdb

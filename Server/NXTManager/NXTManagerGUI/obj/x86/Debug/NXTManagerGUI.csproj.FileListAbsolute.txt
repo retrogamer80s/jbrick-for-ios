@@ -1,0 +1,54 @@
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\obj\x86\Debug\MainWindow.baml
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\obj\x86\Debug\App.g.cs
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI_MarkupCompile.cache
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI.g.resources
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI.Properties.Resources.resources
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\bin\Debug\NXTManagerGUI.exe
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\bin\Debug\NXTManagerGUI.pdb
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\bin\Debug\NXTManager.dll
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\bin\Debug\WinUsbWrapper.dll
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\bin\Debug\InTheHand.Net.Personal.dll
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\bin\Debug\NXTManager.pdb
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\bin\Debug\WinUsbWrapper.pdb
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\bin\Debug\InTheHand.Net.Personal.xml
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI.exe
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI.pdb
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\bin\Debug\NXTManagerGUI.exe.config
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\bin\Debug\NXCCompilerWebService.dll
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\bin\Debug\NXCCompilerWebService.pdb
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI_MarkupCompile.lref
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\bin\Debug\Resources\speaker.png
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\bin\Debug\Resources\nxtbluetoothsymbol.png
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\bin\Debug\Resources\nxtbluetoothsymbol_disabled.png
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI_Content.g.cs
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI.csprojResolveAssemblyReference.cache
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI.csproj.GenerateResource.Cache
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\bin\Debug\NXTManagerGUI.exe.config
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI.exe
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI.pdb
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\bin\Debug\Resources\speaker.png
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\bin\Debug\Resources\nxtbluetoothsymbol.png
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\bin\Debug\Resources\nxtbluetoothsymbol_disabled.png
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\bin\Debug\NXTManagerGUI.exe
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\bin\Debug\NXTManagerGUI.pdb
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\bin\Debug\NXCCompilerWebService.dll
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\bin\Debug\NXTManager.dll
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\bin\Debug\InTheHand.Net.Personal.dll
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\bin\Debug\WinUsbWrapper.dll
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\bin\Debug\NXCCompilerWebService.pdb
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\bin\Debug\NXTManager.pdb
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\bin\Debug\InTheHand.Net.Personal.xml
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\bin\Debug\WinUsbWrapper.pdb
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI.csprojResolveAssemblyReference.cache
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\obj\x86\Debug\MainWindow.g.cs
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\obj\x86\Debug\App.g.cs
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI_Content.g.cs
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI_MarkupCompile.cache
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI_MarkupCompile.lref
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\obj\x86\Debug\MainWindow.baml
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI.g.resources
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI.Properties.Resources.resources
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManagerGUI\obj\x86\Debug\NXTManagerGUI.csproj.GenerateResource.Cache

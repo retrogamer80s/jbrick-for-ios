@@ -1,0 +1,22 @@
+c:\users\colton\documents\visual studio 2010\Projects\NXTManager\NXTManager\bin\Debug\NXTManager.dll
+c:\users\colton\documents\visual studio 2010\Projects\NXTManager\NXTManager\bin\Debug\NXTManager.pdb
+c:\users\colton\documents\visual studio 2010\Projects\NXTManager\NXTManager\obj\x86\Debug\NXTManager.Properties.Resources.resources
+c:\users\colton\documents\visual studio 2010\Projects\NXTManager\NXTManager\obj\x86\Debug\NXTManager.dll
+c:\users\colton\documents\visual studio 2010\Projects\NXTManager\NXTManager\obj\x86\Debug\NXTManager.pdb
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManager\bin\Debug\WinUsbWrapper.dll
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManager\bin\Debug\WinUsbWrapper.pdb
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManager\bin\Debug\InTheHand.Net.Personal.dll
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManager\bin\Debug\InTheHand.Net.Personal.xml
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManager\bin\Debug\NKH.MindSqualls.dll
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManager\obj\x86\Debug\NXTManager.csprojResolveAssemblyReference.cache
+C:\Users\Colton\Documents\Visual Studio 2010\Projects\NXTManager\NXTManager\obj\x86\Debug\NXTManager.csproj.GenerateResource.Cache
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManager\bin\Debug\NXTManager.dll
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManager\bin\Debug\NXTManager.pdb
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManager\bin\Debug\WinUsbWrapper.dll
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManager\bin\Debug\InTheHand.Net.Personal.xml
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManager\bin\Debug\WinUsbWrapper.pdb
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManager\obj\x86\Debug\NXTManager.csprojResolveAssemblyReference.cache
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManager\obj\x86\Debug\NXTManager.Properties.Resources.resources
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManager\obj\x86\Debug\NXTManager.csproj.GenerateResource.Cache
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManager\obj\x86\Debug\NXTManager.dll
+C:\Users\colton\My Projects\Jbrick\NXTManager\NXTManager\obj\x86\Debug\NXTManager.pdb
