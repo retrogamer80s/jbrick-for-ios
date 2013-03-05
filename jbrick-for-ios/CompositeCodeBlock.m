@@ -16,8 +16,12 @@
     return self;
 }
 
+-(bool)canAddCodeBlock:(CodeBlock *)codeBlock{ return true; }
+
 -(bool)addCodeBlock:(CodeBlock *)codeBlock
 {
+    if(![self canAddCodeBlock:codeBlock])
+        return false;
     [innerCodeBlocks addObject:codeBlock];
     codeBlock.Parent = self;
     return true;
@@ -25,6 +29,8 @@
 
 -(bool)addCodeBlock:(CodeBlock *)codeBlock indexBlock:(CodeBlock *)indexBlock afterIndexBlock:(bool)afterIndexBlock
 {
+    if(![self canAddCodeBlock:codeBlock])
+        return false;
     NSInteger insertIndex = [innerCodeBlocks indexOfObject:indexBlock];
     if(insertIndex == NSNotFound)
         return false;

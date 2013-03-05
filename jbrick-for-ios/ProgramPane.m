@@ -97,7 +97,7 @@
                 view.center = CGPointMake(view.center.x - furthestLeft.floatValue, view.center.y);
         }];
     }
-    CGSize canvasSize = (CGSizeMake(furthestRight.floatValue - furthestLeft.floatValue, furthestDown.floatValue - furthestUp.floatValue));
+    CGSize canvasSize = (CGSizeMake(furthestRight.floatValue - furthestLeft.floatValue, furthestDown.floatValue - furthestUp.floatValue+25));
     [zoomableView setFrame:CGRectMake(5, 5,canvasSize.width-5, canvasSize.height-5)];
     [UIView animateWithDuration:0.5 animations:^{
         [self setContentSize:canvasSize];

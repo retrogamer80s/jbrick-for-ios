@@ -13,8 +13,10 @@
 {
     CodeBlock * type;
     CodeBlock * valueBlock;
+    NSString *displayName;
 }
 @property (nonatomic, copy) NSString *Value;
 -(id) init:(Primative)type;
 -(id) init:(Primative)type value:(NSString *)value;
+-(id) init:(Primative)type value:(NSString *)value displayName:(NSString *)dispName;
 @end

@@ -26,6 +26,7 @@
     InternalType = VOID;
     varReference = [[VariableCodeBlock alloc] init:self type:InternalType];
     self.ReturnType = returnTypeParam;
+    self.ContainsChildren = true;
     return self;
 }
 
@@ -58,7 +59,12 @@
 -(NSString *)generateCode
 {
     if(!self.Deleted){
-        return [NSString stringWithFormat:@"%@ %@;", [PrimativeTypeUtility primativeToString:InternalType], self.Name];
+        if(innerCodeBlocks.count == 0)
+            return [NSString stringWithFormat:@"%@ %@;", [PrimativeTypeUtility primativeToString:InternalType], self.Name];
+        else
+            return [NSString stringWithFormat:@"%@ %@=%@;",[PrimativeTypeUtility primativeToString:InternalType],
+                                                            self.Name,
+                                                            [[innerCodeBlocks objectAtIndex:0] generateCode]];
     } else {
         return nil;
     }
@@ -105,12 +111,16 @@
     } else if(oldParam.ReturnType == PARAMETER_RETURN && newParam.ReturnType != self.ReturnType){
         VariableCodeBlock *varRef = (VariableCodeBlock *)varReference;
         
-        if(varRef.ReferenceCount > 0)
+        if(varRef.ReferenceCount + innerCodeBlocks.count > 0)
         {
-            NSString *message = [NSString stringWithFormat:@"Changing the block's type will unlink %d blocks currently using it. Do you wish to continue?", varRef.ReferenceCount];
+            NSString *message = [NSString stringWithFormat:@"Changing the block's type will unlink %d blocks currently using it. Do you wish to continue?", varRef.ReferenceCount + innerCodeBlocks.count];
             [UIPrompt prompt:message title:@"Remove References?" onResponse:^(Boolean positiveResponse) {
                 if(positiveResponse){
                     [self setInnerType:newParam.ReturnType];
+                    if(innerCodeBlocks.count>0){
+                        [self removeCodeBlock:[innerCodeBlocks objectAtIndex:0]];
+                        [[innerCodeBlocks objectAtIndex:0] setDeleted:true];
+                    }
                 }
             }];
         } else {
@@ -134,7 +144,15 @@
     varReference.Deleted = true;
     varReference.ReturnType = newType;
     varReference = [[VariableCodeBlock alloc] init:self type:newType];
+}
 
+- (bool)canAddCodeBlock:(CodeBlock *)codeBlock{
+    if(self.InternalType == VOID)
+        return false;
+    
+    if([codeBlock isKindOfClass:[ValueCodeBlock class]])
+        codeBlock.ReturnType = self.InternalType;
+    return innerCodeBlocks.count < 1 && codeBlock.ReturnType == self.InternalType;
 }
 
 @end

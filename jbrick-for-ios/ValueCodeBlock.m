@@ -29,6 +29,13 @@
     return self;
 }
 
+-(id) init:(Primative)typeParam value:(NSString *)value displayName:(NSString *)dispName
+{
+    self = [self init:typeParam value:value];
+    displayName = dispName;
+    return self;
+}
+
 - (Primative)ReturnType{ return returnType; }
 - (void)setReturnType:(Primative)ReturnType
 {
@@ -64,7 +71,10 @@
 }
 
 -(NSString *)getDisplayName{
-    return @"Value";
+    if(!displayName)
+        return @"Value";
+    else
+        return displayName;
 }
 
 -(id<ViewableCodeBlock>)getPrototype{

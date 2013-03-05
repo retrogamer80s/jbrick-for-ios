@@ -97,7 +97,7 @@ static int DEFAULT_WIDTH = 250;
     
     CGContextSetLineWidth(context, 4.0);
     CGContextBeginPath(context);
-    CGContextSetFillColorWithColor(context, codeBlock.BlockColor);
+    CGContextSetFillColorWithColor(context, codeBlock.BlockColor.CGColor);
     CGContextSetAlpha(context, .8);
     
     UIBezierPath *strokeRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(2, 2, rect.size.width-4, rect.size.height-4) cornerRadius:25];

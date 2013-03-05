@@ -33,7 +33,6 @@ static NSMutableDictionary *constants;
             [constants setObject:[NSArray arrayWithObjects:
                                   [[ValueCodeBlock alloc] init:type value:@"true"],
                                   [[ValueCodeBlock alloc] init:type value:@"false"],
-                                  [[ValueCodeBlock alloc] init:type value:@"SENSOR_2"],
                                   nil]
                           forKey:[NSNumber numberWithInt:type]];
             break;

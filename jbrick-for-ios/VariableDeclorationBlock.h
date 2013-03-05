@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "ViewableCodeBlock.h"
+#import "CompositeCodeBlock.h"
 #import "ValueCodeBlock.h"
 
-@interface VariableDeclorationBlock : CodeBlock <ViewableCodeBlock>
+@interface VariableDeclorationBlock : CompositeCodeBlock <ViewableCodeBlock>
 {
     ValueCodeBlock *name;
     ValueCodeBlock *type;

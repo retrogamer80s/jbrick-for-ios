@@ -10,7 +10,7 @@
 #import "CodeBlock.h"
 
 @protocol ViewableCodeBlock
-@property CGColorRef BlockColor;
+@property (strong, nonatomic) UIColor *BlockColor;
 @property UIImage *Icon;
 @property bool ContainsChildren;
 -(NSString *) getDisplayName;

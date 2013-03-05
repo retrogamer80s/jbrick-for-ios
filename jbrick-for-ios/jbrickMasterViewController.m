@@ -73,21 +73,23 @@ NSMutableDictionary *methodBlocks;
     VariableAssignmentBlock *varAssign = [[VariableAssignmentBlock alloc] init];
     VariableMathBlock *varMath = [[VariableMathBlock alloc] init];
 
-    main.BlockColor = [UIColor purpleColor].CGColor;
-    ifBlock.BlockColor = [UIColor yellowColor].CGColor;
-    whileLoop.BlockColor = [UIColor yellowColor].CGColor;
-    logicOp.BlockColor = [UIColor yellowColor].CGColor;
-    onFWD.BlockColor = [UIColor greenColor].CGColor;
-    onRev.BlockColor = [UIColor greenColor].CGColor;
-    playTone.BlockColor = [UIColor yellowColor].CGColor;
-    wait.BlockColor = [UIColor blueColor].CGColor;
-    stopMotor.BlockColor = [UIColor redColor].CGColor;
-    setSensor.BlockColor = [UIColor blueColor].CGColor;
-    sensorBoolean.BlockColor = [UIColor blueColor].CGColor;
-    variable.BlockColor = [UIColor orangeColor].CGColor;
-    value.BlockColor = [UIColor cyanColor].CGColor;
-    varAssign.BlockColor = [UIColor magentaColor].CGColor;
-    varMath.BlockColor = [UIColor lightGrayColor].CGColor;
+    UIColor *red = [UIColor colorWithRed:1 green:.15 blue:.15 alpha:1];
+    
+    main.BlockColor = [UIColor purpleColor];
+    ifBlock.BlockColor = red;
+    whileLoop.BlockColor = red;
+    logicOp.BlockColor = red;
+    onFWD.BlockColor = [UIColor blueColor];
+    onRev.BlockColor = [UIColor blueColor];
+    playTone.BlockColor = [UIColor blueColor];
+    wait.BlockColor = red;
+    stopMotor.BlockColor = [UIColor blueColor];
+    setSensor.BlockColor = [UIColor blueColor];
+    sensorBoolean.BlockColor = [UIColor blueColor];
+    variable.BlockColor = [UIColor greenColor];
+    value.BlockColor = [UIColor greenColor];
+    varAssign.BlockColor = [UIColor orangeColor];
+    varMath.BlockColor = [UIColor orangeColor];
     
     main.Icon = [UIImage imageNamed:@"main.png"];
     ifBlock.Icon = [UIImage imageNamed:@"Loop_icon.png"];

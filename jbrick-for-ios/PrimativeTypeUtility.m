@@ -132,6 +132,10 @@
         }
         case MOTOR:
             return nil;
+        case PORT:
+            return nil;
+        case SENSOR_TYPE:
+            return nil;
         case PARAMETER_RETURN:
             return nil;
         case MATH_OPERATION:

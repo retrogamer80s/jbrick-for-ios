@@ -124,7 +124,7 @@ float firstY;
     [self.view addGestureRecognizer:sg];
     
     MethodDeclorationBlock *main = [MethodDeclorationBlock getMainBlock];
-    main.BlockColor = [UIColor purpleColor].CGColor;
+    main.BlockColor = [UIColor purpleColor];
     UIBlock *mainBlock = [[UIBlock alloc] init:self codeBlock:main];
     [self.programPane addSubview:mainBlock];
     

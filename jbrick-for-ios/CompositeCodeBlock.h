@@ -15,5 +15,6 @@
     NSMutableArray *innerCodeBlocks;
 }
 -(id) init;
+-(bool) canAddCodeBlock:(CodeBlock *)codeBlock;
 
 @end
