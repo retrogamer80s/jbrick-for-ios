@@ -14,6 +14,7 @@
     CodeBlock * type;
     CodeBlock * valueBlock;
     NSString *displayName;
+    NSArray *propertyNames;
 }
 @property (nonatomic, copy) NSString *Value;
 -(id) init:(Primative)type;

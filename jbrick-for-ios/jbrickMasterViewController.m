@@ -61,33 +61,57 @@ NSMutableDictionary *methodBlocks;
     WhileLoopCodeBlock *ifBlock = [[WhileLoopCodeBlock alloc] init:IF];
     WhileLoopCodeBlock *whileLoop = [[WhileLoopCodeBlock alloc] init:WHILE];
     LogicalOperatorCodeBlock *logicOp = [[LogicalOperatorCodeBlock alloc] init];
-    MethodCallCodeBlock *onFWD = [[MethodCallCodeBlock alloc] init:@"OnFwd" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:MOTOR],[NSNumber numberWithInt:MOTOR_POWER], nil] returnType:VOID];
-    MethodCallCodeBlock *onRev = [[MethodCallCodeBlock alloc] init:@"OnRev" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:MOTOR],[NSNumber numberWithInt:MOTOR_POWER], nil] returnType:VOID];
-    MethodCallCodeBlock *playTone = [[MethodCallCodeBlock alloc] init:@"PlayTone" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:INTEGER],[NSNumber numberWithInt:INTEGER], nil] returnType:VOID];
-    MethodCallCodeBlock *wait = [[MethodCallCodeBlock alloc] init:@"Wait" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:INTEGER], nil] returnType:VOID];
-    MethodCallCodeBlock *stopMotor = [[MethodCallCodeBlock alloc] init:@"Off" parameterTypes:[NSArray arrayWithObject:[NSNumber numberWithInt:MOTOR]] returnType:VOID];
-    MethodCallCodeBlock *setSensor = [[MethodCallCodeBlock alloc] init:@"SetSensorType" parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:PORT],[NSNumber numberWithInt:SENSOR_TYPE], nil] returnType:VOID];
-    MethodCallCodeBlock *sensorBoolean = [[MethodCallCodeBlock alloc] init:@"SensorBoolean" parameterTypes:[NSArray arrayWithObject:[NSNumber numberWithInt:PORT]] returnType:BOOLEAN];
+    MethodCallCodeBlock *onFWD = [[MethodCallCodeBlock alloc] init:@"OnFwd"
+                                        parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:MOTOR],[NSNumber numberWithInt:MOTOR_POWER], nil]
+                                        parameterNames:[NSArray arrayWithObjects:@"Motor", @"Motor Power", nil]
+                                        returnType:VOID];
+    MethodCallCodeBlock *onRev = [[MethodCallCodeBlock alloc] init:@"OnRev"
+                                        parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:MOTOR],[NSNumber numberWithInt:MOTOR_POWER], nil]
+                                        parameterNames:[NSArray arrayWithObjects:@"Motor", @"Motor Power", nil]
+                                        returnType:VOID];
+    MethodCallCodeBlock *playTone = [[MethodCallCodeBlock alloc] init:@"PlayTone"
+                                        parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:INTEGER],[NSNumber numberWithInt:INTEGER], nil]
+                                        parameterNames:[NSArray arrayWithObjects:@"Frequency (Hz)", @"Duration (ms)", nil]
+                                        returnType:VOID];
+    MethodCallCodeBlock *wait = [[MethodCallCodeBlock alloc] init:@"Wait"
+                                        parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:INTEGER], nil]
+                                        parameterNames:[NSArray arrayWithObjects:@"Time (ms)", nil]
+                                        returnType:VOID];
+    MethodCallCodeBlock *stopMotor = [[MethodCallCodeBlock alloc] init:@"Off"
+                                        parameterTypes:[NSArray arrayWithObject:[NSNumber numberWithInt:MOTOR]]
+                                        parameterNames:[NSArray arrayWithObjects:@"Motor", nil]
+                                        returnType:VOID];
+    MethodCallCodeBlock *setSensor = [[MethodCallCodeBlock alloc] init:@"SetSensorType"
+                                        parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:PORT],[NSNumber numberWithInt:SENSOR_TYPE], nil]
+                                        parameterNames:[NSArray arrayWithObjects:@"Port", @"Sensor Type", nil]
+                                        returnType:VOID];
+    MethodCallCodeBlock *sensorBoolean = [[MethodCallCodeBlock alloc] init:@"SensorBoolean"
+                                        parameterTypes:[NSArray arrayWithObject:[NSNumber numberWithInt:PORT]]
+                                        parameterNames:[NSArray arrayWithObjects:@"Port", nil]
+                                        returnType:BOOLEAN];
     VariableDeclorationBlock *variable = [[VariableDeclorationBlock alloc] init:@"Variable" type:VOID];
-    ValueCodeBlock *value = [[ValueCodeBlock alloc] init:VOID];
+    ValueCodeBlock *value = [[ValueCodeBlock alloc] init:VOID value:nil displayName:@"Value"];
     VariableAssignmentBlock *varAssign = [[VariableAssignmentBlock alloc] init];
     VariableMathBlock *varMath = [[VariableMathBlock alloc] init];
 
-    UIColor *red = [UIColor colorWithRed:1 green:.15 blue:.15 alpha:1];
+    UIColor *red = [UIColor colorWithRed:234.0/255 green:55.0/255 blue:19.0/255 alpha:1];
+    UIColor *blue = [UIColor colorWithRed:19.0/255 green:91.0/255 blue:234.0/255 alpha:1];
+    UIColor *green = [UIColor colorWithRed:19.0/255 green:234.0/255 blue:55.0/255 alpha:1];
+    UIColor *purp = [UIColor colorWithRed:162.0/255 green:92.0/255 blue:240.0/255 alpha:1];
     
-    main.BlockColor = [UIColor purpleColor];
+    main.BlockColor = purp;
     ifBlock.BlockColor = red;
     whileLoop.BlockColor = red;
     logicOp.BlockColor = red;
-    onFWD.BlockColor = [UIColor blueColor];
-    onRev.BlockColor = [UIColor blueColor];
-    playTone.BlockColor = [UIColor blueColor];
+    onFWD.BlockColor = blue;
+    onRev.BlockColor = blue;
+    playTone.BlockColor = blue;
     wait.BlockColor = red;
-    stopMotor.BlockColor = [UIColor blueColor];
-    setSensor.BlockColor = [UIColor blueColor];
-    sensorBoolean.BlockColor = [UIColor blueColor];
-    variable.BlockColor = [UIColor greenColor];
-    value.BlockColor = [UIColor greenColor];
+    stopMotor.BlockColor = blue;
+    setSensor.BlockColor = blue;
+    sensorBoolean.BlockColor = blue;
+    variable.BlockColor = green;
+    value.BlockColor = green;
     varAssign.BlockColor = [UIColor orangeColor];
     varMath.BlockColor = [UIColor orangeColor];
     
@@ -107,14 +131,16 @@ NSMutableDictionary *methodBlocks;
     varAssign.Icon = [UIImage imageNamed:@"Equals_icon.png"];
     varMath.Icon = [UIImage imageNamed:@"Math.png"];
     
-    NSArray *motorMethods = [NSArray arrayWithObjects:onFWD, onRev, stopMotor, playTone, nil];
-    NSArray *logicMethods = [NSArray arrayWithObjects:wait, variable, value, varAssign, whileLoop, ifBlock, logicOp, nil];
+    NSArray *systemMethods = [NSArray arrayWithObjects:onFWD, onRev, stopMotor, playTone, wait, nil];
+    NSArray *logicMethods = [NSArray arrayWithObjects:whileLoop, ifBlock, logicOp, nil];
     NSArray *inputMethods = [NSArray arrayWithObjects:setSensor, sensorBoolean, nil];
+    NSArray *varMathMethods = [NSArray arrayWithObjects: variable, value, varAssign, nil];
     NSMutableArray *customMethods = [NSMutableArray arrayWithObjects:nil];
     
-    [methodBlocks setObject:motorMethods forKey:@"Motor Blocks"];
-    [methodBlocks setObject:logicMethods forKey:@"Logic Blocks"];
-    [methodBlocks setObject:inputMethods forKey:@"Input Blocks"];
+    [methodBlocks setObject:systemMethods forKey:@"System"];
+    [methodBlocks setObject:logicMethods forKey:@"Logic"];
+    [methodBlocks setObject:inputMethods forKey:@"Input"];
+    [methodBlocks setObject:varMathMethods forKey:@"Variable"];
      
     selectedIndex = [NSIndexPath indexPathForRow:-1 inSection:-1];
 }

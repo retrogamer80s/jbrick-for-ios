@@ -16,13 +16,14 @@
 
 static MethodDeclorationBlock *mainBlock;
 
--(id) init:(NSString *)methodName parameterTypes:(NSMutableArray *)parameters returnType:(Primative)returnTypeParam
+-(id) init:(NSString *)methodName parameterTypes:(NSMutableArray *)parameters parameterNames:(NSArray *)paramNames returnType:(Primative)returnTypeParam
 {
     self = [super init];
     name = methodName;
     self.ReturnType = returnTypeParam;
     
     parameterTypes = parameters;
+    parameterNames = paramNames;
     parameterValues = [NSMutableArray arrayWithCapacity:[parameters count]];
     for(int i=0; i<[parameterTypes count]; i++)
         [parameterValues addObject:[[ValueCodeBlock alloc] init:[[parameters objectAtIndex:i] integerValue]]];
@@ -35,7 +36,7 @@ static MethodDeclorationBlock *mainBlock;
 +(id) getMainBlock
 {
     if(!mainBlock){
-        mainBlock = [[MethodDeclorationBlock alloc] init:@"main" parameterTypes:[NSArray array] returnType:MAIN];
+        mainBlock = [[MethodDeclorationBlock alloc] init:@"main" parameterTypes:[NSArray array] parameterNames:[NSArray array] returnType:MAIN];
     }
     return mainBlock;
 }
@@ -69,7 +70,8 @@ static MethodDeclorationBlock *mainBlock;
 
 -(id<ViewableCodeBlock>) getPrototype
 {
-    MethodDeclorationBlock *prototype = [[MethodDeclorationBlock alloc] init:name parameterTypes:parameterTypes returnType:self.ReturnType];
+    MethodDeclorationBlock *prototype = [[MethodDeclorationBlock alloc] init:name parameterTypes:parameterTypes
+                                                                  parameterNames:parameterNames returnType:self.ReturnType];
     prototype.BlockColor = self.BlockColor;
     prototype.Icon = self.Icon;
     return prototype;    
@@ -78,6 +80,11 @@ static MethodDeclorationBlock *mainBlock;
 -(NSArray *) getPropertyVariables
 {
     return parameterValues;
+}
+
+- (NSArray *)getPropertyDisplayNames
+{
+    return parameterNames;
 }
 
 -(NSArray *)getParameterDeclorations

@@ -20,6 +20,7 @@
     self = [super init];
     name = @"Logical Operation";
     operation = [[ValueCodeBlock alloc] init:LOGIC_OPERATION value:@"=="];
+    paramNames = [NSArray arrayWithObject:@"Logic Operation"];
     self.ReturnType = BOOLEAN;
     self.ContainsChildren = true;
     
@@ -64,6 +65,11 @@
 -(NSArray *) getPropertyVariables
 {
     return [NSArray arrayWithObject:operation];
+}
+
+- (NSArray *)getPropertyDisplayNames
+{
+    return paramNames;
 }
 
 - (bool) replaceParameter:(CodeBlock *)oldParam newParameter:(CodeBlock *)newParam

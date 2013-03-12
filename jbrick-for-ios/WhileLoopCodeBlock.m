@@ -27,6 +27,7 @@
         src = @"if";
     }
     parameter = [[ValueCodeBlock alloc] init:BOOLEAN];
+    paramNames = [NSArray arrayWithObject: @"Run If"];
     self.ReturnType = VOID;
     self.ContainsChildren = true;
     
@@ -64,6 +65,11 @@
 -(NSArray *) getPropertyVariables
 {
     return [NSArray arrayWithObject:parameter];
+}
+
+- (NSArray *)getPropertyDisplayNames
+{
+    return paramNames;
 }
 
 - (bool) replaceParameter:(CodeBlock *)oldParam newParameter:(CodeBlock *)newParam

@@ -20,6 +20,7 @@
     self = [super init];
     self.ReturnType = VOID;
     innerCodeBlocks = [NSMutableArray array];
+    paramNames = [NSArray arrayWithObjects:@"Variable", @"Math Operation", nil];
     mathOpBlock = [[ValueCodeBlock alloc] init:MATH_OPERATION value:@"+"];
     self.ContainsChildren = YES;
     return self;
@@ -108,6 +109,11 @@
         parameterVariable = [[ValueCodeBlock alloc] init:ANY_VARIABLE value:[variableReference generateCode]];
     }
     return [NSArray arrayWithObjects:parameterVariable, mathOpBlock, nil];
+}
+
+-(NSArray *)getPropertyDisplayNames
+{
+    return paramNames;
 }
 
 - (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(CodeBlock *)index

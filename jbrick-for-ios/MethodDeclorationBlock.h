@@ -17,8 +17,9 @@
     NSString *name;
     NSMutableArray *parameterValues;
     NSMutableArray *parameterTypes;
+    NSArray *parameterNames;
 }
 
 +(id) getMainBlock;
--(id) init:(NSString *)name parameterTypes:(NSMutableArray *)parameters returnType:(Primative)returnType;
+-(id) init:(NSString *)name parameterTypes:(NSMutableArray *)parameters parameterNames:(NSArray *)paramNames returnType:(Primative)returnType;
 @end

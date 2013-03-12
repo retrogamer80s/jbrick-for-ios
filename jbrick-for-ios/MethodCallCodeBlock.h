@@ -15,7 +15,8 @@
     NSString *name;
     NSMutableArray *parameterValues;
     NSArray *parameterTypes;
+    NSArray *parameterNames;
 }
--(id) init:(NSString *)methodName parameterTypes:(NSArray *)parameters returnType:(Primative)returnType;
+-(id) init:(NSString *)methodName parameterTypes:(NSArray *)parameters parameterNames:(NSArray *)paramNames returnType:(Primative)returnType;
 -(void) setVariable:(CodeBlock *)variable index:(NSInteger)index;
 @end

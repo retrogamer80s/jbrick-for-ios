@@ -26,6 +26,7 @@
     self = [super init];
     returnType = typeParam;
     Value = valueParam;
+    propertyNames = [NSArray arrayWithObjects:@"Value", nil];
     return self;
 }
 
@@ -72,13 +73,17 @@
 
 -(NSString *)getDisplayName{
     if(!displayName)
-        return @"Value";
+        return [PrimativeTypeUtility primativeToName:returnType];
     else
         return displayName;
 }
+- (NSArray *)getPropertyDisplayNames
+{
+    return propertyNames;
+}
 
 -(id<ViewableCodeBlock>)getPrototype{
-    ValueCodeBlock *block = [[ValueCodeBlock alloc] init:returnType];
+    ValueCodeBlock *block = [[ValueCodeBlock alloc] init:returnType value:[PrimativeTypeUtility getDefaultValue:returnType] displayName:displayName];
     block.BlockColor = self.BlockColor;
     block.Icon = self.Icon;
     return block;

@@ -12,5 +12,6 @@
 @interface LogicalOperatorCodeBlock : CompositeCodeBlock<ViewableCodeBlock>{
     NSString *name;
     CodeBlock *operation;
+    NSArray *paramNames;
 }
 @end

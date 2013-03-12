@@ -14,6 +14,7 @@
 @interface PropertyViewController : UITableViewController <ValuePickerDelegate, ValueInputCellDelegate>
 {
     NSArray *variables;
+    NSArray *varNames;
     ValuePickerController *valuePicker;
     UIPopoverController *popoverController;
     id<ViewableCodeBlock> codeBlock;

@@ -23,6 +23,7 @@
     self = [super init];
     name = [[ValueCodeBlock alloc] init:PARAMETER_NAME value:variableName];
     type = [[ValueCodeBlock alloc] init:PARAMETER_RETURN value:@"None"];
+    paramNames = [NSArray arrayWithObjects:@"Name", @"Type", nil];
     InternalType = VOID;
     varReference = [[VariableCodeBlock alloc] init:self type:InternalType];
     self.ReturnType = returnTypeParam;
@@ -101,6 +102,11 @@
 -(NSArray *) getPropertyVariables
 {
     return [NSArray arrayWithObjects:name, type, nil];
+}
+
+- (NSArray *)getPropertyDisplayNames
+{
+    return paramNames;
 }
 
 - (bool) replaceParameter:(CodeBlock *)oldParam newParameter:(CodeBlock *)newParam

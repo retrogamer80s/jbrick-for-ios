@@ -30,6 +30,7 @@
 @property bool Deleted;
 @property id<CodeBlockDelegate> Delegate;
 - (NSString *) generateCode;
+- (NSString *) getDisplayName;
 - (bool) addCodeBlock:(CodeBlock *)codeBlock;
 - (bool) addCodeBlock:(CodeBlock *)codeBlock indexBlock:(CodeBlock *)indexBlock afterIndexBlock:(bool)afterIndexBlock;
 - (void) removeCodeBlock:(CodeBlock *)codeBlock;

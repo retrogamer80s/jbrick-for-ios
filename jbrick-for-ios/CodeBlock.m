@@ -8,6 +8,7 @@
 
 #import "CodeBlock.h"
 #import "ConstantValueBlocks.h"
+#import "PrimativeTypeUtility.h"
 
 @implementation CodeBlock
 @synthesize Delegate;
@@ -41,6 +42,11 @@
         if(Delegate && [Delegate respondsToSelector:@selector(blockWasDeleted:)] && !parent.Deleted)
             [Delegate blockWasDeleted:self];
     }
+}
+
+- (NSString *) getDisplayName
+{
+    return [PrimativeTypeUtility primativeToName:returnType];
 }
 
 - (NSString *) generateCode

@@ -15,5 +15,6 @@
     VariableCodeBlock * variableReference;
     CodeBlock * parameterVariable;
     CodeBlock * innerCodeBlock;
+    NSArray *paramNames;
 }
 @end

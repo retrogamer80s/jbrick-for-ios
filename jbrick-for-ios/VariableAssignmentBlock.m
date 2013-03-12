@@ -21,6 +21,7 @@
     self = [super init];
     self.ReturnType = VOID;
     self.ContainsChildren = YES;
+    paramNames = [NSArray arrayWithObjects:@"Variable", nil];
     return self;
 }
 
@@ -86,6 +87,11 @@
         parameterVariable = [[ValueCodeBlock alloc] init:ANY_VARIABLE value:[variableReference generateCode]];
     }
     return [NSArray arrayWithObject:parameterVariable];
+}
+
+- (NSArray *)getPropertyDisplayNames
+{
+    return paramNames;
 }
 
 - (void) addAvailableParameters:(Primative)type parameterList:(NSMutableArray *)paramList beforeIndex:(CodeBlock *)index

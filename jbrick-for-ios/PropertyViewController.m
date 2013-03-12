@@ -64,7 +64,7 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
         if(valueCodeBlock){
-            cell.textLabel.text = [PrimativeTypeUtility primativeToName:valueCodeBlock.ReturnType];
+            cell.textLabel.text = [varNames objectAtIndex:indexPath.row];
             NSString *detail = [valueCodeBlock generateCode];
             cell.detailTextLabel.text = detail;
         }
@@ -159,8 +159,10 @@
 -(void)setPropertyContent:(id<ViewableCodeBlock>) codeBlockParam
 {
     codeBlock = codeBlockParam;
-    if(codeBlock)
+    if(codeBlock) {
         variables = [codeBlockParam getPropertyVariables];
+        varNames = [codeBlockParam getPropertyDisplayNames];
+    }
     else
         variables = [NSArray array];
     varDelegates = [NSMutableDictionary dictionary];

@@ -16,6 +16,7 @@ typedef enum LogicType {IF, WHILE} LogicType;
     NSString *src;
     LogicType type;
     CodeBlock *parameter;
+    NSArray *paramNames;
 }
 -(id) init:(LogicType)ifOrWhile;
 @end

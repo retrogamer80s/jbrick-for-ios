@@ -44,7 +44,7 @@ float firstY;
     MethodDeclorationBlock *main = [MethodDeclorationBlock getMainBlock];
     NSLog(@"Code:\n%@",[main generateCode]);
     
-    NSURL *url = [NSURL URLWithString:@"http://129.21.90.33/"];
+    NSURL *url = [NSURL URLWithString:@"http://media-server.cjpresler.com/"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     httpClient.parameterEncoding = AFJSONParameterEncoding;
     httpClient.stringEncoding = NSUTF16StringEncoding;
@@ -62,7 +62,7 @@ float firstY;
 }
 
 - (IBAction)RunProgram:(id)sender {
-    NSURL *url = [NSURL URLWithString:@"http://129.21.90.33/"];
+    NSURL *url = [NSURL URLWithString:@"http://media-server.cjpresler.com/"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     httpClient.parameterEncoding = AFJSONParameterEncoding;
     
@@ -124,7 +124,6 @@ float firstY;
     [self.view addGestureRecognizer:sg];
     
     MethodDeclorationBlock *main = [MethodDeclorationBlock getMainBlock];
-    main.BlockColor = [UIColor purpleColor];
     UIBlock *mainBlock = [[UIBlock alloc] init:self codeBlock:main];
     [self.programPane addSubview:mainBlock];
     

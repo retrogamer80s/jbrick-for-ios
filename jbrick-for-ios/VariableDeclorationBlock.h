@@ -16,6 +16,7 @@
     ValueCodeBlock *name;
     ValueCodeBlock *type;
     CodeBlock * varReference;
+    NSArray *paramNames;
 }
 @property (readonly) NSString *Name;
 @property Primative InternalType;

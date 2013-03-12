@@ -13,8 +13,8 @@
 @property (strong, nonatomic) UIColor *BlockColor;
 @property UIImage *Icon;
 @property bool ContainsChildren;
--(NSString *) getDisplayName;
 -(id<ViewableCodeBlock>) getPrototype;
 -(NSArray *) getPropertyVariables;
 - (bool) replaceParameter:(CodeBlock *)oldParam newParameter:(CodeBlock *)newParam;
+- (NSArray *) getPropertyDisplayNames;
 @end
