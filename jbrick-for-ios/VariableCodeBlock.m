@@ -30,7 +30,7 @@
 -(void)setParent:(CodeBlock *)Parent
 {
     [parents addObject:Parent];
-    Parent.Delegate = self;
+    //Parent.Delegate = self; // Cannot reasign the delegate because UIBlock uses the delegate methods
 }
 -(void) removeParent:(CodeBlock *)oldParent
 {
@@ -70,7 +70,8 @@
 {
     [visitor visitVariableCodeBlock:self];
 }
-
+/* This method cannot be used because only UIBlock should be a delegate of codeblocks
+ 
 -(void) blockMoved:(NSObject *)sender oldParent:(NSObject *)oldParent newParent:(NSObject *)newParent
 {
     int outOfScopeCount = 0;
@@ -84,5 +85,6 @@
     
     NSLog([NSString stringWithFormat:@"%d are now out of scope, %d", outOfScopeCount, response]);
 }
+ */
 
 @end

@@ -454,6 +454,7 @@ static int DEFAULT_WIDTH = 250;
     CGRect hitBox = CGRectMake(frame.origin.x, frame.origin.y, 50, 50);
     if(CGRectIntersectsRect(hitBox, [controller.programPane convertRect:controller.programPane.TrashCan.frame fromView:controller.view ]))
     {
+        
         [self delete];
         return true;
     }
