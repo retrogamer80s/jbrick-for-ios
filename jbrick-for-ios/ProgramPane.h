@@ -15,5 +15,5 @@
 @property UIImageView *TrashCan;
 @property NSMutableArray *PlacedBlocks;
 - (void)fitToContent;
-
+-(UIView *)getRootBlock;
 @end

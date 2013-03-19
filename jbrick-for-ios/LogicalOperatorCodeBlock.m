@@ -88,7 +88,11 @@
 
 -(void)acceptVisitor:(id<CodeBlockVisitor>)visitor
 {
-    [visitor visitWhileLoopCodeBlock:self];
+    [visitor visitLogicalOperatorCodeBlock:self];
+    
+    for (CodeBlock* cb in innerCodeBlocks) {
+        [cb acceptVisitor:visitor];
+    }
 }
 
 - (bool)addCodeBlock:(CodeBlock *)codeBlock
@@ -122,6 +126,34 @@
     } else {
         return false;
     }
+}
+
+// Encoding/Decoding Methods
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [super encodeWithCoder:coder];
+    
+    [coder encodeObject:name forKey:@"name"];
+    [coder encodeObject:operation forKey:@"operation"];
+    [coder encodeObject:paramNames forKey:@"paramNames"];
+    [coder encodeObject:self.BlockColor forKey:@"BlockColor"];
+    [coder encodeObject:self.Icon forKey:@"Icon"];
+    [coder encodeBool:self.ContainsChildren forKey:@"ContainsChildren"];
+    
+}
+
+- (id)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    
+    name = [coder decodeObjectForKey:@"name"];
+    operation = [coder decodeObjectForKey:@"operation"];
+    paramNames = [coder decodeObjectForKey:@"paramNames"];
+    self.BlockColor = [coder decodeObjectForKey:@"BlockColor"];
+    self.Icon = [coder decodeObjectForKey:@"Icon"];
+    self.ContainsChildren = [coder decodeBoolForKey:@"ContainsChildren"];
+    
+    return self;
 }
 
 @end

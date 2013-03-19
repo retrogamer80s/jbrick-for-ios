@@ -124,4 +124,35 @@
     return false;
 }
 
+// Encoding/Decoding Methods
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [super encodeWithCoder:coder];
+    
+    [coder encodeObject:displayName forKey:@"displayName"];
+    [coder encodeObject:valueBlock forKey:@"valueBlock"];
+    [coder encodeObject:propertyNames forKey:@"propertyNames"];
+    [coder encodeObject:self.BlockColor forKey:@"BlockColor"];
+    [coder encodeObject:self.Icon forKey:@"Icon"];
+    [coder encodeBool:self.ContainsChildren forKey:@"ContainsChildren"];
+    [coder encodeObject:self.Value forKey:@"Value"];
+    
+}
+
+- (id)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    
+    displayName = [coder decodeObjectForKey:@"displayName"];
+    valueBlock = [coder decodeObjectForKey:@"valueBlock"];
+    propertyNames = [coder decodeObjectForKey:@"propertyNames"];
+    self.BlockColor = [coder decodeObjectForKey:@"BlockColor"];
+    self.Icon = [coder decodeObjectForKey:@"Icon"];
+    self.ContainsChildren = [coder decodeBoolForKey:@"ContainsChildren"];
+    self.Value = [coder decodeObjectForKey:@"Value"];
+    
+    return self;
+}
+
+
 @end

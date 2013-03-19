@@ -19,7 +19,7 @@
 
 // This class is inteded to be an abstract class... which objective-c doesn't have
 // So don't use this class instead use a derived class of it.
-@interface CodeBlock : NSObject <UIAlertViewDelegate>
+@interface CodeBlock : NSObject <UIAlertViewDelegate, NSCoding>
 {
     Boolean deleted;
     Primative returnType;

@@ -7,6 +7,7 @@
 //
 
 #import "ProgramPane.h"
+#import "UIBlock.h"
 
 @implementation ProgramPane
 
@@ -46,7 +47,11 @@
     zoomableView.clipsToBounds = NO;
     
     [super addSubview:zoomableView];
-    //[self.superview addSubview:trashCan];
+}
+
+- (UIView *) getRootBlock
+{
+    return [[PlacedBlocks objectAtIndex:0] getHighestParent];
 }
 
 - (void)addSubview:(UIView *)view

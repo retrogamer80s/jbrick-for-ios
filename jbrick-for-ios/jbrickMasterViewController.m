@@ -49,7 +49,7 @@ NSMutableDictionary *methodBlocks;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
-    self.detailViewController = (jbrickDetailViewController *)[[_splitViewController.viewControllers lastObject] topViewController];
+    //self.detailViewController = (jbrickDetailViewController *)[[_splitViewController.viewControllers lastObject] topViewController];
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
     [longPress setMinimumPressDuration:0.15];
@@ -158,9 +158,11 @@ NSMutableDictionary *methodBlocks;
 
 - (void)insertNewObject:(id)sender
 {
+    /* Not allowing adding custom blocks yet
     [[methodBlocks objectForKey:@"Custom"] insertObject:@"Method Name" atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+     */
 }
 
 - (IBAction)longPress:(UIGestureRecognizer *)sender
@@ -181,7 +183,7 @@ NSMutableDictionary *methodBlocks;
         CodeBlock<ViewableCodeBlock> *codeBlock = [[[methodBlocks allValues] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         [self.detailViewController.propertyPane closePanel:nil];
         
-        // create item to be dragged, in this example, just a simple UILabel
+        // create item to be dragged
         UIView *splitView = _splitViewController.view;
         CGPoint point = [sender locationInView:splitView];
         

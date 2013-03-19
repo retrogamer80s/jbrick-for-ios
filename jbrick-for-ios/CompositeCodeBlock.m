@@ -73,5 +73,27 @@
     if(self.Parent)
         [self.Parent addAvailableParameters:type parameterList:paramList beforeIndex:self];
 }
+- (void)childWasDeleted:(CodeBlock *)child{
+    [innerCodeBlocks removeObject:child];
+}
+
+// Encoding/Decoding Methods
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [super encodeWithCoder:coder];
+    
+    [coder encodeObject:innerCodeBlocks forKey:@"innerCodeBlocks"];
+    
+}
+
+- (id)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    
+    innerCodeBlocks = [coder decodeObjectForKey:@"innerCodeBlocks"];
+    
+    return self;
+}
+
 
 @end

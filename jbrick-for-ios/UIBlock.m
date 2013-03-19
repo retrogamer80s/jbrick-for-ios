@@ -478,5 +478,69 @@ static int DEFAULT_WIDTH = 250;
     [controller.propertyPane setPropertyContent:codeBlock];
 }
 
+//Encoding/Decoding Methods
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [super encodeWithCoder:coder];
 
+    [coder encodeBool:panelWasOpen forKey:@"panelwasOpen"]; 
+    [coder encodeObject:codeBlock forKey:@"codeBlock"];
+    [coder encodeObject:attachedBlocks forKey:@"attachedBlocks"];
+    [coder encodeObject:parentBlock forKey:@"parentBlock"];
+    [coder encodeObject:previousBlock forKey:@"previousBlock"];
+    [coder encodeObject:previousIndexBlock forKey:@"previousIndexBlock"];
+    [coder encodeInt32:defaultHeight forKey:@"defaultHeight"];
+
+}
+
+- (id)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    
+    panelWasOpen = [coder decodeBoolForKey:@"panelwasOpen"];
+    
+    codeBlock = [coder decodeObjectForKey:@"codeBlock"];
+    codeBlock.Delegate = self;
+    
+    attachedBlocks = [coder decodeObjectForKey:@"attachedBlocks"];
+    parentBlock = [coder decodeObjectForKey:@"parentBlock"];
+    previousBlock = [coder decodeObjectForKey:@"previousBlock"];
+    previousIndexBlock = [coder decodeObjectForKey:@"previousIndexBlock"];
+    defaultHeight = [coder decodeInt32ForKey:@"defaultHeight"];
+    
+    self.userInteractionEnabled = true;
+    UILongPressGestureRecognizer *lpGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(blockTapped:)];
+    UITapGestureRecognizer *tripleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(blockTripleTapped:)];
+    [tapGesture setNumberOfTapsRequired:1];
+    [tripleTapGesture setNumberOfTapsRequired:3];
+    lpGesture.minimumPressDuration = .15;
+    
+    lpGesture.delegate = self;
+    tapGesture.delegate = self;
+    tripleTapGesture.delegate = self;
+    
+    [self addGestureRecognizer:lpGesture];
+    [self addGestureRecognizer:tapGesture];
+    [self addGestureRecognizer:tripleTapGesture];
+    
+    [self assignSoundID:@"snap" soundID:&snapSound];
+    [self assignSoundID:@"trash" soundID:&trashSound];
+    [self assignSoundID:@"velcro" soundID:&velcroSound];
+    
+    return self;
+}
+
+- (void)initializeControllers:(ProgramPane *)progPane Controller:(jbrickDetailViewController *)cont
+{
+    self.programPane = progPane;
+    self.controller = cont;
+    
+    [programPane.PlacedBlocks addObject:self];
+    [programPane addSubview:self];
+    
+    for (UIBlock *block in attachedBlocks) {
+        [block initializeControllers:progPane Controller:cont];
+    }
+}
 @end

@@ -12,6 +12,7 @@
 
 #import "jbrickDetailViewController.h"
 #import "jbrickMasterViewController.h"
+#import "jbrickNavViewController.h"
 #import "PropertyViewController.h"
 
 #define MG_DEFAULT_SPLIT_POSITION		320.0	// default width of master view in UISplitViewController.
@@ -479,10 +480,11 @@
     
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     jbrickMasterViewController *mVC = [sb instantiateViewControllerWithIdentifier:@"MasterController"];
+    jbrickNavViewController *nav = [[jbrickNavViewController alloc] initWithRootViewController:mVC];
     jbrickDetailViewController *dVC = [sb instantiateViewControllerWithIdentifier:@"DetailController"];
     PropertyViewController *pVC = [sb instantiateViewControllerWithIdentifier:@"PropertyController"];
         
-    [self setMasterViewController:mVC];
+    [self setMasterViewController:nav];
     [self setDetailViewController:dVC];
     [self setPropertyViewController:pVC];
     

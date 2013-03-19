@@ -115,4 +115,35 @@
     [visitor visitMethodCallCodeBlock:self];
 }
 
+// Encoding/Decoding Methods
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [super encodeWithCoder:coder];
+    
+    [coder encodeObject:name forKey:@"name"];
+    [coder encodeObject:parameterValues forKey:@"parameterValues"];
+    [coder encodeObject:parameterTypes forKey:@"parameterTypes"];
+    [coder encodeObject:parameterNames forKey:@"parameterNames"];
+    [coder encodeObject:self.BlockColor forKey:@"BlockColor"];
+    [coder encodeObject:self.Icon forKey:@"Icon"];
+    [coder encodeBool:self.ContainsChildren forKey:@"ContainsChildren"];
+
+}
+
+- (id)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    
+    name = [coder decodeObjectForKey:@"name"];
+    parameterValues = [coder decodeObjectForKey:@"parameterValues"];
+    parameterTypes = [coder decodeObjectForKey:@"parameterTypes"];
+    parameterNames = [coder decodeObjectForKey:@"parameterNames"];
+    self.BlockColor = [coder decodeObjectForKey:@"BlockColor"];
+    self.Icon = [coder decodeObjectForKey:@"Icon"];
+    self.ContainsChildren = [coder decodeBoolForKey:@"ContainsChildren"];
+
+    
+    return self;
+}
+
 @end

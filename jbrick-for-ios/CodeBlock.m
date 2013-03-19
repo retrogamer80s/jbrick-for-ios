@@ -119,4 +119,25 @@
 {
     // Optionally overwrite this method to be notified when a child block is deleted
 }
+
+
+// Encoding/Decoding Methods
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeBool:deleted forKey:@"deleted"];
+    [coder encodeInt32:returnType forKey:@"returnType"];
+    [coder encodeObject:parent forKey:@"parent"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    self = [super init];
+    
+    deleted = [decoder decodeBoolForKey:@"deleted"];
+    returnType = [decoder decodeInt32ForKey:@"returnType"];
+    parent = [decoder decodeObjectForKey:@"parent"];
+    
+    return self;
+}
+
 @end

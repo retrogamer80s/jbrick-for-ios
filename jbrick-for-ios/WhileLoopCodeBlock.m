@@ -89,6 +89,42 @@
 -(void)acceptVisitor:(id<CodeBlockVisitor>)visitor
 {
     [visitor visitWhileLoopCodeBlock:self];
+    
+    for (CodeBlock* cb in innerCodeBlocks) {
+        [cb acceptVisitor:visitor];
+    }
+}
+
+// Encoding/Decoding Methods
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [super encodeWithCoder:coder];
+    
+    [coder encodeObject:name forKey:@"name"];
+    [coder encodeObject:src forKey:@"src"];
+    [coder encodeInt32:type forKey:@"type"];
+    [coder encodeObject:parameter forKey:@"parameter"];
+    [coder encodeObject:paramNames forKey:@"paramNames"];
+    [coder encodeObject:self.BlockColor forKey:@"BlockColor"];
+    [coder encodeObject:self.Icon forKey:@"Icon"];
+    [coder encodeBool:self.ContainsChildren forKey:@"ContainsChildren"];
+    
+}
+
+- (id)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    
+    name = [coder decodeObjectForKey:@"name"];
+    src = [coder decodeObjectForKey:@"src"];
+    type = [coder decodeInt32ForKey:@"type"];
+    parameter = [coder decodeObjectForKey:@"parameter"];
+    paramNames = [coder decodeObjectForKey:@"paramNames"];
+    self.BlockColor = [coder decodeObjectForKey:@"BlockColor"];
+    self.Icon = [coder decodeObjectForKey:@"Icon"];
+    self.ContainsChildren = [coder decodeBoolForKey:@"ContainsChildren"];
+    
+    return self;
 }
 
 @end

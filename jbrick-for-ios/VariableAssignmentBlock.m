@@ -122,6 +122,8 @@
 -(void)acceptVisitor:(id<CodeBlockVisitor>)visitor
 {
     [visitor visitVariableDeclorationBlock:self];
+    
+    [innerCodeBlock acceptVisitor:visitor];
 }
 
 - (Boolean)childRequestChangeType:(CodeBlock *)child prevType:(Primative)prevType newType:(Primative)newType
@@ -132,4 +134,35 @@
     innerCodeBlock.Deleted = true;
     return [super childRequestChangeType:child prevType:prevType newType:newType];
 }
+
+// Encoding/Decoding Methods
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [super encodeWithCoder:coder];
+    
+    [coder encodeObject:variableReference forKey:@"variableReference"];
+    [coder encodeObject:parameterVariable forKey:@"parameterVariable"];
+    [coder encodeObject:innerCodeBlock forKey:@"innerCodeBlock"];
+    [coder encodeObject:paramNames forKey:@"paramNames"];
+    [coder encodeObject:self.BlockColor forKey:@"BlockColor"];
+    [coder encodeObject:self.Icon forKey:@"Icon"];
+    [coder encodeBool:self.ContainsChildren forKey:@"ContainsChildren"];
+    
+}
+
+- (id)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    
+    variableReference = [coder decodeObjectForKey:@"variableReference"];
+    parameterVariable = [coder decodeObjectForKey:@"parameterVariable"];
+    innerCodeBlock = [coder decodeObjectForKey:@"innerCodeBlock"];
+    paramNames = [coder decodeObjectForKey:@"paramNames"];
+    self.BlockColor = [coder decodeObjectForKey:@"BlockColor"];
+    self.Icon = [coder decodeObjectForKey:@"Icon"];
+    self.ContainsChildren = [coder decodeBoolForKey:@"ContainsChildren"];
+    
+    return self;
+}
+
 @end

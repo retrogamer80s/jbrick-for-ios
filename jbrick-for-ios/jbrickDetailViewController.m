@@ -41,8 +41,15 @@ float firstX;
 float firstY;
 
 - (IBAction)Upload:(id)sender {
+    
     MethodDeclorationBlock *main = [MethodDeclorationBlock getMainBlock];
     NSLog(@"Code:\n%@",[main generateCode]);
+    
+    // Testing out serializtion
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *savePath = [rootPath stringByAppendingPathComponent:@"save.sav"];
+    [NSKeyedArchiver archiveRootObject:[self.programPane getRootBlock] toFile:savePath];
+    // Done testing here
     
     NSURL *url = [NSURL URLWithString:@"http://media-server.cjpresler.com/"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -159,9 +166,20 @@ float firstY;
     sg.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:sg];
     
-    MethodDeclorationBlock *main = [MethodDeclorationBlock getMainBlock];
-    UIBlock *mainBlock = [[UIBlock alloc] init:self codeBlock:main];
-    [self.programPane addSubview:mainBlock];
+    // Testing out serializtion
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *savePath = [rootPath stringByAppendingPathComponent:@"save.sav"];
+    if([[NSFileManager defaultManager] fileExistsAtPath:savePath]){
+        UIBlock *block = [NSKeyedUnarchiver unarchiveObjectWithFile:savePath];
+        [block initializeControllers:self.programPane Controller:self];
+        [self.programPane fitToContent];
+    } else {
+        MethodDeclorationBlock *main = [MethodDeclorationBlock getMainBlock];
+        UIBlock *mainBlock = [[UIBlock alloc] init:self codeBlock:main];
+        [self.programPane addSubview:mainBlock];
+    }
+    
+    // Done testing here
     
     UIImageView *trashCan = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Trash Can.png"]];
     trashCan.frame = CGRectMake(615, 580, 100, 140);

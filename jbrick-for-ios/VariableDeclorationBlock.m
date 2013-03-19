@@ -161,4 +161,36 @@
     return innerCodeBlocks.count < 1 && codeBlock.ReturnType == self.InternalType;
 }
 
+// Encoding/Decoding Methods
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [super encodeWithCoder:coder];
+    
+    [coder encodeObject:name forKey:@"name"];
+    [coder encodeObject:type forKey:@"type"];
+    [coder encodeObject:varReference forKey:@"varReference"];
+    [coder encodeObject:paramNames forKey:@"paramNames"];
+    [coder encodeObject:self.BlockColor forKey:@"BlockColor"];
+    [coder encodeObject:self.Icon forKey:@"Icon"];
+    [coder encodeBool:self.ContainsChildren forKey:@"ContainsChildren"];
+    [coder encodeBool:self.InternalType forKey:@"InternalType"];
+    
+}
+
+- (id)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    
+    name = [coder decodeObjectForKey:@"name"];
+    type = [coder decodeObjectForKey:@"type"];
+    varReference = [coder decodeObjectForKey:@"varReference"];
+    paramNames = [coder decodeObjectForKey:@"paramNames"];
+    self.BlockColor = [coder decodeObjectForKey:@"BlockColor"];
+    self.Icon = [coder decodeObjectForKey:@"Icon"];
+    self.ContainsChildren = [coder decodeBoolForKey:@"ContainsChildren"];
+    self.InternalType = [coder decodeBoolForKey:@"InternalType"];
+    
+    return self;
+}
+
 @end

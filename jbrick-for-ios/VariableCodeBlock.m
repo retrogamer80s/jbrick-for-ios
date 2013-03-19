@@ -87,4 +87,26 @@
 }
  */
 
+// Encoding/Decoding Methods
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [super encodeWithCoder:coder];
+    
+    [coder encodeObject:variable forKey:@"variable"];
+    [coder encodeObject:parents forKey:@"parents"];
+    [coder encodeBool:promptDone forKey:@"promptDone"];
+    
+}
+
+- (id)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    
+    variable = [coder decodeObjectForKey:@"variable"];
+    parents = [coder decodeObjectForKey:@"parents"];
+    promptDone = [coder decodeBoolForKey:@"promptDone"];
+    
+    return self;
+}
+
 @end

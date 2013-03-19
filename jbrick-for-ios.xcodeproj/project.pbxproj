@@ -84,6 +84,8 @@
 		3FE1DDA7163593900049555C /* forward_wheel_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE1DDA2163593900049555C /* forward_wheel_icon.png */; };
 		3FE1DDA8163593900049555C /* Gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE1DDA3163593900049555C /* Gear.png */; };
 		3FE1DDA9163593900049555C /* wheel_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE1DDA4163593900049555C /* wheel_icon.png */; };
+		3FED5D6516F8A1ED00511131 /* CBVisitorUIBlockBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FED5D6416F8A1ED00511131 /* CBVisitorUIBlockBuilder.m */; };
+		3FED5D6816F8D06500511131 /* jbrickNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FED5D6716F8D06400511131 /* jbrickNavViewController.m */; };
 		3FEF4D7C16B6D2BE00D9CABD /* UIPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEF4D7B16B6D2BE00D9CABD /* UIPrompt.m */; };
 		3FFD2A75160A118B00E8403C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFD2A74160A118B00E8403C /* AudioToolbox.framework */; };
 		3FFDD4BF1619E4F70065D30B /* UITextFieldStrongDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDD4BE1619E4F70065D30B /* UITextFieldStrongDelegate.m */; };
@@ -218,6 +220,10 @@
 		3FE1DDA2163593900049555C /* forward_wheel_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward_wheel_icon.png; sourceTree = "<group>"; };
 		3FE1DDA3163593900049555C /* Gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gear.png; sourceTree = "<group>"; };
 		3FE1DDA4163593900049555C /* wheel_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wheel_icon.png; sourceTree = "<group>"; };
+		3FED5D6316F8A1ED00511131 /* CBVisitorUIBlockBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBVisitorUIBlockBuilder.h; sourceTree = "<group>"; };
+		3FED5D6416F8A1ED00511131 /* CBVisitorUIBlockBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBVisitorUIBlockBuilder.m; sourceTree = "<group>"; };
+		3FED5D6616F8D06400511131 /* jbrickNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jbrickNavViewController.h; sourceTree = "<group>"; };
+		3FED5D6716F8D06400511131 /* jbrickNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jbrickNavViewController.m; sourceTree = "<group>"; };
 		3FEF4D7A16B6D2BE00D9CABD /* UIPrompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPrompt.h; sourceTree = "<group>"; };
 		3FEF4D7B16B6D2BE00D9CABD /* UIPrompt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPrompt.m; sourceTree = "<group>"; };
 		3FFD2A74160A118B00E8403C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -319,6 +325,8 @@
 				3F1B89A9160108410007A0B9 /* jbrickDetailViewController.m */,
 				3F1B89A5160108410007A0B9 /* jbrickMasterViewController.h */,
 				3F1B89A6160108410007A0B9 /* jbrickMasterViewController.m */,
+				3FED5D6616F8D06400511131 /* jbrickNavViewController.h */,
+				3FED5D6716F8D06400511131 /* jbrickNavViewController.m */,
 				3F86E708162C9D4E00A7C985 /* KGNoise */,
 				3F1B89A2160108410007A0B9 /* MainStoryboard.storyboard */,
 				3FB5322A161098D800A907F7 /* MethodTabelCell.h */,
@@ -357,6 +365,7 @@
 		3F490BB0160B634100B2BA38 /* CodeBlocks */ = {
 			isa = PBXGroup;
 			children = (
+				3FED5D6116F8A1B700511131 /* CodeBlockVisitors */,
 				3FC77320161331420025A048 /* CodeBlock.h */,
 				3FD7740C16481B5C0005A4B9 /* CodeBlock.m */,
 				3FD6B0BD164155EC00B4A0CC /* CodeBlockVisitor.h */,
@@ -478,6 +487,15 @@
 				3F05B29916C994A10020E0C4 /* speaker.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		3FED5D6116F8A1B700511131 /* CodeBlockVisitors */ = {
+			isa = PBXGroup;
+			children = (
+				3FED5D6316F8A1ED00511131 /* CBVisitorUIBlockBuilder.h */,
+				3FED5D6416F8A1ED00511131 /* CBVisitorUIBlockBuilder.m */,
+			);
+			name = CodeBlockVisitors;
 			sourceTree = "<group>";
 		};
 		3FFDD4C4161B3C690065D30B /* InputVerificationStrategies */ = {
@@ -648,6 +666,8 @@
 				3FC4753B16D27CC200B7C1E1 /* WhileLoopCodeBlock.m in Sources */,
 				3FC4753F16D28E3F00B7C1E1 /* LogicalOperatorCodeBlock.m in Sources */,
 				3FCDD45D16EFA35B0055338C /* RobotPickerController.m in Sources */,
+				3FED5D6516F8A1ED00511131 /* CBVisitorUIBlockBuilder.m in Sources */,
+				3FED5D6816F8D06500511131 /* jbrickNavViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

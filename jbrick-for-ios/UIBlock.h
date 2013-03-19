@@ -13,9 +13,8 @@
 #import "ProgramPane.h"
 #import "ViewableCodeBlock.h"
 
-@interface UIBlock : UIView <UIGestureRecognizerDelegate, CodeBlockDelegate>
+@interface UIBlock : UIView <UIGestureRecognizerDelegate, CodeBlockDelegate, NSCoding>
 {
-    CGPoint startLocation;
     SystemSoundID snapSound;
     SystemSoundID trashSound;
     SystemSoundID velcroSound;
@@ -37,5 +36,7 @@
 
 - (void)panToPoint:(CGPoint) newCenter scrollToRect:(CGRect)visibleRect;
 - (void)snapToGrid;
+- (UIBlock *)getHighestParent;
+- (void)initializeControllers:(ProgramPane *)progPane Controller:(jbrickDetailViewController *)controller;
 
 @end
