@@ -10,8 +10,13 @@
 #import "ProgramPane.h"
 #import "MGSplitViewController.h"
 #import "PropertyViewController.h"
+#import "RobotPickerController.h"
 
-@interface jbrickDetailViewController : UIViewController <UISplitViewControllerDelegate, UIGestureRecognizerDelegate>
+@interface jbrickDetailViewController : UIViewController <UISplitViewControllerDelegate, UIGestureRecognizerDelegate, RobotPickerDelegate>{
+    NSString *robotID;
+    RobotPickerController *picker;
+    UIPopoverController *popoverController;
+}
 
 @property (strong, nonatomic) id detailItem;
 
@@ -19,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
 @property (weak, nonatomic) IBOutlet PropertyViewController *propertyPane;
 @property (weak, nonatomic) IBOutlet ProgramPane *programPane;
+@property (weak, nonatomic) IBOutlet UIButton *SelectRobotButton;
 @property (strong, nonatomic) MGSplitViewController *splitViewController;
 
 -(void) placeBlock:(UIView *)block;

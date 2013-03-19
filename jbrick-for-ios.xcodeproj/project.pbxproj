@@ -70,6 +70,7 @@
 		3FC7733A1614B34A0025A048 /* MethodDeclorationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC773391614B34A0025A048 /* MethodDeclorationBlock.m */; };
 		3FCB8F701608DF7A00F45EB7 /* UIBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCB8F6F1608DF7A00F45EB7 /* UIBlock.m */; };
 		3FCB8F711608E39700F45EB7 /* jbrickDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B89A9160108410007A0B9 /* jbrickDetailViewController.m */; };
+		3FCDD45D16EFA35B0055338C /* RobotPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCDD45C16EFA35B0055338C /* RobotPickerController.m */; };
 		3FD7740D16481B5C0005A4B9 /* CodeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD7740C16481B5C0005A4B9 /* CodeBlock.m */; };
 		3FD774181649915E0005A4B9 /* if-elseif-else.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD774151649915E0005A4B9 /* if-elseif-else.png */; };
 		3FD774191649915E0005A4B9 /* sound.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD774161649915E0005A4B9 /* sound.png */; };
@@ -196,6 +197,8 @@
 		3FC773391614B34A0025A048 /* MethodDeclorationBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodDeclorationBlock.m; sourceTree = "<group>"; };
 		3FCB8F6E1608DF7A00F45EB7 /* UIBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBlock.h; sourceTree = "<group>"; };
 		3FCB8F6F1608DF7A00F45EB7 /* UIBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBlock.m; sourceTree = "<group>"; };
+		3FCDD45B16EFA35B0055338C /* RobotPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RobotPickerController.h; sourceTree = "<group>"; };
+		3FCDD45C16EFA35B0055338C /* RobotPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RobotPickerController.m; sourceTree = "<group>"; };
 		3FD00E33161C82C500AD98DB /* ViewableCodeBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewableCodeBlock.h; sourceTree = "<group>"; };
 		3FD6B0BD164155EC00B4A0CC /* CodeBlockVisitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeBlockVisitor.h; sourceTree = "<group>"; };
 		3FD7740C16481B5C0005A4B9 /* CodeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeBlock.m; sourceTree = "<group>"; };
@@ -334,6 +337,8 @@
 				3F86E721162C9D4E00A7C985 /* ValuePickerController.h */,
 				3F86E722162C9D4E00A7C985 /* ValuePickerController.m */,
 				3FFDD4CB161B6CE30065D30B /* Views */,
+				3FCDD45B16EFA35B0055338C /* RobotPickerController.h */,
+				3FCDD45C16EFA35B0055338C /* RobotPickerController.m */,
 			);
 			path = "jbrick-for-ios";
 			sourceTree = "<group>";
@@ -642,6 +647,7 @@
 				3F05B29716C94ED60020E0C4 /* UIImageView+AFNetworking.m in Sources */,
 				3FC4753B16D27CC200B7C1E1 /* WhileLoopCodeBlock.m in Sources */,
 				3FC4753F16D28E3F00B7C1E1 /* LogicalOperatorCodeBlock.m in Sources */,
+				3FCDD45D16EFA35B0055338C /* RobotPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

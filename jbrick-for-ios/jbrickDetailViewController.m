@@ -53,7 +53,7 @@ float firstY;
                             [main generateCode], @"src",
                             @"Test", @"filename",
                             nil];
-    [httpClient postPath:@"rest/Devices/001653081691/compile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [httpClient postPath:[NSString stringWithFormat:@"rest/Devices/%@/compile", robotID] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSLog(@"Request Successful, response '%@'", responseStr);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -69,13 +69,49 @@ float firstY;
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             @"Test", @"program",
                             nil];
-    [httpClient getPath:@"rest/Devices/001653081691/RunProgram" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [httpClient getPath:[NSString stringWithFormat:@"rest/Devices/%@/RunProgram", robotID] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSLog(@"Request Successful, response '%@'", responseStr);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
     }];
 
+}
+- (IBAction)SelectRobot:(id)sender {
+    NSURL *url = [NSURL URLWithString:@"http://media-server.cjpresler.com/"];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    httpClient.parameterEncoding = AFJSONParameterEncoding;
+    [httpClient registerHTTPOperationClass:[AFJSONRequestOperation class]];
+
+    [httpClient  getPath:@"rest/Devices" parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+        NSString *responseStr = [[NSString alloc] initWithData:JSON encoding:NSUTF8StringEncoding];
+        NSLog(@"Request Successful, response '%@'", responseStr);
+        
+        id jsonRobots = [NSJSONSerialization JSONObjectWithData:JSON options:NSJSONWritingPrettyPrinted error:nil];
+        NSArray *robots =  [NSArray arrayWithArray:jsonRobots];
+        
+        NSMutableArray *names = [NSMutableArray array];
+        NSMutableArray *ids = [NSMutableArray array];
+        for (NSDictionary *robotDict in robots) {
+            [names addObject:[robotDict valueForKey:@"Name"]];
+            [ids addObject:[robotDict valueForKey:@"ID"]];
+        }
+        
+        picker = [[RobotPickerController alloc] init:ids names:names selectedID:robotID delegate:self];
+        popoverController = [[UIPopoverController alloc] initWithContentViewController:picker];
+        
+        
+        [popoverController presentPopoverFromRect:_SelectRobotButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+    }];
+}
+
+- (void)didSelectRobot:(NSString *)newRobotID name:(NSString *)robotName{
+    robotID = newRobotID;
+    
+    [popoverController dismissPopoverAnimated:YES];
 }
 
 - (void)setDetailItem:(id)newDetailItem
@@ -141,6 +177,7 @@ float firstY;
     [self setSubmitButton:nil]; 
     [self setPropertyPane:nil];
     [self setProgramPane:nil];
+    [self setSelectRobotButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     self.detailDescriptionLabel = nil;
