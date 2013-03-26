@@ -480,7 +480,8 @@
     
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     jbrickMasterViewController *mVC = [sb instantiateViewControllerWithIdentifier:@"MasterController"];
-    jbrickNavViewController *nav = [[jbrickNavViewController alloc] initWithRootViewController:mVC];
+    jbrickNavViewController *nav = [sb instantiateViewControllerWithIdentifier:@"NavController"];
+    UITableViewController *mainMenu = [sb instantiateViewControllerWithIdentifier:@"mainMenuController"];
     jbrickDetailViewController *dVC = [sb instantiateViewControllerWithIdentifier:@"DetailController"];
     PropertyViewController *pVC = [sb instantiateViewControllerWithIdentifier:@"PropertyController"];
         
@@ -493,6 +494,8 @@
     dVC.splitViewController = self;
     dVC.propertyPane = pVC;
     pVC.splitViewController = self;
+    nav.codeBlockController = mVC;
+    nav.mainMenuController = mainMenu;
 	
 	if ([self isShowingMaster]) {
 		[self.masterViewController viewDidAppear:animated];

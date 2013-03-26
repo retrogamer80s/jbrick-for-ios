@@ -84,36 +84,6 @@ float firstY;
     }];
 
 }
-- (IBAction)SelectRobot:(id)sender {
-    NSURL *url = [NSURL URLWithString:@"http://media-server.cjpresler.com/"];
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    httpClient.parameterEncoding = AFJSONParameterEncoding;
-    [httpClient registerHTTPOperationClass:[AFJSONRequestOperation class]];
-
-    [httpClient  getPath:@"rest/Devices" parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
-        NSString *responseStr = [[NSString alloc] initWithData:JSON encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful, response '%@'", responseStr);
-        
-        id jsonRobots = [NSJSONSerialization JSONObjectWithData:JSON options:NSJSONWritingPrettyPrinted error:nil];
-        NSArray *robots =  [NSArray arrayWithArray:jsonRobots];
-        
-        NSMutableArray *names = [NSMutableArray array];
-        NSMutableArray *ids = [NSMutableArray array];
-        for (NSDictionary *robotDict in robots) {
-            [names addObject:[robotDict valueForKey:@"Name"]];
-            [ids addObject:[robotDict valueForKey:@"ID"]];
-        }
-        
-        picker = [[RobotPickerController alloc] init:ids names:names selectedID:robotID delegate:self];
-        popoverController = [[UIPopoverController alloc] initWithContentViewController:picker];
-        
-        
-        [popoverController presentPopoverFromRect:_SelectRobotButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
-    }];
-}
 
 - (void)didSelectRobot:(NSString *)newRobotID name:(NSString *)robotName{
     robotID = newRobotID;
@@ -166,9 +136,10 @@ float firstY;
     sg.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:sg];
     
-    // Testing out serializtion
+    // ****** Testing out serializtion ******
+    
     NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *savePath = [rootPath stringByAppendingPathComponent:@"save.sav"];
+    NSString *savePath = [rootPath stringByAppendingPathComponent:@"save4.sav"];
     if([[NSFileManager defaultManager] fileExistsAtPath:savePath]){
         UIBlock *block = [NSKeyedUnarchiver unarchiveObjectWithFile:savePath];
         [block initializeControllers:self.programPane Controller:self];
@@ -177,9 +148,10 @@ float firstY;
         MethodDeclorationBlock *main = [MethodDeclorationBlock getMainBlock];
         UIBlock *mainBlock = [[UIBlock alloc] init:self codeBlock:main];
         [self.programPane addSubview:mainBlock];
+        
     }
     
-    // Done testing here
+    // ****** Done testing here ****** 
     
     UIImageView *trashCan = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Trash Can.png"]];
     trashCan.frame = CGRectMake(615, 580, 100, 140);

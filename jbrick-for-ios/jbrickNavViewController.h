@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "jbrickMasterViewController.h"
 
-@interface jbrickNavViewController : UINavigationController
+@interface jbrickNavViewController : UINavigationController <UITableViewDelegate>{
+    id<UITableViewDataSource> currentDataSource;
+}
+
+@property (strong, nonatomic) jbrickMasterViewController *codeBlockController;
+@property (strong, nonatomic) UITableViewController *mainMenuController;
 
 @end

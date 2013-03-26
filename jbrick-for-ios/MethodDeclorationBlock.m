@@ -37,6 +37,10 @@ static MethodDeclorationBlock *mainBlock;
 {
     if(!mainBlock){
         mainBlock = [[MethodDeclorationBlock alloc] init:@"main" parameterTypes:[NSArray array] parameterNames:[NSArray array] returnType:MAIN];
+        UIColor *purp = [UIColor colorWithRed:162.0/255 green:92.0/255 blue:240.0/255 alpha:1];
+        mainBlock.BlockColor = purp;
+        mainBlock.Icon = [UIImage imageNamed:@"main.png"];
+        mainBlock.ContainsChildren = YES;
     }
     return mainBlock;
 }

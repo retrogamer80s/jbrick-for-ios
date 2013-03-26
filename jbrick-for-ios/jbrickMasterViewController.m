@@ -45,11 +45,10 @@ NSMutableDictionary *methodBlocks;
     [super viewDidLoad];
     
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
-    //self.detailViewController = (jbrickDetailViewController *)[[_splitViewController.viewControllers lastObject] topViewController];
+    //UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    //self.navigationItem.rightBarButtonItem = addButton;
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
     [longPress setMinimumPressDuration:0.15];
@@ -57,7 +56,6 @@ NSMutableDictionary *methodBlocks;
     
     methodBlocks = [[NSMutableDictionary alloc] init];
     
-    MethodDeclorationBlock *main = [MethodDeclorationBlock getMainBlock];
     WhileLoopCodeBlock *ifBlock = [[WhileLoopCodeBlock alloc] init:IF];
     WhileLoopCodeBlock *whileLoop = [[WhileLoopCodeBlock alloc] init:WHILE];
     LogicalOperatorCodeBlock *logicOp = [[LogicalOperatorCodeBlock alloc] init];
@@ -97,9 +95,7 @@ NSMutableDictionary *methodBlocks;
     UIColor *red = [UIColor colorWithRed:234.0/255 green:55.0/255 blue:19.0/255 alpha:1];
     UIColor *blue = [UIColor colorWithRed:19.0/255 green:91.0/255 blue:234.0/255 alpha:1];
     UIColor *green = [UIColor colorWithRed:19.0/255 green:234.0/255 blue:55.0/255 alpha:1];
-    UIColor *purp = [UIColor colorWithRed:162.0/255 green:92.0/255 blue:240.0/255 alpha:1];
     
-    main.BlockColor = purp;
     ifBlock.BlockColor = red;
     whileLoop.BlockColor = red;
     logicOp.BlockColor = red;
@@ -115,7 +111,6 @@ NSMutableDictionary *methodBlocks;
     varAssign.BlockColor = [UIColor orangeColor];
     varMath.BlockColor = [UIColor orangeColor];
     
-    main.Icon = [UIImage imageNamed:@"main.png"];
     ifBlock.Icon = [UIImage imageNamed:@"Loop_icon.png"];
     whileLoop.Icon = [UIImage imageNamed:@"Loop_icon.png"];
     logicOp.Icon = [UIImage imageNamed:@"Math.png"];
