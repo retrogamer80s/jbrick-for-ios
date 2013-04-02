@@ -12,6 +12,7 @@
 @implementation UIBlock
 @synthesize controller;
 @synthesize programPane;
+@synthesize CodeBlock = codeBlock;
 
 UIBlock *selectedCodeBlock;
 

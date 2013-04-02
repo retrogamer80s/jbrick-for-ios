@@ -496,6 +496,7 @@
     pVC.splitViewController = self;
     nav.codeBlockController = mVC;
     nav.mainMenuController = mainMenu;
+    nav.detailViewController = dVC;
 	
 	if ([self isShowingMaster]) {
 		[self.masterViewController viewDidAppear:animated];

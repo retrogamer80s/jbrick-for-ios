@@ -2,9 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CurrentProgram</key>
-	<string></string>
 	<key>RobotID</key>
-	<string></string>
+	<string>RobotID</string>
+	<key>CurrentProgram</key>
+	<string>CurrentProgram</string>
 </dict>
 </plist>

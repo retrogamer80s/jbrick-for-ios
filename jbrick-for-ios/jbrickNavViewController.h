@@ -10,10 +10,11 @@
 #import "jbrickMasterViewController.h"
 
 @interface jbrickNavViewController : UINavigationController <UITableViewDelegate>{
-    id<UITableViewDataSource> currentDataSource;
+    id<UITableViewDataSource, UITableViewDelegate> currentDataSource;
 }
 
 @property (strong, nonatomic) jbrickMasterViewController *codeBlockController;
+@property (strong, nonatomic) jbrickDetailViewController *detailViewController;
 @property (strong, nonatomic) UITableViewController *mainMenuController;
 
 @end

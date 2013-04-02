@@ -15,22 +15,17 @@
 #import "KGNoise.h"
 #import "AFJSONRequestOperation.h"
 #import "AFHTTPClient.h"
+#import "Settings.h"
 
 @interface jbrickDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 - (void)configureView;
-@property (weak, nonatomic) IBOutlet UITextView *src;
-@property (weak, nonatomic) IBOutlet UITextField *filename;
-- (IBAction)Upload:(id)sender;
 @end
 
 @implementation jbrickDetailViewController
-@synthesize src = _src;
-@synthesize filename = _filename;
 
 @synthesize detailItem = _detailItem;
 @synthesize detailDescriptionLabel = _detailDescriptionLabel;
-@synthesize submitButton = _submitButton;
 @synthesize propertyPane = _propertyPane;
 @synthesize programPane = _programPane;
 @synthesize masterPopoverController = _masterPopoverController;
@@ -39,57 +34,6 @@
 #pragma mark - Managing the detail item
 float firstX;
 float firstY;
-
-- (IBAction)Upload:(id)sender {
-    
-    MethodDeclorationBlock *main = [MethodDeclorationBlock getMainBlock];
-    NSLog(@"Code:\n%@",[main generateCode]);
-    
-    // Testing out serializtion
-    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *savePath = [rootPath stringByAppendingPathComponent:@"save.sav"];
-    [NSKeyedArchiver archiveRootObject:[self.programPane getRootBlock] toFile:savePath];
-    // Done testing here
-    
-    NSURL *url = [NSURL URLWithString:@"http://media-server.cjpresler.com/"];
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    httpClient.parameterEncoding = AFJSONParameterEncoding;
-    httpClient.stringEncoding = NSUTF16StringEncoding;
-    
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            [main generateCode], @"src",
-                            @"Test", @"filename",
-                            nil];
-    [httpClient postPath:[NSString stringWithFormat:@"rest/Devices/%@/compile", robotID] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful, response '%@'", responseStr);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
-    }];
-}
-
-- (IBAction)RunProgram:(id)sender {
-    NSURL *url = [NSURL URLWithString:@"http://media-server.cjpresler.com/"];
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    httpClient.parameterEncoding = AFJSONParameterEncoding;
-    
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"Test", @"program",
-                            nil];
-    [httpClient getPath:[NSString stringWithFormat:@"rest/Devices/%@/RunProgram", robotID] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful, response '%@'", responseStr);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
-    }];
-
-}
-
-- (void)didSelectRobot:(NSString *)newRobotID name:(NSString *)robotName{
-    robotID = newRobotID;
-    
-    [popoverController dismissPopoverAnimated:YES];
-}
 
 - (void)setDetailItem:(id)newDetailItem
 {
@@ -112,7 +56,6 @@ float firstY;
     if (self.detailItem) {
         self.detailDescriptionLabel.text = [self.detailItem description];
     }
-    
 }
 
 - (void)viewDidLoad
@@ -136,38 +79,50 @@ float firstY;
     sg.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:sg];
     
-    // ****** Testing out serializtion ******
-    
-    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *savePath = [rootPath stringByAppendingPathComponent:@"save4.sav"];
-    if([[NSFileManager defaultManager] fileExistsAtPath:savePath]){
-        UIBlock *block = [NSKeyedUnarchiver unarchiveObjectWithFile:savePath];
-        [block initializeControllers:self.programPane Controller:self];
-        [self.programPane fitToContent];
-    } else {
-        MethodDeclorationBlock *main = [MethodDeclorationBlock getMainBlock];
-        UIBlock *mainBlock = [[UIBlock alloc] init:self codeBlock:main];
-        [self.programPane addSubview:mainBlock];
-        
-    }
-    
-    // ****** Done testing here ****** 
-    
     UIImageView *trashCan = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Trash Can.png"]];
     trashCan.frame = CGRectMake(615, 580, 100, 140);
     [self.view addSubview:trashCan];
     self.programPane.TrashCan = trashCan;
     
+    [self loadNewProgram:[ Settings settings].CurrentProgram];
+    
+}
+
+-(UIBlock *) createNewProgram
+{
+    MethodDeclorationBlock *newMain = [MethodDeclorationBlock createNewMainBlock];
+    UIBlock *newMainBlock = [[UIBlock alloc] init:self codeBlock:newMain];
+    return newMainBlock;
+}
+
+-(void) saveProgram:(NSString *)name
+{
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *savePath = [rootPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.sav", name]];
+    [NSKeyedArchiver archiveRootObject:[_programPane getRootBlock] toFile:savePath];
+}
+
+-(void) loadNewProgram:(NSString *)name
+{
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *savePath = [rootPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.sav", name]];
+    if([[NSFileManager defaultManager] fileExistsAtPath:savePath]){
+        UIBlock *block = [NSKeyedUnarchiver unarchiveObjectWithFile:savePath];
+        [self.programPane loadProgram:block controller:self];
+    } else {
+        UIBlock *block = [self createNewProgram];
+        [self.programPane loadProgram:block controller:self];
+        [self saveProgram:name];
+    }
+
 }
 
 - (void)viewDidUnload
 {
-    [self setSrc:nil];
-    [self setFilename:nil];
-    [self setSubmitButton:nil]; 
     [self setPropertyPane:nil];
     [self setProgramPane:nil];
-    [self setSelectRobotButton:nil];
+    [self setProgramName:nil];
+    [self setProgramPane:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     self.detailDescriptionLabel = nil;

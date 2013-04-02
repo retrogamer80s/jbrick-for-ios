@@ -9,6 +9,7 @@
 #import "RobotDataSource.h"
 #import "AFHTTPClient.h"
 #import "AFJSONRequestOperation.h"
+#import "Settings.h"
 
 @implementation RobotDataSource
 
@@ -17,7 +18,6 @@
     
     tblV = tableView;
     navController = navCont;
-    settings = [NSUserDefaults standardUserDefaults];
     
     NSURL *url = [NSURL URLWithString:@"http://media-server.cjpresler.com/"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -59,7 +59,7 @@
     
     cell.textLabel.text = [robotNames objectAtIndex:[indexPath row]];
     
-    NSString *selRobotID = [settings valueForKey:@"RobotID"];
+    NSString *selRobotID = [Settings settings].RobotID;
     if([selRobotID isEqualToString:[robotIDs objectAtIndex:indexPath.row]])
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     else
@@ -69,7 +69,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [settings setValue:[robotIDs objectAtIndex:indexPath.row] forKey:@"RobotID"];
+    [Settings settings].RobotID = [robotIDs objectAtIndex:indexPath.row];
     [navController popViewControllerAnimated:YES];
 }
 

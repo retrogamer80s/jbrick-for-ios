@@ -20,7 +20,6 @@
     SystemSoundID velcroSound;
     bool panelWasOpen;
     
-    CodeBlock<ViewableCodeBlock> *codeBlock;
     NSMutableArray *attachedBlocks;
     UIBlock *parentBlock;
     UIBlock *previousBlock;
@@ -31,6 +30,7 @@
 }
 @property (nonatomic, retain) jbrickDetailViewController *controller;
 @property (nonatomic, retain) ProgramPane *programPane;
+@property (nonatomic, retain) CodeBlock<ViewableCodeBlock> *CodeBlock;
 
 - (id)init:(jbrickDetailViewController *)controller codeBlock:(id<ViewableCodeBlock>)codeBlockParam;
 

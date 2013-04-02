@@ -8,6 +8,10 @@
 
 #import "ProgramPane.h"
 #import "UIBlock.h"
+#import "Settings.h"
+
+#define MARGIN_SIDE 5
+#define MARGIN_TOP_BOTTOM 35
 
 @implementation ProgramPane
 
@@ -39,19 +43,57 @@
     self.PlacedBlocks = [NSMutableArray array];
     
     CGRect contentRect = self.frame;
-    contentRect.origin.x += 5;
-    contentRect.origin.y += 5;
-    contentRect.size.width -= 5;
-    contentRect.size.height -= 5;
+    contentRect.origin.x += MARGIN_SIDE;
+    contentRect.origin.y += MARGIN_TOP_BOTTOM;
+    contentRect.size.width -= MARGIN_SIDE;
+    contentRect.size.height -= MARGIN_TOP_BOTTOM;
     zoomableView = [[UIView alloc] initWithFrame:contentRect];
     zoomableView.clipsToBounds = NO;
     
+    if(!programName){
+        programName = [[UITextField alloc] initWithFrame:self.frame];
+        [programName setTextColor:[UIColor whiteColor]];
+        programName.borderStyle = UITextBorderStyleNone;
+        programName.font = [UIFont boldSystemFontOfSize:25];
+        programName.textAlignment = NSTextAlignmentCenter;
+    }
+    [programName setText:[Settings settings].CurrentProgram];
+    
     [super addSubview:zoomableView];
+    [super addSubview:programName];
 }
 
-- (UIView *) getRootBlock
+- (UIBlock *) getRootBlock
 {
-    return [[PlacedBlocks objectAtIndex:0] getHighestParent];
+    return rootBlock;
+}
+
+- (void)loadProgram:(UIBlock *)newRootBlock controller:(jbrickDetailViewController *)dvc
+{
+    if(rootBlock){ // Another program is already loaded, animate it off screen
+        UIView *oldZoomView = zoomableView;
+        [UIView animateWithDuration:.5 animations:^{
+            CGPoint center = zoomableView.center;
+            zoomableView.center = CGPointMake(center.x+1000, center.y);
+        }];
+        
+        [self customInitialization];
+        rootBlock = newRootBlock;
+        [rootBlock initializeControllers:self Controller:dvc];
+        [self fitToContent];
+        CGPoint center = zoomableView.center;
+        zoomableView.center = CGPointMake(center.x-1000, center.y);
+        [UIView animateWithDuration:.5 animations:^{
+            zoomableView.center = center;
+        } completion:^(BOOL finished) {
+            [oldZoomView removeFromSuperview];
+        }];
+
+    } else {
+        rootBlock = newRootBlock;
+        [rootBlock initializeControllers:self Controller:dvc];
+        [self fitToContent];
+    }
 }
 
 - (void)addSubview:(UIView *)view
@@ -102,8 +144,8 @@
                 view.center = CGPointMake(view.center.x - furthestLeft.floatValue, view.center.y);
         }];
     }
-    CGSize canvasSize = (CGSizeMake(furthestRight.floatValue - furthestLeft.floatValue, furthestDown.floatValue - furthestUp.floatValue+25));
-    [zoomableView setFrame:CGRectMake(5, 5,canvasSize.width-5, canvasSize.height-5)];
+    CGSize canvasSize = (CGSizeMake(furthestRight.floatValue - furthestLeft.floatValue, furthestDown.floatValue - furthestUp.floatValue+MARGIN_TOP_BOTTOM + 20));
+    [zoomableView setFrame:CGRectMake(MARGIN_SIDE, MARGIN_TOP_BOTTOM, canvasSize.width-MARGIN_SIDE, canvasSize.height-MARGIN_TOP_BOTTOM)];
     [UIView animateWithDuration:0.5 animations:^{
         [self setContentSize:canvasSize];
     }];

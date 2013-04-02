@@ -8,12 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProgramPane : UIScrollView <UIScrollViewDelegate>
+@class UIBlock; @class jbrickDetailViewController;
+
+@interface ProgramPane : UIScrollView <UIScrollViewDelegate, UITextFieldDelegate>
 {
     UIView *zoomableView;
+    UIBlock *rootBlock;
+    UITextField *programName;
 }
 @property UIImageView *TrashCan;
 @property NSMutableArray *PlacedBlocks;
 - (void)fitToContent;
--(UIView *)getRootBlock;
+-(UIBlock *)getRootBlock;
+-(void) loadProgram:(UIBlock *)rootBlock controller:(jbrickDetailViewController *)dvc;
 @end

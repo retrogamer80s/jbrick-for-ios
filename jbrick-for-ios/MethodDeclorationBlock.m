@@ -44,6 +44,15 @@ static MethodDeclorationBlock *mainBlock;
     }
     return mainBlock;
 }
++(id) createNewMainBlock
+{
+    MethodDeclorationBlock *newMainBlock = [[MethodDeclorationBlock alloc] init:@"main" parameterTypes:[NSArray array] parameterNames:[NSArray array] returnType:MAIN];
+    UIColor *purp = [UIColor colorWithRed:162.0/255 green:92.0/255 blue:240.0/255 alpha:1];
+    newMainBlock.BlockColor = purp;
+    newMainBlock.Icon = [UIImage imageNamed:@"main.png"];
+    newMainBlock.ContainsChildren = YES;
+    return newMainBlock;
+}
 
 -(NSString *)generateCode
 {

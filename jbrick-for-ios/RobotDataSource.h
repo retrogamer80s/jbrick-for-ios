@@ -13,7 +13,7 @@
     NSMutableArray *robotIDs;
     UITableView *tblV;
     UINavigationController *navController;
-    NSUserDefaults *settings;
+
 }
 
 -(id)init:(UITableView *)tableView navController:(UINavigationController *)navCont;
