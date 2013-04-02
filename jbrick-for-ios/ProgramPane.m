@@ -51,9 +51,11 @@
     zoomableView.clipsToBounds = NO;
     
     if(!programName){
-        programName = [[UITextField alloc] initWithFrame:self.frame];
+        CGRect frame = self.frame;
+        frame.size.height = 30;
+        programName = [[UILabel alloc] initWithFrame:frame];
         [programName setTextColor:[UIColor whiteColor]];
-        programName.borderStyle = UITextBorderStyleNone;
+        programName.backgroundColor = [UIColor clearColor];
         programName.font = [UIFont boldSystemFontOfSize:25];
         programName.textAlignment = NSTextAlignmentCenter;
     }

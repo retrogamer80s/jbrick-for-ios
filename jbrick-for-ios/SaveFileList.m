@@ -8,6 +8,7 @@
 
 #import "SaveFileList.h"
 #import "Settings.h"
+#import "EditableTableCell.h"
 
 @implementation SaveFileList
 
@@ -16,6 +17,7 @@
     
     detailView = detailViewParam;
     _tableView = tableView;
+    textFields = [NSMutableArray array];
     
     [self findSavedPrograms];
     
@@ -24,7 +26,8 @@
 
 - (void)addProgram
 {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Program Name" message:@"What should the new program be called?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Program Name" message:@"What should the new program be called?"
+                                                    delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alert show];
 }
@@ -36,11 +39,18 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewStylePlain  reuseIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"EditableTableCell";
+    EditableTableCell *cell = (EditableTableCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+    {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EditableTableCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
     
+    cell.TextField.delegate = self;
+    [textFields addObject:cell.TextField];
     NSString *saveName = [saveFiles objectAtIndex:[indexPath row]];
-    cell.textLabel.text = saveName;
+    cell.TextField.text = saveName;
     if([saveName isEqualToString:[Settings settings].CurrentProgram ])
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     else
@@ -58,11 +68,49 @@
     return true;
 }
 
+- (void)setEditingMode{
+    [_tableView setEditing:!_tableView.isEditing animated:YES];
+    if(!_tableView.isEditing)
+        for(UITextField *tf in textFields)
+            tf.userInteractionEnabled = false;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *programName = [saveFiles objectAtIndex:indexPath.row];
-    [self loadProgram:programName];
+    if(! tableView.isEditing){
+        NSString *programName = [saveFiles objectAtIndex:indexPath.row];
+        [self loadProgram:programName];
+    } else {
+        EditableTableCell *cell = (EditableTableCell *)[tableView cellForRowAtIndexPath:indexPath];
+        cell.TextField.userInteractionEnabled = YES;
+        [cell.TextField becomeFirstResponder];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    previousProgramName = textField.text;
+}
+
+- (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    return textField.text.length + string.length - range.length < 12; //Program names on nxt cannot be greater than 11 char
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if(![textField.text isEqual:previousProgramName]){
+        Settings *settings = [Settings settings];
+        NSString *orig = [NSString stringWithFormat:@"%@/%@.%@", settings.SaveDirectory, previousProgramName, settings.SaveExtention];
+        NSString *dest = [NSString stringWithFormat:@"%@/%@.%@", settings.SaveDirectory, textField.text, settings.SaveExtention];
+        
+        if([settings.CurrentProgram isEqual:previousProgramName])
+            settings.CurrentProgram = textField.text;
+        
+        [[NSFileManager defaultManager] moveItemAtPath:orig toPath:dest error:nil];
+        [self findSavedPrograms];
+    }
 }
 
 - (void) loadProgram:(NSString *)progName
@@ -92,6 +140,7 @@
         [[NSFileManager defaultManager] removeItemAtPath:fullPath error:nil];
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
+
 }
 
 

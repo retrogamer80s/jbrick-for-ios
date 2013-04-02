@@ -14,7 +14,7 @@
 {
     UIView *zoomableView;
     UIBlock *rootBlock;
-    UITextField *programName;
+    UILabel *programName;
 }
 @property UIImageView *TrashCan;
 @property NSMutableArray *PlacedBlocks;

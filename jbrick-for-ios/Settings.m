@@ -51,7 +51,7 @@ static Settings *singleton;
 
 - (NSString *)SaveExtention{
     if(!saveExt)
-        saveExt = @".sav";
+        saveExt = @"sav";
     return saveExt;
 }
 

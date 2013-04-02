@@ -47,6 +47,8 @@
 		3F86E72D162C9D4E00A7C985 /* PropertyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F86E71D162C9D4E00A7C985 /* PropertyViewController.m */; };
 		3F86E730162C9D4E00A7C985 /* ValuePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F86E722162C9D4E00A7C985 /* ValuePickerController.m */; };
 		3FAAB9ED17049AF0009B53B7 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAB9EC17049AF0009B53B7 /* Settings.m */; };
+		3FAF4DF8170B4357000177FB /* EditableTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FAF4DF7170B4357000177FB /* EditableTableCell.xib */; };
+		3FAF4DFC170B44BB000177FB /* EditableTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAF4DFB170B44BB000177FB /* EditableTableCell.m */; };
 		3FB5322C161098D800A907F7 /* MethodTabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB5322B161098D800A907F7 /* MethodTabelCell.m */; };
 		3FB775C8166CFC6700C97D22 /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB775C7166CFC6700C97D22 /* main.png */; };
 		3FB775D4166CFC6D00C97D22 /* App_Icon(100x100).png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB775CB166CFC6D00C97D22 /* App_Icon(100x100).png */; };
@@ -174,6 +176,9 @@
 		3F86E722162C9D4E00A7C985 /* ValuePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValuePickerController.m; sourceTree = "<group>"; };
 		3FAAB9EB17049AF0009B53B7 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		3FAAB9EC17049AF0009B53B7 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		3FAF4DF7170B4357000177FB /* EditableTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditableTableCell.xib; sourceTree = "<group>"; };
+		3FAF4DFA170B44BA000177FB /* EditableTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditableTableCell.h; sourceTree = "<group>"; };
+		3FAF4DFB170B44BB000177FB /* EditableTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableTableCell.m; sourceTree = "<group>"; };
 		3FB5322A161098D800A907F7 /* MethodTabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodTabelCell.h; sourceTree = "<group>"; };
 		3FB5322B161098D800A907F7 /* MethodTabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodTabelCell.m; sourceTree = "<group>"; };
 		3FB775C7166CFC6700C97D22 /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main.png; sourceTree = "<group>"; };
@@ -362,6 +367,9 @@
 				3F3C075116F8F7BB0015A4DE /* RobotDataSource.m */,
 				3FAAB9EB17049AF0009B53B7 /* Settings.h */,
 				3FAAB9EC17049AF0009B53B7 /* Settings.m */,
+				3FAF4DF7170B4357000177FB /* EditableTableCell.xib */,
+				3FAF4DFA170B44BA000177FB /* EditableTableCell.h */,
+				3FAF4DFB170B44BB000177FB /* EditableTableCell.m */,
 			);
 			path = "jbrick-for-ios";
 			sourceTree = "<group>";
@@ -630,6 +638,7 @@
 				3F05B29A16C994A20020E0C4 /* speaker.png in Resources */,
 				3FED5D6A16F8D9FB00511131 /* Default-Landscape~ipad.png in Resources */,
 				3FED5D6C16F8DD1D00511131 /* Launch_Image_Landscape.png in Resources */,
+				3FAF4DF8170B4357000177FB /* EditableTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,6 +697,7 @@
 				3FDC7FBD16F8EC0E0066604C /* SaveFileList.m in Sources */,
 				3F3C075216F8F7BB0015A4DE /* RobotDataSource.m in Sources */,
 				3FAAB9ED17049AF0009B53B7 /* Settings.m in Sources */,
+				3FAF4DFC170B44BB000177FB /* EditableTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

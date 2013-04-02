@@ -31,15 +31,15 @@
                         <sections>
                             <tableViewSection id="rDs-kp-cGn">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="DNs-3z-Na4" style="IBUITableViewCellStyleDefault" id="7JU-Xe-W0c">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="DNs-3z-Na4" style="IBUITableViewCellStyleDefault" id="7JU-Xe-W0c">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Programs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DNs-3z-Na4">
-                                                    <rect key="frame" x="10" y="0.0" width="267" height="43"/>
+                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -49,15 +49,15 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="r5g-Bj-1NM" style="IBUITableViewCellStyleDefault" id="DLs-2j-1Rn">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="r5g-Bj-1NM" style="IBUITableViewCellStyleDefault" id="DLs-2j-1Rn">
                                         <rect key="frame" x="0.0" y="44" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Robots" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r5g-Bj-1NM">
-                                                    <rect key="frame" x="10" y="0.0" width="267" height="43"/>
+                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -67,15 +67,15 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" indentationWidth="10" textLabel="BQl-yy-kc1" style="IBUITableViewCellStyleDefault" id="IAY-zQ-dbL">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="BQl-yy-kc1" style="IBUITableViewCellStyleDefault" id="IAY-zQ-dbL">
                                         <rect key="frame" x="0.0" y="88" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Code Blocks" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BQl-yy-kc1">
-                                                    <rect key="frame" x="10" y="0.0" width="267" height="43"/>
+                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -104,7 +104,7 @@
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Save" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y7o-Dd-bNh">
                                                     <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
@@ -475,66 +475,6 @@
             <point key="canvasLocation" x="-293" y="137"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="MGSplitViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MGSplitViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="hideMaster:"/>
-                <relationship kind="action" name="showMaster:"/>
-                <relationship kind="action" name="showMasterPopover:"/>
-                <relationship kind="action" name="toggleMasterBeforeDetail:"/>
-                <relationship kind="action" name="toggleMasterView:"/>
-                <relationship kind="action" name="toggleSplitOrientation:"/>
-                <relationship kind="outlet" name="delegate"/>
-                <relationship kind="outlet" name="detailViewController" candidateClass="UIViewController"/>
-                <relationship kind="outlet" name="masterViewController" candidateClass="UIViewController"/>
-                <relationship kind="outlet" name="propertyViewController" candidateClass="UIViewController"/>
-            </relationships>
-        </class>
-        <class className="MethodTabelCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MethodTabelCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="customLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ProgramPane" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProgramPane.h"/>
-        </class>
-        <class className="PropertyViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PropertyViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="ClosePressed:"/>
-            </relationships>
-        </class>
-        <class className="ValueInputCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ValueInputCell.h"/>
-            <relationships>
-                <relationship kind="action" name="ValueSelected:"/>
-                <relationship kind="outlet" name="Subview" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="ValuePickerController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ValuePickerController.h"/>
-        </class>
-        <class className="jbrickDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/jbrickDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="ProgramName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="ProgramPane" candidateClass="ProgramPane"/>
-                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="propertyPane" candidateClass="PropertyViewController"/>
-            </relationships>
-        </class>
-        <class className="jbrickMasterViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/jbrickMasterViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="longPress:" candidateClass="UIGestureRecognizer"/>
-            </relationships>
-        </class>
-        <class className="jbrickNavViewController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/jbrickNavViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>

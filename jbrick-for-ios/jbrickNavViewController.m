@@ -55,6 +55,9 @@
                                     // because otherwise arc will delete it after assignment... stupid!
     table.tableView.dataSource = currentDataSource;
     table.tableView.delegate = currentDataSource;
+    table.tableView.allowsSelectionDuringEditing = YES;
+    table.editButtonItem.target = currentDataSource;
+    table.editButtonItem.action = @selector(setEditingMode);
     
     
     [self pushViewController:table animated:YES];
