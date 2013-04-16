@@ -478,7 +478,7 @@
     
     [self setup];
     
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:[NSBundle mainBundle]];
     jbrickMasterViewController *mVC = [sb instantiateViewControllerWithIdentifier:@"MasterController"];
     jbrickNavViewController *nav = [sb instantiateViewControllerWithIdentifier:@"NavController"];
     UITableViewController *mainMenu = [sb instantiateViewControllerWithIdentifier:@"mainMenuController"];

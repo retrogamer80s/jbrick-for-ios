@@ -120,6 +120,8 @@ static NSMutableDictionary *constants;
                                   nil]
                           forKey:[NSNumber numberWithInt:type]];
             break;
+        default:
+            break;
 
     }
     return [constants objectForKey:[NSNumber numberWithInt:type]];

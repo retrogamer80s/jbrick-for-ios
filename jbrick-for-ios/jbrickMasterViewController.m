@@ -130,7 +130,7 @@ NSMutableDictionary *methodBlocks;
     NSArray *logicMethods = [NSArray arrayWithObjects:whileLoop, ifBlock, logicOp, nil];
     NSArray *inputMethods = [NSArray arrayWithObjects:setSensor, sensorBoolean, nil];
     NSArray *varMathMethods = [NSArray arrayWithObjects: variable, value, varAssign, nil];
-    NSMutableArray *customMethods = [NSMutableArray arrayWithObjects:nil];
+    //NSMutableArray *customMethods = [NSMutableArray arrayWithObjects:nil];
     
     [methodBlocks setObject:systemMethods forKey:@"System"];
     [methodBlocks setObject:logicMethods forKey:@"Logic"];
@@ -148,7 +148,8 @@ NSMutableDictionary *methodBlocks;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return YES;
+    // Return YES for supported orientations
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 - (void)insertNewObject:(id)sender

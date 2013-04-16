@@ -103,9 +103,9 @@
     
     if(codeBlock.ReturnType == BOOLEAN){
         if([operation generateCode] != @"!" || innerCodeBlocks.count == 0){
-            [super addCodeBlock:codeBlock];
+            return [super addCodeBlock:codeBlock];
         } else {
-            
+            return false;
         }
     } else {
         return false;
@@ -119,9 +119,9 @@
     
     if(codeBlock.ReturnType == BOOLEAN){
         if([operation generateCode] != @"!" || innerCodeBlocks.count == 0){
-            [super addCodeBlock:codeBlock indexBlock:indexBlock afterIndexBlock:afterIndexBlock];
+            return [super addCodeBlock:codeBlock indexBlock:indexBlock afterIndexBlock:afterIndexBlock];
         } else {
-            
+            return false;
         }
     } else {
         return false;

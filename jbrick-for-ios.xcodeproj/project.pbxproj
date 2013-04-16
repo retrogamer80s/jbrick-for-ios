@@ -18,6 +18,7 @@
 		3F05B29716C94ED60020E0C4 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F05B28E16C94ED60020E0C4 /* UIImageView+AFNetworking.m */; };
 		3F05B29A16C994A20020E0C4 /* speaker.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F05B29916C994A10020E0C4 /* speaker.png */; };
 		3F1254E816406582005A1B0E /* VariableAssignmentBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1254E716406581005A1B0E /* VariableAssignmentBlock.m */; };
+		3F1A5E5A171D7D4B00A81D0E /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1A5E59171D7D4B00A81D0E /* right-arrow.png */; };
 		3F1B8991160108410007A0B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1B8990160108410007A0B9 /* UIKit.framework */; };
 		3F1B8993160108410007A0B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1B8992160108410007A0B9 /* Foundation.framework */; };
 		3F1B8995160108410007A0B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1B8994160108410007A0B9 /* CoreGraphics.framework */; };
@@ -74,6 +75,9 @@
 		3FC7733A1614B34A0025A048 /* MethodDeclorationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC773391614B34A0025A048 /* MethodDeclorationBlock.m */; };
 		3FCB8F701608DF7A00F45EB7 /* UIBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCB8F6F1608DF7A00F45EB7 /* UIBlock.m */; };
 		3FCB8F711608E39700F45EB7 /* jbrickDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B89A9160108410007A0B9 /* jbrickDetailViewController.m */; };
+		3FD522FC1714A0EB00E80C73 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD522FB1714A0EB00E80C73 /* Default-Landscape@2x~ipad.png */; };
+		3FD522FD1714A0F700E80C73 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FED5D6916F8D9FB00511131 /* Default-Landscape~ipad.png */; };
+		3FD523001714A65E00E80C73 /* UITableViewControllerLandscape.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD522FF1714A65E00E80C73 /* UITableViewControllerLandscape.m */; };
 		3FD7740D16481B5C0005A4B9 /* CodeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD7740C16481B5C0005A4B9 /* CodeBlock.m */; };
 		3FD774181649915E0005A4B9 /* if-elseif-else.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD774151649915E0005A4B9 /* if-elseif-else.png */; };
 		3FD774191649915E0005A4B9 /* sound.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD774161649915E0005A4B9 /* sound.png */; };
@@ -90,7 +94,6 @@
 		3FE1DDA9163593900049555C /* wheel_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE1DDA4163593900049555C /* wheel_icon.png */; };
 		3FED5D6516F8A1ED00511131 /* CBVisitorUIBlockBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FED5D6416F8A1ED00511131 /* CBVisitorUIBlockBuilder.m */; };
 		3FED5D6816F8D06500511131 /* jbrickNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FED5D6716F8D06400511131 /* jbrickNavViewController.m */; };
-		3FED5D6A16F8D9FB00511131 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FED5D6916F8D9FB00511131 /* Default-Landscape~ipad.png */; };
 		3FED5D6C16F8DD1D00511131 /* Launch_Image_Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FED5D6B16F8DD1D00511131 /* Launch_Image_Landscape.png */; };
 		3FEF4D7C16B6D2BE00D9CABD /* UIPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEF4D7B16B6D2BE00D9CABD /* UIPrompt.m */; };
 		3FFD2A75160A118B00E8403C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFD2A74160A118B00E8403C /* AudioToolbox.framework */; };
@@ -126,6 +129,7 @@
 		3F05B29916C994A10020E0C4 /* speaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speaker.png; sourceTree = "<group>"; };
 		3F1254E616406581005A1B0E /* VariableAssignmentBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariableAssignmentBlock.h; sourceTree = "<group>"; };
 		3F1254E716406581005A1B0E /* VariableAssignmentBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariableAssignmentBlock.m; sourceTree = "<group>"; };
+		3F1A5E59171D7D4B00A81D0E /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
 		3F1B898C160108410007A0B9 /* jbrick-for-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "jbrick-for-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F1B8990160108410007A0B9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3F1B8992160108410007A0B9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -213,6 +217,9 @@
 		3FCB8F6E1608DF7A00F45EB7 /* UIBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBlock.h; sourceTree = "<group>"; };
 		3FCB8F6F1608DF7A00F45EB7 /* UIBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBlock.m; sourceTree = "<group>"; };
 		3FD00E33161C82C500AD98DB /* ViewableCodeBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewableCodeBlock.h; sourceTree = "<group>"; };
+		3FD522FB1714A0EB00E80C73 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		3FD522FE1714A65E00E80C73 /* UITableViewControllerLandscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewControllerLandscape.h; sourceTree = "<group>"; };
+		3FD522FF1714A65E00E80C73 /* UITableViewControllerLandscape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewControllerLandscape.m; sourceTree = "<group>"; };
 		3FD6B0BD164155EC00B4A0CC /* CodeBlockVisitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeBlockVisitor.h; sourceTree = "<group>"; };
 		3FD7740C16481B5C0005A4B9 /* CodeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeBlock.m; sourceTree = "<group>"; };
 		3FD774151649915E0005A4B9 /* if-elseif-else.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "if-elseif-else.png"; sourceTree = "<group>"; };
@@ -300,6 +307,7 @@
 		3F1B8981160108410007A0B9 = {
 			isa = PBXGroup;
 			children = (
+				3FD522FB1714A0EB00E80C73 /* Default-Landscape@2x~ipad.png */,
 				3FED5D6916F8D9FB00511131 /* Default-Landscape~ipad.png */,
 				3FB775E1166CFDE900C97D22 /* App_Icon(144x144).png */,
 				3FB775DD166CFC8900C97D22 /* App_Icon(72x72).png */,
@@ -370,6 +378,8 @@
 				3FAF4DF7170B4357000177FB /* EditableTableCell.xib */,
 				3FAF4DFA170B44BA000177FB /* EditableTableCell.h */,
 				3FAF4DFB170B44BB000177FB /* EditableTableCell.m */,
+				3FD522FE1714A65E00E80C73 /* UITableViewControllerLandscape.h */,
+				3FD522FF1714A65E00E80C73 /* UITableViewControllerLandscape.m */,
 			);
 			path = "jbrick-for-ios";
 			sourceTree = "<group>";
@@ -487,6 +497,7 @@
 		3FCB8F641608A72500F45EB7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3F1A5E59171D7D4B00A81D0E /* right-arrow.png */,
 				3FED5D6B16F8DD1D00511131 /* Launch_Image_Landscape.png */,
 				3FB775CA166CFC6D00C97D22 /* App_Icon */,
 				3FD774151649915E0005A4B9 /* if-elseif-else.png */,
@@ -636,9 +647,11 @@
 				3FB775E2166CFDE900C97D22 /* App_Icon(144x144).png in Resources */,
 				3F7D925A166D0D3300EA5E46 /* Trash Can.png in Resources */,
 				3F05B29A16C994A20020E0C4 /* speaker.png in Resources */,
-				3FED5D6A16F8D9FB00511131 /* Default-Landscape~ipad.png in Resources */,
 				3FED5D6C16F8DD1D00511131 /* Launch_Image_Landscape.png in Resources */,
 				3FAF4DF8170B4357000177FB /* EditableTableCell.xib in Resources */,
+				3FD522FC1714A0EB00E80C73 /* Default-Landscape@2x~ipad.png in Resources */,
+				3FD522FD1714A0F700E80C73 /* Default-Landscape~ipad.png in Resources */,
+				3F1A5E5A171D7D4B00A81D0E /* right-arrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,6 +711,7 @@
 				3F3C075216F8F7BB0015A4DE /* RobotDataSource.m in Sources */,
 				3FAAB9ED17049AF0009B53B7 /* Settings.m in Sources */,
 				3FAF4DFC170B44BB000177FB /* EditableTableCell.m in Sources */,
+				3FD523001714A65E00E80C73 /* UITableViewControllerLandscape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,8 @@
 
 #define MARGIN_SIDE 5
 #define MARGIN_TOP_BOTTOM 35
+#define INSERT_ARROW_WIDTH 50
+#define INSERT_ARROW_HEIGHT 40
 
 @implementation ProgramPane
 
@@ -61,8 +63,16 @@
     }
     [programName setText:[Settings settings].CurrentProgram];
     
+    if(!self.InsertArrow){
+        self.InsertArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right-arrow.png"]];
+        self.InsertArrow.frame = CGRectMake(0, 0, 50, 40);
+        //self.InsertArrow.hidden = YES;
+        [self setInsertArrowPosition:0 y:0];
+    }
+    
     [super addSubview:zoomableView];
     [super addSubview:programName];
+    [super addSubview:self.InsertArrow];
 }
 
 - (UIBlock *) getRootBlock
@@ -157,6 +167,11 @@
 {
     //Return zoomableView to enable zooming... but it's buggy right now
     return nil;
+}
+
+-(void) setInsertArrowPosition:(int)x y:(int)y
+{
+    self.InsertArrow.center = CGPointMake(x-(INSERT_ARROW_WIDTH/2), y);
 }
 
 @end

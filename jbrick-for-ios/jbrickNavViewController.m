@@ -13,6 +13,7 @@
 #import "CodeBlock.h"
 #import "UIBlock.h"
 #import "AFHTTPClient.h"
+#import "UITableViewControllerLandscape.h"
 
 @implementation jbrickNavViewController
 
@@ -35,6 +36,12 @@
     
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+}
+
 - (void)setMainMenuController:(UITableViewController *)mainMenuController{
     mmController = mainMenuController;
     mmController.title = @"Main Menu";
@@ -49,7 +56,7 @@
 }
 
 - (void) pressedPrograms {
-    UITableViewController *table = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+    UITableViewController *table = [[UITableViewControllerLandscape alloc] initWithStyle:UITableViewStylePlain];
     SaveFileList *saveFileList = [[SaveFileList alloc] init:detailViewController tableView:table.tableView];
     currentDataSource = saveFileList;// The datasource object needs to be saved to a local variable
                                     // because otherwise arc will delete it after assignment... stupid!
@@ -68,7 +75,7 @@
 }
 
 - (void) pressedRobots {
-    UITableViewController *table = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+    UITableViewController *table = [[UITableViewControllerLandscape alloc] initWithStyle:UITableViewStylePlain];
     currentDataSource = [[RobotDataSource alloc] init:table.tableView navController:self]; // The datasource object needs to be saved to a local variable
                                                                         // because otherwise arc will delete it after assignment... stupid!
     table.tableView.dataSource = currentDataSource;
