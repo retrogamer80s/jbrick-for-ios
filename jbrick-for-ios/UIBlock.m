@@ -204,6 +204,8 @@ UIBlock *selectedCodeBlock;
             [programPane setInsertArrowPosition:0 y:programPane.InsertArrow.center.y];
         }];
     } else if(insertBlock && insertBlock != tmpAttachedBlock){
+                break;
+                arrowX = insertBlock.frame.origin.x + 10;
         if(!tmpAttachedBlock) // The arrow is off the screen
             [programPane setInsertArrowPosition:0 y:insertBlock.frame.origin.y+35];
         tmpAttachedBlock = insertBlock;

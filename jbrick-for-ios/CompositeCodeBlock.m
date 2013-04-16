@@ -22,7 +22,7 @@
 {
     if(![self canAddCodeBlock:codeBlock])
         return false;
-    [innerCodeBlocks addObject:codeBlock];
+    [innerCodeBlocks insertObject:codeBlock atIndex:0];
     codeBlock.Parent = self;
     return true;
 }
