@@ -203,14 +203,29 @@ UIBlock *selectedCodeBlock;
         [UIView animateWithDuration:.25 animations:^{
             [programPane setInsertArrowPosition:0 y:programPane.InsertArrow.center.y];
         }];
-    } else if(insertBlock && insertBlock != tmpAttachedBlock){
+    } else if(insertBlock){
+        double arrowY, arrowX;
+        switch ([self getAttachDirection:insertBlock]) {
+            case Inside:
+                arrowX = insertBlock.frame.origin.x + 10 + LEFT_MARGIN;
+                arrowY = insertBlock.frame.origin.y+ 35 + TOP_MARGIN;
                 break;
+            case Below:
                 arrowX = insertBlock.frame.origin.x + 10;
+                arrowY = insertBlock.frame.origin.y+ 35 + insertBlock.frame.size.height;
+                break;
+            case Above:
+                arrowX = insertBlock.frame.origin.x + 10;
+                arrowY = insertBlock.frame.origin.y+ 35;
+                break;
+        }
+        
         if(!tmpAttachedBlock) // The arrow is off the screen
-            [programPane setInsertArrowPosition:0 y:insertBlock.frame.origin.y+35];
+            [programPane setInsertArrowPosition:0 y:insertBlock.frame.origin.y+ 35 + insertBlock.frame.size.height];
         tmpAttachedBlock = insertBlock;
+        
         [UIView animateWithDuration:.25 animations:^{
-            [programPane setInsertArrowPosition:insertBlock.frame.origin.x + 10 y:insertBlock.frame.origin.y+35];
+            [programPane setInsertArrowPosition:arrowX y:arrowY];
         }];
     }
 }
@@ -254,45 +269,49 @@ UIBlock *selectedCodeBlock;
     }
 }
 
+// Return the closest block above, or main
 - (UIBlock *)getClosestBlock
 {
-    CGRect boundsA = [self.superview convertRect:self.frame toView:mainWindow];
-    UIBlock *overlappedBlock;
-    CGFloat distanceToBlock = 0.0;
+    CGRect boundsA = [self.superview convertRect:self.frame toView:programPane];
+    UIBlock *closestBlock;
+    CGFloat distanceToClosestBlock = CGFLOAT_MAX;
     
     for(id object in [self getUnattachedBlocks])
     {
         if(object != self)
         {
             UIBlock *otherBlock = object;
-            CGRect boundsB = [otherBlock.superview convertRect:otherBlock.frameWithoutShift toView:mainWindow];
-            if( CGRectIntersectsRect(boundsA, boundsB) ){
-                //Check if this one is closer than the previous
-                CGFloat otherBlockDistance = [self DistanceBetweenTwoPoints:self.frame.origin point2:otherBlock.frameWithoutShift.origin];
-                if(overlappedBlock == nil || otherBlockDistance < distanceToBlock){
-                    distanceToBlock = otherBlockDistance;
-                    overlappedBlock = otherBlock;
-                }
+            CGRect boundsB = [otherBlock.superview convertRect:otherBlock.frame toView:programPane];
+            double distance = boundsA.origin.y - boundsB.origin.y;
+            if(distance > 0 && distance < distanceToClosestBlock && (boundsB.origin.y + boundsB.size.height) >= boundsA.origin.y){
+                closestBlock = otherBlock;
+                distanceToClosestBlock = distance;
             }
         }
     }
-    return overlappedBlock;
-}
+    UIBlock *main = [programPane getRootBlock];
+    if(!closestBlock || closestBlock == main){
+        NSUInteger blocksInMain = main->attachedBlocks.count;
+        CGRect mainBounds = [main.superview convertRect:main.frame toView:programPane];
+        if(boundsA.origin.y > mainBounds.origin.y + TOP_MARGIN && blocksInMain > 0)
+            closestBlock = [main->attachedBlocks objectAtIndex:blocksInMain-1]; // get the lowest block
+        else // Above the main block so return main
+            closestBlock = [programPane getRootBlock];
+    }
+    
+    return closestBlock;
+} 
 
 - (Direction)getAttachDirection:(UIBlock *)overlappedBlock{
-    CGPoint orig1 = [self.superview convertPoint:self.frame.origin toView:mainWindow];
-    CGPoint orig2 = [overlappedBlock.superview convertPoint:overlappedBlock.frameWithoutShift.origin toView:mainWindow];
-    float deltaX = orig1.x - orig2.x;
-    float deltaY = orig1.y - orig2.y;
-    
     if(overlappedBlock->parentBlock){
-        if(deltaX > 50){
+        CGPoint orig1 = [self.superview convertPoint:self.frame.origin toView:programPane];
+        CGPoint orig2 = [overlappedBlock.superview convertPoint:overlappedBlock.frame.origin toView:programPane];
+        double halfway = orig2.y + (overlappedBlock.frame.size.height / 2);
+        
+        if (overlappedBlock.CodeBlock.ContainsChildren && orig1.y <= halfway){
             return Inside;
         } else {
-            if(deltaY <= 0)
-                return Above;
-            else
-                return Below;
+            return Below;
         }
     } else { // No parent, must be main
         return Inside;
@@ -377,7 +396,7 @@ UIBlock *selectedCodeBlock;
     if(!indexBlock)
     {
         if([codeBlock addCodeBlock:attachBlock->codeBlock]){
-            [attachedBlocks addObject:attachBlock];
+            [attachedBlocks insertObject:attachBlock atIndex:0];
             attached = true;
         }
     } else {
