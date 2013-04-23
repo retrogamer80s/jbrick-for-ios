@@ -151,8 +151,8 @@ float firstY;
 
 - (void)placeBlock:(UIView *)block
 {
+    block.center = [self.programPane convertPoint:block.center fromView:block.superview];
     [block removeFromSuperview];
-    block.center = [self.programPane convertPoint:block.center fromView:_splitViewController.view];
     [self.programPane addSubview:block];
     
 }

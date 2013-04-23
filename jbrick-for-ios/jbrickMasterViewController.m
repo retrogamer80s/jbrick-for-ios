@@ -67,6 +67,11 @@
                                         parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:MOTOR],[NSNumber numberWithInt:MOTOR_POWER], nil]
                                         parameterNames:[NSArray arrayWithObjects:@"Motor", @"Motor Power", nil]
                                         returnType:VOID];
+    MethodCallCodeBlock *rotate = [[MethodCallCodeBlock alloc] init:@"RotateMotor"
+                                                       description:@"Rotates the given Motor forward for the given Degrees with the given Power"
+                                                    parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:MOTOR],[NSNumber numberWithInt:MOTOR_POWER],[NSNumber numberWithInt:LONG], nil]
+                                                    parameterNames:[NSArray arrayWithObjects:@"Motor", @"Motor Power", @"Degrees", nil]
+                                                        returnType:VOID];
     MethodCallCodeBlock *playTone = [[MethodCallCodeBlock alloc] init:@"PlayTone"
                                         description:@"Plays a given tone for a given duration"
                                         parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:INTEGER],[NSNumber numberWithInt:INTEGER], nil]
@@ -107,6 +112,7 @@
     logicOp.BlockColor = red;
     onFWD.BlockColor = blue;
     onRev.BlockColor = blue;
+    rotate.BlockColor = blue;
     playTone.BlockColor = blue;
     wait.BlockColor = red;
     stopMotor.BlockColor = blue;
@@ -123,6 +129,7 @@
     logicOp.Icon = [UIImage imageNamed:@"Math.png"];
     onFWD.Icon = [UIImage imageNamed:@"forward_wheel_icon.png"];
     onRev.Icon = [UIImage imageNamed:@"backward_wheel_icon.png"];
+    rotate.Icon = [UIImage imageNamed:@"forward_wheel_icon.png"];
     playTone.Icon = [UIImage imageNamed:@"speaker.png"];
     wait.Icon = [UIImage imageNamed:@"Wait_icon.png"];
     stopMotor.Icon = [UIImage imageNamed:@"wheel_icon.png"];
@@ -133,7 +140,7 @@
     varAssign.Icon = [UIImage imageNamed:@"Equals_icon.png"];
     varMath.Icon = [UIImage imageNamed:@"Math.png"];
     
-    NSArray *systemMethods = [NSArray arrayWithObjects:onFWD, onRev, stopMotor, playTone, wait, nil];
+    NSArray *systemMethods = [NSArray arrayWithObjects:onFWD, onRev, rotate, stopMotor, playTone, wait, nil];
     NSArray *logicMethods = [NSArray arrayWithObjects:whileLoop, ifBlock, elseBlock, logicOp, nil];
     NSArray *inputMethods = [NSArray arrayWithObjects:setSensor, sensorBoolean, nil];
     NSArray *varMathMethods = [NSArray arrayWithObjects: variable, value, varAssign, nil];

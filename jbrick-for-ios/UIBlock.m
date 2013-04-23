@@ -227,45 +227,6 @@ UIBlock *selectedCodeBlock;
     }
 }
 
-- (void)shift:(Direction)direction{
-    if( shiftDirection && shiftDirection.integerValue != direction ){
-        [self shiftBack];
-    }
-    if(!shiftDirection || shiftDirection.integerValue != direction ){
-        [UIView animateWithDuration:.25 animations:^{
-            switch (direction) {
-                case Inside:
-                    break;
-                case Above:
-                    [self setCenter:CGPointMake(self.center.x, self.center.y + SHIFT_MARGIN)];
-                    break;
-                case Below:
-                    [self setCenter:CGPointMake(self.center.x, self.center.y - SHIFT_MARGIN)];
-                    break;
-            }
-        }];
-        shiftDirection = [NSNumber numberWithInt:direction];
-    }
-}
-
-- (void)shiftBack{
-    if( shiftDirection ){
-        [UIView animateWithDuration:.25 animations:^{
-            switch (shiftDirection.integerValue) {
-                case Inside:
-                    break;
-                case Above:
-                    [self setCenter:CGPointMake(self.center.x, self.center.y - SHIFT_MARGIN)];
-                    break;
-                case Below:
-                    [self setCenter:CGPointMake(self.center.x, self.center.y + SHIFT_MARGIN)];
-                    break;
-            }
-        }];
-        shiftDirection = nil;
-    }
-}
-
 // Return the closest block above, or main
 - (UIBlock *)getClosestBlock
 {
