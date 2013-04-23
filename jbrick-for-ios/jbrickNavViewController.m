@@ -129,6 +129,18 @@
     }];
 }
 
+- (void) pressedStop {
+    NSURL *url = [NSURL URLWithString:@"http://media-server.cjpresler.com/"];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+
+    [httpClient getPath:[NSString stringWithFormat:@"rest/Devices/%@/StopProgram", [Settings settings].RobotID] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"Request Successful, response '%@'", responseStr);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+    }];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.row) {
@@ -149,6 +161,9 @@
             break;
         case 6:
             [self pressedRun];
+            break;
+        case 7:
+            [self pressedStop];
             break;
         default:
             break;

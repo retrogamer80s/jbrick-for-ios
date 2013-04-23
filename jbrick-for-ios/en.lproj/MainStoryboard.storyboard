@@ -149,23 +149,14 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" id="JJt-go-h9h">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" textLabel="7be-gr-bZ0" style="IBUITableViewCellStyleDefault" id="hc8-hO-vG9">
                                         <rect key="frame" x="0.0" y="308" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" textLabel="LW6-XZ-W2T" style="IBUITableViewCellStyleDefault" id="epM-0e-8dn">
-                                        <rect key="frame" x="0.0" y="352" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Exit" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LW6-XZ-W2T">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Stop" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7be-gr-bZ0">
                                                     <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -482,67 +473,6 @@
             <point key="canvasLocation" x="-293" y="137"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="MGSplitViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MGSplitViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="hideMaster:"/>
-                <relationship kind="action" name="showMaster:"/>
-                <relationship kind="action" name="showMasterPopover:"/>
-                <relationship kind="action" name="toggleMasterBeforeDetail:"/>
-                <relationship kind="action" name="toggleMasterView:"/>
-                <relationship kind="action" name="toggleSplitOrientation:"/>
-                <relationship kind="outlet" name="delegate"/>
-                <relationship kind="outlet" name="detailViewController" candidateClass="UIViewController"/>
-                <relationship kind="outlet" name="masterViewController" candidateClass="UIViewController"/>
-                <relationship kind="outlet" name="propertyViewController" candidateClass="UIViewController"/>
-            </relationships>
-        </class>
-        <class className="MethodTabelCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MethodTabelCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="DescriptionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="ParametesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="customLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ProgramPane" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProgramPane.h"/>
-        </class>
-        <class className="PropertyViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PropertyViewController.h"/>
-        </class>
-        <class className="UITableViewControllerLandscape" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UITableViewControllerLandscape.h"/>
-        </class>
-        <class className="ValueInputCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ValueInputCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="Subview" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="ValuePickerController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ValuePickerController.h"/>
-        </class>
-        <class className="jbrickDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/jbrickDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="ProgramName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="programPane" candidateClass="ProgramPane"/>
-                <relationship kind="outlet" name="propertyPane" candidateClass="PropertyViewController"/>
-            </relationships>
-        </class>
-        <class className="jbrickMasterViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/jbrickMasterViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="ParametersLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="jbrickNavViewController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/jbrickNavViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
