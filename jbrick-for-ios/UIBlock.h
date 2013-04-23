@@ -35,7 +35,6 @@ typedef enum {
     NSNumber *shiftDirection;
     
     bool continueScrolling;
-    UIWindow *mainWindow; // Used just for converting points to screen coordinates
 }
 @property (nonatomic, retain) jbrickDetailViewController *controller;
 @property (nonatomic, retain) ProgramPane *programPane;

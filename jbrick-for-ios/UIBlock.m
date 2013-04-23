@@ -56,9 +56,6 @@ UIBlock *selectedCodeBlock;
         [self assignSoundID:@"snap" soundID:&snapSound];
         [self assignSoundID:@"trash" soundID:&trashSound];
         [self assignSoundID:@"velcro" soundID:&velcroSound];
-        
-        mainWindow = [[UIApplication sharedApplication] keyWindow];
-        
     }
     return self;
 }
