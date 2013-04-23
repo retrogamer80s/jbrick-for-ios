@@ -75,6 +75,7 @@
     <Compile Include="Connectivity\NXTUsbConnection.cs" />
     <Compile Include="NXTCommands\NXTRunProgramCommand.cs" />
     <Compile Include="NXTCommands\NXTSetNameCommand.cs" />
+    <Compile Include="NXTCommands\NXTStopProgramCommand.cs" />
     <Compile Include="NXTCommands\NXTWriteFileCommand.cs" />
     <Compile Include="NXTCommands\PlaySoundCommand.cs" />
     <Compile Include="ReplyReceivedEventArgs.cs" />

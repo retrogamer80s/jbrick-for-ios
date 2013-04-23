@@ -8,6 +8,7 @@ using System.Text;
 using System.IO;
 using System.Diagnostics;
 using NXTManager;
+using NXCCompilerWebService.DataClasses;
 
 namespace NXCCompilerWebService
 {
@@ -18,11 +19,11 @@ namespace NXCCompilerWebService
         {
             filename += ".rxe";
             Guid guidFilename = Guid.NewGuid();
-            String srcFilename = String.Format(@"C:\inetpub\wwwroot\CompiledApps\{0}.nxc", guidFilename);
-            String compiledFilename = String.Format(@"C:\inetpub\wwwroot\CompiledApps\{0}.rxe", guidFilename);
+            String srcFilename = String.Format(Directory.GetCurrentDirectory() + @"\{0}.nxc", guidFilename);
+            String compiledFilename = String.Format(Directory.GetCurrentDirectory() + @"\{0}.rxe", guidFilename);
 
             File.WriteAllText(srcFilename, src);
-            RunResults runResults = Program.RunExecutable(@"C:\inetpub\wwwroot\nbc.exe", 
+            RunResults runResults = Program.RunExecutable(Directory.GetCurrentDirectory() + @"\nbc.exe", 
                         "-O="+ compiledFilename + " " + srcFilename, ".");
             if (runResults.RunException != null)
                 System.Diagnostics.Trace.WriteLine(runResults.RunException);
@@ -98,13 +99,13 @@ namespace NXCCompilerWebService
                 robot.CreateFile(filename, buffer);
         }
 
-        public string[] GetAvailableDevices()
+        public NXTRobot[] GetAvailableDevices()
         {
-            List<String> robotNames = new List<string>();
+            List<NXTRobot> robots = new List<NXTRobot>();
             foreach (NXT robot in NXT.AvailableRobots.Values)
-                robotNames.Add(robot.Name);
+                robots.Add(new NXTRobot(robot));
 
-            return robotNames.ToArray();
+            return robots.ToArray();
         }
 
         public void PlayTone(String nxtID, int tone, int duration)
@@ -119,6 +120,12 @@ namespace NXCCompilerWebService
             if (NXT.AvailableRobots.ContainsKey(nxtID))
                 NXT.AvailableRobots[nxtID].RunProgram(filename);
 
+        }
+
+        public void StopProgram(String nxtID)
+        {
+            if (NXT.AvailableRobots.ContainsKey(nxtID))
+                NXT.AvailableRobots[nxtID].StopProgram();
         }
     }
 

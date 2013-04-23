@@ -33,6 +33,8 @@ namespace NXTManager
                 RaisePropertyChanged("Name");
             }
         }
+
+        public String ID { get { return uniqueID; } }
         public String ConnectionName { get { return nxtConn.Name; } }
 
         public delegate void AvailableRobotsChangedEventHandler(object sender, AvailableDevicesChangedEventArgs args);
@@ -166,6 +168,11 @@ namespace NXTManager
         public void RunProgram(String filename)
         {
             commandQueue.Add(new NXTRunProgramCommand(nxtConn, filename));
+        }
+
+        public void StopProgram()
+        {
+            commandQueue.Add(new NXTStopProgramCommand(nxtConn));
         }
 
         private void Reconnect()

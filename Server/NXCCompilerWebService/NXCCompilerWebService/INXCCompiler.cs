@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using System.IO;
+using NXCCompilerWebService.DataClasses;
 
 namespace NXCCompilerWebService
 {
@@ -27,7 +28,7 @@ namespace NXCCompilerWebService
         [WebGet(ResponseFormat = WebMessageFormat.Json,
              BodyStyle = WebMessageBodyStyle.Bare,
              UriTemplate = "Devices")]
-        String[] GetAvailableDevices();
+        NXTRobot[] GetAvailableDevices();
 
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json,
@@ -40,5 +41,11 @@ namespace NXCCompilerWebService
              BodyStyle = WebMessageBodyStyle.Bare,
              UriTemplate = "Devices/{nxtID}/RunProgram?program={filename}")]
         void RunProgram(string nxtID, string filename);
+
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json,
+             BodyStyle = WebMessageBodyStyle.Bare,
+             UriTemplate = "Devices/{nxtID}/StopProgram")]
+        void StopProgram(string nxtID);
     }
 }
