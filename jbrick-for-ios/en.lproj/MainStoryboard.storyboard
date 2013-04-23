@@ -407,7 +407,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="top" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell_Normal" rowHeight="57" id="ZSw-0O-9Pw" customClass="MethodTabelCell">
+                            <tableViewCell contentMode="top" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="57" id="ZSw-0O-9Pw" customClass="MethodTabelCell">
                                 <rect key="frame" x="0.0" y="34" width="320" height="58"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -443,24 +443,28 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Parameter - Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gce-UB-4G1">
-                                            <rect key="frame" x="54" y="55" width="180" height="21"/>
+                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GDQ-eg-gPs">
+                                            <rect key="frame" x="20" y="51" width="240" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Parameter - Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GDQ-eg-gPs">
-                                            <rect key="frame" x="54" y="75" width="180" height="21"/>
+                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="Bool - Parameter" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oHn-CN-qHj">
+                                            <rect key="frame" x="20" y="83" width="240" height="23"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="DescriptionLabel" destination="GDQ-eg-gPs" id="V3P-5G-hNB"/>
+                                    <outlet property="ParametesLabel" destination="oHn-CN-qHj" id="gv3-38-ToF"/>
+                                    <outlet property="customLabel" destination="xRZ-cw-U6B" id="IjR-nG-kZI"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -497,6 +501,8 @@
         <class className="MethodTabelCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MethodTabelCell.h"/>
             <relationships>
+                <relationship kind="outlet" name="DescriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="ParametesLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="customLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
@@ -512,7 +518,6 @@
         <class className="ValueInputCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ValueInputCell.h"/>
             <relationships>
-                <relationship kind="action" name="ValueSelected:"/>
                 <relationship kind="outlet" name="Subview" candidateClass="UIView"/>
             </relationships>
         </class>
@@ -530,6 +535,9 @@
         </class>
         <class className="jbrickMasterViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/jbrickMasterViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="ParametersLabel" candidateClass="UILabel"/>
+            </relationships>
         </class>
         <class className="jbrickNavViewController" superclassName="UINavigationController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/jbrickNavViewController.h"/>

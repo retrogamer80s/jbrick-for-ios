@@ -13,14 +13,17 @@
 @synthesize BlockColor;
 @synthesize Icon;
 @synthesize ContainsChildren;
+@synthesize Description;
 
 static MethodDeclorationBlock *mainBlock;
 
--(id) init:(NSString *)methodName parameterTypes:(NSMutableArray *)parameters parameterNames:(NSArray *)paramNames returnType:(Primative)returnTypeParam
+-(id) init:(NSString *)methodName description:(NSString *)desc parameterTypes:(NSMutableArray *)parameters
+                       parameterNames:(NSArray *)paramNames returnType:(Primative)returnTypeParam
 {
     self = [super init];
     name = methodName;
     self.ReturnType = returnTypeParam;
+    self.Description = desc;
     
     parameterTypes = parameters;
     parameterNames = paramNames;
@@ -36,17 +39,13 @@ static MethodDeclorationBlock *mainBlock;
 +(id) getMainBlock
 {
     if(!mainBlock){
-        mainBlock = [[MethodDeclorationBlock alloc] init:@"main" parameterTypes:[NSArray array] parameterNames:[NSArray array] returnType:MAIN];
-        UIColor *purp = [UIColor colorWithRed:162.0/255 green:92.0/255 blue:240.0/255 alpha:1];
-        mainBlock.BlockColor = purp;
-        mainBlock.Icon = [UIImage imageNamed:@"main.png"];
-        mainBlock.ContainsChildren = YES;
+        mainBlock = [self createNewMainBlock];
     }
     return mainBlock;
 }
 +(id) createNewMainBlock
 {
-    MethodDeclorationBlock *newMainBlock = [[MethodDeclorationBlock alloc] init:@"main" parameterTypes:[NSArray array] parameterNames:[NSArray array] returnType:MAIN];
+    MethodDeclorationBlock *newMainBlock = [[MethodDeclorationBlock alloc] init:@"main" description:@"The main block" parameterTypes:[NSArray array] parameterNames:[NSArray array] returnType:MAIN];
     UIColor *purp = [UIColor colorWithRed:162.0/255 green:92.0/255 blue:240.0/255 alpha:1];
     newMainBlock.BlockColor = purp;
     newMainBlock.Icon = [UIImage imageNamed:@"main.png"];
@@ -83,7 +82,7 @@ static MethodDeclorationBlock *mainBlock;
 
 -(id<ViewableCodeBlock>) getPrototype
 {
-    MethodDeclorationBlock *prototype = [[MethodDeclorationBlock alloc] init:name parameterTypes:parameterTypes
+    MethodDeclorationBlock *prototype = [[MethodDeclorationBlock alloc] init:name description:self.Description parameterTypes:parameterTypes
                                                                   parameterNames:parameterNames returnType:self.ReturnType];
     prototype.BlockColor = self.BlockColor;
     prototype.Icon = self.Icon;

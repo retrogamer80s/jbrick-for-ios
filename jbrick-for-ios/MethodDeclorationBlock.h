@@ -22,5 +22,6 @@
 
 +(id) getMainBlock;
 +(id) createNewMainBlock;
--(id) init:(NSString *)name parameterTypes:(NSMutableArray *)parameters parameterNames:(NSArray *)paramNames returnType:(Primative)returnType;
+-(id) init:(NSString *)methodName description:(NSString *)desc parameterTypes:(NSMutableArray *)parameters
+                       parameterNames:(NSArray *)paramNames returnType:(Primative)returnTypeParam;
 @end

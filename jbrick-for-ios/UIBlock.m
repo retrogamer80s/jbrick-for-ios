@@ -320,10 +320,11 @@ UIBlock *selectedCodeBlock;
 
 - (void)snapToGrid
 {
+    [self animateArrow:nil];// Remove the arrow
+    
     if([self isInDeleteLocation:self.frame]){
         return;
     }
-    [self animateArrow:nil];
     
     AudioServicesPlaySystemSound(snapSound);
     

@@ -15,12 +15,14 @@
 @synthesize BlockColor;
 @synthesize Icon;
 @synthesize ContainsChildren;
+@synthesize Description;
 
 -(id) init
 {
     self = [super init];
     self.ReturnType = VOID;
     self.ContainsChildren = YES;
+    self.Description = @"Assign a value to a variable, set the Variable property, then put a block inside to set the value";
     paramNames = [NSArray arrayWithObjects:@"Variable", nil];
     return self;
 }

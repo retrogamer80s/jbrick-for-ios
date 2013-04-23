@@ -14,6 +14,7 @@
 @synthesize BlockColor;
 @synthesize Icon;
 @synthesize ContainsChildren;
+@synthesize Description;
 
 -(id) init:(LogicType)ifOrWhile
 {
@@ -22,9 +23,11 @@
     if(ifOrWhile == WHILE){
         name = @"While";
         src = @"while";
+        self.Description = @"Runs the blocks inside repeatedly as long as the Run If property is true";
     } else {
         name = @"If";
         src = @"if";
+        self.Description = @"Runs the blocks inside only if the Run If property is true";
     }
     parameter = [[ValueCodeBlock alloc] init:BOOLEAN];
     paramNames = [NSArray arrayWithObject: @"Run If"];

@@ -17,10 +17,12 @@
 @synthesize BlockColor;
 @synthesize Icon;
 @synthesize ContainsChildren;
+@synthesize Description;
 
 -(id) init:(NSString *)variableName type:(Primative)returnTypeParam
 {
     self = [super init];
+    self.Description = @"Declare a new variable, place a block inside to set the variables value";
     name = [[ValueCodeBlock alloc] init:PARAMETER_NAME value:variableName];
     type = [[ValueCodeBlock alloc] init:PARAMETER_RETURN value:@"None"];
     paramNames = [NSArray arrayWithObjects:@"Name", @"Type", nil];
