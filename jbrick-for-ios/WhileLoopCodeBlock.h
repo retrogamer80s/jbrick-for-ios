@@ -14,9 +14,10 @@ typedef enum LogicType {IF, WHILE} LogicType;
 @interface WhileLoopCodeBlock : CompositeCodeBlock<ViewableCodeBlock>{
     NSString *name;
     NSString *src;
-    LogicType type;
     CodeBlock *parameter;
     NSArray *paramNames;
 }
+@property LogicType logicType;
+
 -(id) init:(LogicType)ifOrWhile;
 @end

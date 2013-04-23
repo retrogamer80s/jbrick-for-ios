@@ -26,4 +26,5 @@
 -(void) visitVariableMathBlock:(NSObject *)block{}
 -(void) visitWhileLoopCodeBlock:(NSObject *)block{}
 -(void) visitLogicalOperatorCodeBlock:(NSObject *)block{}
+-(void) visitElseCodeBlock:(NSObject *)block{}
 @end

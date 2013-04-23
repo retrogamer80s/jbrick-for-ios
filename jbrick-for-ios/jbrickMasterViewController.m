@@ -16,6 +16,7 @@
 #import "VariableMathBlock.h"
 #import "WhileLoopCodeBlock.h"
 #import "LogicalOperatorCodeBlock.h"
+#import "ElseCodeBlock.h"
 #import "KGNoise.h"
 
 @interface jbrickMasterViewController () {
@@ -54,6 +55,7 @@
     
     WhileLoopCodeBlock *ifBlock = [[WhileLoopCodeBlock alloc] init:IF];
     WhileLoopCodeBlock *whileLoop = [[WhileLoopCodeBlock alloc] init:WHILE];
+    ElseCodeBlock *elseBlock = [[ElseCodeBlock alloc] init];
     LogicalOperatorCodeBlock *logicOp = [[LogicalOperatorCodeBlock alloc] init];
     MethodCallCodeBlock *onFWD = [[MethodCallCodeBlock alloc] init:@"OnFwd"
                                         description:@"Sets the specified Motor to move forward with the given Power"
@@ -101,6 +103,7 @@
     
     ifBlock.BlockColor = red;
     whileLoop.BlockColor = red;
+    elseBlock.BlockColor = red;
     logicOp.BlockColor = red;
     onFWD.BlockColor = blue;
     onRev.BlockColor = blue;
@@ -114,8 +117,9 @@
     varAssign.BlockColor = [UIColor orangeColor];
     varMath.BlockColor = [UIColor orangeColor];
     
-    ifBlock.Icon = [UIImage imageNamed:@"Loop_icon.png"];
+    ifBlock.Icon = [UIImage imageNamed:@"if-else.png"];
     whileLoop.Icon = [UIImage imageNamed:@"Loop_icon.png"];
+    elseBlock.Icon = [UIImage imageNamed:@"if-else.png"];
     logicOp.Icon = [UIImage imageNamed:@"Math.png"];
     onFWD.Icon = [UIImage imageNamed:@"forward_wheel_icon.png"];
     onRev.Icon = [UIImage imageNamed:@"backward_wheel_icon.png"];
@@ -130,7 +134,7 @@
     varMath.Icon = [UIImage imageNamed:@"Math.png"];
     
     NSArray *systemMethods = [NSArray arrayWithObjects:onFWD, onRev, stopMotor, playTone, wait, nil];
-    NSArray *logicMethods = [NSArray arrayWithObjects:whileLoop, ifBlock, logicOp, nil];
+    NSArray *logicMethods = [NSArray arrayWithObjects:whileLoop, ifBlock, elseBlock, logicOp, nil];
     NSArray *inputMethods = [NSArray arrayWithObjects:setSensor, sensorBoolean, nil];
     NSArray *varMathMethods = [NSArray arrayWithObjects: variable, value, varAssign, nil];
     //NSMutableArray *customMethods = [NSMutableArray arrayWithObjects:nil];

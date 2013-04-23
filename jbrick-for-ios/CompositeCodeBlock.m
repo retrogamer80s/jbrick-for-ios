@@ -22,9 +22,17 @@
 {
     if(![self canAddCodeBlock:codeBlock])
         return false;
-    [innerCodeBlocks insertObject:codeBlock atIndex:0];
-    codeBlock.Parent = self;
-    return true;
+
+    CodeBlock *beforeBlock = nil;
+    if(innerCodeBlocks.count > 1)
+        beforeBlock = [innerCodeBlocks objectAtIndex:1];
+    if([codeBlock canAddCodeBlockAfter:nil andBefore:beforeBlock]){
+        [innerCodeBlocks insertObject:codeBlock atIndex:0];
+        codeBlock.Parent = self;
+        return true;
+    } else {
+        return false;
+    }
 }
 
 -(bool)addCodeBlock:(CodeBlock *)codeBlock indexBlock:(CodeBlock *)indexBlock afterIndexBlock:(bool)afterIndexBlock
@@ -36,10 +44,33 @@
         return false;
     
     if(afterIndexBlock)
-        [innerCodeBlocks insertObject:codeBlock atIndex:insertIndex+1];
+    {
+        CodeBlock *afterBlock = [innerCodeBlocks objectAtIndex:insertIndex];
+        CodeBlock *beforeBlock = nil;
+        if(innerCodeBlocks.count > insertIndex+2)
+            beforeBlock = [innerCodeBlocks objectAtIndex:insertIndex+2];
+        if([codeBlock canAddCodeBlockAfter:afterBlock andBefore:beforeBlock]) {
+            [innerCodeBlocks insertObject:codeBlock atIndex:insertIndex+1];
+        } else {
+            return false;
+        }
+    }
     else
-        [innerCodeBlocks insertObject:codeBlock atIndex:insertIndex];     codeBlock.Parent = self;
+    {
+        CodeBlock *afterBlock = nil;
+        CodeBlock *beforeBlock = nil;
+        if(insertIndex > 0)
+            afterBlock = [innerCodeBlocks objectAtIndex:insertIndex-1];
+        if(innerCodeBlocks.count > insertIndex+1)
+            beforeBlock = [innerCodeBlocks objectAtIndex:insertIndex+1];
+        if([codeBlock canAddCodeBlockAfter:afterBlock andBefore:beforeBlock]){
+            [innerCodeBlocks insertObject:codeBlock atIndex:insertIndex];
+        } else {
+            return false;
+        }
+    }
     
+    codeBlock.Parent = self;
     return true;
 }
 
