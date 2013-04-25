@@ -7,6 +7,9 @@
 //
 
 #import "VariableAssignmentDelegate.h"
+#import "IntInputStrategy.h"
+#import "StringInputStrategy.h"
+#import "VariableNameInputStrategy.h"
 
 @implementation VariableAssignmentDelegate
 
@@ -55,8 +58,14 @@
         case INTEGER:
             inputStrategy = [[IntInputStrategy alloc] initWithPrim:type];
             break;
+        case LONG:
+            inputStrategy = [[IntInputStrategy alloc] initWithPrim:type];
+            break;
         case MOTOR_POWER:
             inputStrategy = [[IntInputStrategy alloc] initWithPrim:type];
+            break;
+        case PARAMETER_NAME:
+            inputStrategy = [[VariableNameInputStrategy alloc] initWithPrim:type];
             break;
         case STRING:
             inputStrategy = [[StringInputStrategy alloc] initWithPrim:type];

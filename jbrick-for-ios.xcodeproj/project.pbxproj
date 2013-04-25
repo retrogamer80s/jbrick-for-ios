@@ -48,6 +48,7 @@
 		3F86E72D162C9D4E00A7C985 /* PropertyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F86E71D162C9D4E00A7C985 /* PropertyViewController.m */; };
 		3F86E730162C9D4E00A7C985 /* ValuePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F86E722162C9D4E00A7C985 /* ValuePickerController.m */; };
 		3FAAB9ED17049AF0009B53B7 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAB9EC17049AF0009B53B7 /* Settings.m */; };
+		3FAB87C01729B3B200028F3E /* VariableNameInputStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAB87BF1729B3B200028F3E /* VariableNameInputStrategy.m */; };
 		3FAF4DF8170B4357000177FB /* EditableTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FAF4DF7170B4357000177FB /* EditableTableCell.xib */; };
 		3FAF4DFC170B44BB000177FB /* EditableTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAF4DFB170B44BB000177FB /* EditableTableCell.m */; };
 		3FB0F7151726D77A00E9F772 /* ElseCodeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB0F7141726D77A00E9F772 /* ElseCodeBlock.m */; };
@@ -182,6 +183,8 @@
 		3F86E722162C9D4E00A7C985 /* ValuePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValuePickerController.m; sourceTree = "<group>"; };
 		3FAAB9EB17049AF0009B53B7 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		3FAAB9EC17049AF0009B53B7 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		3FAB87BE1729B3B200028F3E /* VariableNameInputStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariableNameInputStrategy.h; sourceTree = "<group>"; };
+		3FAB87BF1729B3B200028F3E /* VariableNameInputStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariableNameInputStrategy.m; sourceTree = "<group>"; };
 		3FAF4DF7170B4357000177FB /* EditableTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditableTableCell.xib; sourceTree = "<group>"; };
 		3FAF4DFA170B44BA000177FB /* EditableTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditableTableCell.h; sourceTree = "<group>"; };
 		3FAF4DFB170B44BB000177FB /* EditableTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableTableCell.m; sourceTree = "<group>"; };
@@ -551,6 +554,8 @@
 				3FFDD4C6161B3CBB0065D30B /* IntInputStrategy.m */,
 				3FFDD4C8161B3E610065D30B /* StringInputStrategy.h */,
 				3FFDD4C9161B3E610065D30B /* StringInputStrategy.m */,
+				3FAB87BE1729B3B200028F3E /* VariableNameInputStrategy.h */,
+				3FAB87BF1729B3B200028F3E /* VariableNameInputStrategy.m */,
 			);
 			name = InputVerificationStrategies;
 			sourceTree = "<group>";
@@ -724,6 +729,7 @@
 				3FD523001714A65E00E80C73 /* UITableViewControllerLandscape.m in Sources */,
 				3FB0F7151726D77A00E9F772 /* ElseCodeBlock.m in Sources */,
 				3FB0F7191727347900E9F772 /* UIPopoverControllerLandscape.m in Sources */,
+				3FAB87C01729B3B200028F3E /* VariableNameInputStrategy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

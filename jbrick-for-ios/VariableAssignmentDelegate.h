@@ -10,8 +10,6 @@
 #import "CodeBlock.h"
 #import "ValueCodeBlock.h"
 #import "ValueInputStrategy.h"
-#import "IntInputStrategy.h"
-#import "StringInputStrategy.h"
 
 @interface VariableAssignmentDelegate : NSObject <UITextFieldDelegate>
 {
