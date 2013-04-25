@@ -10,13 +10,14 @@
 #import "MGSplitViewController.h"
 #import "ValuePickerController.h"
 #import "ViewableCodeBlock.h"
+#import "UIPopoverControllerLandscape.h"
 
 @interface PropertyViewController : UITableViewController <ValuePickerDelegate, ValueInputCellDelegate>
 {
     NSArray *variables;
     NSArray *varNames;
     ValuePickerController *valuePicker;
-    UIPopoverController *popoverController;
+    UIPopoverControllerLandscape  *popoverController;
     id<ViewableCodeBlock> codeBlock;
     NSMutableDictionary *varDelegates;
 }

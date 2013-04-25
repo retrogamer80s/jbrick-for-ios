@@ -20,7 +20,7 @@
 {
     self = [super init];
     name = @"Else";
-    self.Description = @"Runs the blocks inside if the previos If block didn't run. Must immediately follow an If block.";
+    self.Description = @"Runs the blocks inside, if the previous If block didn't run. Must immediately follow an If block.";
     self.ReturnType = VOID;
     self.ContainsChildren = true;
     

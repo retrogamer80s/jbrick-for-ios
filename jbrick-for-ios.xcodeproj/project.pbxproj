@@ -51,6 +51,7 @@
 		3FAF4DF8170B4357000177FB /* EditableTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FAF4DF7170B4357000177FB /* EditableTableCell.xib */; };
 		3FAF4DFC170B44BB000177FB /* EditableTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAF4DFB170B44BB000177FB /* EditableTableCell.m */; };
 		3FB0F7151726D77A00E9F772 /* ElseCodeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB0F7141726D77A00E9F772 /* ElseCodeBlock.m */; };
+		3FB0F7191727347900E9F772 /* UIPopoverControllerLandscape.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB0F7181727347800E9F772 /* UIPopoverControllerLandscape.m */; };
 		3FB5322C161098D800A907F7 /* MethodTabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB5322B161098D800A907F7 /* MethodTabelCell.m */; };
 		3FB775C8166CFC6700C97D22 /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB775C7166CFC6700C97D22 /* main.png */; };
 		3FB775D4166CFC6D00C97D22 /* App_Icon(100x100).png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB775CB166CFC6D00C97D22 /* App_Icon(100x100).png */; };
@@ -186,6 +187,8 @@
 		3FAF4DFB170B44BB000177FB /* EditableTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableTableCell.m; sourceTree = "<group>"; };
 		3FB0F7131726D77A00E9F772 /* ElseCodeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElseCodeBlock.h; sourceTree = "<group>"; };
 		3FB0F7141726D77A00E9F772 /* ElseCodeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElseCodeBlock.m; sourceTree = "<group>"; };
+		3FB0F7171727347800E9F772 /* UIPopoverControllerLandscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPopoverControllerLandscape.h; sourceTree = "<group>"; };
+		3FB0F7181727347800E9F772 /* UIPopoverControllerLandscape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPopoverControllerLandscape.m; sourceTree = "<group>"; };
 		3FB5322A161098D800A907F7 /* MethodTabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodTabelCell.h; sourceTree = "<group>"; };
 		3FB5322B161098D800A907F7 /* MethodTabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodTabelCell.m; sourceTree = "<group>"; };
 		3FB775C7166CFC6700C97D22 /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main.png; sourceTree = "<group>"; };
@@ -383,6 +386,8 @@
 				3FAF4DFB170B44BB000177FB /* EditableTableCell.m */,
 				3FD522FE1714A65E00E80C73 /* UITableViewControllerLandscape.h */,
 				3FD522FF1714A65E00E80C73 /* UITableViewControllerLandscape.m */,
+				3FB0F7171727347800E9F772 /* UIPopoverControllerLandscape.h */,
+				3FB0F7181727347800E9F772 /* UIPopoverControllerLandscape.m */,
 			);
 			path = "jbrick-for-ios";
 			sourceTree = "<group>";
@@ -718,6 +723,7 @@
 				3FAF4DFC170B44BB000177FB /* EditableTableCell.m in Sources */,
 				3FD523001714A65E00E80C73 /* UITableViewControllerLandscape.m in Sources */,
 				3FB0F7151726D77A00E9F772 /* ElseCodeBlock.m in Sources */,
+				3FB0F7191727347900E9F772 /* UIPopoverControllerLandscape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

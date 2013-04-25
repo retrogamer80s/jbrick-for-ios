@@ -125,6 +125,12 @@
 
 - (void)setup
 {
+    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+    swipe.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipe];
+    swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+    swipe.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swipe];
 	// Configure default behaviour.
 	_viewControllers = [[NSMutableArray alloc] initWithObjects:[NSNull null], [NSNull null], [NSNull null], nil];
 	_splitWidth = 5;//MG_DEFAULT_SPLIT_WIDTH;
@@ -152,6 +158,15 @@
 	_dividerViewDP.backgroundColor = [UIColor clearColor];
     
 	_dividerStyle = MGSplitViewDividerStyleShadow;
+}
+
+- (void) swipe:(UISwipeGestureRecognizer*)gesture
+{
+    if(gesture.direction == UISwipeGestureRecognizerDirectionLeft){
+        [self hideMaster:self];
+    } else if(gesture.direction == UISwipeGestureRecognizerDirectionRight){
+        [self showMaster:self];
+    }
 }
 
 

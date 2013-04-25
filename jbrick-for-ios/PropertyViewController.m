@@ -136,7 +136,7 @@
         valuePicker.contentSizeForViewInPopover = self.view.frame.size;
         valuePicker.valueCodeBlock = valueCodeBlock;
         
-        popoverController = [[UIPopoverController alloc] initWithContentViewController:valuePicker];
+        popoverController = [[UIPopoverControllerLandscape alloc] initWithContentViewController:valuePicker];
         
         NSInteger width = self.tableView.frame.size.width;
         NSInteger yPos = 0;
@@ -149,6 +149,12 @@
         
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 - (BOOL)isOpen
