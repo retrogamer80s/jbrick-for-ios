@@ -125,7 +125,10 @@
         case MOTOR_POWER:
         {
             UISlider *slider = [[UISliderStrongReference alloc] initWithFrame:CGRectMake(0, 0, 280, 40)];
-            [slider addTarget:delegate action:@selector(sliderChanged:) forControlEvents:UIControlEventTouchUpInside];
+            slider.minimumValue = -100; slider.maximumValue = 100;
+            [slider addTarget:delegate action:@selector(sliderDoneEditing:) forControlEvents:UIControlEventTouchUpInside];
+            [slider addTarget:delegate action:@selector(sliderDoneEditing:) forControlEvents:UIControlEventTouchUpOutside];
+            [slider addTarget:delegate action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
             if(valBlock && valBlock.Value)
                 [slider setValue:[valBlock.Value floatValue] animated:NO];
             return slider;

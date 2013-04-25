@@ -22,5 +22,6 @@
 @property (nonatomic, retain) CodeBlock * value;
 
 -(id) init:(CodeBlock *)codeBlock;
+- (void)sliderDoneEditing:(UISlider *)slider;
 - (void)sliderChanged:(UISlider *)slider;
 @end

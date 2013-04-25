@@ -38,10 +38,16 @@
     return NO;
 }
 
-- (void)sliderChanged:(UISlider *)slider {
+- (void)sliderDoneEditing:(UISlider *)slider {
     
     CodeBlock * codeBlock = [inputStrategy GetCodeBlock:[NSString stringWithFormat:@"%d", (int)roundf(slider.value)]];
     value = codeBlock;
+}
+
+- (void)sliderChanged:(UISlider *)slider {
+    float output = slider.value;
+    int newValue = 5 * floor((output/5)+0.5);
+    slider.value = newValue;
 }
 
 - (void)initInputStrategy{
