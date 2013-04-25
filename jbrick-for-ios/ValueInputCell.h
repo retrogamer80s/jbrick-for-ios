@@ -16,6 +16,7 @@
 {
     NSIndexPath *indexPath;
 }
+@property (weak, nonatomic) IBOutlet UILabel *Label;
 @property (weak, nonatomic) IBOutlet UIView *Subview;
 @property (nonatomic, assign) id<ValueInputCellDelegate> delegate;
 

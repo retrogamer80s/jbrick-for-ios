@@ -23,7 +23,8 @@
     for (int i = 0; i < [input length]; i++) {
         unichar c = [input characterAtIndex:i];
         if (![myCharSet characterIsMember:c]) {
-            return NO;
+            if(i != 0 || c != '-') // Only the first character may be a negative sign
+                return NO;
         }
     }
     
