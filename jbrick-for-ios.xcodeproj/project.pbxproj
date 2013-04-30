@@ -18,6 +18,7 @@
 		3F05B29716C94ED60020E0C4 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F05B28E16C94ED60020E0C4 /* UIImageView+AFNetworking.m */; };
 		3F05B29A16C994A20020E0C4 /* speaker.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F05B29916C994A10020E0C4 /* speaker.png */; };
 		3F1254E816406582005A1B0E /* VariableAssignmentBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1254E716406581005A1B0E /* VariableAssignmentBlock.m */; };
+		3F13ACDE17303FB400997225 /* jbrickServerUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F13ACDD17303FB400997225 /* jbrickServerUtility.m */; };
 		3F1A5E5A171D7D4B00A81D0E /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1A5E59171D7D4B00A81D0E /* right-arrow.png */; };
 		3F1B8991160108410007A0B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1B8990160108410007A0B9 /* UIKit.framework */; };
 		3F1B8993160108410007A0B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1B8992160108410007A0B9 /* Foundation.framework */; };
@@ -132,6 +133,8 @@
 		3F05B29916C994A10020E0C4 /* speaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speaker.png; sourceTree = "<group>"; };
 		3F1254E616406581005A1B0E /* VariableAssignmentBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariableAssignmentBlock.h; sourceTree = "<group>"; };
 		3F1254E716406581005A1B0E /* VariableAssignmentBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariableAssignmentBlock.m; sourceTree = "<group>"; };
+		3F13ACDC17303FB400997225 /* jbrickServerUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jbrickServerUtility.h; sourceTree = "<group>"; };
+		3F13ACDD17303FB400997225 /* jbrickServerUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jbrickServerUtility.m; sourceTree = "<group>"; };
 		3F1A5E59171D7D4B00A81D0E /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
 		3F1B898C160108410007A0B9 /* jbrick-for-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "jbrick-for-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F1B8990160108410007A0B9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -391,6 +394,8 @@
 				3FD522FF1714A65E00E80C73 /* UITableViewControllerLandscape.m */,
 				3FB0F7171727347800E9F772 /* UIPopoverControllerLandscape.h */,
 				3FB0F7181727347800E9F772 /* UIPopoverControllerLandscape.m */,
+				3F13ACDC17303FB400997225 /* jbrickServerUtility.h */,
+				3F13ACDD17303FB400997225 /* jbrickServerUtility.m */,
 			);
 			path = "jbrick-for-ios";
 			sourceTree = "<group>";
@@ -730,6 +735,7 @@
 				3FB0F7151726D77A00E9F772 /* ElseCodeBlock.m in Sources */,
 				3FB0F7191727347900E9F772 /* UIPopoverControllerLandscape.m in Sources */,
 				3FAB87C01729B3B200028F3E /* VariableNameInputStrategy.m in Sources */,
+				3F13ACDE17303FB400997225 /* jbrickServerUtility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
