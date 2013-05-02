@@ -23,4 +23,5 @@
 -(UIBlock *)getRootBlock;
 -(void) loadProgram:(UIBlock *)rootBlock controller:(jbrickDetailViewController *)dvc;
 -(void) setInsertArrowPosition:(int)x y:(int)y;
+-(CGPoint) convertPointFromList:(CGPoint)point fromView:(UIView *)view;
 @end

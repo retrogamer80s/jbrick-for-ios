@@ -69,16 +69,6 @@ float firstY;
     [tapGesture setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapGesture];
     
-    UISwipeGestureRecognizer *sg = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRightReceived:)];
-    sg.numberOfTouchesRequired = 2;
-    sg.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:sg];
-    
-    sg = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeftReceived:)];
-    sg.numberOfTouchesRequired = 2;
-    sg.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:sg];
-    
     UIImageView *trashCan = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Trash Can.png"]];
     trashCan.frame = CGRectMake(615, 580, 100, 140);
     [self.view addSubview:trashCan];
@@ -134,16 +124,6 @@ float firstY;
     self.detailDescriptionLabel = nil;
 }
 
-- (void)swipeRightReceived:(UISwipeGestureRecognizer *)gestureRecognizer
-{
-    [_propertyPane closePanel:nil];
-}
-
-- (void)swipeLeftReceived:(UISwipeGestureRecognizer *)gestureRecognizer
-{
-    [_propertyPane openPanel:nil];
-}
-
 - (void)tapOutsideBlock:(UITapGestureRecognizer *)gestureRecognizer
 {
     [_propertyPane closePanel:nil];
@@ -151,7 +131,8 @@ float firstY;
 
 - (void)placeBlock:(UIView *)block
 {
-    block.center = [self.programPane convertPoint:block.center fromView:block.superview];
+    // User custom convert point because program pane is offset for the title
+    block.center = [self.programPane convertPointFromList:block.center fromView:block.superview];
     [block removeFromSuperview];
     [self.programPane addSubview:block];
     

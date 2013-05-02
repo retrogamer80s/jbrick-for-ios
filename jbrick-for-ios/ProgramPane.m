@@ -108,9 +108,10 @@
     }
 }
 
--(CGPoint) convertPoint:(CGPoint)point fromView:(UIView *)view{
+-(CGPoint) convertPointFromList:(CGPoint)point fromView:(UIView *)view{
     return [zoomableView convertPoint:point fromView:view];
 }
+
 
 - (void)addSubview:(UIView *)view
 {
