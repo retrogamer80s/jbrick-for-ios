@@ -18,6 +18,7 @@
 }
 
 @property (nonatomic, retain) CodeBlock * value;
+@property (nonatomic, retain) UILabel * valueLabel;
 
 -(id) init:(CodeBlock *)codeBlock;
 - (void)sliderDoneEditing:(UISlider *)slider;

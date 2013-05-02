@@ -45,12 +45,17 @@
     
     CodeBlock * codeBlock = [inputStrategy GetCodeBlock:[NSString stringWithFormat:@"%d", (int)roundf(slider.value)]];
     value = codeBlock;
+    if(self.valueLabel)
+        self.valueLabel.text = @"";
 }
 
 - (void)sliderChanged:(UISlider *)slider {
     float output = slider.value;
     int newValue = 5 * floor((output/5)+0.5);
     slider.value = newValue;
+    
+    if(self.valueLabel)
+        self.valueLabel.text = [NSString stringWithFormat:@"%d", newValue];
 }
 
 - (void)initInputStrategy{

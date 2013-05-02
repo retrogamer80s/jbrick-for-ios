@@ -260,12 +260,20 @@
                                                 <action selector="ValueSelected:" destination="vtB-G6-Ukt" eventType="touchUpInside" id="zqn-XG-oBF"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eW0-GH-gQk">
+                                            <rect key="frame" x="235" y="12" width="0.0" height="0.0"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
                                     <outlet property="Label" destination="UYB-Mv-Xow" id="oMW-4z-GHj"/>
                                     <outlet property="Subview" destination="Dov-c9-ChD" id="h7s-V0-o8d"/>
+                                    <outlet property="ValueLabel" destination="eW0-GH-gQk" id="zQL-fe-0oo"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -352,11 +360,19 @@
                                                 <action selector="ValueSelected:" destination="v1c-Yq-Im6" eventType="touchUpInside" id="jHR-kC-dZP"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FqK-fb-KwG">
+                                            <rect key="frame" x="235" y="11" width="35" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
                                     <outlet property="Subview" destination="GFK-Cz-PdW" id="Dqm-zE-Ejl"/>
+                                    <outlet property="ValueLabel" destination="FqK-fb-KwG" id="mnG-xm-X7m"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" textLabel="I2g-03-OU5" style="IBUITableViewCellStyleDefault" id="lNF-d0-P9R">
@@ -452,6 +468,71 @@
             <point key="canvasLocation" x="-293" y="137"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="MGSplitViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MGSplitViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="hideMaster:"/>
+                <relationship kind="action" name="showMaster:"/>
+                <relationship kind="action" name="showMasterPopover:"/>
+                <relationship kind="action" name="toggleMasterBeforeDetail:"/>
+                <relationship kind="action" name="toggleMasterView:"/>
+                <relationship kind="action" name="toggleSplitOrientation:"/>
+                <relationship kind="outlet" name="delegate"/>
+                <relationship kind="outlet" name="detailViewController" candidateClass="UIViewController"/>
+                <relationship kind="outlet" name="masterViewController" candidateClass="UIViewController"/>
+                <relationship kind="outlet" name="propertyViewController" candidateClass="UIViewController"/>
+            </relationships>
+        </class>
+        <class className="MethodTabelCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MethodTabelCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="DescriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="ParametesLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="customLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="ProgramPane" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProgramPane.h"/>
+        </class>
+        <class className="PropertyViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PropertyViewController.h"/>
+        </class>
+        <class className="UITableViewControllerLandscape" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UITableViewControllerLandscape.h"/>
+        </class>
+        <class className="ValueInputCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ValueInputCell.h"/>
+            <relationships>
+                <relationship kind="action" name="ValueSelected:"/>
+                <relationship kind="outlet" name="Label" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="Subview" candidateClass="UIView"/>
+                <relationship kind="outlet" name="ValueLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="ValuePickerController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ValuePickerController.h"/>
+        </class>
+        <class className="jbrickDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/jbrickDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="ProgramName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="programPane" candidateClass="ProgramPane"/>
+                <relationship kind="outlet" name="propertyPane" candidateClass="PropertyViewController"/>
+            </relationships>
+        </class>
+        <class className="jbrickMasterViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/jbrickMasterViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="longPress:" candidateClass="UIGestureRecognizer"/>
+                <relationship kind="outlet" name="ParametersLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="jbrickNavViewController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/jbrickNavViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>

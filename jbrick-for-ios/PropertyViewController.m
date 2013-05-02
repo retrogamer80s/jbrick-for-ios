@@ -73,6 +73,7 @@
         ValueInputCell *cell = [tableView dequeueReusableCellWithIdentifier:@"valueCell"];
         cell.delegate = self;
         VariableAssignmentDelegate *varDel = [self getVarDelegate:valueCodeBlock index:indexPath];
+        varDel.valueLabel = cell.ValueLabel;
         [cell setContent:[PrimativeTypeUtility constructDefaultView:valueCodeBlock.ReturnType delegate:varDel value:valueCodeBlock] indexPath:indexPath];
 
         return cell;
