@@ -66,6 +66,10 @@
     return false; // By default codeBlocks do not have children
 }
 
+- (bool) canAddCodeBlockAfter:(CodeBlock *)afterBlock andBefore:(CodeBlock *)beforeBlock{
+    return true;
+}
+
 - (void) removeCodeBlock:(CodeBlock *)codeBlock
 {
     // By default codeBlocks don't have children

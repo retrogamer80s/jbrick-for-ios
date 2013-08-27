@@ -10,8 +10,6 @@
 #import "CodeBlock.h"
 #import "ValueCodeBlock.h"
 #import "ValueInputStrategy.h"
-#import "IntInputStrategy.h"
-#import "StringInputStrategy.h"
 
 @interface VariableAssignmentDelegate : NSObject <UITextFieldDelegate>
 {
@@ -20,7 +18,9 @@
 }
 
 @property (nonatomic, retain) CodeBlock * value;
+@property (nonatomic, retain) UILabel * valueLabel;
 
 -(id) init:(CodeBlock *)codeBlock;
+- (void)sliderDoneEditing:(UISlider *)slider;
 - (void)sliderChanged:(UISlider *)slider;
 @end

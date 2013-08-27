@@ -14,6 +14,7 @@
 @synthesize BlockColor;
 @synthesize Icon;
 @synthesize ContainsChildren;
+@synthesize Description;
 
 -(id) init
 {
@@ -21,6 +22,7 @@
     name = @"Logical Operation";
     operation = [[ValueCodeBlock alloc] init:LOGIC_OPERATION value:@"=="];
     paramNames = [NSArray arrayWithObject:@"Logic Operation"];
+    self.Description = @"Performs the specified Logic Operation on the blocks inside and returns the result";
     self.ReturnType = BOOLEAN;
     self.ContainsChildren = true;
     
@@ -103,9 +105,9 @@
     
     if(codeBlock.ReturnType == BOOLEAN){
         if([operation generateCode] != @"!" || innerCodeBlocks.count == 0){
-            [super addCodeBlock:codeBlock];
+            return [super addCodeBlock:codeBlock];
         } else {
-            
+            return false;
         }
     } else {
         return false;
@@ -119,9 +121,9 @@
     
     if(codeBlock.ReturnType == BOOLEAN){
         if([operation generateCode] != @"!" || innerCodeBlocks.count == 0){
-            [super addCodeBlock:codeBlock indexBlock:indexBlock afterIndexBlock:afterIndexBlock];
+            return [super addCodeBlock:codeBlock indexBlock:indexBlock afterIndexBlock:afterIndexBlock];
         } else {
-            
+            return false;
         }
     } else {
         return false;

@@ -15,6 +15,7 @@
 @synthesize BlockColor;
 @synthesize Icon;
 @synthesize ContainsChildren;
+@synthesize Description;
 
 -(id) init:(Primative)typeParam
 {
@@ -27,6 +28,7 @@
     returnType = typeParam;
     Value = valueParam;
     propertyNames = [NSArray arrayWithObjects:@"Value", nil];
+    self.Description = @"Place inside a Variable Decloration or Assignment block to set a specific value";
     return self;
 }
 
