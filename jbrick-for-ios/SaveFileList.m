@@ -29,6 +29,9 @@
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Program Name" message:@"What should the new program be called?"
                                                     delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField * alertTextField = [alert textFieldAtIndex:0];
+    alertTextField.placeholder = @"Program Name";
+    alertTextField.delegate = self;
     [alert show];
 }
 
@@ -100,7 +103,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if(![textField.text isEqual:previousProgramName]){
+    if(previousProgramName && ![@"" isEqual:previousProgramName] && ![textField.text isEqual:previousProgramName]){
         Settings *settings = [Settings settings];
         NSString *orig = [NSString stringWithFormat:@"%@/%@.%@", settings.SaveDirectory, previousProgramName, settings.SaveExtention];
         NSString *dest = [NSString stringWithFormat:@"%@/%@.%@", settings.SaveDirectory, textField.text, settings.SaveExtention];
@@ -132,13 +135,23 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *fileName = [NSString stringWithFormat:@"%@.sav", [saveFiles objectAtIndex:indexPath.row]];
+        NSString *progName = [saveFiles objectAtIndex:indexPath.row];
+        NSString *rootPath = [Settings settings].SaveDirectory;
+        NSString *fileName = [NSString stringWithFormat:@"%@.%@", progName, [Settings settings].SaveExtention];
         NSString *fullPath = [NSString stringWithFormat:@"%@/%@", rootPath, fileName];
         
         [saveFiles removeObjectAtIndex:indexPath.row];
         [[NSFileManager defaultManager] removeItemAtPath:fullPath error:nil];
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        if([[Settings settings].CurrentProgram isEqual:progName]){
+            if(saveFiles.count > 0){
+                [Settings settings].CurrentProgram = [saveFiles objectAtIndex:0];
+                [self loadProgram:[saveFiles objectAtIndex:0]];
+            } else {
+                //The currently running program was deleted and there are no others to load in
+            }
+        }
     }
 
 }

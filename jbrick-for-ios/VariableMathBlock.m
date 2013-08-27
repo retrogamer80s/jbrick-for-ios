@@ -14,6 +14,7 @@
 @synthesize BlockColor;
 @synthesize Icon;
 @synthesize ContainsChildren;
+@synthesize Description;
 
 -(id) init
 {
@@ -23,6 +24,7 @@
     paramNames = [NSArray arrayWithObjects:@"Variable", @"Math Operation", nil];
     mathOpBlock = [[ValueCodeBlock alloc] init:MATH_OPERATION value:@"+"];
     self.ContainsChildren = YES;
+    self.Description = @"Performs the specified Math Operation on the blocks placed inside and stores it to the given Variable";
     return self;
 }
 

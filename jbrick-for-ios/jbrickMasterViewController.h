@@ -13,9 +13,16 @@
 
 @class jbrickDetailViewController;
 
-@interface jbrickMasterViewController : UITableViewController
+@interface jbrickMasterViewController : UITableViewController {
+    bool inDrag;
+    UIBlock *draggedView;
+    NSIndexPath *selectedIndex;
+    NSMutableDictionary *methodBlocks;
+    NSMutableArray *reuseCells;
+}
 
 @property (strong, nonatomic) jbrickDetailViewController *detailViewController;
 @property (strong, nonatomic) MGSplitViewController *splitViewController;
+@property (weak, nonatomic) IBOutlet UILabel *ParametersLabel;
 
 @end

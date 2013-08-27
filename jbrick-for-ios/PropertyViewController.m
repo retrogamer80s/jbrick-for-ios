@@ -73,6 +73,7 @@
         ValueInputCell *cell = [tableView dequeueReusableCellWithIdentifier:@"valueCell"];
         cell.delegate = self;
         VariableAssignmentDelegate *varDel = [self getVarDelegate:valueCodeBlock index:indexPath];
+        varDel.valueLabel = cell.ValueLabel;
         [cell setContent:[PrimativeTypeUtility constructDefaultView:valueCodeBlock.ReturnType delegate:varDel value:valueCodeBlock] indexPath:indexPath];
 
         return cell;
@@ -136,7 +137,7 @@
         valuePicker.contentSizeForViewInPopover = self.view.frame.size;
         valuePicker.valueCodeBlock = valueCodeBlock;
         
-        popoverController = [[UIPopoverController alloc] initWithContentViewController:valuePicker];
+        popoverController = [[UIPopoverControllerLandscape alloc] initWithContentViewController:valuePicker];
         
         NSInteger width = self.tableView.frame.size.width;
         NSInteger yPos = 0;
@@ -149,6 +150,12 @@
         
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 - (BOOL)isOpen

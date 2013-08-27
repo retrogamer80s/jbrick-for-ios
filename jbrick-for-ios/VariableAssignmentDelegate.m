@@ -7,6 +7,9 @@
 //
 
 #import "VariableAssignmentDelegate.h"
+#import "IntInputStrategy.h"
+#import "StringInputStrategy.h"
+#import "VariableNameInputStrategy.h"
 
 @implementation VariableAssignmentDelegate
 
@@ -38,10 +41,21 @@
     return NO;
 }
 
-- (void)sliderChanged:(UISlider *)slider {
+- (void)sliderDoneEditing:(UISlider *)slider {
     
     CodeBlock * codeBlock = [inputStrategy GetCodeBlock:[NSString stringWithFormat:@"%d", (int)roundf(slider.value)]];
     value = codeBlock;
+    if(self.valueLabel)
+        self.valueLabel.text = @"";
+}
+
+- (void)sliderChanged:(UISlider *)slider {
+    float output = slider.value;
+    int newValue = 5 * floor((output/5)+0.5);
+    slider.value = newValue;
+    
+    if(self.valueLabel)
+        self.valueLabel.text = [NSString stringWithFormat:@"%d", newValue];
 }
 
 - (void)initInputStrategy{
@@ -49,8 +63,14 @@
         case INTEGER:
             inputStrategy = [[IntInputStrategy alloc] initWithPrim:type];
             break;
+        case LONG:
+            inputStrategy = [[IntInputStrategy alloc] initWithPrim:type];
+            break;
         case MOTOR_POWER:
             inputStrategy = [[IntInputStrategy alloc] initWithPrim:type];
+            break;
+        case PARAMETER_NAME:
+            inputStrategy = [[VariableNameInputStrategy alloc] initWithPrim:type];
             break;
         case STRING:
             inputStrategy = [[StringInputStrategy alloc] initWithPrim:type];

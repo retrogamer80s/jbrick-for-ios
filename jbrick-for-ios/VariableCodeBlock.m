@@ -15,7 +15,6 @@
 {
     self = [super init];
     variable = variableParam;
-    variable.Delegate = self;
     self.ReturnType = primitive;
     parents = [NSMutableArray array];
     return self;
@@ -70,22 +69,6 @@
 {
     [visitor visitVariableCodeBlock:self];
 }
-/* This method cannot be used because only UIBlock should be a delegate of codeblocks
- 
--(void) blockMoved:(NSObject *)sender oldParent:(NSObject *)oldParent newParent:(NSObject *)newParent
-{
-    int outOfScopeCount = 0;
-
-    for (CodeBlock * reference in parents) {
-        if(! [reference parameterIsInScope:variable beforeIndex:self])
-            outOfScopeCount++;
-    }
-    
-    Boolean response = [UIPrompt promptBlocking:@"Parameters out of scope" title:@"Variable out of scope"];
-    
-    NSLog([NSString stringWithFormat:@"%d are now out of scope, %d", outOfScopeCount, response]);
-}
- */
 
 // Encoding/Decoding Methods
 - (void)encodeWithCoder:(NSCoder *)coder

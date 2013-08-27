@@ -58,6 +58,7 @@
         ValueInputCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EmptyCell" forIndexPath:indexPath];
         cell.delegate = self;
         varDel = [[VariableAssignmentDelegate alloc] init:valueCodeBlock];
+        varDel.valueLabel = cell.ValueLabel;
         [cell setContent:[PrimativeTypeUtility constructDefaultView:valueCodeBlock.ReturnType delegate:varDel value:valueCodeBlock] indexPath:indexPath];
         return cell;
     } else {
@@ -76,14 +77,12 @@
     else
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
 }
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    // Return YES for supported orientations
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
-*/
 
 /*
 // Override to support editing the table view.

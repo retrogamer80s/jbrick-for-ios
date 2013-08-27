@@ -33,6 +33,7 @@
 - (NSString *) getDisplayName;
 - (bool) addCodeBlock:(CodeBlock *)codeBlock;
 - (bool) addCodeBlock:(CodeBlock *)codeBlock indexBlock:(CodeBlock *)indexBlock afterIndexBlock:(bool)afterIndexBlock;
+- (bool) canAddCodeBlockAfter:(CodeBlock *)afterBlock andBefore:(CodeBlock *)beforeBlock;
 - (void) removeCodeBlock:(CodeBlock *)codeBlock;
 - (void) removeFromParent;
 - (NSArray *) getAvailableParameters:(Primative)type;

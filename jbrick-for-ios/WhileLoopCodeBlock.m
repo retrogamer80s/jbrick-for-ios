@@ -14,17 +14,22 @@
 @synthesize BlockColor;
 @synthesize Icon;
 @synthesize ContainsChildren;
+@synthesize Description;
+
+@synthesize logicType;
 
 -(id) init:(LogicType)ifOrWhile
 {
     self = [super init];
-    type = ifOrWhile;
+    self.logicType = ifOrWhile;
     if(ifOrWhile == WHILE){
         name = @"While";
         src = @"while";
+        self.Description = @"Runs the blocks inside repeatedly as long as the Run If property is true";
     } else {
         name = @"If";
         src = @"if";
+        self.Description = @"Runs the blocks inside only if the Run If property is true";
     }
     parameter = [[ValueCodeBlock alloc] init:BOOLEAN];
     paramNames = [NSArray arrayWithObject: @"Run If"];
@@ -42,7 +47,8 @@
     
     for(CodeBlock * statement in innerCodeBlocks){
         [generatedCode appendString:[statement generateCode]];
-        [generatedCode appendString:@";"];
+        if(! [statement isKindOfClass:[CompositeCodeBlock class]]) // Composite blocks end themselves
+            [generatedCode appendString:@";"];
     }
     [generatedCode appendString:@"}"];
     
@@ -56,7 +62,7 @@
 
 -(id<ViewableCodeBlock>) getPrototype
 {
-    WhileLoopCodeBlock *prototype = [[WhileLoopCodeBlock alloc] init:type];
+    WhileLoopCodeBlock *prototype = [[WhileLoopCodeBlock alloc] init:self.logicType];
     prototype.BlockColor = self.BlockColor;
     prototype.Icon = self.Icon;
     return prototype;
@@ -102,7 +108,7 @@
     
     [coder encodeObject:name forKey:@"name"];
     [coder encodeObject:src forKey:@"src"];
-    [coder encodeInt32:type forKey:@"type"];
+    [coder encodeInt32:self.logicType forKey:@"type"];
     [coder encodeObject:parameter forKey:@"parameter"];
     [coder encodeObject:paramNames forKey:@"paramNames"];
     [coder encodeObject:self.BlockColor forKey:@"BlockColor"];
@@ -117,7 +123,7 @@
     
     name = [coder decodeObjectForKey:@"name"];
     src = [coder decodeObjectForKey:@"src"];
-    type = [coder decodeInt32ForKey:@"type"];
+    self.logicType = [coder decodeInt32ForKey:@"type"];
     parameter = [coder decodeObjectForKey:@"parameter"];
     paramNames = [coder decodeObjectForKey:@"paramNames"];
     self.BlockColor = [coder decodeObjectForKey:@"BlockColor"];

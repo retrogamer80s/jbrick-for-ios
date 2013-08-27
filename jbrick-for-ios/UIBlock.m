@@ -9,18 +9,25 @@
 #import "UIBlock.h"
 #import "iToast.h"
 
+@interface UIBlock ()
+@property CGRect frameWithoutShift;
+@end
+
+
 @implementation UIBlock
+
 @synthesize controller;
 @synthesize programPane;
 @synthesize CodeBlock = codeBlock;
 
 UIBlock *selectedCodeBlock;
 
-static int TOP_MARGIN = 60;
-static int BOTTOM_MARGIN = 20;
-static int LEFT_MARGIN = 40;
-static int DEFAULT_MINIMIZED_HEIGHT = 100;
-static int DEFAULT_WIDTH = 250;
+#define TOP_MARGIN 60
+#define BOTTOM_MARGIN 30
+#define LEFT_MARGIN 40
+#define DEFAULT_MINIMIZED_HEIGHT 100
+#define DEFAULT_WIDTH 250
+#define SHIFT_MARGIN 50
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -117,7 +124,7 @@ static int DEFAULT_WIDTH = 250;
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, soundID);
 }
 
-- (void)panGesture:(UILongPressGestureRecognizer *)gestureRecognizer
+- (void)panGesture:(UIGestureRecognizer *)gestureRecognizer
 {
     if(parentBlock || previousBlock){
         CGPoint translation = [gestureRecognizer locationInView:[self superview]];
@@ -154,63 +161,146 @@ static int DEFAULT_WIDTH = 250;
     }
 }
 
+-(CGRect)frameWithoutShift{
+    CGRect origFrame = self.frame;
+    if(shiftDirection){
+        switch (shiftDirection.integerValue) {
+            case Inside:
+                return origFrame;
+            case Above:
+                return CGRectMake(origFrame.origin.x, origFrame.origin.y - SHIFT_MARGIN, origFrame.size.width, origFrame.size.height);
+            case Below:
+                return CGRectMake(origFrame.origin.x, origFrame.origin.y + SHIFT_MARGIN, origFrame.size.width, origFrame.size.height);
+            default:
+                return origFrame;
+        }
+    } else {
+        return origFrame;
+    }
+}
+- (void)setFrameWithoutShift:(CGRect)frameWithoutShift{
+    
+}
+
 - (void)panToPoint:(CGPoint) newCenter scrollToRect:(CGRect)visibleRect
 {
     [self bringGroupToFront];
     [self setCenter:CGPointMake(newCenter.x+(self.frame.size.width/2)-20, newCenter.y +(self.frame.size.height/2)-20)];
     
     [self.programPane scrollRectToVisible:visibleRect animated:false];
-    
     [self fitToChildren];
+    
+    UIBlock *tmpBlock = [self getClosestBlock];
+    [self animateArrow:tmpBlock];
 }
 
-- (void)snapToGrid
-{
-    AudioServicesPlaySystemSound(snapSound);
-    
-    CGRect boundsA = self.frame;
-    UIBlock *overlappedBlock;
-    CGFloat distanceToBlock = 0.0;
-    
-    if([self isInDeleteLocation:self.frame]){
-        return;
+- (void)animateArrow:(UIBlock *)insertBlock{
+    if(!insertBlock && tmpAttachedBlock){
+        tmpAttachedBlock = nil;
+        [UIView animateWithDuration:.25 animations:^{
+            [programPane setInsertArrowPosition:0 y:programPane.InsertArrow.center.y];
+        }];
+    } else if(insertBlock){
+        double arrowY, arrowX;
+        switch ([self getAttachDirection:insertBlock]) {
+            case Inside:
+                arrowX = insertBlock.frame.origin.x + 10 + LEFT_MARGIN;
+                arrowY = insertBlock.frame.origin.y+ 35 + TOP_MARGIN;
+                break;
+            case Below:
+                arrowX = insertBlock.frame.origin.x + 10;
+                arrowY = insertBlock.frame.origin.y+ 35 + insertBlock.frame.size.height;
+                break;
+            case Above:
+                arrowX = insertBlock.frame.origin.x + 10;
+                arrowY = insertBlock.frame.origin.y+ 35;
+                break;
+        }
+        
+        if(!tmpAttachedBlock) // The arrow is off the screen
+            [programPane setInsertArrowPosition:0 y:insertBlock.frame.origin.y+ 35 + insertBlock.frame.size.height];
+        tmpAttachedBlock = insertBlock;
+        
+        [UIView animateWithDuration:.25 animations:^{
+            [programPane setInsertArrowPosition:arrowX y:arrowY];
+        }];
     }
+}
 
+// Return the closest block above, or main
+- (UIBlock *)getClosestBlock
+{
+    CGRect boundsA = [self.superview convertRect:self.frame toView:programPane];
+    UIBlock *closestBlock;
+    CGFloat distanceToClosestBlock = CGFLOAT_MAX;
+    
     for(id object in [self getUnattachedBlocks])
     {
         if(object != self)
         {
             UIBlock *otherBlock = object;
-            CGRect boundsB = otherBlock.frame;
-            if( CGRectIntersectsRect(boundsA, boundsB) ){
-                //Check if this one is closer than the previous
-                CGFloat otherBlockDistance = [self DistanceBetweenTwoPoints:self.frame.origin point2:otherBlock.frame.origin];
-                if(overlappedBlock == nil || otherBlockDistance < distanceToBlock){
-                    distanceToBlock = otherBlockDistance;
-                    overlappedBlock = otherBlock;
-                }
+            CGRect boundsB = [otherBlock.superview convertRect:otherBlock.frame toView:programPane];
+            double distance = boundsA.origin.y - boundsB.origin.y;
+            if(distance > 0 && distance < distanceToClosestBlock && (boundsB.origin.y + boundsB.size.height) >= boundsA.origin.y){
+                closestBlock = otherBlock;
+                distanceToClosestBlock = distance;
             }
         }
     }
+    UIBlock *main = [programPane getRootBlock];
+    if(!closestBlock || closestBlock == main){
+        NSUInteger blocksInMain = main->attachedBlocks.count;
+        CGRect mainBounds = [main.superview convertRect:main.frame toView:programPane];
+        if(boundsA.origin.y > mainBounds.origin.y + TOP_MARGIN && blocksInMain > 0)
+            closestBlock = [main->attachedBlocks objectAtIndex:blocksInMain-1]; // get the lowest block
+        else // Above the main block so return main
+            closestBlock = [programPane getRootBlock];
+    }
     
+    return closestBlock;
+} 
+
+- (Direction)getAttachDirection:(UIBlock *)overlappedBlock{
+    if(overlappedBlock->parentBlock){
+        CGPoint orig1 = [self.superview convertPoint:self.frame.origin toView:programPane];
+        CGPoint orig2 = [overlappedBlock.superview convertPoint:overlappedBlock.frame.origin toView:programPane];
+        double halfway = orig2.y + (overlappedBlock.frame.size.height / 2);
+        
+        if (overlappedBlock.CodeBlock.ContainsChildren && orig1.y <= halfway){
+            return Inside;
+        } else {
+            return Below;
+        }
+    } else { // No parent, must be main
+        return Inside;
+    }
+}
+
+- (void)snapToGrid
+{
+    [self animateArrow:nil];// Remove the arrow
+    
+    if([self isInDeleteLocation:self.frame]){
+        return;
+    }
+    
+    AudioServicesPlaySystemSound(snapSound);
+    
+    UIBlock *overlappedBlock = [self getClosestBlock];
     if(overlappedBlock) {
         // Animated Snap to place
         [UIView animateWithDuration:0.5 animations:^{
             //Determine what side to attach to
-            float deltaX = self.frame.origin.x - overlappedBlock.frame.origin.x;
-            float deltaY = self.frame.origin.y - overlappedBlock.frame.origin.y;
-
-            if(overlappedBlock->parentBlock){
-                if(deltaX > 50){
+            switch ([self getAttachDirection:overlappedBlock]) {
+                case Inside:
                     [overlappedBlock attachBlockToSide:self indexBlock:nil afterIndexBlock:false];
-                } else {
-                    if(deltaY <= 0)
-                        [overlappedBlock->parentBlock attachBlockToSide:self indexBlock:overlappedBlock afterIndexBlock:false];
-                    else
-                        [overlappedBlock->parentBlock attachBlockToSide:self indexBlock:overlappedBlock afterIndexBlock:true];
-                }
-            } else {
-                [overlappedBlock attachBlockToSide:self indexBlock:nil afterIndexBlock:false];
+                    break;
+                case Above:
+                    [overlappedBlock->parentBlock attachBlockToSide:self indexBlock:overlappedBlock afterIndexBlock:false];
+                    break;
+                case Below:
+                    [overlappedBlock->parentBlock attachBlockToSide:self indexBlock:overlappedBlock afterIndexBlock:true];
+                    break;
             }
         }];
         [programPane fitToContent];
@@ -265,7 +355,7 @@ static int DEFAULT_WIDTH = 250;
     if(!indexBlock)
     {
         if([codeBlock addCodeBlock:attachBlock->codeBlock]){
-            [attachedBlocks addObject:attachBlock];
+            [attachedBlocks insertObject:attachBlock atIndex:0];
             attached = true;
         }
     } else {

@@ -10,6 +10,7 @@
 #import "AFHTTPClient.h"
 #import "AFJSONRequestOperation.h"
 #import "Settings.h"
+#import "jbrickServerUtility.h"
 
 @implementation RobotDataSource
 
@@ -19,32 +20,16 @@
     tblV = tableView;
     navController = navCont;
     
-    NSURL *url = [NSURL URLWithString:@"http://media-server.cjpresler.com/"];
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    httpClient.parameterEncoding = AFJSONParameterEncoding;
-    [httpClient registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    
-    [httpClient  getPath:@"rest/Devices" parameters:nil
-     success:^(AFHTTPRequestOperation *operation, id JSON) {
-        NSString *responseStr = [[NSString alloc] initWithData:JSON encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful, response '%@'", responseStr);
-        
-        id jsonRobots = [NSJSONSerialization JSONObjectWithData:JSON options:NSJSONWritingPrettyPrinted error:nil];
-        NSArray *robots =  [NSArray arrayWithArray:jsonRobots];
-        
+    [[[jbrickServerUtility alloc] init] getRobots:^(NSArray *robots) {
         robotNames = [NSMutableArray array];
         robotIDs = [NSMutableArray array];
         for (NSDictionary *robotDict in robots) {
             [robotNames addObject:[robotDict valueForKey:@"Name"]];
             [robotIDs addObject:[robotDict valueForKey:@"ID"]];
         }
-         
+        
         [tblV reloadData];
-     
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
-    }];
-
+    } failure:nil];
     
     return self;
 }
