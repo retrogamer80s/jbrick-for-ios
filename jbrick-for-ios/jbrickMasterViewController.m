@@ -16,6 +16,7 @@
 #import "VariableMathBlock.h"
 #import "WhileLoopCodeBlock.h"
 #import "LogicalOperatorCodeBlock.h"
+#import "ElseCodeBlock.h"
 #import "KGNoise.h"
 
 @interface jbrickMasterViewController () {
@@ -27,11 +28,6 @@
 
 @synthesize detailViewController = _detailViewController;
 @synthesize splitViewController = _splitViewController;
-
-bool inDrag = NO;
-UIBlock *draggedView = nil;
-NSIndexPath *selectedIndex = nil;
-NSMutableDictionary *methodBlocks;
 
 - (void)awakeFromNib
 {
@@ -51,39 +47,53 @@ NSMutableDictionary *methodBlocks;
     //self.navigationItem.rightBarButtonItem = addButton;
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
-    [longPress setMinimumPressDuration:0.15];
-    [self.tableView addGestureRecognizer:longPress];    
+    longPress.minimumPressDuration = .15;
+    [self.tableView addGestureRecognizer:longPress];
     
     methodBlocks = [[NSMutableDictionary alloc] init];
+    reuseCells = [[NSMutableArray alloc] init];
     
     WhileLoopCodeBlock *ifBlock = [[WhileLoopCodeBlock alloc] init:IF];
     WhileLoopCodeBlock *whileLoop = [[WhileLoopCodeBlock alloc] init:WHILE];
+    ElseCodeBlock *elseBlock = [[ElseCodeBlock alloc] init];
     LogicalOperatorCodeBlock *logicOp = [[LogicalOperatorCodeBlock alloc] init];
     MethodCallCodeBlock *onFWD = [[MethodCallCodeBlock alloc] init:@"OnFwd"
+                                        description:@"Sets the specified Motor to move forward with the given Power"
                                         parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:MOTOR],[NSNumber numberWithInt:MOTOR_POWER], nil]
                                         parameterNames:[NSArray arrayWithObjects:@"Motor", @"Motor Power", nil]
                                         returnType:VOID];
     MethodCallCodeBlock *onRev = [[MethodCallCodeBlock alloc] init:@"OnRev"
+                                        description:@"Sets the specified Motor to move backwards with the given Power"
                                         parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:MOTOR],[NSNumber numberWithInt:MOTOR_POWER], nil]
                                         parameterNames:[NSArray arrayWithObjects:@"Motor", @"Motor Power", nil]
                                         returnType:VOID];
+    MethodCallCodeBlock *rotate = [[MethodCallCodeBlock alloc] init:@"RotateMotor"
+                                                       description:@"Rotates the given Motor forward for the given Degrees with the given Power"
+                                                    parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:MOTOR],[NSNumber numberWithInt:MOTOR_POWER],[NSNumber numberWithInt:LONG], nil]
+                                                    parameterNames:[NSArray arrayWithObjects:@"Motor", @"Motor Power", @"Degrees", nil]
+                                                        returnType:VOID];
     MethodCallCodeBlock *playTone = [[MethodCallCodeBlock alloc] init:@"PlayTone"
+                                        description:@"Plays a given tone for a given duration"
                                         parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:INTEGER],[NSNumber numberWithInt:INTEGER], nil]
                                         parameterNames:[NSArray arrayWithObjects:@"Frequency (Hz)", @"Duration (ms)", nil]
                                         returnType:VOID];
     MethodCallCodeBlock *wait = [[MethodCallCodeBlock alloc] init:@"Wait"
+                                        description:@"Stops the next block from running for a given number of milliseconds"
                                         parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:INTEGER], nil]
                                         parameterNames:[NSArray arrayWithObjects:@"Time (ms)", nil]
                                         returnType:VOID];
     MethodCallCodeBlock *stopMotor = [[MethodCallCodeBlock alloc] init:@"Off"
+                                        description:@"Stops the specified motor by applying a brake"
                                         parameterTypes:[NSArray arrayWithObject:[NSNumber numberWithInt:MOTOR]]
                                         parameterNames:[NSArray arrayWithObjects:@"Motor", nil]
                                         returnType:VOID];
     MethodCallCodeBlock *setSensor = [[MethodCallCodeBlock alloc] init:@"SetSensorType"
+                                        description:@""
                                         parameterTypes:[NSArray arrayWithObjects:[NSNumber numberWithInt:PORT],[NSNumber numberWithInt:SENSOR_TYPE], nil]
                                         parameterNames:[NSArray arrayWithObjects:@"Port", @"Sensor Type", nil]
                                         returnType:VOID];
     MethodCallCodeBlock *sensorBoolean = [[MethodCallCodeBlock alloc] init:@"SensorBoolean"
+                                        description:@""
                                         parameterTypes:[NSArray arrayWithObject:[NSNumber numberWithInt:PORT]]
                                         parameterNames:[NSArray arrayWithObjects:@"Port", nil]
                                         returnType:BOOLEAN];
@@ -98,9 +108,11 @@ NSMutableDictionary *methodBlocks;
     
     ifBlock.BlockColor = red;
     whileLoop.BlockColor = red;
+    elseBlock.BlockColor = red;
     logicOp.BlockColor = red;
     onFWD.BlockColor = blue;
     onRev.BlockColor = blue;
+    rotate.BlockColor = blue;
     playTone.BlockColor = blue;
     wait.BlockColor = red;
     stopMotor.BlockColor = blue;
@@ -111,11 +123,13 @@ NSMutableDictionary *methodBlocks;
     varAssign.BlockColor = [UIColor orangeColor];
     varMath.BlockColor = [UIColor orangeColor];
     
-    ifBlock.Icon = [UIImage imageNamed:@"Loop_icon.png"];
+    ifBlock.Icon = [UIImage imageNamed:@"if-else.png"];
     whileLoop.Icon = [UIImage imageNamed:@"Loop_icon.png"];
+    elseBlock.Icon = [UIImage imageNamed:@"if-else.png"];
     logicOp.Icon = [UIImage imageNamed:@"Math.png"];
     onFWD.Icon = [UIImage imageNamed:@"forward_wheel_icon.png"];
     onRev.Icon = [UIImage imageNamed:@"backward_wheel_icon.png"];
+    rotate.Icon = [UIImage imageNamed:@"forward_wheel_icon.png"];
     playTone.Icon = [UIImage imageNamed:@"speaker.png"];
     wait.Icon = [UIImage imageNamed:@"Wait_icon.png"];
     stopMotor.Icon = [UIImage imageNamed:@"wheel_icon.png"];
@@ -126,29 +140,34 @@ NSMutableDictionary *methodBlocks;
     varAssign.Icon = [UIImage imageNamed:@"Equals_icon.png"];
     varMath.Icon = [UIImage imageNamed:@"Math.png"];
     
-    NSArray *systemMethods = [NSArray arrayWithObjects:onFWD, onRev, stopMotor, playTone, wait, nil];
-    NSArray *logicMethods = [NSArray arrayWithObjects:whileLoop, ifBlock, logicOp, nil];
+    NSArray *systemMethods = [NSArray arrayWithObjects:onFWD, onRev, rotate, stopMotor, playTone, wait, nil];
+    NSArray *logicMethods = [NSArray arrayWithObjects:whileLoop, ifBlock, elseBlock, logicOp, nil];
     NSArray *inputMethods = [NSArray arrayWithObjects:setSensor, sensorBoolean, nil];
     NSArray *varMathMethods = [NSArray arrayWithObjects: variable, value, varAssign, nil];
-    NSMutableArray *customMethods = [NSMutableArray arrayWithObjects:nil];
+    //NSMutableArray *customMethods = [NSMutableArray arrayWithObjects:nil];
     
     [methodBlocks setObject:systemMethods forKey:@"System"];
     [methodBlocks setObject:logicMethods forKey:@"Logic"];
     [methodBlocks setObject:inputMethods forKey:@"Input"];
     [methodBlocks setObject:varMathMethods forKey:@"Variable"];
+    
+    for(int i=0; i < methodBlocks.count; i++)
+        [reuseCells addObject:[NSMutableArray array]];
      
     selectedIndex = [NSIndexPath indexPathForRow:-1 inSection:-1];
 }
 
 - (void)viewDidUnload
 {
+    [self setParametersLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return YES;
+    // Return YES for supported orientations
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 - (void)insertNewObject:(id)sender
@@ -225,30 +244,27 @@ NSMutableDictionary *methodBlocks;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    MethodTabelCell *cell;
-    if (selectedIndex.row == indexPath.row && selectedIndex.section == indexPath.section)
-        cell = [tableView dequeueReusableCellWithIdentifier:@"Cell_Expanded"];
-    else
-        cell = [tableView dequeueReusableCellWithIdentifier:@"Cell_Normal"];
-    NSArray *methods = [methodBlocks objectForKey:[[methodBlocks allKeys] objectAtIndex:indexPath.section]];
-    CodeBlock<ViewableCodeBlock> *codeBlock = [methods objectAtIndex:indexPath.row];
-    [cell.customLabel setText:[codeBlock getDisplayName]];
-    
-    return cell;
+{   
+    return [[reuseCells objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //If this is the selected index we need to return the height of the cell
-    //in relation to the label height otherwise we just return the minimum label height with padding
-    if(selectedIndex.row == indexPath.row && selectedIndex.section == indexPath.section)
-    {
-        return 153;
+    NSMutableArray *sectionCells = [reuseCells objectAtIndex:indexPath.section];
+    if(! (sectionCells.count > indexPath.row && [sectionCells objectAtIndex:indexPath.row])){
+        MethodTabelCell *cell;
+        cell = [tableView dequeueReusableCellWithIdentifier:@"Cell_Expanded"];
+        
+        NSArray *methods = [methodBlocks objectForKey:[[methodBlocks allKeys] objectAtIndex:indexPath.section]];
+        CodeBlock<ViewableCodeBlock> *codeBlock = [methods objectAtIndex:indexPath.row];
+        [cell.customLabel setText:[codeBlock getDisplayName]];
+        [cell.DescriptionLabel setText:codeBlock.Description];
+        [cell.ParametesLabel setText:[self buildParameterString:codeBlock]];
+        [sectionCells insertObject:cell atIndex:indexPath.row];
     }
-    else {
-        return 57;
-    }
+    
+    MethodTabelCell *cell = [[reuseCells objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    return cell.Height;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -257,6 +273,23 @@ NSMutableDictionary *methodBlocks;
     if([[methodBlocks allKeys] objectAtIndex:indexPath.section] == @"Custom")
         return YES;
     return NO;
+}
+
+- (NSString *) buildParameterString:(id<ViewableCodeBlock>)codeBlock{
+    NSMutableString *statement = [NSMutableString string];
+    NSArray *params = [codeBlock getPropertyVariables];
+    for (int i=0; i<params.count; i++) {
+        NSString *type = [PrimativeTypeUtility primativeToName:((CodeBlock*)[params objectAtIndex:i]).ReturnType];
+        NSString *name = [[codeBlock getPropertyDisplayNames] objectAtIndex:i];
+        NSString *param = [NSString stringWithFormat:@"%@ - %@\n", name, type];
+        [statement appendString:param];
+    }
+    
+    NSString *type = [PrimativeTypeUtility primativeToName:((CodeBlock *)codeBlock).ReturnType];
+    NSString *param = [NSString stringWithFormat:@"%@ - %@\n", @"Return", type];
+    [statement appendString:param];
+    
+    return statement;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -292,14 +325,13 @@ NSMutableDictionary *methodBlocks;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDate *object = [_objects objectAtIndex:indexPath.row];
-    self.detailViewController.detailItem = object;
-    
+    [tableView beginUpdates];
     if(selectedIndex.row == indexPath.row && selectedIndex.section == indexPath.section)
     {
+        MethodTabelCell *cell = (MethodTabelCell *)[tableView cellForRowAtIndexPath:indexPath];
+        cell.Expanded = false;
         selectedIndex = [NSIndexPath indexPathForRow:-1 inSection:-1];
-        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
+        [tableView endUpdates];
         return;
     }
     
@@ -308,14 +340,17 @@ NSMutableDictionary *methodBlocks;
     if(selectedIndex.row >= 0)
     {
         NSIndexPath *previousPath = selectedIndex;
-        selectedIndex = indexPath;
-        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:previousPath] withRowAnimation:UITableViewRowAnimationFade];
+        MethodTabelCell *cell = (MethodTabelCell *)[tableView cellForRowAtIndexPath:previousPath];
+        cell.Expanded = false;
     }
     
     
     //Finally set the selected index to the new selection and reload it to expand
     selectedIndex = indexPath;
-    [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    MethodTabelCell *cell = (MethodTabelCell *)[tableView cellForRowAtIndexPath:indexPath];
+    cell.Expanded = true;
+    [tableView endUpdates];
+    
 }
 
 - (NSString *)convertToKey:(NSInteger)section {

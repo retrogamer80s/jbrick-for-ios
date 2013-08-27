@@ -13,6 +13,8 @@
 #import "CodeBlock.h"
 #import "UIBlock.h"
 #import "AFHTTPClient.h"
+#import "UITableViewControllerLandscape.h"
+#import "jbrickServerUtility.h"
 
 @implementation jbrickNavViewController
 
@@ -35,6 +37,12 @@
     
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+}
+
 - (void)setMainMenuController:(UITableViewController *)mainMenuController{
     mmController = mainMenuController;
     mmController.title = @"Main Menu";
@@ -49,7 +57,7 @@
 }
 
 - (void) pressedPrograms {
-    UITableViewController *table = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+    UITableViewController *table = [[UITableViewControllerLandscape alloc] initWithStyle:UITableViewStylePlain];
     SaveFileList *saveFileList = [[SaveFileList alloc] init:detailViewController tableView:table.tableView];
     currentDataSource = saveFileList;// The datasource object needs to be saved to a local variable
                                     // because otherwise arc will delete it after assignment... stupid!
@@ -68,7 +76,7 @@
 }
 
 - (void) pressedRobots {
-    UITableViewController *table = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+    UITableViewController *table = [[UITableViewControllerLandscape alloc] initWithStyle:UITableViewStylePlain];
     currentDataSource = [[RobotDataSource alloc] init:table.tableView navController:self]; // The datasource object needs to be saved to a local variable
                                                                         // because otherwise arc will delete it after assignment... stupid!
     table.tableView.dataSource = currentDataSource;
@@ -88,38 +96,18 @@
 - (void) pressedUpload {
     CodeBlock *main = [detailViewController.programPane getRootBlock].CodeBlock;
     NSLog(@"Code:\n%@",[main generateCode]);
-    
-    NSURL *url = [NSURL URLWithString:@"http://media-server.cjpresler.com/"];
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    httpClient.parameterEncoding = AFJSONParameterEncoding;
-    httpClient.stringEncoding = NSUTF16StringEncoding;
-    
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            [main generateCode], @"src",
-                            [Settings settings].CurrentProgram, @"filename",
-                            nil];
-    [httpClient postPath:[NSString stringWithFormat:@"rest/Devices/%@/compile", [Settings settings].RobotID] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful, response '%@'", responseStr);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
-    }];
+    [[[jbrickServerUtility alloc] init] uploadProgram:[Settings settings].CurrentProgram
+                                           withSource:[main generateCode]
+                                              toRobot:[Settings settings].RobotID];
 }
 
 - (void) pressedRun {
-    NSURL *url = [NSURL URLWithString:@"http://media-server.cjpresler.com/"];
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    httpClient.parameterEncoding = AFJSONParameterEncoding;
-    
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            [Settings settings].CurrentProgram, @"program",
-                            nil];
-    [httpClient getPath:[NSString stringWithFormat:@"rest/Devices/%@/RunProgram", [Settings settings].RobotID] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful, response '%@'", responseStr);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
-    }];
+    [[[jbrickServerUtility alloc] init] runProgram:[Settings settings].CurrentProgram
+                                           onRobot:[Settings settings].RobotID];
+}
+
+- (void) pressedStop {
+    [[[jbrickServerUtility alloc] init] stopProgramOnRobot:[Settings settings].RobotID];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -142,6 +130,9 @@
             break;
         case 6:
             [self pressedRun];
+            break;
+        case 7:
+            [self pressedStop];
             break;
         default:
             break;

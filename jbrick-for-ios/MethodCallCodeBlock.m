@@ -14,12 +14,15 @@
 @synthesize BlockColor;
 @synthesize Icon;
 @synthesize ContainsChildren;
+@synthesize Description;
 
--(id) init:(NSString *)methodName parameterTypes:(NSArray *)parameters parameterNames:(NSArray *)paramNames returnType:(Primative)returnTypeParam
+-(id) init:(NSString *)methodName description:(NSString *)desc parameterTypes:(NSArray *)parameters
+                       parameterNames:(NSArray *)paramNames returnType:(Primative)returnTypeParam
 {
     self = [super init];
     name = methodName;
     self.ReturnType = returnTypeParam;
+    self.Description = desc;
     parameterTypes = parameters;
     parameterNames = paramNames;
     parameterValues = [NSMutableArray arrayWithCapacity:[parameters count]];
@@ -61,7 +64,7 @@
 }
 
 -(id<ViewableCodeBlock>)getPrototype{
-    MethodCallCodeBlock *block = [[MethodCallCodeBlock alloc] init:name parameterTypes:parameterTypes parameterNames:parameterNames returnType:self.ReturnType];
+    MethodCallCodeBlock *block = [[MethodCallCodeBlock alloc] init:name description:self.Description parameterTypes:parameterTypes parameterNames:parameterNames returnType:self.ReturnType];
     block.BlockColor = self.BlockColor;
     block.Icon = self.Icon;
     return block;

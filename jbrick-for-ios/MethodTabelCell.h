@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MethodTabelCell : UITableViewCell
-
+@interface MethodTabelCell : UITableViewCell {
+    bool expanded;
+}
+@property (weak, nonatomic) IBOutlet UILabel *DescriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ParametesLabel;
 @property (nonatomic) IBOutlet UILabel* customLabel;
+@property bool Expanded;
+@property (readonly) float Height;
 
 @end
