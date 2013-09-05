@@ -21,7 +21,7 @@
 {
     self = [super init];
     name = @"Logical Operation";
-    operation = [[ValueCodeBlock alloc] init:LOGIC_OPERATION value:@"=="];
+    operation = [[ValueCodeBlock alloc] init:LOGIC_OPERATION value:@"&&"];
     paramNames = [NSArray arrayWithObject:@"Logic Operation"];
     self.Description = @"Performs the specified Logic Operation on the blocks inside and returns the result";
     self.ReturnType = BOOLEAN;
@@ -33,7 +33,7 @@
 -(NSString *)generateCode
 {
     // The end result should look like "(variable operator variable)" or "!variable"
-    if([operation generateCode] == @"!"){
+    if([[operation generateCode] isEqual: @"!"]){
         if(innerCodeBlocks.count == 1){
             return [NSString stringWithFormat:@"!%@", [[innerCodeBlocks objectAtIndex:0] generateCode]];
         }
@@ -79,10 +79,32 @@
 {
     if(oldParam.ReturnType == newParam.ReturnType)
     {
-        operation = newParam;
-        if([oldParam isKindOfClass:[VariableCodeBlock class]])
-            [((VariableCodeBlock *)oldParam) removeParent:self];
-        newParam.Parent = self;
+        if([[newParam generateCode] isEqual: @"!"] && innerCodeBlocks.count > 1)
+        {
+            NSString *message = @"Changing the operation to ! will remove all but the first child block, do you wish to continue?";
+            [UIPrompt prompt:message title:@"Delete Child Blocks?" onResponse:^(Boolean positiveResponse) {
+                if(positiveResponse){
+                    operation = newParam;
+                    
+                    if([oldParam isKindOfClass:[VariableCodeBlock class]])
+                        [((VariableCodeBlock *)oldParam) removeParent:self];
+                    newParam.Parent = self;
+                    
+                    while (innerCodeBlocks.count > 1) {
+                        
+                        // As blocks are deleted they are automatically removed from the list, so
+                        // this will get rid of all but the first block
+                        ((CodeBlock*)[innerCodeBlocks objectAtIndex:1]).Deleted = true;
+                    }
+                }
+            }];
+        } else {
+             operation = newParam;
+            
+             if([oldParam isKindOfClass:[VariableCodeBlock class]])
+                 [((VariableCodeBlock *)oldParam) removeParent:self];
+             newParam.Parent = self;
+        }
         return true;
     }
     
@@ -106,13 +128,6 @@
     
     if(codeBlock.ReturnType == BOOLEAN)
     {
-        if([[operation generateCode] isEqual: @"=="] && innerCodeBlocks.count >= 2)
-        {
-            // Only two blocks can be inside the comparison with the == operator
-            [[[[iToast makeText:@"Only two blocks can be modified when using the == operator"]
-               setDuration:iToastDurationNormal] setGravity:iToastGravityTop ] show];
-            return false;
-        }
         if([[operation generateCode] isEqual: @"!"] && innerCodeBlocks.count >= 1)
         {
             // Negation can only be applied to one child block

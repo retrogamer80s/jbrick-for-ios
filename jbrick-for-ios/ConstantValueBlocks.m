@@ -115,7 +115,6 @@ static NSMutableDictionary *constants;
             [constants setObject:[NSArray arrayWithObjects:
                                   [[ValueCodeBlock alloc] init:type value:@"||"],
                                   [[ValueCodeBlock alloc] init:type value:@"&&"],
-                                  [[ValueCodeBlock alloc] init:type value:@"=="],
                                   [[ValueCodeBlock alloc] init:type value:@"!"],
                                   nil]
                           forKey:[NSNumber numberWithInt:type]];
