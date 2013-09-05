@@ -13,11 +13,12 @@
     NSMutableArray *saveFiles;
     jbrickDetailViewController *detailView;
     UITableView *_tableView;
+    UIBarButtonItem *editButton;
     NSMutableArray *textFields;
     NSString *previousProgramName;
 }
 
--(id)init:(jbrickDetailViewController *)detailView tableView:(UITableView *)tableView;
+-(id)init:(jbrickDetailViewController *)detailView table:(UITableViewController *)table;
 -(void)addProgram;
 -(void)setEditingMode;
 

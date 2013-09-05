@@ -58,7 +58,7 @@
 
 - (void) pressedPrograms {
     UITableViewController *table = [[UITableViewControllerLandscape alloc] initWithStyle:UITableViewStylePlain];
-    SaveFileList *saveFileList = [[SaveFileList alloc] init:detailViewController tableView:table.tableView];
+    SaveFileList *saveFileList = [[SaveFileList alloc] init:detailViewController table:table];
     currentDataSource = saveFileList;// The datasource object needs to be saved to a local variable
                                     // because otherwise arc will delete it after assignment... stupid!
     table.tableView.dataSource = currentDataSource;

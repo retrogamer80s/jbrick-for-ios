@@ -12,11 +12,12 @@
 
 @implementation SaveFileList
 
--(id)init:(jbrickDetailViewController *)detailViewParam tableView:(UITableView *)tableView{
+-(id)init:(jbrickDetailViewController *)detailViewParam table:(UITableViewController *)table{
     self = [super init];
     
     detailView = detailViewParam;
-    _tableView = tableView;
+    _tableView = table.tableView;
+    editButton = table.editButtonItem;
     textFields = [NSMutableArray array];
     
     [self findSavedPrograms];
@@ -74,8 +75,18 @@
 - (void)setEditingMode{
     [_tableView setEditing:!_tableView.isEditing animated:YES];
     if(!_tableView.isEditing)
+    {
+        editButton.style = UIBarButtonItemStylePlain;
+        editButton.title = @"Edit";
+        
         for(UITextField *tf in textFields)
             tf.userInteractionEnabled = false;
+    }
+    else
+    {
+        editButton.style = UIBarButtonItemStyleDone;
+        editButton.title = @"Done";
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
