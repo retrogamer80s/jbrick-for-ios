@@ -9,6 +9,7 @@
 #import "LogicalOperatorCodeBlock.h"
 #import "ValueCodeBlock.h"
 #import "VariableCodeBlock.h"
+#import "iToast.h"
 
 @implementation LogicalOperatorCodeBlock
 @synthesize BlockColor;
@@ -97,35 +98,35 @@
     }
 }
 
-- (bool)addCodeBlock:(CodeBlock *)codeBlock
+- (bool)canAddCodeBlock:(CodeBlock *)codeBlock
 {
     if([codeBlock isKindOfClass:[ValueCodeBlock class]]){
         codeBlock.ReturnType = BOOLEAN;
     }
     
-    if(codeBlock.ReturnType == BOOLEAN){
-        if([operation generateCode] != @"!" || innerCodeBlocks.count == 0){
-            return [super addCodeBlock:codeBlock];
-        } else {
+    if(codeBlock.ReturnType == BOOLEAN)
+    {
+        if([[operation generateCode] isEqual: @"=="] && innerCodeBlocks.count >= 2)
+        {
+            // Only two blocks can be inside the comparison with the == operator
+            [[[[iToast makeText:@"Only two blocks can be modified when using the == operator"]
+               setDuration:iToastDurationNormal] setGravity:iToastGravityTop ] show];
             return false;
         }
-    } else {
-        return false;
-    }
-}
-- (bool)addCodeBlock:(CodeBlock *)codeBlock indexBlock:(CodeBlock *)indexBlock afterIndexBlock:(bool)afterIndexBlock
-{
-    if([codeBlock isKindOfClass:[ValueCodeBlock class]]){
-        codeBlock.ReturnType = BOOLEAN;
-    }
-    
-    if(codeBlock.ReturnType == BOOLEAN){
-        if([operation generateCode] != @"!" || innerCodeBlocks.count == 0){
-            return [super addCodeBlock:codeBlock indexBlock:indexBlock afterIndexBlock:afterIndexBlock];
-        } else {
+        if([[operation generateCode] isEqual: @"!"] && innerCodeBlocks.count >= 1)
+        {
+            // Negation can only be applied to one child block
+            [[[[iToast makeText:@"Only one block can be modified when using the ! operator"]
+               setDuration:iToastDurationNormal] setGravity:iToastGravityTop ] show];
             return false;
         }
-    } else {
+        else
+        {
+            return [super canAddCodeBlock:codeBlock];
+        }
+    }
+    else
+    {
         return false;
     }
 }

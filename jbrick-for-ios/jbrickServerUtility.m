@@ -13,7 +13,7 @@
 
 - (id)init{
     self = [super init];
-    NSURL *url = [NSURL URLWithString:@"http://link.se.rit.edu/rest/"];
+    NSURL *url = [NSURL URLWithString:@"http://media-server.cjpresler.com/rest/"];
     httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     return self;
 }
