@@ -50,7 +50,6 @@
                 if(positiveResponse) {
                     [super setDeleted:Deleted];
                     varReference.Deleted = true;
-                    varReference.ReturnType = VOID;
                 }
             }];
         }
@@ -124,11 +123,17 @@
             NSString *message = [NSString stringWithFormat:@"Changing the block's type will unlink %d blocks currently using it. Do you wish to continue?", varRef.ReferenceCount + innerCodeBlocks.count];
             [UIPrompt prompt:message title:@"Remove References?" onResponse:^(Boolean positiveResponse) {
                 if(positiveResponse){
-                    [self setInnerType:newParam.ReturnType];
+                    // Delete all child blocks
                     if(innerCodeBlocks.count>0){
-                        [self removeCodeBlock:[innerCodeBlocks objectAtIndex:0]];
                         [[innerCodeBlocks objectAtIndex:0] setDeleted:true];
                     }
+                    
+                    // Delete previous reference block so it goes back to using a default value
+                    varReference.Deleted = true;
+                    
+                    // Create a new varReference and set it's new type
+                    varReference = [[VariableCodeBlock alloc] init:self type:InternalType];
+                    [self setInnerType:newParam.ReturnType];
                 }
             }];
         } else {
