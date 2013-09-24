@@ -12,7 +12,6 @@
 #import "MethodDeclorationBlock.h"
 #import "ValueCodeBlock.h"
 #import "UIBlock.h"
-#import "KGNoise.h"
 #import "AFJSONRequestOperation.h"
 #import "AFHTTPClient.h"
 #import "Settings.h"

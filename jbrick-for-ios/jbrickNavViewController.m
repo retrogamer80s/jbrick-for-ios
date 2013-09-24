@@ -60,7 +60,7 @@
     UITableViewController *table = [[UITableViewControllerLandscape alloc] initWithStyle:UITableViewStylePlain];
     SaveFileList *saveFileList = [[SaveFileList alloc] init:detailViewController table:table];
     currentDataSource = saveFileList;// The datasource object needs to be saved to a local variable
-                                    // because otherwise arc will delete it after assignment... stupid!
+                                    // because otherwise arc will delete it after assignment.
     table.tableView.dataSource = currentDataSource;
     table.tableView.delegate = currentDataSource;
     table.tableView.allowsSelectionDuringEditing = YES;
@@ -78,7 +78,7 @@
 - (void) pressedRobots {
     UITableViewController *table = [[UITableViewControllerLandscape alloc] initWithStyle:UITableViewStylePlain];
     currentDataSource = [[RobotDataSource alloc] init:table.tableView navController:self]; // The datasource object needs to be saved to a local variable
-                                                                        // because otherwise arc will delete it after assignment... stupid!
+                                                                        // because otherwise arc will delete it after assignment.
     table.tableView.dataSource = currentDataSource;
     table.tableView.delegate = currentDataSource;
     

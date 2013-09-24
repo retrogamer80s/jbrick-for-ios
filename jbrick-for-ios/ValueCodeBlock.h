@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "ViewableCodeBlock.h"
 
+/**
+ * This block is the smallest unit of a block. It represents a hard-coded value.
+ * This class is also used in some cases to store things like a variables name.
+ */
 @interface ValueCodeBlock : CodeBlock <ViewableCodeBlock>
 {
     CodeBlock * type;
@@ -16,6 +20,8 @@
     NSString *displayName;
     NSArray *propertyNames;
 }
+
+/** The string value of this block */
 @property (nonatomic, copy) NSString *Value;
 -(id) init:(Primative)type;
 -(id) init:(Primative)type value:(NSString *)value;

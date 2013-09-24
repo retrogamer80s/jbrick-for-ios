@@ -38,9 +38,11 @@
     return name.generateCode;
 }
 
+// Override the default delete action to prompt about unlinking variable references
 -(void)setDeleted:(bool)Deleted
 {
     if(!deleted){
+        // Cast to a VariableCodeBlock type so we can access the ReferenceCount attribute
         VariableCodeBlock *varRef = (VariableCodeBlock *)varReference;
         
         if(varRef.ReferenceCount > 0)

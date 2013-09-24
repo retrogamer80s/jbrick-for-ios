@@ -17,7 +17,6 @@
 #import "WhileLoopCodeBlock.h"
 #import "LogicalOperatorCodeBlock.h"
 #import "ElseCodeBlock.h"
-#import "KGNoise.h"
 
 @interface jbrickMasterViewController () {
     NSMutableArray *_objects;

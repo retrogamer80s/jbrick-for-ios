@@ -41,8 +41,6 @@
 		3F6E422D1642CE2F00E69AF2 /* ValueCodeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6E422C1642CE2F00E69AF2 /* ValueCodeBlock.m */; };
 		3F7857A316C2DB6D00A292FA /* CompositeCodeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7857A216C2DB6D00A292FA /* CompositeCodeBlock.m */; };
 		3F7D925A166D0D3300EA5E46 /* Trash Can.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7D9259166D0D3300EA5E46 /* Trash Can.png */; };
-		3F86E723162C9D4E00A7C985 /* KGNoise.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F86E70A162C9D4E00A7C985 /* KGNoise.m */; };
-		3F86E724162C9D4E00A7C985 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3F86E70B162C9D4E00A7C985 /* license.txt */; };
 		3F86E727162C9D4E00A7C985 /* MGSplitCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F86E711162C9D4E00A7C985 /* MGSplitCornersView.m */; };
 		3F86E728162C9D4E00A7C985 /* MGSplitDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F86E713162C9D4E00A7C985 /* MGSplitDividerView.m */; };
 		3F86E729162C9D4E00A7C985 /* MGSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F86E715162C9D4E00A7C985 /* MGSplitViewController.m */; };
@@ -171,9 +169,6 @@
 		3F7857A116C2DB6D00A292FA /* CompositeCodeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositeCodeBlock.h; sourceTree = "<group>"; };
 		3F7857A216C2DB6D00A292FA /* CompositeCodeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompositeCodeBlock.m; sourceTree = "<group>"; };
 		3F7D9259166D0D3300EA5E46 /* Trash Can.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Trash Can.png"; sourceTree = "<group>"; };
-		3F86E709162C9D4E00A7C985 /* KGNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGNoise.h; sourceTree = "<group>"; };
-		3F86E70A162C9D4E00A7C985 /* KGNoise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGNoise.m; sourceTree = "<group>"; };
-		3F86E70B162C9D4E00A7C985 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 		3F86E710162C9D4E00A7C985 /* MGSplitCornersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSplitCornersView.h; sourceTree = "<group>"; };
 		3F86E711162C9D4E00A7C985 /* MGSplitCornersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSplitCornersView.m; sourceTree = "<group>"; };
 		3F86E712162C9D4E00A7C985 /* MGSplitDividerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSplitDividerView.h; sourceTree = "<group>"; };
@@ -363,7 +358,6 @@
 				3F1B89A6160108410007A0B9 /* jbrickMasterViewController.m */,
 				3FED5D6616F8D06400511131 /* jbrickNavViewController.h */,
 				3FED5D6716F8D06400511131 /* jbrickNavViewController.m */,
-				3F86E708162C9D4E00A7C985 /* KGNoise */,
 				3F1B89A2160108410007A0B9 /* MainStoryboard.storyboard */,
 				3FB5322A161098D800A907F7 /* MethodTabelCell.h */,
 				3FB5322B161098D800A907F7 /* MethodTabelCell.m */,
@@ -451,16 +445,6 @@
 				3FB0F7141726D77A00E9F772 /* ElseCodeBlock.m */,
 			);
 			name = CodeBlocks;
-			sourceTree = "<group>";
-		};
-		3F86E708162C9D4E00A7C985 /* KGNoise */ = {
-			isa = PBXGroup;
-			children = (
-				3F86E709162C9D4E00A7C985 /* KGNoise.h */,
-				3F86E70A162C9D4E00A7C985 /* KGNoise.m */,
-				3F86E70B162C9D4E00A7C985 /* license.txt */,
-			);
-			path = KGNoise;
 			sourceTree = "<group>";
 		};
 		3F86E70F162C9D4E00A7C985 /* MGSplitView */ = {
@@ -638,7 +622,6 @@
 				94E8F99A162C8F9100C9886B /* Loop_icon.png in Resources */,
 				94E8F99B162C8F9100C9886B /* Variable.png in Resources */,
 				94E8F99C162C8F9100C9886B /* Wait_icon.png in Resources */,
-				3F86E724162C9D4E00A7C985 /* license.txt in Resources */,
 				3FE1DDA5163593900049555C /* backward_wheel_icon.png in Resources */,
 				3FE1DDA6163593900049555C /* Equals_icon.png in Resources */,
 				3FE1DDA7163593900049555C /* forward_wheel_icon.png in Resources */,
@@ -698,7 +681,6 @@
 				3FFDD4C7161B3CBB0065D30B /* IntInputStrategy.m in Sources */,
 				3FFDD4CA161B3E610065D30B /* StringInputStrategy.m in Sources */,
 				3FFDD4CE161B6D200065D30B /* UISliderStrongReference.m in Sources */,
-				3F86E723162C9D4E00A7C985 /* KGNoise.m in Sources */,
 				3F86E727162C9D4E00A7C985 /* MGSplitCornersView.m in Sources */,
 				3F86E728162C9D4E00A7C985 /* MGSplitDividerView.m in Sources */,
 				3F86E729162C9D4E00A7C985 /* MGSplitViewController.m in Sources */,

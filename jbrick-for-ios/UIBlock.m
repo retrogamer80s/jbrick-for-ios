@@ -92,6 +92,10 @@ UIBlock *selectedCodeBlock;
     return self;
 }
 
+/**
+ * This is the main draw method for the block and controls the overall visuals.
+ * This is done programatically to allow dynamic sizing.
+ */
 -(void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -117,6 +121,7 @@ UIBlock *selectedCodeBlock;
 
 }
 
+/** Helper method for using the System Sounds API */
 - (void)assignSoundID:(NSString *)filename soundID:(SystemSoundID *)soundID
 {
     NSString *path= [[NSBundle mainBundle] pathForResource:filename ofType:@"wav"];
@@ -124,8 +129,14 @@ UIBlock *selectedCodeBlock;
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, soundID);
 }
 
+/**
+ * This method is called repeatedly durring the time that a UIBlock is being drug around the screen.
+ * Each call to this method should update the blocks position and check to see if the block
+ * has been released.
+ */
 - (void)panGesture:(UIGestureRecognizer *)gestureRecognizer
 {
+    // Exclude the top level block from being able to be picked up and potentially deleted
     if(parentBlock || previousBlock){
         CGPoint translation = [gestureRecognizer locationInView:[self superview]];
         if([gestureRecognizer state] == UIGestureRecognizerStateBegan)
@@ -133,10 +144,13 @@ UIBlock *selectedCodeBlock;
             [self selectBlock];
             AudioServicesPlaySystemSound(velcroSound);
             
+            // If the block being picked up has a parent block, null it out and assigne it to the
+            // previousBlock property so we can restore it if need be
             if(parentBlock){
                 previousBlock = parentBlock;
                 previousIndexBlock = [parentBlock getIndexBlock:self];
                 
+                // Remove teh CodeBlock within the model as well
                 [codeBlock removeFromParent];
                 [parentBlock->attachedBlocks removeObject:self];
                 [UIView animateWithDuration:.5 animations:^{
@@ -149,6 +163,8 @@ UIBlock *selectedCodeBlock;
         
         if ([gestureRecognizer state] == UIGestureRecognizerStateBegan || [gestureRecognizer state] == UIGestureRecognizerStateChanged) {
             CGRect scrollRect = CGRectMake(translation.x > programPane.contentSize.width ? 0 :translation.x, translation.y, 100, 100);
+            // Pan the block to the translation position and ensure that the rectagle around the users fingers remains
+            // visible incase they are trying to scroll the programPane with a block picked up
             [self panToPoint:translation scrollToRect:scrollRect];
         }
         
@@ -202,6 +218,8 @@ UIBlock *selectedCodeBlock;
         }];
     } else if(insertBlock){
         double arrowY, arrowX;
+        // Get the position for which the new block will be inserted and then
+        // construct the Arrows new X and Y values
         switch ([self getAttachDirection:insertBlock]) {
             case Inside:
                 arrowX = insertBlock.frame.origin.x + 10 + LEFT_MARGIN;
@@ -221,19 +239,22 @@ UIBlock *selectedCodeBlock;
             [programPane setInsertArrowPosition:0 y:insertBlock.frame.origin.y+ 35 + insertBlock.frame.size.height];
         tmpAttachedBlock = insertBlock;
         
+        // Animate the arrow to the position the block will be inserted into if released
         [UIView animateWithDuration:.25 animations:^{
             [programPane setInsertArrowPosition:arrowX y:arrowY];
         }];
     }
 }
 
-// Return the closest block above, or main
+/** Get the block that is phisically closed the this block and above, otherwise get the main block */
 - (UIBlock *)getClosestBlock
 {
     CGRect boundsA = [self.superview convertRect:self.frame toView:programPane];
     UIBlock *closestBlock;
     CGFloat distanceToClosestBlock = CGFLOAT_MAX;
     
+    // Search through all blocks that are not within this blocks children (if you're moving several blocks at once)
+    // In each pass record the vertical distance between the two blocks if it's above and less than the previous loop
     for(id object in [self getUnattachedBlocks])
     {
         if(object != self)
@@ -247,6 +268,8 @@ UIBlock *selectedCodeBlock;
             }
         }
     }
+    
+    // Main is the closest block, determine where within main to attach
     UIBlock *main = [programPane getRootBlock];
     if(!closestBlock || closestBlock == main){
         NSUInteger blocksInMain = main->attachedBlocks.count;
@@ -260,12 +283,14 @@ UIBlock *selectedCodeBlock;
     return closestBlock;
 } 
 
+/** Determine if this block is being attached inside or below the overlappedBlock */
 - (Direction)getAttachDirection:(UIBlock *)overlappedBlock{
     if(overlappedBlock->parentBlock){
         CGPoint orig1 = [self.superview convertPoint:self.frame.origin toView:programPane];
         CGPoint orig2 = [overlappedBlock.superview convertPoint:overlappedBlock.frame.origin toView:programPane];
         double halfway = orig2.y + (overlappedBlock.frame.size.height / 2);
         
+        // If the overlapped block can have children and this block is above it's halfway point
         if (overlappedBlock.CodeBlock.ContainsChildren && orig1.y <= halfway){
             return Inside;
         } else {
@@ -281,6 +306,8 @@ UIBlock *selectedCodeBlock;
     [self animateArrow:nil];// Remove the arrow
     
     if([self isInDeleteLocation:self.frame]){
+        // If it is in the Delete location than it has already started deleting itself so just return
+        // without snapping to the grid
         return;
     }
     
@@ -310,17 +337,18 @@ UIBlock *selectedCodeBlock;
         [self selectBlock];
     } else {
         
-        if(previousBlock)
+        if(previousBlock) // Could not attach to new location return to previous location
             [UIView animateWithDuration:0.5 animations:^{
                 [previousBlock attachBlockToSide:self indexBlock:previousIndexBlock afterIndexBlock:false];
             }];
-        else
+        else // There was no previous location so remove yourself from the ProgramPane
             [self returnToList];
         
     }
     
 }
 
+/** Highlights this block as the selected block and removes the highlight to the previously selected block. */
 -(void) selectBlock
 {
     [controller.propertyPane setPropertyContent:codeBlock];
@@ -348,12 +376,14 @@ UIBlock *selectedCodeBlock;
     return children;
 }
 
+/** Try and attach the given block within this block based on the indexBlock */
 -(void)attachBlockToSide:(UIBlock *)attachBlock indexBlock:(UIBlock *)indexBlock afterIndexBlock:(bool)afterIndexBlock
 {
     bool attached = false;
     attachBlock->parentBlock = self;
     if(!indexBlock)
     {
+        // There was no indexBlock so add this block to the front of the children
         if([codeBlock addCodeBlock:attachBlock->codeBlock]){
             [attachedBlocks insertObject:attachBlock atIndex:0];
             attached = true;
@@ -373,9 +403,9 @@ UIBlock *selectedCodeBlock;
     if(attached)
         [self positionBlockGroup];
     else{
-        if(attachBlock->previousBlock)
+        if(attachBlock->previousBlock) // The block could not be attached return it to it's previous location
             [attachBlock->previousBlock attachBlockToSide:attachBlock indexBlock:attachBlock->previousIndexBlock afterIndexBlock:false];
-        else
+        else // The block had no previous location so delete it
             [attachBlock delete];
     }
 }
@@ -395,6 +425,10 @@ UIBlock *selectedCodeBlock;
     [[self getHighestParent] fitToChildren];
 }
 
+/**
+ * resize the size of this block based on how many children are present, this call goes recursively up to the main block when
+ * a block is added.
+ */
 -(void)resizeSelf
 {
     NSInteger childHeightSum = 0;
@@ -410,21 +444,7 @@ UIBlock *selectedCodeBlock;
         [parentBlock resizeSelf];
 }
 
--(void)setChildrenSize
-{
-    for(UIBlock *child in attachedBlocks)
-        [child setChildrenSize];
-    
-    NSInteger childHeightSum = 0;
-    for(UIBlock *child in attachedBlocks){
-        childHeightSum += child.frame.size.height;
-    }
-    if(childHeightSum == 0)
-        childHeightSum = defaultHeight - TOP_MARGIN - BOTTOM_MARGIN;
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, childHeightSum+TOP_MARGIN+BOTTOM_MARGIN);
-    [self setNeedsDisplay];
-}
-
+/** Reposition the blocks so they fit within the parent. This call goes recursively down */
 -(void) fitToChildren
 {
     for(int i=0; i<[attachedBlocks count]; i++){
@@ -460,6 +480,7 @@ UIBlock *selectedCodeBlock;
     return parent;
 }
 
+/** Return the block to the list because it could not be placed in the ProgramPane */
 - (void)returnToList
 {
     [[[[iToast makeText:@"Blocks must be placed over other blocks"]
@@ -478,6 +499,7 @@ UIBlock *selectedCodeBlock;
     codeBlock.Deleted = true;
 }
 
+/** Perform delete animation on this block and all of it's children */
 -(void)performDeleteAnimation
 {
     [controller.propertyPane closePanel:nil];
@@ -540,6 +562,7 @@ UIBlock *selectedCodeBlock;
         [self delete];
 }
 
+/** Determine if the block is over the trash can and if so call to delete it */
 - (bool) isInDeleteLocation:(CGRect)frame
 {
     CGRect hitBox = CGRectMake(frame.origin.x, frame.origin.y, 50, 50);
@@ -569,7 +592,7 @@ UIBlock *selectedCodeBlock;
     [controller.propertyPane setPropertyContent:codeBlock];
 }
 
-//Encoding/Decoding Methods
+//Encoding/Decoding Methods, these are used when loading a program from file
 - (void)encodeWithCoder:(NSCoder *)coder
 {
     [super encodeWithCoder:coder];

@@ -13,6 +13,11 @@
 
 @class jbrickDetailViewController;
 
+/**
+ * This is the main controller that facilitates access between the 3 sub controllers.
+ * The NavViewController on the far left, the DetailView in the center, and the property
+ * view on the far right.
+ */
 @interface jbrickMasterViewController : UITableViewController {
     bool inDrag;
     UIBlock *draggedView;

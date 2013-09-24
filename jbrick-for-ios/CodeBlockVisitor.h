@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ * This class is an implimentation of the Visitor pattern it is here
+ * for extensability purposes of the codeBlock's
+ */
 @protocol CodeBlockVisitor <NSObject>
 -(void) visitMethodCallCodeBlock:(NSObject *)block;
 -(void) visitMethodDeclorationBlock:(NSObject *)block;
